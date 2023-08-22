@@ -1,5 +1,7 @@
 package Tours;
 
+import Reservas.ReservaTour;
+
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -110,6 +112,15 @@ public class Tour {
                     "Tour",
                     JOptionPane.WARNING_MESSAGE);
         }
+    }
+
+    public int getDisponibilidad (){
+        int result = 0;
+        int contReservas = 0;
+        for (ReservaTour reserva : this.gestion_reserva.reservaciones) {
+            contReservas += reserva.getNumeroPersonas();
+        }
+        return result = this.limite_usuarios - contReservas;
     }
 
 
