@@ -1,25 +1,37 @@
 package Hospedaje.Criteria;
 
 import Hospedaje.Habitaciones.Habitacion;
+import Hospedaje.Reservas.ReservaHospedaje;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-public class CriteriaDisponibilidad implements Criteria {
-    private boolean disponibilidad;
+public class CriteriaDisponibilidad implements HospedajeCriteria<Habitacion, ReservaHospedaje> {
+    private Date reservarDesde;
+    private Date reservarHasta;
 
-    public CriteriaDisponibilidad(boolean disponibilidad) {
-        this.disponibilidad = disponibilidad;
+    public CriteriaDisponibilidad(Date reservarDesde, Date reservarHasta) {
+        this.reservarDesde = reservarDesde;
+        this.reservarHasta = reservarHasta;
     }
 
     @Override
-    public List<Habitacion> meetCriteria(List<Habitacion> habitaciones) {
-        List<Habitacion> habitacionesDisponibles = new ArrayList<>();
-        for (Habitacion habitacion : habitaciones) {
-            if (habitacion.estaDisponible() == disponibilidad) {
-                habitacionesDisponibles.add(habitacion);
+    public List<Habitacion> meetCriteria(List<Habitacion> habitaciones, List<ReservaHospedaje> reservas) {
+        List<Habitacion> habitacionesDisponibles = new ArrayList<>(habitaciones);
+
+        for (ReservaHospedaje reserva : reservas) {
+            Date fechaInicioReserva = reserva.getFechaInicio();
+            Date fechaFinReserva = reserva.getFechaFin();
+
+            // Si la reserva coincide con el rango de fechas solicitado, eliminamos todas las habitaciones de esa reserva de la lista de disponibles
+            if (!(fechaInicioReserva.after(reservarHasta) || fechaFinReserva.before(reservarDesde))) {
+                for (Habitacion habitacion : reserva.getHabitaciones()) {
+                    habitacionesDisponibles.remove(habitacion);
+                }
             }
         }
+
         return habitacionesDisponibles;
     }
 }
