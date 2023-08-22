@@ -26,8 +26,8 @@ public class ModuloRentaVehiculos extends JFrame {
     private JTextField txtRetorno;
     private JLabel lblOrigen;
     private JLabel lblRetorno;
-    private JDateChooser dateChooserInicio = new JDateChooser();
-    private JDateChooser dateChooserFinal = new JDateChooser();
+   // private JDateChooser dateChooserInicio = new JDateChooser();
+   // private JDateChooser dateChooserFinal = new JDateChooser();
 
     public ModuloRentaVehiculos() {
         pnlCatalogo1.setVisible(false);
@@ -43,8 +43,8 @@ public class ModuloRentaVehiculos extends JFrame {
             System.exit(0);
         });
         //calendario
-        pnlCalendario1.add(dateChooserInicio);
-        pnlCalendario2.add(dateChooserFinal);
+       // pnlCalendario1.add(dateChooserInicio);
+       // pnlCalendario2.add(dateChooserFinal);
     }
 
     public void crearFrame() {
