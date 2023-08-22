@@ -7,13 +7,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ReservaHospedaje extends Reserva {
+    private String reservaId;
     private int numeroPersonas;
     private Date fechaCreacion;
     private Date fechaCancelacionPago;
     private Date fechaInicio;
     private Date fechaFin;
-    private Habitacion[] habitaciones;
-    ReservaHospedaje(String userId, String reservaId, int numeroPersonas, Habitacion[] habitaciones, Date fechaCreacion, Date fechaInicio, Date fechaFin) {
+    private Habitacion habitaciones[];
+    public ReservaHospedaje(String userId, String reservaId, int numeroPersonas, Habitacion[] habitaciones, Date fechaCreacion, Date fechaInicio, Date fechaFin) {
         super(userId, reservaId);
         this.numeroPersonas = numeroPersonas;
         this.fechaCreacion = fechaCreacion;
@@ -49,6 +50,22 @@ public class ReservaHospedaje extends Reserva {
                 "\n\tfechaFin=" + dateFormat.format(fechaFin) +
                 "\n\tHabitaciones:" + habitacionesInfo.toString() +
                 "\n";
+    }
+
+    public Date getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public Date getFechaFin() {
+        return fechaFin;
+    }
+
+    public Habitacion[] getHabitaciones() {
+        return habitaciones;
+    }
+
+    public String getReservaId() {
+        return reservaId;
     }
     public boolean confirmarReserva() {
         // pagar
