@@ -12,16 +12,16 @@ public class Login extends JFrame {
     public Login() {
 
         btnLogin.addActionListener(e -> {
-            String username = "DS-2023A";
-            String password = "GR2SW";
+            String username = "a";
+            String password = "a";
             String passwordIngresada = new String(txtContraseña.getPassword());
 
-            if(txtUsuario.getText().equals(username) && passwordIngresada.equals(password)){
+            if (txtUsuario.getText().equals(username) && passwordIngresada.equals(password)) {
                 Módulos módulos = new Módulos();
                 módulos.crearFrame();
                 dispose();
             } else {
-                JOptionPane.showMessageDialog(null,"Credenciales Incorrectas");
+                JOptionPane.showMessageDialog(null, "Credenciales Incorrectas");
             }
         });
     }
