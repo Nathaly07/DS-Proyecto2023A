@@ -52,6 +52,7 @@ public class ModuloTours extends JFrame{
             JTextField infoGuiaTF = new JTextField(aux.getInfo_guia());
             JTextField duracionTF = new JTextField(aux.getDuracion());
             JTextField limiteUsuariosTF = new JTextField(aux.getLimite_usuarios());
+            JButton botonReservar = new JButton("Reservar");
 
             add(nombreLabel);
             add(nombreTF);
@@ -63,6 +64,7 @@ public class ModuloTours extends JFrame{
             add(duracionTF);
             add(limiteUsuariosLabel);
             add(limiteUsuariosTF);
+            add(botonReservar);
         }
     }
 
