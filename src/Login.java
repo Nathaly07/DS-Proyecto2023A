@@ -17,8 +17,8 @@ public class Login extends JFrame {
             String passwordIngresada = new String(txtContraseña.getPassword());
 
             if(txtUsuario.getText().equals(username) && passwordIngresada.equals(password)){
-                Módulos módulos = new Módulos();
-                módulos.crearFrame();
+                Modulos modulos = new Modulos();
+                modulos.crearFrame();
                 dispose();
             } else {
                 JOptionPane.showMessageDialog(null,"Credenciales Incorrectas");
