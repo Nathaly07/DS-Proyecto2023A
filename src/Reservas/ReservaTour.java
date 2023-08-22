@@ -1,5 +1,6 @@
 package Reservas;
 
+import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -79,7 +80,10 @@ public class ReservaTour extends Reserva{
         return dias;
     }
 
-
+    public ArrayList<Tour> getToursAgregados() {
+        return toursAgregados;
+    }
+    
     @Override
     public void cancelarReserva() {
         if (this.activado = true){
