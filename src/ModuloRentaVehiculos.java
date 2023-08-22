@@ -34,8 +34,8 @@ public class ModuloRentaVehiculos extends JFrame {
         btnCarrito.setVisible(false);
         btnCatalogo.addActionListener(e -> pnlCatalogo1.setVisible(true));
         btnRegresar.addActionListener(e -> {
-            Módulos módulos = new Módulos();
-            módulos.crearFrame();
+            Modulos modulos = new Modulos();
+            modulos.crearFrame();
             dispose();
         });
         btnSalir.addActionListener(e -> {
