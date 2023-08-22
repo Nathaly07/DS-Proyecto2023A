@@ -4,21 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Parada {
-    private int paradaId;
+    private String paradaId;
     private String destino;
     private List<String> actividades;
 
-    public Parada(int paradaId, String destino, List<String> actividades) {
+    public Parada(String paradaId, String destino, List<String> actividades) {
         this.paradaId = paradaId;
         this.destino = destino;
         this.actividades = new ArrayList<>();
     }
 
-    public int getParadaId() {
+    public String getParadaId() {
         return paradaId;
     }
 
-    public void setParadaId(int paradaId) {
+    public void setParadaId(String paradaId)
+    {
         this.paradaId = paradaId;
     }
 

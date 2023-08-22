@@ -95,7 +95,7 @@ public class Tour {
     public void eliminarParada(int paradaId) {
         Parada paradaAEliminar = null;
         for (Parada parada : this.paradasTuristicas) {
-            if (parada.getParadaId() == paradaId) {
+            if (parada.getParadaId().equals(paradaId)) {
                 paradaAEliminar = parada;
                 break;
             }

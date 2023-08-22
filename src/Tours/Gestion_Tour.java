@@ -89,7 +89,7 @@ public class Gestion_Tour {
     public void eliminarParada(int id) {
         Parada paradaAEliminar = null;
         for (Parada parada : this.paradas) {
-            if (parada.getParadaId() == id) {
+            if (parada.getParadaId().equals(id)) {
                 paradaAEliminar = parada;
                 break;
             }
