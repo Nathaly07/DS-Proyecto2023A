@@ -81,8 +81,8 @@ public class Tour {
     public boolean eliminarParada(int paradaId) {
         Iterator <Parada> it = this.paradasTuristicas.iterator();
         while(it.hasNext()) {
-            Libro libro = it.next();
-            if(libro.getTitulo().equalsIgnoreCase(nombre)) {
+            Parada parada = it.next();
+            if(parada.getParadaId() == paradaId) {
                 it.remove();
                 return true;
             }

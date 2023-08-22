@@ -10,9 +10,9 @@ public class Gestion_Tour {
     }
 // Metodo para retorna el tour
 
-    public Tour getTour(int id) {
+    public Tour getTour(String nombre) {
         for (Tour tour : this.tours) {
-            if (tour.getTourID() == id) {
+            if (tour.getTourID().equalsIgnoreCase(nombre)) {
                 return tour;
             }
         }

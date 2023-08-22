@@ -45,7 +45,7 @@ public class ReservaTour extends Reserva{
         this.toursAgregados.remove(tour);
     }
 
-    public String buscarTour(String nombreTour){
+    public Tour buscarTour(String nombreTour){
         return this.gestionTour.getTour(nombreTour);
     }
 
