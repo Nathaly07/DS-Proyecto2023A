@@ -1,3 +1,5 @@
+package Tours;
+
 import java.util.ArrayList;
 import java.util.List;
 public class Gestion_Tour {
@@ -30,16 +32,16 @@ public class Gestion_Tour {
         return toursDisponibles;
     }
 
-//Agregar Tour
+//Agregar Tours.Tour
 
     public void nuevoTour(Tour tour) {
         this.tours.add(tour);
     }
-//Actualizar Tour
+//Actualizar Tours.Tour
 
-    public void actualizarTour(int id, Tour changes) {
+    public void actualizarTour(String id, Tour changes) {
         for (Tour tour : this.tours) {
-            if (tour.getTourID() == id) {
+            if (tour.getTourID().equalsIgnoreCase(id)) {
                 // Actualizar los atributos necesarios según los cambios
                 tour.setNombre(changes.getNombre());
                 tour.setPrecio(changes.getPrecio());
@@ -47,12 +49,12 @@ public class Gestion_Tour {
             }
         }
     }
-//Eliminar Tour
+//Eliminar Tours.Tour
 
-    public void eliminarTour(int id) {
+    public void eliminarTour(String id) {
         Tour tourAEliminar = null;
         for (Tour tour : this.tours) {
-            if (tour.getTourID() == id) {
+            if (tour.getTourID().equalsIgnoreCase(id)) {
                 tourAEliminar = tour;
                 break;
             }
@@ -61,20 +63,20 @@ public class Gestion_Tour {
             this.tours.remove(tourAEliminar);
         }
     }
-//Promocionar Tour
+//Promocionar Tours.Tour
 
-    public String promocionarTour(int id) {
-        Tour tourPromocionado = getTour(id);
+    public String promocionarTour(String nombre) {
+        Tour tourPromocionado = getTour(nombre);
 
         if (tourPromocionado != null) {
-            String promocion = "¡Promoción de Tour!\n";
+            String promocion = "¡Promoción de Tours.Tour!\n";
             promocion += "Nombre: " + tourPromocionado.getNombre() + "\n";
             promocion += "Precio: $" + tourPromocionado.getPrecio() + "\n";
             promocion += "Duración: " + tourPromocionado.getDuracion() + " horas\n";
 
             return promocion;
         } else {
-            return "Tour no encontrado.";
+            return "Tours.Tour no encontrado.";
         }
     }
 
@@ -83,7 +85,7 @@ public class Gestion_Tour {
         this.paradas.add(parada);
     }
 
-    //Eliminar Parada
+    //Eliminar Tours.Parada
     public void eliminarParada(int id) {
         Parada paradaAEliminar = null;
         for (Parada parada : this.paradas) {

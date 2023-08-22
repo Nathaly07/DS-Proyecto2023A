@@ -1,5 +1,7 @@
+package Tours;
+
 import java.util.ArrayList;
-import java.util.Iterator;
+import javax.swing.JOptionPane;
 
 public class Tour {
 
@@ -10,13 +12,12 @@ public class Tour {
     private String info_guia;
     private String duracion;
     private int limite_usuarios;
-    private Gestion_Tour gestion_tour;
     private Gestion_Reserva gestion_reserva;
 
 
     //Constructor
 
-    public Tour(String tourID, String nombre, double precio, String info_guia, String duracion, int limite_usuarios, Gestion_Tour gestion_tour, Gestion_Reserva gestion_reserva) {
+    public Tour(String tourID, String nombre, double precio, String info_guia, String duracion, int limite_usuarios, Gestion_Reserva gestion_reserva) {
         this.tourID = tourID;
         this.nombre = nombre;
         this.precio = precio;
@@ -24,7 +25,6 @@ public class Tour {
         this.info_guia = info_guia;
         this.duracion = duracion;
         this.limite_usuarios = limite_usuarios;
-        this.gestion_tour = gestion_tour;
         this.gestion_reserva = gestion_reserva;
     }
 
@@ -36,6 +36,14 @@ public class Tour {
 
     public void setTourID(String tourID) {
         this.tourID = tourID;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public double getPrecio() {
@@ -78,16 +86,30 @@ public class Tour {
         this.limite_usuarios = limite_usuarios;
     }
 
-    public boolean eliminarParada(int paradaId) {
-        Iterator <Parada> it = this.paradasTuristicas.iterator();
-        while(it.hasNext()) {
-            Parada parada = it.next();
-            if(parada.getParadaId() == paradaId) {
-                it.remove();
-                return true;
+    public void agregarParada(Parada parada) {
+        this.paradasTuristicas.add(parada);
+    }
+
+    public void eliminarParada(int paradaId) {
+        Parada paradaAEliminar = null;
+        for (Parada parada : this.paradasTuristicas) {
+            if (parada.getParadaId() == paradaId) {
+                paradaAEliminar = parada;
+                break;
             }
         }
-        return false;
+        if (paradaAEliminar != null) {
+            paradasTuristicas.remove(paradaAEliminar);
+            JOptionPane.showMessageDialog(null,
+                    "La parada se ha eliminado correctamente.",
+                    "Tour",
+                    JOptionPane.WARNING_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    "La parada no se ha eliminado porque no existe en la lista.",
+                    "Tour",
+                    JOptionPane.WARNING_MESSAGE);
+        }
     }
 
 

@@ -1,3 +1,5 @@
+import Tours.ModuloTours;
+
 import javax.swing.*;
 
 public class Modulos extends JFrame {

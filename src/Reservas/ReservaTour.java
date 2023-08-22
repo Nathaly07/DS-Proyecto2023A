@@ -1,5 +1,6 @@
 package Reservas;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -8,6 +9,9 @@ import javax.swing.JOptionPane;
 
 import java.time.LocalDate;
 import java.text.SimpleDateFormat;
+import Tours.Tour;
+import Tours.Gestion_Tour;
+
 
 public class ReservaTour extends Reserva{
     private boolean activado;
@@ -16,13 +20,13 @@ public class ReservaTour extends Reserva{
     private Date fechaCreacion;
     private Date fechaConfirmacion;
     private ArrayList<Tour> toursAgregados;
-    private GestionTour gestionTour;
+    private Gestion_Tour gestionTour;
 
     private SimpleDateFormat format = new SimpleDateFormat("dd/M/yy");
 
-    public ReservaTour(String usuarioID, GestionTour gestionTour, Date fechaCreacion, Date fechaConfirmacion, int numeroPersonas, boolean seguroActivado, ArrayList<Tour> toursAgregados) {
+    public ReservaTour(String usuarioID, String reservaID, Gestion_Tour gestionTour, Date fechaCreacion, Date fechaConfirmacion, int numeroPersonas, boolean seguroActivado, ArrayList<Tour> toursAgregados) {
         super(usuarioID, reservaID);
-        this.toursAgregados = new ArrayList<>();
+        this.toursAgregados = new ArrayList<Tour>();
         this.gestionTour = gestionTour;
         this.fechaConfirmacion = fechaConfirmacion;
         this.fechaCreacion = fechaCreacion;
@@ -51,7 +55,12 @@ public class ReservaTour extends Reserva{
 
     public int tiempoSinConfirmar(){
         LocalDate fecha = LocalDate.now();
-        Date fechaActual = format.parse(fecha.toString());
+        Date fechaActual = null;
+        try {
+            fechaActual = format.parse(fecha.toString());
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
         int milisecondsByDay = 86400000;
         int dias = (int) ((fechaActual.getTime()-fechaCreacion.getTime()) / milisecondsByDay);
         return dias;
@@ -59,7 +68,12 @@ public class ReservaTour extends Reserva{
 
     public int tiempoTrasCancelar(){
         LocalDate fecha = LocalDate.now();
-        Date fechaActual = format.parse(fecha.toString());
+        Date fechaActual = null;
+        try {
+            fechaActual = format.parse(fecha.toString());
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
         int milisecondsByDay = 86400000;
         int dias = (int) ((fechaActual.getTime()-fechaConfirmacion.getTime()) / milisecondsByDay);
         return dias;
@@ -73,7 +87,7 @@ public class ReservaTour extends Reserva{
         }else {
             JOptionPane.showMessageDialog(null, 
                                             "La reserva ya ha sido cancelada", 
-                                            "Reserva Tour", 
+                                            "Reserva Tours.Tour",
                                             JOptionPane.WARNING_MESSAGE);
         }
     }
