@@ -1,22 +1,24 @@
-public package Tours;
+package Tours;
 
-import Reservas.Reserva;
+import Reservas.ReservaTour;
+
+import java.util.ArrayList;
 
 class PagoTour {
 
-    private float tarifaImpuesto = 0.12;
-    private float tarifaDevolucion = 0.4;
-    private Reserva Reserva;
+    private double tarifaImpuesto = 0.12;
+    private double tarifaDevolucion = 0.4;
+    private ReservaTour Reserva;
 
-    public PagoTour(Reserva reserva) {
+    public PagoTour(ReservaTour reserva) {
         this.Reserva = reserva;
     }
 
     public float calcularPrecioNeto() {
-        Arraylist<Tour> tours = this.Reserva.getToursAgregados();
+        ArrayList<Tour> tours = this.Reserva.getToursAgregados();
         float precioNeto = 0;
         for (Tour tour : tours) {
-            precioFinal += tour.getPrecio();
+            precioNeto += tour.getPrecio();
         }
 
         return precioNeto;
@@ -26,11 +28,11 @@ class PagoTour {
         return this.calcularPrecioNeto() + this.calcularImpuesto();
     }
 
-    public calcularImpuesto() {
-        return this.calcularPrecioNeto() * this.tarifaImpuesto;
+    public float calcularImpuesto() {
+        return (float)(this.calcularPrecioNeto() * this.tarifaImpuesto);
     }
 
-    public calcularDevolucion() {
+    public double calcularDevolucion() {
         int dias = this.Reserva.tiempoTrasCancelar();
         if(dias <= 15){
             return this.calcularPrecioFinal();
