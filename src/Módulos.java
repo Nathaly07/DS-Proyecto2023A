@@ -1,4 +1,6 @@
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Módulos extends JFrame {
     private JPanel pnlMódulos;
@@ -14,6 +16,7 @@ public class Módulos extends JFrame {
             login.crearFrame();
             dispose();
         });
+        btnMódulo3.addActionListener(e -> rentarVehiculo());
     }
 
     public void crearFrame() {
@@ -24,4 +27,10 @@ public class Módulos extends JFrame {
         add(pnlMódulos);
         setVisible(true);
     }
+    public void rentarVehiculo(){
+        ModuloRentaVehiculos rentaVehiculos = new ModuloRentaVehiculos();
+        rentaVehiculos.crearFrame();
+        dispose();
+    }
+
 }
