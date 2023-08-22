@@ -15,14 +15,14 @@ public class ReservaTour extends Reserva{
     private boolean seguroActivado;
     private Date fechaCreacion;
     private Date fechaConfirmacion;
-    private ArrayList<Tour> listaTours;
+    private ArrayList<Tour> toursAgregados;
     private GestionTour gestionTour;
 
     private SimpleDateFormat format = new SimpleDateFormat("dd/M/yy");
 
-    public ReservaTour(String usuarioID, GestionTour gestionTour, Date fechaCreacion, Date fechaConfirmacion, int numeroPersonas, boolean seguroActivado, ArrayList<Tour> listaTours) {
+    public ReservaTour(String usuarioID, GestionTour gestionTour, Date fechaCreacion, Date fechaConfirmacion, int numeroPersonas, boolean seguroActivado, ArrayList<Tour> toursAgregados) {
         super(usuarioID, reservaID);
-        this.listaTours = new ArrayList<>();
+        this.toursAgregados = new ArrayList<>();
         this.gestionTour = gestionTour;
         this.fechaConfirmacion = fechaConfirmacion;
         this.fechaCreacion = fechaCreacion;
@@ -38,11 +38,11 @@ public class ReservaTour extends Reserva{
     }
 
     public void agregarTour(Tour tour){
-        this.listaTours.add(tour);
+        this.toursAgregados.add(tour);
     }
 
     public void eliminarTour(Tour tour){
-        this.listaTours.remove(tour);
+        this.toursAgregados.remove(tour);
     }
 
     public String buscarTour(String nombreTour){
