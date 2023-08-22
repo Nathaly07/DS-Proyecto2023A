@@ -1,8 +1,9 @@
 package Tours;
+import Reservas.ReservaTour;
 
 public class Gestion_Reserva {
 
-    //private Reserva[] reservas;
+    private ReservaTour[] reservas;
 
     public Gestion_Reserva() {
 
@@ -13,9 +14,9 @@ public class Gestion_Reserva {
     public void actualizar(){
 
     }
-//  public void totalPersonasPorTour(tourID){
-//
-//  }
+    public void totalPersonasPorTour(Tour tour){
+
+    }
     public void agregarReserva(){
 
     }

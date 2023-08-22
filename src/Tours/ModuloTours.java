@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 public class ModuloTours extends JFrame{
 
     private Gestion_Tour gestionTour;
+    private Gestion_Reserva gestionReserva;
     private JPanel panel1;
     private JButton mostrarToursDisponiblesButton;
     private JPanel panelTours;
