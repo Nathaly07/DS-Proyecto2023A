@@ -1,22 +1,21 @@
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class Módulos extends JFrame {
+public class Modulos extends JFrame {
     private JPanel pnlMódulos;
     private JButton btnMódulo1;
     private JButton btnMódulo2;
     private JButton btnMódulo3;
-    private JButton btnMódulon;
+    private JButton botonTour;
     private JButton btnExit;
 
-    public Módulos() {
+    public Modulos() {
         btnExit.addActionListener(e -> {
             Login login = new Login();
             login.crearFrame();
             dispose();
         });
         btnMódulo3.addActionListener(e -> rentarVehiculo());
+        botonTour.addActionListener(e -> reservarTours());
     }
 
     public void crearFrame() {
@@ -30,6 +29,12 @@ public class Módulos extends JFrame {
     public void rentarVehiculo(){
         ModuloRentaVehiculos rentaVehiculos = new ModuloRentaVehiculos();
         rentaVehiculos.crearFrame();
+        dispose();
+    }
+
+    public void reservarTours(){
+        ModuloTours reservaTours = new ModuloTours();
+        reservaTours.crearFrame();
         dispose();
     }
 
