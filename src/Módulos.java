@@ -1,14 +1,17 @@
+import Seguros.InterfazSeguros;
+
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Módulos extends JFrame {
     private JPanel pnlMódulos;
-    private JButton btnMódulo1;
-    private JButton btnMódulo2;
-    private JButton btnMódulo3;
-    private JButton btnMódulon;
+    private JButton button1;
+    private JButton button2;
+    private JButton button3;
+    private JButton button4;
+    private JButton btnSeguros;
     private JButton btnExit;
+    private JPanel pnlContenido;
+
 
     public Módulos() {
         btnExit.addActionListener(e -> {
@@ -16,7 +19,12 @@ public class Módulos extends JFrame {
             login.crearFrame();
             dispose();
         });
-        btnMódulo3.addActionListener(e -> rentarVehiculo());
+        btnSeguros.addActionListener(e -> {
+            InterfazSeguros interfazSeguros = new InterfazSeguros();
+            setPanel(interfazSeguros.pnlOpcionesSeguro);
+            crearFrame();
+        });
+        button3.addActionListener(e -> rentarVehiculo());
     }
 
     public void crearFrame() {
@@ -27,10 +35,12 @@ public class Módulos extends JFrame {
         add(pnlMódulos);
         setVisible(true);
     }
+    public void setPanel(JPanel pnlMódulos) {
+        pnlContenido.add(pnlMódulos);
+    }
     public void rentarVehiculo(){
         ModuloRentaVehiculos rentaVehiculos = new ModuloRentaVehiculos();
         rentaVehiculos.crearFrame();
         dispose();
     }
-
 }
