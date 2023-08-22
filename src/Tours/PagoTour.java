@@ -11,8 +11,6 @@ class PagoTour {
     public PagoTour(Reserva reserva) {
         this.Reserva = reserva;
     }
-        
-    }
 
     public float calcularPrecioNeto() {
         Arraylist<Tour> tours = this.Reserva.getToursAgregados();
