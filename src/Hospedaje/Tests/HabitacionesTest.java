@@ -14,11 +14,5 @@ public class HabitacionesTest {
         habitaciones.forEach(habitacion -> {
             System.out.println(habitacion.getInfo());
         });
-
-        List<Habitacion> habitacionesDisponibles = gestion_habitaciones.getHabitacionesDisponibles();
-        System.out.println("Habitaciones disponibles: " + habitacionesDisponibles.size());
-        habitacionesDisponibles.forEach(habitacion -> {
-            System.out.println(habitacion.getInfo());
-        });
     }
 }
