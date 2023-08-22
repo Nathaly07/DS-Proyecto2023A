@@ -1,7 +1,6 @@
 import Seguros.InterfazSeguros;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class Módulos extends JFrame {
     private JPanel pnlMódulos;
@@ -25,6 +24,7 @@ public class Módulos extends JFrame {
             setPanel(interfazSeguros.pnlOpcionesSeguro);
             crearFrame();
         });
+        button3.addActionListener(e -> rentarVehiculo());
     }
 
     public void crearFrame() {
@@ -35,8 +35,12 @@ public class Módulos extends JFrame {
         add(pnlMódulos);
         setVisible(true);
     }
-
     public void setPanel(JPanel pnlMódulos) {
         pnlContenido.add(pnlMódulos);
+    }
+    public void rentarVehiculo(){
+        ModuloRentaVehiculos rentaVehiculos = new ModuloRentaVehiculos();
+        rentaVehiculos.crearFrame();
+        dispose();
     }
 }
