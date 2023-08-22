@@ -64,7 +64,9 @@
             <preferred-size width="150" height="50"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <text value=""/>
+        </properties>
       </component>
       <hspacer id="31f1d">
         <constraints>
