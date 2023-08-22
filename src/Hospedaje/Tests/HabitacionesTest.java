@@ -5,7 +5,7 @@ import Hospedaje.Habitaciones.Habitacion;
 
 import java.util.List;
 
-public class Tests {
+public class HabitacionesTest {
     public static void main(String[] args) {
         Gestion_Habitaciones gestion_habitaciones = new Gestion_Habitaciones();
         // Habitaciones Totales
