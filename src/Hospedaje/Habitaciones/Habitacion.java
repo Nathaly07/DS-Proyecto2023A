@@ -19,8 +19,12 @@ public class Habitacion {
         return this.hotel;
     }
 
+    public int getHabitacionID() {
+        return this.habitacionID;
+    }
+
     public String getInfo(){
-        return "\nHabitación: " + this.habitacionID +
+        return "\nHabitaciónId: " + this.habitacionID +
                 "\nPrecio: " + this.precio +
                 "\nLímite de Usuarios: " + this.limiteUsuarios +
                 "\nHotel: " + this.hotel.getNombre() + "\n";

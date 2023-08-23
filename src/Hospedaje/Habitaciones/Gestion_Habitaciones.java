@@ -27,5 +27,13 @@ public class Gestion_Habitaciones {
         return habitaciones;
     }
 
+    public static Habitacion getHabitacionById(int id){
+        for (Habitacion habitacion : habitaciones) {
+            if (habitacion.getHabitacionID() == id) {
+                return habitacion;
+            }
+        }
+        return null;
+    }
 
 }
