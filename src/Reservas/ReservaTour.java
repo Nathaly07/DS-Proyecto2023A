@@ -67,8 +67,8 @@ public class ReservaTour extends Reserva{
         this.toursAgregados.add(tour);
     }
 
-    public void eliminarTour(Tour tour){
-        this.toursAgregados.remove(tour);
+    public void eliminarTour(String nombreTour){
+        this.toursAgregados.remove(this.buscarTour(nombreTour));
     }
 
     public Tour buscarTour(String nombreTour){
