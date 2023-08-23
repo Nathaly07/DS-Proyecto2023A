@@ -98,6 +98,15 @@ public class Gestion_Tour {
             paradas.remove(paradaAEliminar);
         }
     }
+//Buscar Tour
+public Tour buscarTour(String id) {
+    for (Tour tour : this.tours) {
+        if (tour.getTourID().equals(id)) {
+            return tour;
+        }
+    }
+    return null;
+}
 
     //Obtener lista de Tours
     public List<Tour> getTours() {
