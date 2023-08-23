@@ -3,14 +3,13 @@ package Principal;
 import ModuloRentaVehiculos.ModuloRentaVehiculos;
 
 import Seguros.InterfazSeguros;
+import Vuelos.ModuloVuelos;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Módulos extends JFrame {
     private JPanel pnlMódulos;
-    private JButton button1;
+    private JButton btnVuelos;
     private JButton button2;
     private JButton button3;
     private JButton btnHospedaje;
@@ -23,6 +22,8 @@ public class Módulos extends JFrame {
 
     public Módulos(Login login) {
         this.login = login;
+
+        btnVuelos.addActionListener(e -> reservarVuelo());
         btnExit.addActionListener(e -> {
             LoginInterfaz loginInterfaz = new LoginInterfaz(login);
             loginInterfaz.crearFrame();
@@ -41,6 +42,7 @@ public class Módulos extends JFrame {
         });
     }
 
+
     public void crearFrame() {
         setSize(1000, 700);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -55,9 +57,15 @@ public class Módulos extends JFrame {
         pnlContenido.add(pnlMódulos);
     }
 
+    private void reservarVuelo() {
+        ModuloVuelos moduloVuelos = new ModuloVuelos(login);
+        moduloVuelos.crearframe();
+        dispose();
+    }
     public void rentarVehiculo() {
         ModuloRentaVehiculos rentaVehiculos = new ModuloRentaVehiculos(this.login);
         rentaVehiculos.crearFrame();
         dispose();
     }
+
 }
