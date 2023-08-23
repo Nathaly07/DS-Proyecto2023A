@@ -56,8 +56,8 @@ public class Gestion_Reserva {
 
     public void agregarReserva(ReservaTour reservaAAgregar) { this.reservas.add(reservaAAgregar); }
 
-    public Reserva getReserva(String idReserva){
-        for (Reserva reserva: this.reservas){
+    public ReservaTour getReserva(String idReserva){
+        for (ReservaTour reserva: this.reservas){
             if(reserva.getReservaID().equalsIgnoreCase(idReserva)) {
                 return reserva;
             }

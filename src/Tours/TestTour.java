@@ -1,8 +1,21 @@
+package Tours;
+
+import Pagos.Pago;
+import Reservas.Reserva;
+import Reservas.ReservaTour;
+
 import javax.swing.JOptionPane;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 
 public class TestTour {
 
-    public TestTour() {
+    private Gestion_Reserva gestionReserva;
+
+    public TestTour(Gestion_Reserva gestionReserva) {
+        this.gestionReserva = gestionReserva;
     }
 
     public void initTour() {
@@ -26,7 +39,10 @@ public class TestTour {
                 JOptionPane.showMessageDialog(null, "Eliminar Tour");
                 break;
             case 5:
-                JOptionPane.showMessageDialog(null, "Confirmar Tour");
+                JOptionPane.showMessageDialog(null, "Confirmar Reserva");
+                String idReserva = JOptionPane.showInputDialog("Ingrese el id de la reserva");
+                String metodoPago = JOptionPane.showInputDialog("Seleccione el metodo de pago:\n-Paypal\n-Transferncia\n-Tarjeta de credito");
+                this.confirmarReserva(idReserva, metodoPago);
                 break;
             case 6:
                 JOptionPane.showMessageDialog(null, "Salir");
@@ -38,5 +54,22 @@ public class TestTour {
 
     }
 
-    public
+    public void confirmarReserva(String idReserva, String metodoPago){
+        ReservaTour reserva = this.gestionReserva.getReserva(idReserva);
+
+        SimpleDateFormat format = new SimpleDateFormat("dd/M/yy");
+        LocalDate fecha = LocalDate.now();
+        Date fechaActual = null;
+        try {
+            fechaActual = format.parse(fecha.toString());
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        };
+        reserva.setFechaConfirmacion(fechaActual);
+
+        PagoTour pagoTour = new PagoTour(reserva);
+        double valorTotal = pagoTour.calcularPrecioFinal();
+        Pago pago = new Pago(valorTotal, metodoPago);
+        pago.pagar();
+    }
 }
