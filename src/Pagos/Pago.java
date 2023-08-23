@@ -12,6 +12,10 @@ public abstract class Pago {
         this.modoPago = modoPago;
     }
 
+    public Pago() {
+
+    }
+
 
     public void pagar(){
         JOptionPane.showMessageDialog(null, "Se ha pagado la cantidad de: " + montoAPagar + " por medio de: "
