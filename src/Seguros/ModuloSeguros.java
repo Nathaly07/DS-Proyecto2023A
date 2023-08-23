@@ -10,7 +10,7 @@ public class ModuloSeguros {
 
     }
 
-    public void procesarCreacionSeguro(Seguro seguro) {
+    public void procesarCreaciónSeguro(Seguro seguro) {
         this.seguros.agregarSeguro(seguro);
         JOptionPane.showMessageDialog(null, "Se ha creado el seguro con éxito.");
     }
@@ -46,7 +46,7 @@ public class ModuloSeguros {
         }
     }
 
-    public void procesarIndemnizacion(int ID_Seguro, String motivo, float montoPedido) {
+    public void procesarIndemnización(int ID_Seguro, String motivo, float montoPedido) {
         float montoARetornar = 0.0f;
         Seguro seguroIndemnizar = this.seguros.buscarSeguro(ID_Seguro);
         if (seguroIndemnizar == null) {

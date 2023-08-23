@@ -162,7 +162,7 @@ public class InterfazSeguros extends JFrame {
                         destino,
                         coberturas
                 );
-                this.moduloSeguro.procesarCreacionSeguro(seguroDeViajes);
+                this.moduloSeguro.procesarCreaciónSeguro(seguroDeViajes);
             } else if (tbdTiposDeSeguro.getSelectedIndex() == 1) {
                 String[] coberturas = txtCoberturasMédico.getText().split(",");
                 Seguro seguroMédico = new SeguroMédico(
@@ -175,7 +175,7 @@ public class InterfazSeguros extends JFrame {
                         primaSinRecargo,
                         coberturas
                 );
-                this.moduloSeguro.procesarCreacionSeguro(seguroMédico);
+                this.moduloSeguro.procesarCreaciónSeguro(seguroMédico);
             } else if (tbdTiposDeSeguro.getSelectedIndex() == 2) {
                 float montoAPagar = Float.parseFloat(txtMontoAPagar.getText());
                 Seguro seguroDeVida = new SeguroDeVida(
@@ -188,7 +188,7 @@ public class InterfazSeguros extends JFrame {
                         primaSinRecargo,
                         montoAPagar
                 );
-                this.moduloSeguro.procesarCreacionSeguro(seguroDeVida);
+                this.moduloSeguro.procesarCreaciónSeguro(seguroDeVida);
             }
         });
 
@@ -207,7 +207,7 @@ public class InterfazSeguros extends JFrame {
         btnIndemnizar.addActionListener(e -> {
             int ID_Seguro = Integer.parseInt(this.textField1.getText());
             float montoPedido = Float.parseFloat(this.txtValorGastado.getText());
-            this.moduloSeguro.procesarIndemnizacion(ID_Seguro, this.txtMotivo.getText(), montoPedido);
+            this.moduloSeguro.procesarIndemnización(ID_Seguro, this.txtMotivo.getText(), montoPedido);
         });
 
         pagarButton.addActionListener(e -> {
