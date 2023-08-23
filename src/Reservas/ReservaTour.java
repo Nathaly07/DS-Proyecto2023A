@@ -67,7 +67,18 @@ public class ReservaTour extends Reserva{
     public Gestion_Tour getGestionTour() { return gestionTour; }
 
     public void agregarTour(Tour tour){
-        this.toursAgregados.add(tour);
+        if (tour.getDisponibilidad() >= this.numeroPersonas) {
+            this.toursAgregados.add(tour);
+            JOptionPane.showMessageDialog(null,
+                    "El tour se ha agregado correctamente.",
+                    "Reserva Tour",
+                    JOptionPane.WARNING_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    "El tour no se puede agregar porque se ha excedido el limite de usuarios.",
+                    "Reserva Tour",
+                    JOptionPane.WARNING_MESSAGE);
+        }
     }
 
     public void eliminarTour(String nombreTour){
