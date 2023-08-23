@@ -130,7 +130,6 @@ public class ModuloTours extends JFrame{
             botonReservar.addActionListener(e -> {
                 ArrayList<Tour> toursAgregados = null;
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                String personas = JOptionPane.showInputDialog("Ingrese el numero de personas");
                 LocalDate fechaActual = LocalDate.now();
                 this.reservaTour = new ReservaTour("01","01", gestionTour, fechaActual.toString(), 100, true, toursAgregados);
                 reservaTour.agregarTour(aux);
@@ -181,16 +180,6 @@ public class ModuloTours extends JFrame{
             JLabel limiteUsuariosLabel = new JLabel("Limite usuarios: ");
             JTextField limiteUsuariosTF = new JTextField(aux.getLimite_usuarios());
 
-            JButton botonEliminarTour = new JButton("Eliminar");
-            JButton botonMoficiarTour = new JButton("Modificar");
-
-
-            botonEliminarTour.addActionListener(e -> {
-                this.reservaTour.eliminarTour(aux.getNombre());
-                nombreLabel.setText(" ");
-                nombreTF.setText("");
-            });
-
 
             nombreLabel.setBounds(10, yPos, 100, 25);
             nombreTF.setBounds(110, yPos, 150, 25);
@@ -202,9 +191,6 @@ public class ModuloTours extends JFrame{
             duracionTF.setBounds(110, yPos + 90, 150, 25);
             limiteUsuariosLabel.setBounds(10, yPos + 120, 100, 25);
             limiteUsuariosTF.setBounds(110, yPos + 120, 60, 25);
-            botonMoficiarTour.setBounds(10, yPos + 150, 60, 25);
-            botonEliminarTour.setBounds(10, yPos + 180, 60, 25);
-
 
             panelReserva.add(nombreLabel);
             panelReserva.add(nombreTF);
@@ -216,9 +202,6 @@ public class ModuloTours extends JFrame{
             panelReserva.add(duracionTF);
             panelReserva.add(limiteUsuariosLabel);
             panelReserva.add(limiteUsuariosTF);
-            panelReserva.add(botonMoficiarTour);
-            panelReserva.add(botonEliminarTour);
-
 
 
             yPos += 140;

@@ -33,7 +33,6 @@ public class ReservaTour extends Reserva{
         this.numeroPersonas = numeroPersonas;
         this.seguroActivado = seguroActivado;
         this.activado = true;
-        this.toursAgregados = toursAgregados;
     }
 
     public void setNumeroPersonas(int numeroPersonas) {
