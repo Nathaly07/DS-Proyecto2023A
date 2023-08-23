@@ -34,13 +34,35 @@ public class ReservaTour extends Reserva{
         this.activado = true;
     }
 
+    public void setNumeroPersonas(int numeroPersonas) {
+        this.numeroPersonas = numeroPersonas;
+    }
+
+    public void setActivado(boolean activado) { this.activado = activado; }
+
+    public void setSeguroActivado(boolean seguroActivado) { this.seguroActivado = seguroActivado; }
+
+    public void setFechaCreacion(Date fechaCreacion) { this.fechaCreacion = fechaCreacion; }
+
+    public void setFechaConfirmacion(Date fechaConfirmacion) { this.fechaConfirmacion = fechaConfirmacion; }
+
+    public void setToursAgregados(ArrayList<Tour> toursAgregados) { this.toursAgregados = toursAgregados; }
+
+    public void setGestionTour(Gestion_Tour gestionTour) { this.gestionTour = gestionTour; }
+
     public int getNumeroPersonas() {
         return numeroPersonas;
     }
 
-    public void setNumeroPersonas(int numeroPersonas) {
-        this.numeroPersonas = numeroPersonas;
-    }
+    public boolean isActivado() { return activado; }
+
+    public boolean isSeguroActivado() { return seguroActivado; }
+
+    public Date getFechaCreacion() { return fechaCreacion; }
+
+    public Date getFechaConfirmacion() { return fechaConfirmacion; }
+
+    public Gestion_Tour getGestionTour() { return gestionTour; }
 
     public void agregarTour(Tour tour){
         this.toursAgregados.add(tour);
