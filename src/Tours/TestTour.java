@@ -1,22 +1,33 @@
+package Tours;
+
+import Pagos.Pago;
+import Reservas.ReservaTour;
+
 import javax.swing.JOptionPane;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 
 public class TestTour {
 
-    public TestTour() {
+    private Gestion_Reserva gestorReserva;
+
+    public TestTour(Gestion_Reserva gestorReserva) {
+        this.gestorReserva = gestorReserva;
     }
 
     public void initTour() {
         boolean flag = true;
 
-        while (flag == true){
-        int op = Integer.parseInt(
-            JOptionPane.showInputDialog(null, 
-            "1. Buscar Tours \n2. Reservar Tour\n3. Modificar Tour\n4. Eliminar Tour\n5. Confirmar Tour\n6. Salir\n ", 
-            "Menu",
-            JOptionPane.QUESTION_MESSAGE));
+        while (flag == true) {
+            int op = Integer.parseInt(
+                    JOptionPane.showInputDialog(null,
+                            "1. Buscar Tours \n2. Reservar Tour\n3. Modificar Tour\n4. Eliminar Tour\n5. Confirmar Tour\n6. Salir\n ",
+                            "Menu",
+                            JOptionPane.QUESTION_MESSAGE));
 
-        
-            switch (op) {         
+            switch (op) {
                 case 1:
                     JOptionPane.showMessageDialog(null, "Buscar Tours");
                     break;
@@ -27,25 +38,45 @@ public class TestTour {
                     JOptionPane.showMessageDialog(null, "Modificar Tour");
                     break;
                 case 4:
+                    JOptionPane.showMessageDialog(null, "Eliminar Tour");
                     String nombreTour = JOptionPane.showInputDialog(null,
                         "Ingrese el nombre del Tour a eliminar", 
                         "Eliminar Tour", JOptionPane.QUESTION_MESSAGE);
-
-                        gestorReserva.eliminarTour(nombreTour);
+                    gestorReserva.eliminarTour(nombreTour);
                     JOptionPane.showMessageDialog(null, 
                         "Tour eliminado", "Eliminar Tour", JOptionPane.INFORMATION_MESSAGE);
                     break;
                 case 5:
-                    JOptionPane.showMessageDialog(null, "Confirmar Tour");
+                    JOptionPane.showMessageDialog(null, "Confirmar Reserva");
+                    String idReserva = JOptionPane.showInputDialog("Ingrese el id de la reserva");
+                    String metodoPago = JOptionPane.showInputDialog("Seleccione el metodo de pago:\n-Paypal\n-Transferncia\n-Tarjeta de credito");
+                    this.confirmarReserva(idReserva, metodoPago);
                     break;
                 case 6:
                     JOptionPane.showMessageDialog(null, "Salir");
-                    flag = false;
                     break;
                 default:
                     JOptionPane.showMessageDialog(null, "Opción no válida");
                     break;
             }
         }
+    }
+    public void confirmarReserva(String idReserva, String metodoPago){
+        ReservaTour reserva = this.gestorReserva.getReserva(idReserva);
+
+        SimpleDateFormat format = new SimpleDateFormat("dd/M/yy");
+        LocalDate fecha = LocalDate.now();
+        Date fechaActual = null;
+        try {
+            fechaActual = format.parse(fecha.toString());
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        };
+        reserva.setFechaConfirmacion(fechaActual);
+
+        PagoTour pagoTour = new PagoTour(reserva);
+        double valorTotal = pagoTour.calcularPrecioFinal();
+        Pago pago = new Pago(valorTotal, metodoPago);
+        pago.pagar();
     }
 }
