@@ -12,6 +12,10 @@ public class Gestion_Reserva {
         this.reservas = new ArrayList<>();
     }
 
+    public List<ReservaTour> getReservas() {
+        return reservas;
+    }
+
     public void cancelar(String id){
         ReservaTour reservaACancelar = null;
         for (ReservaTour reserva : this.reservas) {
