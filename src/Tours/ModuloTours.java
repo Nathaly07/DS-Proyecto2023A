@@ -120,7 +120,9 @@ public class ModuloTours extends JFrame{
                 } catch (ParseException ex) {
                     throw new RuntimeException(ex);
                 }
-                this.reservaTour = new ReservaTour("01","01", gestionTour, fechaActual, 100, true, toursAgregados);
+                String personas = JOptionPane.showInputDialog("Ingrese el numero de personas");
+
+                this.reservaTour = new ReservaTour("01","01", gestionTour, fechaActual, Integer.parseInt(personas), true, toursAgregados);
                 reservaTour.agregarTour(aux);
             });
 
