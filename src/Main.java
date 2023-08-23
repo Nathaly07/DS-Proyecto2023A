@@ -1,6 +1,9 @@
+import Principal.LoginInterfaz;
+
 public class Main {
     public static void main(String[] args) {
-        Login login = new Login();
-        login.crearFrame();
+        //Probando
+        LoginInterfaz loginInterfaz = new LoginInterfaz();
+        loginInterfaz.crearFrame();
     }
 }   

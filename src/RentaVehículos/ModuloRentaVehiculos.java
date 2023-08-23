@@ -1,8 +1,9 @@
-import com.toedter.calendar.JDateChooser;
+package RentaVehículos;
+
+import Principal.Login;
+import Principal.Módulos;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class ModuloRentaVehiculos extends JFrame {
     private JPanel pnlPrincipal;
@@ -26,15 +27,18 @@ public class ModuloRentaVehiculos extends JFrame {
     private JTextField txtRetorno;
     private JLabel lblOrigen;
     private JLabel lblRetorno;
-   // private JDateChooser dateChooserInicio = new JDateChooser();
-   // private JDateChooser dateChooserFinal = new JDateChooser();
+    private Login login;
 
-    public ModuloRentaVehiculos() {
+    // private JDateChooser dateChooserInicio = new JDateChooser();
+    // private JDateChooser dateChooserFinal = new JDateChooser();
+
+    public ModuloRentaVehiculos(Login login) {
+        this.login = login;
         pnlCatalogo1.setVisible(false);
         btnCarrito.setVisible(false);
         btnCatalogo.addActionListener(e -> pnlCatalogo1.setVisible(true));
         btnRegresar.addActionListener(e -> {
-            Módulos módulos = new Módulos();
+            Módulos módulos = new Módulos(login);
             módulos.crearFrame();
             dispose();
         });
@@ -43,18 +47,16 @@ public class ModuloRentaVehiculos extends JFrame {
             System.exit(0);
         });
         //calendario
-       // pnlCalendario1.add(dateChooserInicio);
-       // pnlCalendario2.add(dateChooserFinal);
+        // pnlCalendario1.add(dateChooserInicio);
+        // pnlCalendario2.add(dateChooserFinal);
     }
 
     public void crearFrame() {
-
-            setSize(1000, 700);
-            setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-            setResizable(false);
-            setLocationRelativeTo(null);
-            add(pnlPrincipal);
-            setVisible(true);
-
+        setSize(1000, 700);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
+        setLocationRelativeTo(null);
+        add(pnlPrincipal);
+        setVisible(true);
     }
 }
