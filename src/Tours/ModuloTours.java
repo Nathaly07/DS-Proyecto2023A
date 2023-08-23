@@ -76,7 +76,7 @@ public class ModuloTours extends JFrame{
                 String idReserva = JOptionPane.showInputDialog("Ingrese el id de la reserva");
                 ReservaTour reserva = gestorReserva.getReserva(idReserva);
 
-                if (reserva.equals(null)){
+                if (reserva == null){
                     JOptionPane.showMessageDialog(null, "Reserva no encontrada");
                 } else {
                     PagoTour pagoTour = new PagoTour(reserva);
