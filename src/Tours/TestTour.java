@@ -31,8 +31,9 @@ public class TestTour {
                         "Ingrese el nombre del Tour a eliminar", 
                         "Eliminar Tour", JOptionPane.QUESTION_MESSAGE);
 
-                    
-                    JOptionPane.showMessageDialog(null, "Eliminar Tour");
+                        gestorReserva.eliminarTour(nombreTour);
+                    JOptionPane.showMessageDialog(null, 
+                        "Tour eliminado", "Eliminar Tour", JOptionPane.INFORMATION_MESSAGE);
                     break;
                 case 5:
                     JOptionPane.showMessageDialog(null, "Confirmar Tour");
