@@ -1,15 +1,15 @@
 package Principal;
 
-import Hospedaje.InterfacesDeUsuario.MenuHospedaje;
 import ModuloRentaVehiculos.ModuloRentaVehiculos;
 
 import Seguros.InterfazSeguros;
+import Vuelos.ModuloVuelos;
 
 import javax.swing.*;
 
 public class Módulos extends JFrame {
     private JPanel pnlMódulos;
-    private JButton button1;
+    private JButton btnVuelos;
     private JButton button2;
     private JButton button3;
     private JButton btnHospedaje;
@@ -22,6 +22,8 @@ public class Módulos extends JFrame {
 
     public Módulos(Login login) {
         this.login = login;
+
+        btnVuelos.addActionListener(e -> reservarVuelo());
         btnExit.addActionListener(e -> {
             LoginInterfaz loginInterfaz = new LoginInterfaz(login);
             loginInterfaz.crearFrame();
@@ -33,13 +35,13 @@ public class Módulos extends JFrame {
             crearFrame();
         });
         button3.addActionListener(e -> rentarVehiculo());
-        btnHospedaje.addActionListener(e -> reservarHospedaje());
         btnActualizarDatos.addActionListener(e -> {
             ActualizarDatosInterfaz actualizarDatosInterfaz = new ActualizarDatosInterfaz(login);
             setPanel(actualizarDatosInterfaz.pnlActualizarDatos);
             crearFrame();
         });
     }
+
 
     public void crearFrame() {
         setSize(1000, 700);
@@ -51,17 +53,19 @@ public class Módulos extends JFrame {
     }
 
     public void setPanel(JPanel pnlMódulos) {
+        pnlContenido.removeAll();
         pnlContenido.add(pnlMódulos);
     }
 
+    private void reservarVuelo() {
+        ModuloVuelos moduloVuelos = new ModuloVuelos(login);
+        moduloVuelos.crearframe();
+        dispose();
+    }
     public void rentarVehiculo() {
         ModuloRentaVehiculos rentaVehiculos = new ModuloRentaVehiculos(this.login);
         rentaVehiculos.crearFrame();
         dispose();
     }
 
-    public void reservarHospedaje() {
-        MenuHospedaje interfazHospedaje = new MenuHospedaje(this.login);
-        interfazHospedaje.crearFrame();
-    }
 }
