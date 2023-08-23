@@ -10,6 +10,9 @@ public class InterfazTours extends JFrame{
     private JPanel panelPestana1;
     private JTextField textField1;
     private JButton buscarButton;
+    private JCheckBox checkBox1;
+    private JComboBox comboBox1;
+    private JCheckBox checkBox2;
 
     JPanel firstPanel = new JPanel();
     JPanel secondPanel = new JPanel();
