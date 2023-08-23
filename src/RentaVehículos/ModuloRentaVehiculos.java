@@ -1,8 +1,9 @@
-import com.toedter.calendar.JDateChooser;
+package RentaVehículos;
+
+import Principal.Login;
+import Principal.Módulos;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class ModuloRentaVehiculos extends JFrame {
     private JPanel pnlPrincipal;
@@ -43,18 +44,16 @@ public class ModuloRentaVehiculos extends JFrame {
             System.exit(0);
         });
         //calendario
-       // pnlCalendario1.add(dateChooserInicio);
-       // pnlCalendario2.add(dateChooserFinal);
+        // pnlCalendario1.add(dateChooserInicio);
+        // pnlCalendario2.add(dateChooserFinal);
     }
 
     public void crearFrame() {
-
-            setSize(1000, 700);
-            setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-            setResizable(false);
-            setLocationRelativeTo(null);
-            add(pnlPrincipal);
-            setVisible(true);
-
+        setSize(1000, 700);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
+        setLocationRelativeTo(null);
+        add(pnlPrincipal);
+        setVisible(true);
     }
 }

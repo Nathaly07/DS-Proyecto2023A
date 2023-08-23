@@ -1,28 +1,31 @@
+package Principal;
+
 import javax.swing.*;
 
-public class Login extends JFrame {
-
+public class LoginInterfaz extends JFrame {
     private JPanel pnlLogin;
     private JButton btnLogin;
     private JTextField txtUsuario;
     private JPasswordField txtContraseña;
     private JLabel lblContraseña;
     private JLabel lblUsuario;
+    private JButton btnRegistrarse;
+    private Login login;
 
-    public Login() {
-
+    public LoginInterfaz() {
+        login = new Login();
         btnLogin.addActionListener(e -> {
-            String username = "a";
-            String password = "a";
             String passwordIngresada = new String(txtContraseña.getPassword());
-
-            if (txtUsuario.getText().equals(username) && passwordIngresada.equals(password)) {
-                Módulos módulos = new Módulos();
+            if (login.validarUsuario(Integer.parseInt(txtUsuario.getText()), passwordIngresada)) {
+                Módulos módulos = new Módulos(login);
                 módulos.crearFrame();
-                dispose();
-            } else {
-                JOptionPane.showMessageDialog(null, "Credenciales Incorrectas");
+                this.dispose();
             }
+        });
+
+        btnRegistrarse.addActionListener(e -> {
+            RegistrarInterfaz registrarInterfaz = new RegistrarInterfaz(login);
+            registrarInterfaz.crearFrame();
         });
     }
 

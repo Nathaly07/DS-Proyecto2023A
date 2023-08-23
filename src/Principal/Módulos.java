@@ -1,6 +1,12 @@
+package Principal;
+
+import RentaVehículos.ModuloRentaVehiculos;
+
 import Seguros.InterfazSeguros;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Módulos extends JFrame {
     private JPanel pnlMódulos;
@@ -11,12 +17,14 @@ public class Módulos extends JFrame {
     private JButton btnSeguros;
     private JButton btnExit;
     private JPanel pnlContenido;
+    private JButton btnActualizarDatos;
+    private Login login;
 
 
     public Módulos() {
         btnExit.addActionListener(e -> {
-            Login login = new Login();
-            login.crearFrame();
+            LoginInterfaz loginInterfaz = new LoginInterfaz(login);
+            loginInterfaz.crearFrame();
             dispose();
         });
         btnSeguros.addActionListener(e -> {
@@ -25,6 +33,11 @@ public class Módulos extends JFrame {
             crearFrame();
         });
         button3.addActionListener(e -> rentarVehiculo());
+        btnActualizarDatos.addActionListener(e -> {
+            ActualizarDatosInterfaz actualizarDatosInterfaz = new ActualizarDatosInterfaz(login);
+            setPanel(actualizarDatosInterfaz.pnlActualizarDatos);
+            crearFrame();
+        });
     }
 
     public void crearFrame() {
@@ -35,11 +48,13 @@ public class Módulos extends JFrame {
         add(pnlMódulos);
         setVisible(true);
     }
+
     public void setPanel(JPanel pnlMódulos) {
         pnlContenido.add(pnlMódulos);
     }
-    public void rentarVehiculo(){
-        ModuloRentaVehiculos rentaVehiculos = new ModuloRentaVehiculos();
+
+    public void rentarVehiculo() {
+        ModuloRentaVehiculos rentaVehiculos = new ModuloRentaVehiculos(this.login);
         rentaVehiculos.crearFrame();
         dispose();
     }

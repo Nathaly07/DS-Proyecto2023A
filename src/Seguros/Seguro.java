@@ -9,9 +9,7 @@ public abstract class Seguro {
     private String[] beneficiarios;
     private Date fechaDeInicio;
     private Date fechaDeVencimiento;
-
     private float primaSinRecargo;
-
 
     public Seguro(int ID_Seguro, String propietario, String[] condiciones, String[] beneficiarios, Date fechaDeInicio, Date fechaDeVencimiento, float primaSinRecargo) {
         this.ID_Seguro = ID_Seguro;
