@@ -1,18 +1,19 @@
 package Principal;
 
-import Hospedaje.InterfazHospedaje;
-import RentaVehículos.ModuloRentaVehiculos;
+import ModuloRentaVehiculos.ModuloRentaVehiculos;
 
 import Seguros.InterfazSeguros;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Módulos extends JFrame {
     private JPanel pnlMódulos;
     private JButton button1;
     private JButton button2;
     private JButton button3;
-    private JButton btnHospedaje;
+    private JButton button4;
     private JButton btnSeguros;
     private JButton btnExit;
     private JPanel pnlContenido;
@@ -30,11 +31,6 @@ public class Módulos extends JFrame {
         btnSeguros.addActionListener(e -> {
             InterfazSeguros interfazSeguros = new InterfazSeguros();
             setPanel(interfazSeguros.pnlOpcionesSeguro);
-            crearFrame();
-        });
-        btnHospedaje.addActionListener(e -> {
-            InterfazHospedaje interfazHospedaje = new InterfazHospedaje();
-            setPanel(interfazHospedaje.mainPanel);
             crearFrame();
         });
         button3.addActionListener(e -> rentarVehiculo());
