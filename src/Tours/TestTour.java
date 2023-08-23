@@ -38,7 +38,6 @@ public class TestTour {
                     break;
                 default:
                     JOptionPane.showMessageDialog(null, "Opción no válida");
-
                     break;
             }
         }
