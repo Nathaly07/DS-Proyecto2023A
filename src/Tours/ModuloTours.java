@@ -18,7 +18,7 @@ import java.awt.event.ActionListener;
 public class ModuloTours extends JFrame{
 
     private Gestion_Tour gestionTour = new Gestion_Tour();
-    private Gestion_Reserva gestionReserva;
+    private Gestion_Reserva gestionReserva = new Gestion_Reserva();
     private JPanel panel1;
     private JButton mostrarToursDisponiblesButton;
     private JPanel panelTours;
@@ -80,7 +80,7 @@ public class ModuloTours extends JFrame{
 
             botonReservar.addActionListener(e -> {
                 ArrayList<Tour> toursAgregados = null;
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 LocalDate fecha = LocalDate.now();
                 Date fechaActual = null;
                 try {
@@ -122,7 +122,7 @@ public class ModuloTours extends JFrame{
 
     }
     public void verReserva(){
-        this.reservaTour.getToursAgregados();
+        this.tours = this.reservaTour.getToursAgregados();
         panelReserva.setVisible(true);
         int yPos = 10;
         for(Tour aux: this.reservaTour.getToursAgregados()){
@@ -146,9 +146,6 @@ public class ModuloTours extends JFrame{
                 nombreLabel.setText(" ");
                 nombreTF.setText("");
             });
-
-
-
 
 
             nombreLabel.setBounds(10, yPos, 100, 25);
