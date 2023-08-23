@@ -53,18 +53,11 @@ public class ModuloTours extends JFrame{
                 ReservaTour reserva = gestorReserva.getReserva(idReserva);
 
                 SimpleDateFormat format = new SimpleDateFormat("dd/M/yy");
-                LocalDate fecha = LocalDate.now();
-                Date fechaActual = null;
-                try {
-                    fechaActual = format.parse(fecha.toString());
-                } catch (ParseException exc) {
-                    throw new RuntimeException(exc);
-                };
-
-                if (reserva.equals(null)){
+                LocalDate fechaActual = LocalDate.now();
+                if (reserva == null){
                     JOptionPane.showMessageDialog(null, "Reserva no encontrada");
                 } else {
-                    reserva.setFechaConfirmacion(fechaActual);
+                    reserva.setFechaConfirmacion(fechaActual.toString());
 
                     PagoTour pagoTour = new PagoTour(reserva);
                     double valorTotal = pagoTour.calcularPrecioFinal();
@@ -113,14 +106,8 @@ public class ModuloTours extends JFrame{
             botonReservar.addActionListener(e -> {
                 ArrayList<Tour> toursAgregados = null;
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                LocalDate fecha = LocalDate.now();
-                Date fechaActual = null;
-                try {
-                    fechaActual = dateFormat.parse(fecha.toString());
-                } catch (ParseException ex) {
-                    throw new RuntimeException(ex);
-                }
-                this.reservaTour = new ReservaTour("01","01", gestionTour, fechaActual, 100, true, toursAgregados);
+                LocalDate fechaActual = LocalDate.now();
+                this.reservaTour = new ReservaTour("01","01", gestionTour, fechaActual.toString(), 100, true, toursAgregados);
                 reservaTour.agregarTour(aux);
             });
 
