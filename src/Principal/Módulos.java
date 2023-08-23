@@ -1,5 +1,6 @@
 package Principal;
 
+import Hospedaje.InterfacesDeUsuario.MenuHospedaje;
 import ModuloRentaVehiculos.ModuloRentaVehiculos;
 
 import Seguros.InterfazSeguros;
@@ -39,6 +40,11 @@ public class Módulos extends JFrame {
             ActualizarDatosInterfaz actualizarDatosInterfaz = new ActualizarDatosInterfaz(login);
             setPanel(actualizarDatosInterfaz.pnlActualizarDatos);
             crearFrame();
+        });
+
+        btnHospedaje.addActionListener(e -> {
+            MenuHospedaje menuHospedaje = new MenuHospedaje(login);
+            menuHospedaje.crearFrame();
         });
     }
 
