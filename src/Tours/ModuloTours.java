@@ -72,7 +72,7 @@ public class ModuloTours extends JFrame{
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Confirmar Reserva");
+                JOptionPane.showMessageDialog(null, "Cancelar Reserva");
                 String idReserva = JOptionPane.showInputDialog("Ingrese el id de la reserva");
                 ReservaTour reserva = gestorReserva.getReserva(idReserva);
 
