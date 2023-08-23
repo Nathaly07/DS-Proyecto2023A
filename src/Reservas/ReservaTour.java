@@ -25,11 +25,14 @@ public class ReservaTour extends Reserva{
 
     private SimpleDateFormat format = new SimpleDateFormat("dd/M/yy");
 
+<<<<<<< HEAD
     public ReservaTour(String usuarioID, String reservaID, Gestion_Tour gestionTour, String fechaCreacion, String fechaConfirmacion, int numeroPersonas, boolean seguroActivado, ArrayList<Tour> toursAgregados) {
+=======
+    public ReservaTour(String usuarioID, String reservaID, Gestion_Tour gestionTour, Date fechaCreacion, int numeroPersonas, boolean seguroActivado, ArrayList<Tour> toursAgregados) {
+>>>>>>> 45b3d76d8b5bf1a6603a4a1308b84a64a627c2e7
         super(usuarioID, reservaID);
         this.toursAgregados = new ArrayList<Tour>();
         this.gestionTour = gestionTour;
-        this.fechaConfirmacion = fechaConfirmacion;
         this.fechaCreacion = fechaCreacion;
         this.activado = true;
     }
