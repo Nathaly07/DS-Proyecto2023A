@@ -117,9 +117,9 @@ public class Tour {
     public int getDisponibilidad (){
         int result = 0;
         int contReservas = 0;
-        for (ReservaTour reserva : this.gestion_reserva.reservaciones) {
+        /*for (ReservaTour reserva : this.gestion_reserva.reservaciones) {
             contReservas += reserva.getNumeroPersonas();
-        }
+        }*/
         return result = this.limite_usuarios - contReservas;
     }
 

@@ -18,14 +18,14 @@ public class ReservaTour extends Reserva{
     private boolean activado;
     private int numeroPersonas;
     private boolean seguroActivado;
-    private Date fechaCreacion;
-    private Date fechaConfirmacion;
+    private String fechaCreacion;
+    private String fechaConfirmacion;
     private ArrayList<Tour> toursAgregados;
     private Gestion_Tour gestionTour;
 
     private SimpleDateFormat format = new SimpleDateFormat("dd/M/yy");
 
-    public ReservaTour(String usuarioID, String reservaID, Gestion_Tour gestionTour, Date fechaCreacion, Date fechaConfirmacion, int numeroPersonas, boolean seguroActivado, ArrayList<Tour> toursAgregados) {
+    public ReservaTour(String usuarioID, String reservaID, Gestion_Tour gestionTour, String fechaCreacion, String fechaConfirmacion, int numeroPersonas, boolean seguroActivado, ArrayList<Tour> toursAgregados) {
         super(usuarioID, reservaID);
         this.toursAgregados = new ArrayList<Tour>();
         this.gestionTour = gestionTour;
@@ -42,9 +42,9 @@ public class ReservaTour extends Reserva{
 
     public void setSeguroActivado(boolean seguroActivado) { this.seguroActivado = seguroActivado; }
 
-    public void setFechaCreacion(Date fechaCreacion) { this.fechaCreacion = fechaCreacion; }
+    public void setFechaCreacion(String fechaCreacion) { this.fechaCreacion = fechaCreacion; }
 
-    public void setFechaConfirmacion(Date fechaConfirmacion) { this.fechaConfirmacion = fechaConfirmacion; }
+    public void setFechaConfirmacion(String fechaConfirmacion) { this.fechaConfirmacion = fechaConfirmacion; }
 
     public void setToursAgregados(ArrayList<Tour> toursAgregados) { this.toursAgregados = toursAgregados; }
 
@@ -58,9 +58,9 @@ public class ReservaTour extends Reserva{
 
     public boolean isSeguroActivado() { return seguroActivado; }
 
-    public Date getFechaCreacion() { return fechaCreacion; }
+    public String getFechaCreacion() { return fechaCreacion; }
 
-    public Date getFechaConfirmacion() { return fechaConfirmacion; }
+    public String getFechaConfirmacion() { return fechaConfirmacion; }
 
     public Gestion_Tour getGestionTour() { return gestionTour; }
 
@@ -85,7 +85,7 @@ public class ReservaTour extends Reserva{
             throw new RuntimeException(e);
         }
         int milisecondsByDay = 86400000;
-        int dias = (int) ((fechaActual.getTime()-fechaCreacion.getTime()) / milisecondsByDay);
+        int dias = 10;
         return dias;
     }
 
@@ -98,7 +98,7 @@ public class ReservaTour extends Reserva{
             throw new RuntimeException(e);
         }
         int milisecondsByDay = 86400000;
-        int dias = (int) ((fechaActual.getTime()-fechaConfirmacion.getTime()) / milisecondsByDay);
+        int dias = 10;
         return dias;
     }
 
