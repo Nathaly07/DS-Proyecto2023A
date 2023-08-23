@@ -6,4 +6,4 @@ public class Main {
         LoginInterfaz loginInterfaz = new LoginInterfaz();
         loginInterfaz.crearFrame();
     }
-}   
+}
