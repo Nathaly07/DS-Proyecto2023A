@@ -1,12 +1,11 @@
 package Principal;
 
+import Hospedaje.InterfacesDeUsuario.MenuHospedaje;
 import ModuloRentaVehiculos.ModuloRentaVehiculos;
 
 import Seguros.InterfazSeguros;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Módulos extends JFrame {
     private JPanel pnlMódulos;
@@ -34,6 +33,7 @@ public class Módulos extends JFrame {
             crearFrame();
         });
         button3.addActionListener(e -> rentarVehiculo());
+        btnHospedaje.addActionListener(e -> reservarHospedaje());
         btnActualizarDatos.addActionListener(e -> {
             ActualizarDatosInterfaz actualizarDatosInterfaz = new ActualizarDatosInterfaz(login);
             setPanel(actualizarDatosInterfaz.pnlActualizarDatos);
@@ -58,5 +58,10 @@ public class Módulos extends JFrame {
         ModuloRentaVehiculos rentaVehiculos = new ModuloRentaVehiculos(this.login);
         rentaVehiculos.crearFrame();
         dispose();
+    }
+
+    public void reservarHospedaje() {
+        MenuHospedaje interfazHospedaje = new MenuHospedaje(this.login);
+        interfazHospedaje.crearFrame();
     }
 }
