@@ -1,6 +1,8 @@
 package Tours;
 
 import java.text.DateFormat;
+import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.text.SimpleDateFormat;
@@ -79,7 +81,14 @@ public class ModuloTours extends JFrame{
             botonReservar.addActionListener(e -> {
                 ArrayList<Tour> toursAgregados = null;
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                this.reservaTour = new ReservaTour("01","01", gestionTour, "19/01/2023", "12/02/2023", 100, true, toursAgregados);
+                LocalDate fecha = LocalDate.now();
+                Date fechaActual = null;
+                try {
+                    fechaActual = dateFormat.parse(fecha.toString());
+                } catch (ParseException ex) {
+                    throw new RuntimeException(ex);
+                }
+                this.reservaTour = new ReservaTour("01","01", gestionTour, fechaActual, 100, true, toursAgregados);
                 reservaTour.agregarTour(aux);
             });
 
