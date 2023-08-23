@@ -142,7 +142,7 @@ public class ModuloTours extends JFrame{
 
 
             botonEliminarTour.addActionListener(e -> {
-                this.reservaTour.eliminarTour(aux);
+                this.reservaTour.eliminarTour(aux.getNombre());
                 nombreLabel.setText(" ");
                 nombreTF.setText("");
             });
