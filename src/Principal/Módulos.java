@@ -1,15 +1,17 @@
 package Principal;
 
+import Hospedaje.InterfacesDeUsuario.MenuHospedaje;
 import ModuloRentaVehiculos.ModuloRentaVehiculos;
 
 import Seguros.InterfazSeguros;
-import Vuelos.ModuloVuelos;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Módulos extends JFrame {
     private JPanel pnlMódulos;
-    private JButton btnVuelos;
+    private JButton button1;
     private JButton button2;
     private JButton button3;
     private JButton btnHospedaje;
@@ -22,8 +24,6 @@ public class Módulos extends JFrame {
 
     public Módulos(Login login) {
         this.login = login;
-
-        btnVuelos.addActionListener(e -> reservarVuelo());
         btnExit.addActionListener(e -> {
             LoginInterfaz loginInterfaz = new LoginInterfaz(login);
             loginInterfaz.crearFrame();
@@ -40,8 +40,11 @@ public class Módulos extends JFrame {
             setPanel(actualizarDatosInterfaz.pnlActualizarDatos);
             crearFrame();
         });
+        btnHospedaje.addActionListener(e -> {
+            MenuHospedaje menuHospedaje = new MenuHospedaje(login);
+            menuHospedaje.crearFrame();
+        });
     }
-
 
     public void crearFrame() {
         setSize(1000, 700);
@@ -53,19 +56,12 @@ public class Módulos extends JFrame {
     }
 
     public void setPanel(JPanel pnlMódulos) {
-        pnlContenido.removeAll();
         pnlContenido.add(pnlMódulos);
     }
 
-    private void reservarVuelo() {
-        ModuloVuelos moduloVuelos = new ModuloVuelos(login);
-        moduloVuelos.crearframe();
-        dispose();
-    }
     public void rentarVehiculo() {
         ModuloRentaVehiculos rentaVehiculos = new ModuloRentaVehiculos(this.login);
         rentaVehiculos.crearFrame();
         dispose();
     }
-
 }
