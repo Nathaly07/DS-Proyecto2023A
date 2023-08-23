@@ -1,10 +1,9 @@
 package Hospedaje.Reservas;
 
-import Hospedaje.Criteria.CriteriaDisponibilidad;
+import Hospedaje.Criteria.CriteriaDisponibilidadHabitaciones;
 import Hospedaje.Criteria.HospedajeCriteria;
 import Hospedaje.Habitaciones.Gestion_Habitaciones;
 import Hospedaje.Habitaciones.Habitacion;
-import Reservas.Reserva;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,7 +26,7 @@ public class Gestion_Reservas {
 
     public static List<Habitacion> getHabitacionesDisponibles(Date reservarDesde, Date reservarHasta) {
         List<Habitacion> habitaciones = Gestion_Habitaciones.getHabitaciones();
-        HospedajeCriteria criteriaDisponibles = new CriteriaDisponibilidad(reservarDesde, reservarHasta);
+        HospedajeCriteria criteriaDisponibles = new CriteriaDisponibilidadHabitaciones(reservarDesde, reservarHasta);
         return criteriaDisponibles.meetCriteria(habitaciones, reservas);
     }
     public List<ReservaHospedaje> getReservas() {

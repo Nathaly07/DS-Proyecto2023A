@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class CriteriaDisponibilidad implements HospedajeCriteria<Habitacion, ReservaHospedaje> {
+public class CriteriaDisponibilidadHabitaciones implements HospedajeCriteria<Habitacion, ReservaHospedaje> {
     private Date reservarDesde;
     private Date reservarHasta;
 
-    public CriteriaDisponibilidad(Date reservarDesde, Date reservarHasta) {
+    public CriteriaDisponibilidadHabitaciones(Date reservarDesde, Date reservarHasta) {
         this.reservarDesde = reservarDesde;
         this.reservarHasta = reservarHasta;
     }

@@ -1,7 +1,5 @@
 package Hospedaje.Habitaciones;
 
-import Hospedaje.Criteria.CriteriaDisponibilidad;
-
 import java.util.ArrayList;
 import java.util.List;
 
