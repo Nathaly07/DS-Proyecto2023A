@@ -16,7 +16,6 @@ import javax.swing.*;
 
 public class ModuloTours extends JFrame{
 
-    private Gestion_Reserva gestorReserva = new Gestion_Reserva();
     private Gestion_Tour gestionTour = new Gestion_Tour();
     private Gestion_Reserva gestionReserva = new Gestion_Reserva();
     private JPanel panel1;
@@ -51,7 +50,7 @@ public class ModuloTours extends JFrame{
                 JOptionPane.showMessageDialog(null, "Confirmar Reserva");
                 String idReserva = JOptionPane.showInputDialog("Ingrese el id de la reserva");
                 String metodoPago = JOptionPane.showInputDialog("Seleccione el metodo de pago:\n-Paypal\n-Transferncia\n-Tarjeta de credito");
-                ReservaTour reserva = gestorReserva.getReserva(idReserva);
+                ReservaTour reserva = gestionReserva.getReserva(idReserva);
 
                 SimpleDateFormat format = new SimpleDateFormat("dd/M/yy");
                 LocalDate fechaActual = LocalDate.now();
@@ -74,14 +73,14 @@ public class ModuloTours extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null, "Cancelar Reserva");
                 String idReserva = JOptionPane.showInputDialog("Ingrese el id de la reserva");
-                ReservaTour reserva = gestorReserva.getReserva(idReserva);
+                ReservaTour reserva = gestionReserva.getReserva(idReserva);
 
                 if (reserva == null){
                     JOptionPane.showMessageDialog(null, "Reserva no encontrada");
                 } else {
                     PagoTour pagoTour = new PagoTour(reserva);
                     double valorDevolucion = pagoTour.calcularDevolucion();
-                    gestorReserva.cancelar(idReserva);
+                    gestionReserva.cancelar(idReserva);
                     JOptionPane.showMessageDialog(null,
                             "La reserva se ha eliminado correctamente. /n" +
                                     "El valor a devolver es: " + valorDevolucion,
@@ -133,6 +132,7 @@ public class ModuloTours extends JFrame{
                 LocalDate fechaActual = LocalDate.now();
                 this.reservaTour = new ReservaTour("01","01", gestionTour, fechaActual.toString(), 100, true, toursAgregados);
                 reservaTour.agregarTour(aux);
+                gestionReserva.agregarReserva(reservaTour);
             });
 
             nombreLabel.setBounds(10, yPos, 100, 25);
