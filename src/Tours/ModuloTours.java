@@ -16,6 +16,7 @@ import javax.swing.*;
 
 public class ModuloTours extends JFrame{
 
+    private Gestion_Reserva gestorReserva = new Gestion_Reserva();
     private Gestion_Tour gestionTour = new Gestion_Tour();
     private Gestion_Reserva gestionReserva = new Gestion_Reserva();
     private JPanel panel1;
@@ -46,25 +47,17 @@ public class ModuloTours extends JFrame{
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                Gestion_Reserva gestorReserva = new Gestion_Reserva();
                 JOptionPane.showMessageDialog(null, "Confirmar Reserva");
                 String idReserva = JOptionPane.showInputDialog("Ingrese el id de la reserva");
                 String metodoPago = JOptionPane.showInputDialog("Seleccione el metodo de pago:\n-Paypal\n-Transferncia\n-Tarjeta de credito");
                 ReservaTour reserva = gestorReserva.getReserva(idReserva);
 
                 SimpleDateFormat format = new SimpleDateFormat("dd/M/yy");
-                LocalDate fecha = LocalDate.now();
-                Date fechaActual = null;
-                try {
-                    fechaActual = format.parse(fecha.toString());
-                } catch (ParseException exc) {
-                    throw new RuntimeException(exc);
-                };
-
-                if (reserva.equals(null)){
+                LocalDate fechaActual = LocalDate.now();
+                if (reserva == null){
                     JOptionPane.showMessageDialog(null, "Reserva no encontrada");
                 } else {
-                    reserva.setFechaConfirmacion(fechaActual);
+                    reserva.setFechaConfirmacion(fechaActual.toString());
 
                     PagoTour pagoTour = new PagoTour(reserva);
                     double valorTotal = pagoTour.calcularPrecioFinal();
@@ -113,6 +106,7 @@ public class ModuloTours extends JFrame{
             botonReservar.addActionListener(e -> {
                 ArrayList<Tour> toursAgregados = null;
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+<<<<<<< HEAD
                 LocalDate fecha = LocalDate.now();
                 Date fechaActual = null;
                 try {
@@ -123,6 +117,10 @@ public class ModuloTours extends JFrame{
                 String personas = JOptionPane.showInputDialog("Ingrese el numero de personas");
 
                 this.reservaTour = new ReservaTour("01","01", gestionTour, fechaActual, Integer.parseInt(personas), true, toursAgregados);
+=======
+                LocalDate fechaActual = LocalDate.now();
+                this.reservaTour = new ReservaTour("01","01", gestionTour, fechaActual.toString(), 100, true, toursAgregados);
+>>>>>>> f4cb822eea5662ca6be3b6869a332eb41fd740c8
                 reservaTour.agregarTour(aux);
             });
 
