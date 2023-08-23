@@ -1,19 +1,18 @@
 package Tours;
 
-import java.text.DateFormat;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
+import Pagos.Pago;
 import Reservas.ReservaTour;
 import com.toedter.calendar.JDateChooser;
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class ModuloTours extends JFrame{
 
@@ -24,8 +23,10 @@ public class ModuloTours extends JFrame{
     private JPanel panelTours;
     private JButton verReservaButton;
     private JPanel panelReserva;
+    private JButton confirmarReservaButton;
     private Tour tour; //para prueba
     private ReservaTour reservaTour;
+
     List<Tour> tours;
 
     public ModuloTours(){
@@ -41,6 +42,37 @@ public class ModuloTours extends JFrame{
         });
 
 
+        confirmarReservaButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Gestion_Reserva gestorReserva = new Gestion_Reserva();
+                JOptionPane.showMessageDialog(null, "Confirmar Reserva");
+                String idReserva = JOptionPane.showInputDialog("Ingrese el id de la reserva");
+                String metodoPago = JOptionPane.showInputDialog("Seleccione el metodo de pago:\n-Paypal\n-Transferncia\n-Tarjeta de credito");
+                ReservaTour reserva = gestorReserva.getReserva(idReserva);
+
+                SimpleDateFormat format = new SimpleDateFormat("dd/M/yy");
+                LocalDate fecha = LocalDate.now();
+                Date fechaActual = null;
+                try {
+                    fechaActual = format.parse(fecha.toString());
+                } catch (ParseException exc) {
+                    throw new RuntimeException(exc);
+                };
+
+                if (reserva.equals(null)){
+                    JOptionPane.showMessageDialog(null, "Reserva no encontrada");
+                } else {
+                    reserva.setFechaConfirmacion(fechaActual);
+
+                    PagoTour pagoTour = new PagoTour(reserva);
+                    double valorTotal = pagoTour.calcularPrecioFinal();
+                    Pago pago = new Pago(valorTotal, metodoPago);
+                    pago.pagar();
+                }
+            }
+        });
     }
 
     public void crearFrame() {
