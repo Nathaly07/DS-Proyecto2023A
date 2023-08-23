@@ -1,16 +1,16 @@
 package Hospedaje.Reservas;
 
 import Hospedaje.Habitaciones.Habitacion;
+import Hospedaje.Pagos.PagoHospedaje;
 import Reservas.Reserva;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ReservaHospedaje extends Reserva {
-    private String reservaId;
     private int numeroPersonas;
     private Date fechaCreacion;
-    private Date fechaCancelacionPago;
+    private EstadoReserva estadoReserva;
     private Date fechaInicio;
     private Date fechaFin;
     private Habitacion habitaciones[];
@@ -21,11 +21,12 @@ public class ReservaHospedaje extends Reserva {
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.habitaciones = habitaciones;
+        this.estadoReserva = EstadoReserva.PENDIENTE;
     }
 
     @Override
     public void cancelarReserva() {
-
+        this.estadoReserva = EstadoReserva.CANCELADA;
     }
 
     @Override
@@ -65,10 +66,9 @@ public class ReservaHospedaje extends Reserva {
     }
 
     public String getReservaId() {
-        return reservaId;
+        return this.reservaID;
     }
-    public boolean confirmarReserva() {
-        // pagar
-        return true;
+    public void confirmarReserva() {
+        this.estadoReserva = EstadoReserva.CONFIRMADA;
     }
 }

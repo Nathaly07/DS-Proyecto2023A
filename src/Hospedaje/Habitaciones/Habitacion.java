@@ -4,13 +4,13 @@ import java.util.Date;
 
 public class Habitacion {
     private int habitacionID;
-    private double precio;
+    private double precioPorNoche;
     private int limiteUsuarios;
     private Hotel hotel;
 
-    public Habitacion(int habitacionID, double precio, int limiteUsuarios, Hotel hotel) {
+    public Habitacion(int habitacionID, double precioPorNoche, int limiteUsuarios, Hotel hotel) {
         this.habitacionID = habitacionID;
-        this.precio = precio;
+        this.precioPorNoche = precioPorNoche;
         this.limiteUsuarios = limiteUsuarios;
         this.hotel = hotel;
     }
@@ -23,9 +23,17 @@ public class Habitacion {
         return this.habitacionID;
     }
 
+    public double getPrecioPorNoche() {
+        return this.precioPorNoche;
+    }
+
+    public int getLimiteUsuarios() {
+        return this.limiteUsuarios;
+    }
+
     public String getInfo(){
         return "\nHabitaciónId: " + this.habitacionID +
-                "\nPrecio: " + this.precio +
+                "\nPrecioPorNoche: " + this.precioPorNoche +
                 "\nLímite de Usuarios: " + this.limiteUsuarios +
                 "\nHotel: " + this.hotel.getNombre() + "\n";
     }

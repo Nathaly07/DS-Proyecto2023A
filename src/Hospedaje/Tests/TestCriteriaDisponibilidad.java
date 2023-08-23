@@ -14,7 +14,7 @@ public class TestCriteriaDisponibilidad {
         try {
             // Crear una instancia de Gestion_Habitaciones y Gestion_Reservas
             Gestion_Habitaciones gestionHabitaciones = new Gestion_Habitaciones();
-            Gestion_Reservas gestionReservas = new Gestion_Reservas();
+            Gestion_Reservas gestionReservas = new Gestion_Reservas(gestionHabitaciones);
 
             // Definir las fechas para buscar habitaciones disponibles
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -23,13 +23,13 @@ public class TestCriteriaDisponibilidad {
 
             // Crear reservas adicionales para ocupar 6 habitaciones
             for (int i = 3; i < 9; i++) {
-                Habitacion habitacion = Gestion_Habitaciones.getHabitaciones().get(i);
+                Habitacion habitacion = gestionHabitaciones.getHabitaciones().get(i);
                 ReservaHospedaje reserva = new ReservaHospedaje("1", "1", 2, new Habitacion[]{habitacion}, new Date(), reservarDesde, reservarHasta);
-                gestionReservas.addReserva(reserva);
+                gestionReservas.crearReserva(reserva);
             }
 
             // Obtener las habitaciones disponibles
-            List<Habitacion> habitacionesDisponibles = Gestion_Reservas.getHabitacionesDisponibles(reservarDesde, reservarHasta);
+            List<Habitacion> habitacionesDisponibles = gestionReservas.getHabitacionesDisponibles(reservarDesde, reservarHasta);
 
             // Imprimir las habitaciones disponibles
             System.out.println("Habitaciones disponibles:");

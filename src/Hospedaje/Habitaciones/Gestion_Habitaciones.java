@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Gestion_Habitaciones {
-    private static List<Habitacion> habitaciones;
+    private List<Habitacion> habitaciones;
 
     public Gestion_Habitaciones() {
         habitaciones = new ArrayList<>();
@@ -20,12 +20,11 @@ public class Gestion_Habitaciones {
         habitaciones.add(new Habitacion(110, 220.00, 3,  new Hotel("Hotel Baños", "Avenida Baños 482", "Baños", 4)));
     }
 
-
-    public static List<Habitacion> getHabitaciones() {
+    public List<Habitacion> getHabitaciones() {
         return habitaciones;
     }
 
-    public static Habitacion getHabitacionById(int id){
+    public Habitacion getHabitacionById(int id){
         for (Habitacion habitacion : habitaciones) {
             if (habitacion.getHabitacionID() == id) {
                 return habitacion;
