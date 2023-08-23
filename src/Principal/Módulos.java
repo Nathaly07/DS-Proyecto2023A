@@ -13,7 +13,7 @@ public class Módulos extends JFrame {
     private JButton button1;
     private JButton button2;
     private JButton button3;
-    private JButton button4;
+    private JButton btnHospedaje;
     private JButton btnSeguros;
     private JButton btnExit;
     private JPanel pnlContenido;
