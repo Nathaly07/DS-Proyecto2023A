@@ -45,7 +45,7 @@ public class Gestion_Reserva {
     public int totalPersonasPorTour(String idTour){
         int contadorPersonas = 0;
         for (ReservaTour reserva : this.reservas) {
-            for (Tour tour : reserva.getGestionTour().getTours()){
+            for (Tour tour : reserva.getToursAgregados()){
                 if (tour.getTourID().equalsIgnoreCase(idTour)) {
                     contadorPersonas += reserva.getNumeroPersonas();
                 }
