@@ -27,6 +27,11 @@ public class TestTour {
                     JOptionPane.showMessageDialog(null, "Modificar Tour");
                     break;
                 case 4:
+                    String nombreTour = JOptionPane.showInputDialog(null,
+                        "Ingrese el nombre del Tour a eliminar", 
+                        "Eliminar Tour", JOptionPane.QUESTION_MESSAGE);
+
+                    
                     JOptionPane.showMessageDialog(null, "Eliminar Tour");
                     break;
                 case 5:
