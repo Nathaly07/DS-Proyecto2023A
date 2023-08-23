@@ -1,5 +1,4 @@
 package Tours;
-import Reservas.Reserva;
 import Reservas.ReservaTour;
 
 import java.util.ArrayList;
@@ -42,8 +41,16 @@ public class Gestion_Reserva {
         }
     }
 
-    public void totalPersonasPorTour(Tour tour){
-
+    public int totalPersonasPorTour(String idTour){
+        int contadorPersonas = 0;
+        for (ReservaTour reserva : this.reservas) {
+            for (Tour tour : reserva.getGestionTour().getTours()){
+                if (tour.getTourID().equalsIgnoreCase(idTour)) {
+                    contadorPersonas += reserva.getNumeroPersonas();
+                }
+            }
+        }
+        return contadorPersonas;
     }
 
     public void agregarReserva(ReservaTour reservaAAgregar) { this.reservas.add(reservaAAgregar); }
