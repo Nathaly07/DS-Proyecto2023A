@@ -18,8 +18,8 @@ public class ReservaTour extends Reserva{
     private boolean activado;
     private int numeroPersonas;
     private boolean seguroActivado;
-    private String fechaCreacion;
-    private String fechaConfirmacion;
+    private Date fechaCreacion;
+    private Date fechaConfirmacion;
     private ArrayList<Tour> toursAgregados;
     private Gestion_Tour gestionTour;
 
@@ -41,9 +41,9 @@ public class ReservaTour extends Reserva{
 
     public void setSeguroActivado(boolean seguroActivado) { this.seguroActivado = seguroActivado; }
 
-    public void setFechaCreacion(String fechaCreacion) { this.fechaCreacion = fechaCreacion; }
+    public void setFechaCreacion(Date fechaCreacion) { this.fechaCreacion = fechaCreacion; }
 
-    public void setFechaConfirmacion(String fechaConfirmacion) { this.fechaConfirmacion = fechaConfirmacion; }
+    public void setFechaConfirmacion(Date fechaConfirmacion) { this.fechaConfirmacion = fechaConfirmacion; }
 
     public void setToursAgregados(ArrayList<Tour> toursAgregados) { this.toursAgregados = toursAgregados; }
 
@@ -57,9 +57,9 @@ public class ReservaTour extends Reserva{
 
     public boolean isSeguroActivado() { return seguroActivado; }
 
-    public String getFechaCreacion() { return fechaCreacion; }
+    public Date getFechaCreacion() { return fechaCreacion; }
 
-    public String getFechaConfirmacion() { return fechaConfirmacion; }
+    public Date getFechaConfirmacion() { return fechaConfirmacion; }
 
     public Gestion_Tour getGestionTour() { return gestionTour; }
 
