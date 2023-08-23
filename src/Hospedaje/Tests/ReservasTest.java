@@ -11,7 +11,7 @@ import java.util.List;
 public class ReservasTest {
     public static void main(String[] args) {
         Gestion_Habitaciones gestion_habitaciones = new Gestion_Habitaciones();
-        Gestion_Reservas gestion_reservas = new Gestion_Reservas();
+        Gestion_Reservas gestion_reservas = new Gestion_Reservas(gestion_habitaciones);
 
         // Reservas Totales
         List<ReservaHospedaje> reservas = gestion_reservas.getReservas();

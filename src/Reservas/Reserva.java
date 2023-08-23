@@ -2,8 +2,8 @@ package Reservas;
 
 public abstract class Reserva {
 
-    private String usuarioID;
-    private String reservaID;
+    protected String usuarioID;
+    protected String reservaID;
 
     public Reserva(String usuarioID, String reservaID) {
         this.usuarioID = usuarioID;
