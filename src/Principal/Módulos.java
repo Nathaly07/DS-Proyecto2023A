@@ -3,14 +3,17 @@ package Principal;
 import ModuloRentaVehiculos.ModuloRentaVehiculos;
 
 import Seguros.InterfazSeguros;
+import Tours.ModuloTours;
 import Vuelos.ModuloVuelos;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Módulos extends JFrame {
     private JPanel pnlMódulos;
     private JButton btnVuelos;
-    private JButton button2;
+    private JButton toursButton;
     private JButton button3;
     private JButton btnHospedaje;
     private JButton btnSeguros;
@@ -39,6 +42,13 @@ public class Módulos extends JFrame {
             ActualizarDatosInterfaz actualizarDatosInterfaz = new ActualizarDatosInterfaz(login);
             setPanel(actualizarDatosInterfaz.pnlActualizarDatos);
             crearFrame();
+        });
+        toursButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ModuloTours moduloTours = new ModuloTours();
+                moduloTours.crearFrame();
+            }
         });
     }
 
