@@ -1,6 +1,6 @@
 package Principal;
 
-import RentaVehículos.ModuloRentaVehiculos;
+import ModuloRentaVehiculos.ModuloRentaVehiculos;
 
 import Seguros.InterfazSeguros;
 

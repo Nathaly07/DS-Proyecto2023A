@@ -45,7 +45,7 @@
               </grid>
             </constraints>
             <properties>
-              <text value="Button"/>
+              <text value="Renta Vehiculos"/>
             </properties>
           </component>
           <component id="b29e6" class="javax.swing.JButton" binding="button4" default-binding="true">
