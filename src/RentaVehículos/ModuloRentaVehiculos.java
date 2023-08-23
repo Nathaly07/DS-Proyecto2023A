@@ -27,15 +27,18 @@ public class ModuloRentaVehiculos extends JFrame {
     private JTextField txtRetorno;
     private JLabel lblOrigen;
     private JLabel lblRetorno;
-   // private JDateChooser dateChooserInicio = new JDateChooser();
-   // private JDateChooser dateChooserFinal = new JDateChooser();
+    private Login login;
 
-    public ModuloRentaVehiculos() {
+    // private JDateChooser dateChooserInicio = new JDateChooser();
+    // private JDateChooser dateChooserFinal = new JDateChooser();
+
+    public ModuloRentaVehiculos(Login login) {
+        this.login = login;
         pnlCatalogo1.setVisible(false);
         btnCarrito.setVisible(false);
         btnCatalogo.addActionListener(e -> pnlCatalogo1.setVisible(true));
         btnRegresar.addActionListener(e -> {
-            Módulos módulos = new Módulos();
+            Módulos módulos = new Módulos(login);
             módulos.crearFrame();
             dispose();
         });

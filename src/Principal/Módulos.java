@@ -21,7 +21,8 @@ public class Módulos extends JFrame {
     private Login login;
 
 
-    public Módulos() {
+    public Módulos(Login login) {
+        this.login = login;
         btnExit.addActionListener(e -> {
             LoginInterfaz loginInterfaz = new LoginInterfaz(login);
             loginInterfaz.crearFrame();
