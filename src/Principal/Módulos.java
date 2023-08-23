@@ -51,6 +51,7 @@ public class Módulos extends JFrame {
     }
 
     public void setPanel(JPanel pnlMódulos) {
+        pnlContenido.removeAll();
         pnlContenido.add(pnlMódulos);
     }
 
