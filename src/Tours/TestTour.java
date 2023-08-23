@@ -64,15 +64,9 @@ public class TestTour {
     public void confirmarReserva(String idReserva, String metodoPago){
         ReservaTour reserva = this.gestorReserva.getReserva(idReserva);
 
-        SimpleDateFormat format = new SimpleDateFormat("dd/M/yy");
-        LocalDate fecha = LocalDate.now();
-        Date fechaActual = null;
-        try {
-            fechaActual = format.parse(fecha.toString());
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        };
-        reserva.setFechaConfirmacion(fechaActual);
+        LocalDate fechaActual = LocalDate.now();
+
+        reserva.setFechaConfirmacion(fechaActual.toString());
 
         PagoTour pagoTour = new PagoTour(reserva);
         double valorTotal = pagoTour.calcularPrecioFinal();
