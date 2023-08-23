@@ -1,4 +1,4 @@
 package Hospedaje.Pagos;
 
-public class PagoHospedaje {
+public class PagoHospedaje{
 }

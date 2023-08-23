@@ -4,9 +4,9 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ModuloHospedaje extends JFrame {
+public class InterfazHospedaje extends JFrame {
 
-    private JPanel mainPanel;
+    public JPanel mainPanel;
     private JButton crearReservaButton;
     private JButton confirmarReservaButton;
     private JButton cambiarReservaButton;
@@ -15,9 +15,7 @@ public class ModuloHospedaje extends JFrame {
     private JButton buscarHabitacionesDisponiblesButton;
     private JButton pagarButton;
 
-    public ModuloHospedaje(){
-        crearFrame();
-
+    public InterfazHospedaje(){
         crearReservaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -61,7 +59,8 @@ public class ModuloHospedaje extends JFrame {
         setVisible(true);
         this.setLocationRelativeTo(null);
         setTitle("Modulo hospedaje");
-        setSize(400,300);
+        setSize(500,400);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
+
 }
