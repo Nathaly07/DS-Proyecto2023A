@@ -1,6 +1,7 @@
 package Principal;
 
 import ModuloRentaVehiculos.ModuloRentaVehiculos;
+import Hospedaje.InterfacesDeUsuario.MenuHospedaje;
 
 import Seguros.InterfazSeguros;
 import Tours.ModuloTours;
@@ -38,6 +39,7 @@ public class Módulos extends JFrame {
             crearFrame();
         });
         button3.addActionListener(e -> rentarVehiculo());
+        btnHospedaje.addActionListener(e -> hospedaje());
         btnActualizarDatos.addActionListener(e -> {
             ActualizarDatosInterfaz actualizarDatosInterfaz = new ActualizarDatosInterfaz(login);
             setPanel(actualizarDatosInterfaz.pnlActualizarDatos);
@@ -75,6 +77,11 @@ public class Módulos extends JFrame {
     public void rentarVehiculo() {
         ModuloRentaVehiculos rentaVehiculos = new ModuloRentaVehiculos(this.login);
         rentaVehiculos.crearFrame();
+        dispose();
+    }
+    public void hospedaje(){
+        MenuHospedaje menuHospedaje = new MenuHospedaje(this.login);
+        menuHospedaje.crearFrame();
         dispose();
     }
 
