@@ -16,6 +16,7 @@ import javax.swing.*;
 
 public class ModuloTours extends JFrame{
 
+    private Gestion_Reserva gestorReserva = new Gestion_Reserva();
     private Gestion_Tour gestionTour = new Gestion_Tour();
     private Gestion_Reserva gestionReserva = new Gestion_Reserva();
     private JPanel panel1;
@@ -46,7 +47,6 @@ public class ModuloTours extends JFrame{
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                Gestion_Reserva gestorReserva = new Gestion_Reserva();
                 JOptionPane.showMessageDialog(null, "Confirmar Reserva");
                 String idReserva = JOptionPane.showInputDialog("Ingrese el id de la reserva");
                 String metodoPago = JOptionPane.showInputDialog("Seleccione el metodo de pago:\n-Paypal\n-Transferncia\n-Tarjeta de credito");
