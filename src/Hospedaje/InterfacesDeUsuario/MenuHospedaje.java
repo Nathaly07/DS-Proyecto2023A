@@ -2,6 +2,7 @@ package Hospedaje.InterfacesDeUsuario;
 
 import Hospedaje.ModuloHospedaje;
 import Principal.Login;
+import Principal.Módulos;
 
 import javax.swing.*;
 
@@ -19,6 +20,8 @@ public class MenuHospedaje extends JFrame {
         btnReservarHabitaciones.addActionListener(e -> reservarHabitaciones());
 
         btnSalir.addActionListener(e -> {
+            Módulos mod = new Módulos(login);
+            mod.crearFrame();
             dispose();
         });
     }
