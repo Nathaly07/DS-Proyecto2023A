@@ -1,9 +1,10 @@
-import Principal.LoginInterfaz;
+//import Principal.LoginInterfaz;
+import Tours.*;
 
 public class Main {
     public static void main(String[] args) {
         //Probando
-        LoginInterfaz loginInterfaz = new LoginInterfaz();
-        loginInterfaz.crearFrame();
+        ModuloTours interfaz = new ModuloTours();
+        interfaz.crearFrame();
     }
 }
