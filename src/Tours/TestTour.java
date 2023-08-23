@@ -13,4 +13,6 @@ public class TestTour {
                                             6. Salir\n", JOptionPane.QUESTION_MESSAGE));
         );
     }
+
+    public
 }

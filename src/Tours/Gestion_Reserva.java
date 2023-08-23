@@ -1,4 +1,5 @@
 package Tours;
+import Reservas.Reserva;
 import Reservas.ReservaTour;
 
 import java.util.ArrayList;
@@ -54,4 +55,14 @@ public class Gestion_Reserva {
     }
 
     public void agregarReserva(ReservaTour reservaAAgregar) { this.reservas.add(reservaAAgregar); }
+
+    public Reserva getReserva(String idReserva){
+        for (Reserva reserva: this.reservas){
+            if(reserva.getReservaID().equalsIgnoreCase(idReserva)) {
+                return reserva;
+            }
+        }
+        return null;
+    }
+
 }
