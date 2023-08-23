@@ -1,17 +1,17 @@
 import javax.swing.JOptionPane;
 
 public class TestTour {
-    public static void main(String[] args) {
-        //Probando
-        
+
+    public TestTour() {
+    }
+
+    public int initTour() {
         int op = Integer.parseInt(
-                JOptionPane.showInputDialog("1. Buscar Tours \n
-                                            2. Reservar Tour\n
-                                            3. Modificar Tour\n
-                                            4. Eliminar Tour\n
-                                            5. Confirmar Tour\n
-                                            6. Salir\n", JOptionPane.QUESTION_MESSAGE));
-        );
+            JOptionPane.showInputDialog(null, 
+            "1. Buscar Tours \n2. Reservar Tour\n3. Modificar Tour\n4. Eliminar Tour\n5. Confirmar Tour\n6. Salir\n ", 
+            JOptionPane.QUESTION_MESSAGE));
+
+            return op;
     }
 
     public
