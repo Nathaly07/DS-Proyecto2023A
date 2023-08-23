@@ -25,6 +25,7 @@ public class ModuloTours extends JFrame{
     private JButton verReservaButton;
     private JPanel panelReserva;
     private JButton confirmarReservaButton;
+    private JButton cancelarReservaButton;
     private Tour tour; //para prueba
     private ReservaTour reservaTour;
 
@@ -70,6 +71,29 @@ public class ModuloTours extends JFrame{
                     double valorTotal = pagoTour.calcularPrecioFinal();
                     Pago pago = new Pago(valorTotal, metodoPago);
                     pago.pagar();
+                }
+            }
+        });
+
+        cancelarReservaButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, "Confirmar Reserva");
+                String idReserva = JOptionPane.showInputDialog("Ingrese el id de la reserva");
+                ReservaTour reserva = gestorReserva.getReserva(idReserva);
+
+                if (reserva.equals(null)){
+                    JOptionPane.showMessageDialog(null, "Reserva no encontrada");
+                } else {
+                    PagoTour pagoTour = new PagoTour(reserva);
+                    double valorDevolucion = pagoTour.calcularDevolucion();
+                    gestorReserva.cancelar(idReserva);
+                    JOptionPane.showMessageDialog(null,
+                            "La reserva se ha eliminado correctamente. /n" +
+                                    "El valor a devolver es: " + valorDevolucion,
+                            "Reserva Tour",
+                            JOptionPane.WARNING_MESSAGE);
                 }
             }
         });
