@@ -106,21 +106,9 @@ public class ModuloTours extends JFrame{
             botonReservar.addActionListener(e -> {
                 ArrayList<Tour> toursAgregados = null;
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-<<<<<<< HEAD
-                LocalDate fecha = LocalDate.now();
-                Date fechaActual = null;
-                try {
-                    fechaActual = dateFormat.parse(fecha.toString());
-                } catch (ParseException ex) {
-                    throw new RuntimeException(ex);
-                }
                 String personas = JOptionPane.showInputDialog("Ingrese el numero de personas");
-
-                this.reservaTour = new ReservaTour("01","01", gestionTour, fechaActual, Integer.parseInt(personas), true, toursAgregados);
-=======
                 LocalDate fechaActual = LocalDate.now();
                 this.reservaTour = new ReservaTour("01","01", gestionTour, fechaActual.toString(), 100, true, toursAgregados);
->>>>>>> f4cb822eea5662ca6be3b6869a332eb41fd740c8
                 reservaTour.agregarTour(aux);
             });
 
