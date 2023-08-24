@@ -1,83 +1,55 @@
 package Vuelos.Logica;
 
-
-import Vuelos.DAO.AsientoDAO;
-
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Vuelo {
-    private int cod_vuelo, capacidad;
-    private String origen, destino, hora_salida, hora_llegada;
+
+    private String origen, destino, hora_salida;
     private String fecha;
     private int duracion;
     private boolean estaDisponible;
     private List<Asiento> asientos;
+    private int numeroAsientos;
 
-    public Vuelo(int cod_vuelo, String origen, String destino, String hora_salida, String hora_llegada, String fecha, int duracion, int estaDisponible) {
-        this.cod_vuelo = cod_vuelo;
+    public Vuelo(String origen, String destino, String hora_salida, String fecha, int duracion, int estaDisponible, int numeroAsientos) {
         this.origen = origen;
         this.destino = destino;
         this.hora_salida = hora_salida;
-        this.hora_llegada = hora_llegada;
         this.fecha = fecha;
         this.duracion = duracion;
-        if (estaDisponible == 0) {
+        this.estaDisponible = true;
+        this.numeroAsientos = numeroAsientos;
+        this.asientos = new ArrayList<>();
+        GenerarAsientos(numeroAsientos);
+    }
 
-            this.estaDisponible = true;
-        } else {
-
-            this.estaDisponible = false;
+    private void GenerarAsientos(int cantidad){
+        int cantidadPremium = (int)(cantidad/4);
+        for(int i = 1; i <= cantidadPremium; i++){
+            Asiento a;
+            a = new Asiento(i,200.0,"Clase Premium");
+            this.asientos.add(a);
         }
-        this.asientos = null;
-        setAsientos();
-    }
-
-    public Vuelo(int cod_vuelo,List<Asiento> asientos, String origen, String destino, String hora_salida, String hora_llegada, String fecha, int duracion, int estaDisponible) {
-        this.cod_vuelo = cod_vuelo;
-        this.asientos = asientos;
-        this.origen = origen;
-        this.destino = destino;
-        this.hora_salida = hora_salida;
-        this.hora_llegada = hora_llegada;
-        this.fecha = fecha;
-        this.duracion = duracion;
-        if (estaDisponible == 0) {
-
-            this.estaDisponible = true;
-        } else {
-
-            this.estaDisponible = false;
+        for(int i = cantidadPremium; i <= cantidad; i++){
+            Asiento a;
+            a = new Asiento(i,150.0,"Clase turista");
+            this.asientos.add(a);
         }
-    }
 
-    public void setAsientos() {
-        AsientoDAO asientos = new AsientoDAO();
-        this.asientos = asientos.BuscarAsientos(this.cod_vuelo);
     }
 
 
-    public void consultarAsientosDisponibles() {
-        AsientoDAO asientoDAO = new AsientoDAO();
-        List<Asiento> asientosDis = new ArrayList<>();
-        for (Asiento a : this.asientos) {
-            if (a.isEstaReservado()) {
-                System.out.println(a.toString());
-            }
-        }
-    }
+
 
 
     public void actualizarInformacion() {
 
     }
 
-    public int getCod_vuelo() {
-        return cod_vuelo;
-    }
 
-    public boolean isEstaDisponible() {
+    public boolean getDisponibilidad() {
         return estaDisponible;
     }
 
@@ -92,7 +64,7 @@ public class Vuelo {
 
     @Override
     public String toString() {
-        return "Vuelo{ ccodigo vuelo: "+ this.cod_vuelo + " origen=" + origen + ", destino=" + destino + ", hora_salida=" + hora_salida + ", hora_llegada=" + hora_llegada + ", fecha=" + fecha + ", duracion=" + duracion + ", estaDisponible=" + estaDisponible + '}';
+        return "Vuelo{ "+ " origen=" + origen + ", destino=" + destino + ", hora_salida=" + hora_salida +", fecha=" + fecha + ", duracion=" + duracion + ", estaDisponible=" + estaDisponible + '}';
     }
 
     public void mostrarVuelo() {
@@ -110,5 +82,26 @@ public class Vuelo {
     public String getDestino() {
         return destino;
     }
+
+    public String getHora_salida() {
+        return hora_salida;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public int getDuracion() {
+        return duracion;
+    }
+
+    public List<Asiento> getAsientos() {
+        return asientos;
+    }
+
+    public int getNumeroAsientos() {
+        return numeroAsientos;
+    }
 }
+
 

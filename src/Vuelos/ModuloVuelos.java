@@ -2,25 +2,35 @@ package Vuelos;
 
 import Principal.Login;
 import Principal.Módulos;
+import Vuelos.Logica.*;
 
 import javax.swing.*;
+
+import com.toedter.calendar.JDateChooser;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 
 public class ModuloVuelos extends JFrame{
     private JButton mostrarCatalogoButton;
     private JButton regresarButton;
     private JButton salirButton;
-    private JLabel title;
     private JPanel plnPrincipalVuelos;
     private JTextField textField1;
     private JTextField textField2;
-    private JButton buscarVuelosButton;
     private JTable table1;
     private JPanel pnlListaVuelos;
+    private JPanel pnlCalendario;
+    private JLabel lblFecha;
+    private JButton buscarVuelosButton;
+    private GestorVuelos g = new GestorVuelos();
+    private JDateChooser dateChooserInicio = new JDateChooser();
 
 
     public ModuloVuelos(Login login){
         setContentPane(plnPrincipalVuelos);
-        pnlListaVuelos.setVisible(false);
+        pnlListaVuelos.setVisible(true);
         mostrarCatalogoButton.addActionListener(e -> pnlListaVuelos.setVisible(true));
         regresarButton.addActionListener(e -> {
             Módulos módulos = new Módulos(login);
@@ -28,9 +38,25 @@ public class ModuloVuelos extends JFrame{
             dispose();
         });
 
+
         salirButton.addActionListener(e -> {
             dispose();
             System.exit(0);
+        });
+
+        //calendario
+       pnlCalendario.add(dateChooserInicio);
+        buscarVuelosButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                g.mostarVuelosFiltrados(table1, g.buscarVuelo(textField1.getText(),textField2.getText()));
+            }
+        });
+        mostrarCatalogoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MostrarTabla();
+            }
         });
     }
 
@@ -41,6 +67,9 @@ public class ModuloVuelos extends JFrame{
         setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+    public void MostrarTabla(){
+        g.mostrarVuelos(table1);
     }
 
 }
