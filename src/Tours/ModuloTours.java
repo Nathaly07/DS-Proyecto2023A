@@ -58,8 +58,8 @@ public class ModuloTours extends JFrame{
 
     List<Tour> tours;
 
-    public ModuloTours(){
-
+    public ModuloTours(String head){
+        super (head);
 //        panelTours.setVisible(false);
 //        panelReserva.setVisible(false);
 //        mostrarToursDisponiblesButton.addActionListener(e -> {
