@@ -40,6 +40,19 @@ public class ModuloTours extends JFrame{
     private JComboBox comboBox1;
     private JLabel lblPersonas;
     private JLabel lblSeguroCrear;
+    private JList list1;
+    private JList list2;
+    private JLabel lbl1;
+    private JLabel lbl2;
+    private JButton btnAgregarTour;
+    private JButton btnEliminarTour;
+    private JButton btnCrearReserva;
+    private JTextField textField1;
+    private JButton btnBuscarParaModificar;
+    private JLabel lbl3;
+    private JPanel pnlCrearReserva;
+    private JPanel pnlModificarReserva;
+    private JButton btnConfirmar;
     private Tour tour; //para prueba
     private ReservaTour reservaTour;
 
