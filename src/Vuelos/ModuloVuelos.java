@@ -14,9 +14,7 @@ import java.awt.event.ActionListener;
 
 public class ModuloVuelos extends JFrame{
     private JButton mostrarCatalogoButton;
-    private JButton regresarButton;
-    private JButton salirButton;
-    private JPanel plnPrincipalVuelos;
+    public JPanel plnPrincipalVuelos;
     private JTextField textField1;
     private JTextField textField2;
     private JTable table1;
@@ -29,20 +27,19 @@ public class ModuloVuelos extends JFrame{
 
 
     public ModuloVuelos(Login login){
-        setContentPane(plnPrincipalVuelos);
         pnlListaVuelos.setVisible(true);
         mostrarCatalogoButton.addActionListener(e -> pnlListaVuelos.setVisible(true));
-        regresarButton.addActionListener(e -> {
-            Módulos módulos = new Módulos(login);
-            módulos.crearFrame();
-            dispose();
-        });
+        //regresarButton.addActionListener(e -> {
+        //    Módulos módulos = new Módulos(login);
+        //    módulos.crearFrame();
+        //    dispose();
+        //});
 
 
-        salirButton.addActionListener(e -> {
-            dispose();
-            System.exit(0);
-        });
+       //salirButton.addActionListener(e -> {
+       //    dispose();
+       //    System.exit(0);
+       //});
 
         //calendario
        pnlCalendario.add(dateChooserInicio);
