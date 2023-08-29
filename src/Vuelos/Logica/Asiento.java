@@ -57,6 +57,3 @@ public class Asiento {
         return cadena;
     }
 }
-
-
-

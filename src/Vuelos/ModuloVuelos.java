@@ -18,13 +18,11 @@ public class ModuloVuelos extends JFrame{
     private JButton salirButton;
     private JPanel plnPrincipalVuelos;
     private JTextField textField1;
-
     private JTextField textField2;
     private JTable table1;
     private JPanel pnlListaVuelos;
     private JPanel pnlCalendario;
     private JLabel lblFecha;
-    private JLabel title;
     private JButton buscarVuelosButton;
     private GestorVuelos g = new GestorVuelos();
     private JDateChooser dateChooserInicio = new JDateChooser();
@@ -47,7 +45,7 @@ public class ModuloVuelos extends JFrame{
         });
 
         //calendario
-        pnlCalendario.add(dateChooserInicio);
+       pnlCalendario.add(dateChooserInicio);
         buscarVuelosButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -75,5 +73,3 @@ public class ModuloVuelos extends JFrame{
     }
 
 }
-
-
