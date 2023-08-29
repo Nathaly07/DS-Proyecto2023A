@@ -2,7 +2,6 @@ package Principal;
 
 import Hospedaje.InterfacesDeUsuario.MenuHospedaje;
 import ModuloRentaVehiculos.ModuloRentaVehiculos;
-import Hospedaje.InterfacesDeUsuario.MenuHospedaje;
 
 import Seguros.InterfazSeguros;
 import Tours.ModuloTours;
