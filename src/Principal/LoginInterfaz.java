@@ -1,6 +1,8 @@
 package Principal;
 
 import javax.swing.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class LoginInterfaz extends JFrame {
     private JPanel pnlLogin;
@@ -26,6 +28,15 @@ public class LoginInterfaz extends JFrame {
         btnRegistrarse.addActionListener(e -> {
             RegistrarInterfaz registrarInterfaz = new RegistrarInterfaz(login);
             registrarInterfaz.crearFrame();
+        });
+        txtContraseña.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                super.keyPressed(e);
+                if (e.getKeyCode() == KeyEvent.VK_ENTER){
+                    btnLogin.doClick();
+                }
+            }
         });
     }
 
