@@ -102,6 +102,8 @@ public class Vuelo {
     public int getNumeroAsientos() {
         return numeroAsientos;
     }
+
+
 }
 
 
