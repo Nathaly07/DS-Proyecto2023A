@@ -245,7 +245,9 @@
                     <preferred-size width="150" height="50"/>
                   </grid>
                 </constraints>
-                <properties/>
+                <properties>
+                  <model/>
+                </properties>
               </component>
               <component id="2e0c2" class="javax.swing.JList" binding="list2" default-binding="true">
                 <constraints>
