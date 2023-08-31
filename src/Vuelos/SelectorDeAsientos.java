@@ -46,6 +46,12 @@ public class SelectorDeAsientos extends JFrame{
 
             }
         });
+        btnA1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
     }
 
     public void setVuelo(Vuelo v){
