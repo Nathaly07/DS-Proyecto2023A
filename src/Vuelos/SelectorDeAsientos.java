@@ -3,6 +3,7 @@ package Vuelos;
 import Vuelos.Logica.Vuelo;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -36,19 +37,17 @@ public class SelectorDeAsientos extends JFrame{
     private JPanel pnlVIPAsientos;
     private JPanel pnlTextoTurista;
     private JPanel pnlBotonesTurista;
-    private JTextPane seleccionarFilaTextPane;
-    private JTextPane claseVIPTextPane1;
     private Vuelo v;
 
-    public void SelectorDeAsientos(){
-        btnA1.addActionListener(new ActionListener() {
+    public SelectorDeAsientos() {
+        btnF1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose();
+
             }
         });
-
     }
+
     public void setVuelo(Vuelo v){
         this.v = v;
     }
