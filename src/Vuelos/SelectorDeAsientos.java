@@ -37,8 +37,6 @@ public class SelectorDeAsientos extends JFrame{
     private JPanel pnlVIPAsientos;
     private JPanel pnlTextoTurista;
     private JPanel pnlBotonesTurista;
-    private JTextPane seleccionarFilaTextPane;
-    private JTextPane claseVIPTextPane1;
     private Vuelo v;
 
     public SelectorDeAsientos() {
