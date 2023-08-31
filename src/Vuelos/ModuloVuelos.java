@@ -1,7 +1,6 @@
 package Vuelos;
 
 import Principal.Login;
-import Principal.Módulos;
 import Vuelos.Logica.*;
 
 import javax.swing.*;
@@ -22,7 +21,9 @@ public class ModuloVuelos extends JFrame{
     private JPanel pnlCalendario;
     private JLabel lblFecha;
     private JButton buscarVuelosButton;
+    private JButton btnSeleccionarVuelo;
     private GestorVuelos g = new GestorVuelos();
+    private SelectorDeAsientos selectorDeAsientos = new SelectorDeAsientos();
     private JDateChooser dateChooserInicio = new JDateChooser();
 
 
@@ -55,6 +56,15 @@ public class ModuloVuelos extends JFrame{
                 MostrarTabla();
             }
         });
+        btnSeleccionarVuelo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mostrarPantallaEmergente(ModuloVuelos.this);
+                //selectorDeAsientos.crearframe();
+                //setPanel(selectorDeAsientos.);
+                //dispose();
+            }
+        });
     }
 
     public void crearframe() {
@@ -64,6 +74,24 @@ public class ModuloVuelos extends JFrame{
         setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+    private void mostrarPantallaEmergente(JFrame parentFrame) {
+        JDialog dialog = new JDialog(parentFrame, "Pantalla Emergente", true);
+
+        // Configurar el contenido de la pantalla emergente
+        //JLabel label = new JLabel("Esto es una pantalla emergente.");
+
+        dialog.add(selectorDeAsientos.pnlPrincipalAsientos);
+
+        // Configurar el tamaño de la pantalla emergente
+        dialog.setSize(804, 604);
+
+        // Centrar la pantalla emergente en la ventana principal
+        dialog.setLocationRelativeTo(parentFrame);
+
+        // Hacer visible la pantalla emergente
+        dialog.setVisible(true);
     }
     public void MostrarTabla(){
         g.mostrarVuelos(table1);
