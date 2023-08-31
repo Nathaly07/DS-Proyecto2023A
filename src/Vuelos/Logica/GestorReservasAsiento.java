@@ -10,11 +10,11 @@ public class GestorReservasAsiento {
     public GestorReservasAsiento(){
         reservas = new ArrayList<>();
     }
-    public void AgregarResarva(ReservaAsiento r){
+    public void agregarResarva(ReservaAsiento r){
         reservas.add(r);
     }
 
-public void QuiteReserva(ReservaAsiento r){
+public void quitarReserva(ReservaAsiento r){
     Iterator<ReservaAsiento> iterador = reservas.iterator();
     while (iterador.hasNext()) {
         ReservaAsiento i = iterador.next();
