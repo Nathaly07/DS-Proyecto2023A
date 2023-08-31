@@ -47,10 +47,9 @@ public class Vuelo {
             Asiento a;
             if (numeroAsiento % 3 == 0) {
                 a = new Asiento(numeroAsiento, true, ((duracion / 60) * precio), Clase_Turista, numeroFilaTurista);
-                this.asientos.add(a);
-                continue;
+            }else {
+                a = new Asiento(numeroAsiento, false, ((duracion / 60) * precio), Clase_Turista, numeroFilaTurista);
             }
-            a = new Asiento(numeroAsiento, false, ((duracion / 60) * precio), Clase_Turista, numeroFilaTurista);
             this.asientos.add(a);
         }
     }
@@ -109,7 +108,15 @@ public class Vuelo {
         return numeroAsientos;
     }
 
-
+    public List<Integer> getFila(int fila){
+        List<Integer> lista = new ArrayList<>();
+        for(Asiento a: this.asientos){
+            if(a.isEstaReservado() == true){
+                lista.add(a.getNumero());
+            }
+        }
+        return lista;
+    }
 }
 
 

@@ -40,9 +40,6 @@ public class GestorVuelos {
     public void mostrarVuelos(JTable tabla){
         TablaVuelos modelo = new TablaVuelos(this.vuelos);
         tabla.setModel(modelo);
-        for(Vuelo v : this.vuelos){
-            System.out.println(v.toString());
-        }
     }
     public List<Vuelo> buscarVuelo(String origen, String destino) {
         List<Vuelo> vuelosEncontrados = new ArrayList<>();
