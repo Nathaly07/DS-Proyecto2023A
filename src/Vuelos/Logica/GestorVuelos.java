@@ -88,7 +88,7 @@ public class GestorVuelos {
 
     private static class TablaVuelos extends AbstractTableModel {
     private final String[] COLUMNS = {"Origen","Destino", "Fecha", "Hora salida",
-        "Duracion", "Numero de asientos"};
+        "Duracion", "Num. Asientos"};
     private List<Vuelo> vuelos;
 
     public TablaVuelos(List<Vuelo> vuelos){
