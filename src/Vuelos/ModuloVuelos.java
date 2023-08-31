@@ -1,6 +1,7 @@
 package Vuelos;
 
 import Principal.Login;
+import Principal.Módulos;
 import Vuelos.Logica.*;
 
 import javax.swing.*;
@@ -11,7 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-public class ModuloVuelos extends JFrame {
+public class ModuloVuelos extends JFrame{
     private JButton mostrarCatalogoButton;
     public JPanel plnPrincipalVuelos;
     private JTextField textField1;
@@ -25,7 +26,7 @@ public class ModuloVuelos extends JFrame {
     private JDateChooser dateChooserInicio = new JDateChooser();
 
 
-    public ModuloVuelos(Login login) {
+    public ModuloVuelos(Login login){
         pnlListaVuelos.setVisible(true);
         mostrarCatalogoButton.addActionListener(e -> pnlListaVuelos.setVisible(true));
         //regresarButton.addActionListener(e -> {
@@ -35,17 +36,17 @@ public class ModuloVuelos extends JFrame {
         //});
 
 
-        //salirButton.addActionListener(e -> {
-        //    dispose();
-        //    System.exit(0);
-        //});
+       //salirButton.addActionListener(e -> {
+       //    dispose();
+       //    System.exit(0);
+       //});
 
         //calendario
-        pnlCalendario.add(dateChooserInicio);
+       pnlCalendario.add(dateChooserInicio);
         buscarVuelosButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                g.mostarVuelosFiltrados(table1, g.buscarVuelo(textField1.getText(), textField2.getText()));
+                g.mostarVuelosFiltrados(table1, g.buscarVuelo(textField1.getText(),textField2.getText()));
             }
         });
         mostrarCatalogoButton.addActionListener(new ActionListener() {
@@ -56,7 +57,6 @@ public class ModuloVuelos extends JFrame {
         });
     }
 
-
     public void crearframe() {
         setTitle("Modulo Vuelos");
         setSize(1000, 700);
@@ -65,8 +65,7 @@ public class ModuloVuelos extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
     }
-
-    public void MostrarTabla() {
+    public void MostrarTabla(){
         g.mostrarVuelos(table1);
     }
 
