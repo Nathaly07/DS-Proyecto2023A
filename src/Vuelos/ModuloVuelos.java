@@ -9,6 +9,8 @@ import com.toedter.calendar.JDateChooser;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 
 public class ModuloVuelos extends JFrame{
@@ -25,6 +27,8 @@ public class ModuloVuelos extends JFrame{
     private GestorVuelos g = new GestorVuelos();
     private SelectorDeAsientos selectorDeAsientos = new SelectorDeAsientos();
     private JDateChooser dateChooserInicio = new JDateChooser();
+
+    private  Vuelo v;
 
 
     public ModuloVuelos(Login login){
@@ -59,10 +63,26 @@ public class ModuloVuelos extends JFrame{
         btnSeleccionarVuelo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                selectorDeAsientos.setVuelo(g.seleccionarVuelo(v));
                 mostrarPantallaEmergente(ModuloVuelos.this);
                 //selectorDeAsientos.crearframe();
                 //setPanel(selectorDeAsientos.);
                 //dispose();
+            }
+        });
+        table1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int fila = table1.getSelectedRow();
+                if (fila != -1) {
+                    v = new Vuelo(table1.getValueAt(fila, 0).toString(),
+                    table1.getValueAt(fila, 1).toString(),
+                    table1.getValueAt(fila, 2).toString(),
+                    table1.getValueAt(fila, 3).toString(),
+                    Integer.parseInt(table1.getValueAt(fila, 4).toString()));
+                } else {
+                    JOptionPane.showMessageDialog(null, "Vuelo No Seleccionado", "Aviso", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
     }

@@ -9,16 +9,14 @@ import java.util.List;
 public class GestorVuelos {
 
     private List<Vuelo> vuelos = new ArrayList<>();
-    private List<ReservaAsiento> reservas;
-
 
     public GestorVuelos() {
-        Vuelo v1 = new Vuelo("New York", "Los Angeles", "08:00", "2023-08-25", 180, 0,200);
-        Vuelo v2 = new Vuelo("Miami", "Chicago", "08:00", "2023-08-25", 180, 0,180);
-        Vuelo v3 = new Vuelo("London", "Paris", "08:00", "2023-08-25", 180, 0,230);
-        Vuelo v4 = new Vuelo("Tokyo", "Sydney", "08:00", "2023-08-25", 180, 0,130);
-        Vuelo v5 = new Vuelo("San Francisco", "Seattle", "08:00", "2023-08-25", 180, 0,210);
-        Vuelo v6 = new Vuelo("New York", "Los Angeles", "08:00", "2023-08-25", 180, 0,150);
+        Vuelo v1 = new Vuelo("New York", "Los Angeles", "08:00", "2023-08-25", 180);
+        Vuelo v2 = new Vuelo("Miami", "Chicago", "08:00", "2023-08-25", 180);
+        Vuelo v3 = new Vuelo("London", "Paris", "08:00", "2023-08-25", 180);
+        Vuelo v4 = new Vuelo("Tokyo", "Sydney", "08:00", "2023-08-25", 180);
+        Vuelo v5 = new Vuelo("San Francisco", "Seattle", "08:00", "2023-08-25", 180);
+        Vuelo v6 = new Vuelo("New York", "Los Angeles", "08:00", "2023-08-25", 180);
         vuelos.add(v1);
         vuelos.add(v2);
         vuelos.add(v3);
@@ -122,6 +120,15 @@ public class GestorVuelos {
         }
         }
 
+    }
+    public Vuelo seleccionarVuelo(Vuelo v) {
+        ComparadorVuelo com = new ComparadorVuelo();
+        for(Vuelo aux : this.vuelos){
+            if(com.compare(v,aux) == 1){
+                return aux;
+            }
+        }
+        return null;
     }
 
 }

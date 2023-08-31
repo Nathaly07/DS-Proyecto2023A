@@ -1,5 +1,7 @@
 package Vuelos;
 
+import Vuelos.Logica.Vuelo;
+
 import javax.swing.*;
 
 public class SelectorDeAsientos extends JFrame{
@@ -34,9 +36,13 @@ public class SelectorDeAsientos extends JFrame{
     private JPanel pnlBotonesTurista;
     private JTextPane seleccionarFilaTextPane;
     private JTextPane claseVIPTextPane1;
+    private Vuelo v;
 
     public void SelectorDeAsientos(){
-    setContentPane(pnlPrincipalAsientos);
+
+    }
+    public void setVuelo(Vuelo v){
+        this.v = v;
     }
     public void crearframe() {
         setTitle("Selector de asientos");

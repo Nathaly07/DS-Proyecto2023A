@@ -8,10 +8,10 @@ public class ReservaAsiento {
     private String fecha_vuelo;
     private double costo;
 
-    private ListaAsientos reservas;
+    private CarritoAsientos reservas;
 
     public ReservaAsiento() {
-        reservas = new ListaAsientos();
+        reservas = new CarritoAsientos();
 
     }
 
@@ -20,8 +20,8 @@ public class ReservaAsiento {
         reservas.añadir(a);
     }
 
-    public void cancelarReserva(int num) {
-        reservas.eliminar(num);
+    public void cancelarReserva(Asiento a) {
+        reservas.eliminar(a);
     }
 
     public void crearReserva(String fecha){
