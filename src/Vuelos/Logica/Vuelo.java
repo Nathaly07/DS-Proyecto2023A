@@ -13,14 +13,13 @@ public class Vuelo {
     private List<Asiento> asientos;
     private int numeroAsientos = 60;
 
-    public Vuelo(String origen, String destino, String hora_salida, String fecha, int duracion, int estaDisponible, int numeroAsientos) {
+    public Vuelo(String origen, String destino, String hora_salida, String fecha, int duracion) {
         this.origen = origen;
         this.destino = destino;
         this.hora_salida = hora_salida;
         this.fecha = fecha;
         this.duracion = duracion;
         this.estaDisponible = true;
-        this.numeroAsientos = numeroAsientos;
         this.asientos = new ArrayList<>();
         GenerarAsientos(duracion);
     }
@@ -51,12 +50,6 @@ public class Vuelo {
             this.asientos.add(a);
         }
     }
-
-
-    public void actualizarInformacion() {
-
-    }
-
 
     public boolean getDisponibilidad() {
         return estaDisponible;
