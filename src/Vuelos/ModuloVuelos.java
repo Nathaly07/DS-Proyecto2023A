@@ -83,8 +83,8 @@ public class ModuloVuelos extends JFrame{
                 if (fila != -1) {
                     v = new Vuelo(table1.getValueAt(fila, 0).toString(),
                     table1.getValueAt(fila, 1).toString(),
-                    table1.getValueAt(fila, 2).toString(),
                     table1.getValueAt(fila, 3).toString(),
+                    table1.getValueAt(fila, 2).toString(),
                     Integer.parseInt(table1.getValueAt(fila, 4).toString()));
                 }
             }
