@@ -35,10 +35,10 @@
                     <constraints/>
                     <properties>
                       <focusable value="true"/>
-                      <icon value="Vuelos/Imagenes/asiento.jpg"/>
+                      <icon value="Vuelos/Imagenes/asientos672.jpg"/>
                       <maximumSize width="320" height="180"/>
-                      <minimumSize width="640" height="360"/>
-                      <preferredSize width="640" height="360"/>
+                      <minimumSize width="672" height="339"/>
+                      <preferredSize width="672" height="339"/>
                       <text value=""/>
                     </properties>
                   </component>
