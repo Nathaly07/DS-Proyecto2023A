@@ -24,6 +24,7 @@ public class ModuloVuelos extends JFrame{
     private JLabel lblFecha;
     private JButton buscarVuelosButton;
     private JButton btnSeleccionarVuelo;
+    private JTabbedPane tabbedPane1;
     private GestorVuelos g = new GestorVuelos();
     private SelectorDeAsientos selectorDeAsientos = new SelectorDeAsientos();
     private JDateChooser dateChooserInicio = new JDateChooser();
