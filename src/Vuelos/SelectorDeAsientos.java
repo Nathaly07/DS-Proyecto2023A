@@ -3,6 +3,8 @@ package Vuelos;
 import Vuelos.Logica.Vuelo;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class SelectorDeAsientos extends JFrame{
     public JPanel pnlPrincipalAsientos;
@@ -39,6 +41,12 @@ public class SelectorDeAsientos extends JFrame{
     private Vuelo v;
 
     public void SelectorDeAsientos(){
+        btnA1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
 
     }
     public void setVuelo(Vuelo v){
