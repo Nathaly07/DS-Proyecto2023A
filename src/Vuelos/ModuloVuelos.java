@@ -58,6 +58,7 @@ public class ModuloVuelos extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 MostrarTabla();
+
             }
         });
         btnSeleccionarVuelo.addActionListener(new ActionListener() {

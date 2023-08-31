@@ -3,31 +3,46 @@ package Vuelos.Logica;
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class GestorVuelos {
 
-    private List<Vuelo> vuelos = new ArrayList<>();
+    private List<Vuelo> vuelos = new ArrayList<Vuelo>();
 
     public GestorVuelos() {
-        Vuelo v1 = new Vuelo("New York", "Los Angeles", "08:00", "2023-08-25", 180);
-        Vuelo v2 = new Vuelo("Miami", "Chicago", "08:00", "2023-08-25", 180);
-        Vuelo v3 = new Vuelo("London", "Paris", "08:00", "2023-08-25", 180);
-        Vuelo v4 = new Vuelo("Tokyo", "Sydney", "08:00", "2023-08-25", 180);
-        Vuelo v5 = new Vuelo("San Francisco", "Seattle", "08:00", "2023-08-25", 180);
-        Vuelo v6 = new Vuelo("New York", "Los Angeles", "08:00", "2023-08-25", 180);
-        vuelos.add(v1);
-        vuelos.add(v2);
-        vuelos.add(v3);
-        vuelos.add(v4);
-        vuelos.add(v5);
-        vuelos.add(v6);
+        leerVuelosDesdeArchivo("src/Vuelos/Archivo/listaVuelos.txt");
     }
+
+    public void leerVuelosDesdeArchivo(String rutaArchivo) {
+        try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] partes = linea.split(",");
+                String origen = partes[0];
+                String destino = partes[1];
+                String hora_salida = partes[2];
+                String fecha = partes[3];
+                int duracion = Integer.parseInt(partes[4]);
+                agregarVuelo(new Vuelo(origen,destino,hora_salida,fecha,duracion));
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
     public void mostrarVuelos(JTable tabla){
         TablaVuelos modelo = new TablaVuelos(this.vuelos);
         tabla.setModel(modelo);
+        for(Vuelo v : this.vuelos){
+            System.out.println(v.toString());
+        }
     }
     public List<Vuelo> buscarVuelo(String origen, String destino) {
         List<Vuelo> vuelosEncontrados = new ArrayList<>();
@@ -129,9 +144,6 @@ public class GestorVuelos {
             }
         }
         return null;
-    }
-    public void Push(){
-
     }
 
 }
