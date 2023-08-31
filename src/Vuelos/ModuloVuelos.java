@@ -63,8 +63,13 @@ public class ModuloVuelos extends JFrame{
         btnSeleccionarVuelo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                selectorDeAsientos.setVuelo(g.seleccionarVuelo(v));
-                mostrarPantallaEmergente(ModuloVuelos.this);
+                if(v != null) {
+                    selectorDeAsientos.setVuelo(g.seleccionarVuelo(v));
+                    mostrarPantallaEmergente(ModuloVuelos.this);
+                } else{
+                    JOptionPane.showMessageDialog(null, "Seleccione un vuelo", "Aviso", JOptionPane.ERROR_MESSAGE);
+
+                }
                 //selectorDeAsientos.crearframe();
                 //setPanel(selectorDeAsientos.);
                 //dispose();
@@ -80,8 +85,6 @@ public class ModuloVuelos extends JFrame{
                     table1.getValueAt(fila, 2).toString(),
                     table1.getValueAt(fila, 3).toString(),
                     Integer.parseInt(table1.getValueAt(fila, 4).toString()));
-                } else {
-                    JOptionPane.showMessageDialog(null, "Vuelo No Seleccionado", "Aviso", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
