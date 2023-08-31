@@ -51,12 +51,6 @@ public class Vuelo {
         }
     }
 
-
-    public void actualizarInformacion() {
-
-    }
-
-
     public boolean getDisponibilidad() {
         return estaDisponible;
     }

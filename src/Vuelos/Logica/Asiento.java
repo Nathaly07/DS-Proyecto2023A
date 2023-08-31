@@ -13,8 +13,6 @@ public class Asiento {
 
     private int numFila;
 
-    public Asiento(){};
-
     public Asiento(int numero,boolean estadoReservado, double precio, String tipo, int numFila) {
         this.numero = numero;
         this.estaReservado = false;

@@ -36,13 +36,13 @@ public class ModuloVuelos extends JFrame{
         //});
 
 
-       //salirButton.addActionListener(e -> {
-       //    dispose();
-       //    System.exit(0);
-       //});
+        //salirButton.addActionListener(e -> {
+        //    dispose();
+        //    System.exit(0);
+        //});
 
         //calendario
-       pnlCalendario.add(dateChooserInicio);
+        pnlCalendario.add(dateChooserInicio);
         buscarVuelosButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
