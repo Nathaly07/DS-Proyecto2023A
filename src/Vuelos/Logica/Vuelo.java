@@ -1,17 +1,20 @@
 package Vuelos.Logica;
 
-import javax.swing.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Vuelo {
 
-    private String origen, destino, hora_salida;
-    private String fecha;
-    private int duracion;
-    private boolean estaDisponible;
-    private List<Asiento> asientos;
-    private int numeroAsientos = 60;
+    private  String origen, destino, hora_salida;
+    private  String fecha;
+    private  int duracion;
+    private  int estaDisponible;
+    private  List<Asiento> asientos;
+    private  int numeroAsientos = 60;
+
 
     public Vuelo(String origen, String destino, String hora_salida, String fecha, int duracion) {
         this.origen = origen;
@@ -19,10 +22,11 @@ public class Vuelo {
         this.hora_salida = hora_salida;
         this.fecha = fecha;
         this.duracion = duracion;
-        this.estaDisponible = true;
+        this.estaDisponible = 1;
         this.asientos = new ArrayList<>();
         GenerarAsientos(duracion);
     }
+
 
     private void GenerarAsientos(int duracion){
         int numeroAsientoPorFila = 6;
@@ -51,7 +55,7 @@ public class Vuelo {
         }
     }
 
-    public boolean getDisponibilidad() {
+    public  int getEstaDisponible() {
         return estaDisponible;
     }
 
