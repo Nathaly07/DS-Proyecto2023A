@@ -15,7 +15,6 @@ public class ReservaAsiento {
 
     }
 
-
     public void reservar(Asiento a) {
         reservas.añadir(a);
     }
@@ -54,8 +53,6 @@ public class ReservaAsiento {
         DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String fechaFormateada = fechaActual.format(formatoFecha);
         return fechaFormateada;
-    }
-    public void pagar() {
     }
 }
 

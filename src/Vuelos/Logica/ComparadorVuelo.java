@@ -11,7 +11,6 @@ public class ComparadorVuelo implements Comparator<Vuelo> {
                 o1.getHora_salida().equalsIgnoreCase(o2.getHora_salida())){
             return 1;
         }
-
         return 0;
     }
 }
