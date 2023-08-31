@@ -117,7 +117,29 @@ public class ReservaTour extends Reserva{
     public ArrayList<Tour> getToursAgregados() {
         return toursAgregados;
     }
-    
+
+    public String getPRE_InfoReserva(){
+        String info = "";
+
+        for (Tour x: toursAgregados ) {
+            info += "\nTour: " + x.getNombre();
+            info += "\nPrecio: " + x.getPrecio();
+        }
+
+        return info;
+    }
+
+    public String getInfoReserva(){
+        String info = "";
+
+        for (Tour x: toursAgregados ) {
+            info += "\n" + x.toString();
+        }
+
+        return info;
+    }
+
+
     @Override
     public void cancelarReserva() {
         if (this.activado = true){
@@ -134,5 +156,7 @@ public class ReservaTour extends Reserva{
     public void modificarReserva() {
         
     }
+
+
     
 }
