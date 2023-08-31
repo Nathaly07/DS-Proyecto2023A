@@ -1,106 +1,130 @@
 package Tours;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
-import Pagos.Pago;
 import Reservas.ReservaTour;
-import com.toedter.calendar.JDateChooser;
+
 import javax.swing.*;
 
 public class ModuloTours extends JFrame{
 
     private Gestion_Tour gestionTour = new Gestion_Tour();
     private Gestion_Reserva gestionReserva = new Gestion_Reserva();
-    private JPanel panel1;
+    public JPanel pnlOpcionesTours;
     private JButton mostrarToursDisponiblesButton;
     private JPanel panelTours;
     private JButton verReservaButton;
     private JPanel panelReserva;
     private JButton confirmarReservaButton;
     private JButton cancelarReservaButton;
+    private JTabbedPane tabbedPane1;
+    private JPanel pnlBuscarReserva;
+    private JButton btnBuscar;
+    private JTextField campoID;
+    private JList listTours;
+    private JLabel lblReservaId;
+    private JLabel lblNPersonas;
+    private JLabel lblSeguro;
+    private JLabel lblFechaCreacion;
+    private JLabel lblFechaConfirmacion;
+    private JLabel lblTours;
+    private JSpinner spinner1;
+    private JComboBox comboBox1;
+    private JLabel lblPersonas;
+    private JLabel lblSeguroCrear;
+    private JList list1;
+    private JList list2;
+    private JLabel lbl1;
+    private JLabel lbl2;
+    private JButton btnAgregarTour;
+    private JButton btnEliminarTour;
+    private JButton btnCrearReserva;
+    private JTextField textField1;
+    private JButton btnBuscarParaModificar;
+    private JLabel lbl3;
+    private JPanel pnlCrearReserva;
+    private JPanel pnlModificarReserva;
+    private JButton btnConfirmar;
     private Tour tour; //para prueba
     private ReservaTour reservaTour;
 
     List<Tour> tours;
 
-    public ModuloTours(){
-        panelTours.setVisible(false);
-        panelReserva.setVisible(false);
-        mostrarToursDisponiblesButton.addActionListener(e -> {
-            panelTours.setVisible(true);
-            this.buscarToursDisponibles();
-        });
-        verReservaButton.addActionListener(e -> {
-            panelReserva.setVisible(true);
-            this.verReserva();
-        });
-
-
-        confirmarReservaButton.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Confirmar Reserva");
-                String idReserva = JOptionPane.showInputDialog("Ingrese el id de la reserva");
-                String metodoPago = JOptionPane.showInputDialog("Seleccione el metodo de pago:\n-Paypal\n-Transferncia\n-Tarjeta de credito");
-                ReservaTour reserva = gestionReserva.getReserva(idReserva);
-
-                SimpleDateFormat format = new SimpleDateFormat("dd/M/yy");
-                LocalDate fechaActual = LocalDate.now();
-                if (reserva == null){
-                    JOptionPane.showMessageDialog(null, "Reserva no encontrada");
-                } else {
-                    reserva.setFechaConfirmacion(fechaActual.toString());
-
-                    PagoTour pagoTour = new PagoTour(reserva);
-                    double valorTotal = pagoTour.calcularPrecioFinal();
-                    Pago pago = new Pago(valorTotal, metodoPago);
-                    pago.pagar();
-                }
-            }
-        });
-
-        cancelarReservaButton.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Cancelar Reserva");
-                String idReserva = JOptionPane.showInputDialog("Ingrese el id de la reserva");
-                ReservaTour reserva = gestionReserva.getReserva(idReserva);
-
-                if (reserva == null){
-                    JOptionPane.showMessageDialog(null, "Reserva no encontrada");
-                } else {
-                    PagoTour pagoTour = new PagoTour(reserva);
-                    double valorDevolucion = pagoTour.calcularDevolucion();
-                    gestionReserva.cancelar(idReserva);
-                    JOptionPane.showMessageDialog(null,
-                            "La reserva se ha eliminado correctamente. /n" +
-                                    "El valor a devolver es: " + valorDevolucion,
-                            "Reserva Tour",
-                            JOptionPane.WARNING_MESSAGE);
-                }
-            }
-        });
+    public ModuloTours(String head){
+        super (head);
+//        panelTours.setVisible(false);
+//        panelReserva.setVisible(false);
+//        mostrarToursDisponiblesButton.addActionListener(e -> {
+//            panelTours.setVisible(true);
+//            this.buscarToursDisponibles();
+//        });
+//        verReservaButton.addActionListener(e -> {
+//            panelReserva.setVisible(true);
+//            this.verReserva();
+//        });
+//
+//
+//        confirmarReservaButton.addActionListener(new ActionListener() {
+//
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                JOptionPane.showMessageDialog(null, "Confirmar Reserva");
+//                String idReserva = JOptionPane.showInputDialog("Ingrese el id de la reserva");
+//                String metodoPago = JOptionPane.showInputDialog("Seleccione el metodo de pago:\n-Paypal\n-Transferncia\n-Tarjeta de credito");
+//                ReservaTour reserva = gestionReserva.getReserva(idReserva);
+//
+//                SimpleDateFormat format = new SimpleDateFormat("dd/M/yy");
+//                LocalDate fechaActual = LocalDate.now();
+//                if (reserva == null){
+//                    JOptionPane.showMessageDialog(null, "Reserva no encontrada");
+//                } else {
+//                    reserva.setFechaConfirmacion(fechaActual.toString());
+//
+//                    PagoTour pagoTour = new PagoTour(reserva);
+//                    double valorTotal = pagoTour.calcularPrecioFinal();
+//                    Pago pago = new Pago(valorTotal, metodoPago);
+//                    pago.pagar();
+//                }
+//            }
+//        });
+//
+//        cancelarReservaButton.addActionListener(new ActionListener() {
+//
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                JOptionPane.showMessageDialog(null, "Cancelar Reserva");
+//                String idReserva = JOptionPane.showInputDialog("Ingrese el id de la reserva");
+//                ReservaTour reserva = gestionReserva.getReserva(idReserva);
+//
+//                if (reserva == null){
+//                    JOptionPane.showMessageDialog(null, "Reserva no encontrada");
+//                } else {
+//                    PagoTour pagoTour = new PagoTour(reserva);
+//                    double valorDevolucion = pagoTour.calcularDevolucion();
+//                    gestionReserva.cancelar(idReserva);
+//                    JOptionPane.showMessageDialog(null,
+//                            "La reserva se ha eliminado correctamente. /n" +
+//                                    "El valor a devolver es: " + valorDevolucion,
+//                            "Reserva Tour",
+//                            JOptionPane.WARNING_MESSAGE);
+//                }
+//            }
+//        });
     }
 
-    public void crearFrame() {
+/*    public void crearFrame() {
 
-        setSize(1000, 700);
+        setSize(670, 500);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
         setLocationRelativeTo(null);
-        add(panel1);
+        add(pnlOpcionesTours);
         setVisible(true);
 
-    }
+    }*/
 
     public void buscarToursDisponibles(){
         int yPos = 10;

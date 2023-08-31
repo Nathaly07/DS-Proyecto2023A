@@ -129,5 +129,22 @@ public class Tour {
         return result = this.limite_usuarios - contReservas;
     }
 
+    //ToString para mostrar en la informacion
+    public String toString(){
+        String info = "";
+
+        info += "Tour: " + this.nombre;
+        info +=  "\nParadas: \n";
+
+        for (Parada x: paradasTuristicas) {
+            info += x.getDestino() + ", \n ";
+        }
+
+        info += "Guia: $" + this.info_guia;
+        info += "Duracion: $" + this.duracion;
+        info += "Precio: $" + this.precio;
+
+        return info;
+    }
 
 }
