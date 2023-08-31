@@ -1,24 +1,19 @@
 package Tours;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
-import Pagos.Pago;
 import Reservas.ReservaTour;
-import com.toedter.calendar.JDateChooser;
+
 import javax.swing.*;
 
 public class ModuloTours extends JFrame{
 
     private Gestion_Tour gestionTour = new Gestion_Tour();
     private Gestion_Reserva gestionReserva = new Gestion_Reserva();
-    private JPanel panel1;
+    public JPanel pnlOpcionesTours;
     private JButton mostrarToursDisponiblesButton;
     private JPanel panelTours;
     private JButton verReservaButton;
@@ -120,16 +115,16 @@ public class ModuloTours extends JFrame{
 //        });
     }
 
-    public void crearFrame() {
+/*    public void crearFrame() {
 
         setSize(670, 500);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
         setLocationRelativeTo(null);
-        add(panel1);
+        add(pnlOpcionesTours);
         setVisible(true);
 
-    }
+    }*/
 
     public void buscarToursDisponibles(){
         int yPos = 10;
