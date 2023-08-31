@@ -11,37 +11,45 @@ public class Vuelo {
     private int duracion;
     private boolean estaDisponible;
     private List<Asiento> asientos;
-    private int numeroAsientos;
+    private int numeroAsientos = 60;
 
-    public Vuelo(String origen, String destino, String hora_salida, String fecha, int duracion, int estaDisponible, int numeroAsientos) {
+    public Vuelo(String origen, String destino, String hora_salida, String fecha, int duracion) {
         this.origen = origen;
         this.destino = destino;
         this.hora_salida = hora_salida;
         this.fecha = fecha;
         this.duracion = duracion;
         this.estaDisponible = true;
-        this.numeroAsientos = numeroAsientos;
         this.asientos = new ArrayList<>();
-        GenerarAsientos(numeroAsientos);
+        GenerarAsientos(duracion);
     }
 
-    private void GenerarAsientos(int cantidad){
-        int cantidadPremium = (int)(cantidad/4);
-        for(int i = 1; i <= cantidadPremium; i++){
-            Asiento a;
-            a = new Asiento(i,200.0,"Clase Premium");
-            this.asientos.add(a);
-        }
-        for(int i = cantidadPremium; i <= cantidad; i++){
-            Asiento a;
-            a = new Asiento(i,150.0,"Clase turista");
-            this.asientos.add(a);
+    private void GenerarAsientos(int duracion){
+        int numeroAsientoPorFila = 6;
+        int cantidadFilaPremium = 4;
+        int cantidadFilaTurista = 10;
+
+        for(int numeroFilaPremium = 1; numeroFilaPremium <= cantidadFilaPremium; numeroFilaPremium++){
+            crearAsiento(numeroAsientoPorFila, (int) duracion, 100, "Clase Premium", numeroFilaPremium);
         }
 
+        for(int numeroFilaTurista = 5; numeroFilaTurista <= cantidadFilaTurista; numeroFilaTurista++){
+            crearAsiento(numeroAsientoPorFila, (int) duracion, 75, "Clase Turista", numeroFilaTurista);
+        }
     }
 
-
-
+    private void crearAsiento(int numeroAsientoPorFila, int duracion, int precio, String Clase_Turista, int numeroFilaTurista) {
+        for (int numeroAsiento = 1; numeroAsiento <= numeroAsientoPorFila; numeroAsiento++) {
+            Asiento a;
+            if (numeroAsiento % 3 == 0) {
+                a = new Asiento(numeroAsiento, true, ((duracion / 60) * precio), Clase_Turista, numeroFilaTurista);
+                this.asientos.add(a);
+                continue;
+            }
+            a = new Asiento(numeroAsiento, false, ((duracion / 60) * precio), Clase_Turista, numeroFilaTurista);
+            this.asientos.add(a);
+        }
+    }
 
 
     public void actualizarInformacion() {

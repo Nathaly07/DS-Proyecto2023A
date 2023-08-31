@@ -11,13 +11,16 @@ public class Asiento {
     private double precio;
     private String tipo;
 
+    private int numFila;
+
     public Asiento(){};
 
-    public Asiento(int numero, double precio, String tipo) {
+    public Asiento(int numero,boolean estadoReservado, double precio, String tipo, int numFila) {
         this.numero = numero;
         this.estaReservado = false;
         this.precio = precio;
         this.tipo = tipo;
+        this.numFila = numFila;
     }
 
     public int getNumero() {
@@ -55,5 +58,9 @@ public class Asiento {
         String cadena = "num_asiento:" + this.numero + " Estado:" + this.estaReservado
                 + " Precio:" + this.precio + " Tipo:" + this.tipo;
         return cadena;
+    }
+
+    public int getNumFila() {
+        return numFila;
     }
 }
