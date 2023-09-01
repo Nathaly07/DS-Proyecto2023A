@@ -13,7 +13,7 @@ import java.awt.event.ContainerEvent;
 public class PagoVuelos extends JFrame {
 
 
-    private JPanel JPPagoVuelos;
+    public JPanel JPPagoVuelos;
     private JButton cerrarButton;
     private JButton pagarButton;
     private JTextField textField1;
