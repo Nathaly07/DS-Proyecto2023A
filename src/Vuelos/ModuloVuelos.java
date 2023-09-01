@@ -34,6 +34,7 @@ public class ModuloVuelos extends JFrame{
     private SelectorDeAsientos selectorDeAsientos = new SelectorDeAsientos();
     private JDateChooser dateChooserInicio = new JDateChooser();
 
+
     private  Vuelo v;
 
 
@@ -93,6 +94,15 @@ public class ModuloVuelos extends JFrame{
                     table1.getValueAt(fila, 2).toString(),
                     Integer.parseInt(table1.getValueAt(fila, 4).toString()));
                 }
+            }
+        });
+        confirmarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                PagoVuelos pagoVuelos = new PagoVuelos();
+                pagoVuelos.crearframe();
+                dispose();
+
             }
         });
     }
