@@ -1,8 +1,11 @@
-package Vuelos.Logica;
+package Reservas;
+
+import Vuelos.Logica.Asiento;
+import Vuelos.Logica.CarritoAsientos;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-public class ReservaAsiento {
+public class ReservaAsiento extends Reserva{
 
     private String fecha;
     private String fecha_vuelo;
@@ -10,8 +13,19 @@ public class ReservaAsiento {
 
     private CarritoAsientos reservas;
 
-    public ReservaAsiento() {
+    public ReservaAsiento(String IDReserva, String IDUsuario) {
+        super(IDUsuario,IDReserva);
         reservas = new CarritoAsientos();
+
+    }
+
+    @Override
+    public void cancelarReserva() {
+
+    }
+
+    @Override
+    public void modificarReserva() {
 
     }
 

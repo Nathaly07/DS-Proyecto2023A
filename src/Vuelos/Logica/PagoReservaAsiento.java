@@ -1,5 +1,7 @@
 package Vuelos.Logica;
 
+import Reservas.ReservaAsiento;
+
 import java.util.List;
 
 public class PagoReservaAsiento {

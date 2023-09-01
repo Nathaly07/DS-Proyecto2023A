@@ -51,10 +51,10 @@ public class Vuelo {
             int numeroAsientoAleatorio2 = random.nextInt(max - min + 1) + min;
             Asiento a;
             if (numeroAsiento % numeroAsientoAleatorio2 == 0) {
-                a = new Asiento(numeroAsiento, true, ((duracion / 60) * precio), Clase_Turista, numeroFilaTurista);
+                a = new Asiento(numeroAsiento, true, ((duracion / 60) * precio), Clase_Turista, numeroFilaTurista, this);
 
             } else {
-                a = new Asiento(numeroAsiento, false, ((duracion / 60) * precio), Clase_Turista, numeroFilaTurista);
+                a = new Asiento(numeroAsiento, false, ((duracion / 60) * precio), Clase_Turista, numeroFilaTurista, this);
             }
             this.asientos.add(a);
         }
@@ -124,11 +124,6 @@ public class Vuelo {
         return lista;
     }
 
-    public void Imprimir(){
-        for (Asiento a: this.asientos) {
-            System.out.println(a.toString());
-        }
-    }
 }
 
 
