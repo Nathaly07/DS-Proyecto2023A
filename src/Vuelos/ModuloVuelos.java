@@ -16,8 +16,8 @@ import java.awt.event.MouseEvent;
 public class ModuloVuelos extends JFrame{
     private JButton mostrarCatalogoButton;
     public JPanel plnPrincipalVuelos;
-    private JTextField origen;
-    private JTextField destino;
+    private JTextField textField1;
+    private JTextField textField2;
     private JTable table1;
     private JPanel pnlListaVuelos;
     private JPanel pnlCalendario;
@@ -57,19 +57,7 @@ public class ModuloVuelos extends JFrame{
         buscarVuelosButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                boolean bandera = false;
-                if(dateChooserInicio.getDate() == null){
-                    bandera = true;
-                }
-                if(!origen.getText().isEmpty() && !destino.getText().isEmpty() && !bandera ){
-                    g.mostarVuelosFiltrados(table1, g.filtar(origen.getText(),destino.getText(),dateChooserInicio.getDate().toString()));
-                } else if(!origen.getText().isEmpty() && !destino.getText().isEmpty()){
-                    g.mostarVuelosFiltrados(table1, g.buscarVuelo(origen.getText(), destino.getText()));
-                } else if(!bandera && origen.getText().isEmpty() && destino.getText().isEmpty()){
-                    g.mostarVuelosFiltrados(table1, g.buscarVueloFecha(dateChooserInicio.getDate().toString()));
-                } else{
-                    JOptionPane.showMessageDialog(null, "Datos incompletos", "Aviso", JOptionPane.ERROR_MESSAGE);
-                }
+                g.mostarVuelosFiltrados(table1, g.buscarVuelo(textField1.getText(),textField2.getText()));
             }
         });
         mostrarCatalogoButton.addActionListener(new ActionListener() {
@@ -107,7 +95,6 @@ public class ModuloVuelos extends JFrame{
                 }
             }
         });
-        dateChooserInicio.getDate();
     }
 
     public void crearframe() {
