@@ -40,19 +40,6 @@ public class ModuloVuelos extends JFrame{
     public ModuloVuelos(Login login){
         pnlListaVuelos.setVisible(true);
         mostrarCatalogoButton.addActionListener(e -> pnlListaVuelos.setVisible(true));
-        //regresarButton.addActionListener(e -> {
-        //    Módulos módulos = new Módulos(login);
-        //    módulos.crearFrame();
-        //    dispose();
-        //});
-
-
-        //salirButton.addActionListener(e -> {
-        //    dispose();
-        //    System.exit(0);
-        //});
-
-        //calendario
         pnlCalendario.add(dateChooserInicio);
         buscarVuelosButton.addActionListener(new ActionListener() {
             @Override

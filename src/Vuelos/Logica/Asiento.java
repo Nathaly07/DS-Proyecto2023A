@@ -64,4 +64,7 @@ public class Asiento {
         return numFila;
     }
 
+    public String getTipo() {
+        return tipo;
+    }
 }

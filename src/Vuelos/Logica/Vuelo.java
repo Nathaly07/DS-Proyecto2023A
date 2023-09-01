@@ -16,6 +16,9 @@ public class Vuelo {
     private  List<Asiento> asientos;
     private  int numeroAsientos = 60;
 
+    private int precioPremium = 100;
+    private int precioTurista = 75;
+
 
     public Vuelo(String origen, String destino, String hora_salida, String fecha, int duracion) {
         this.origen = origen;
@@ -35,15 +38,15 @@ public class Vuelo {
         int cantidadFilaTurista = 10;
 
         for(int numeroFilaPremium = 1; numeroFilaPremium <= cantidadFilaPremium; numeroFilaPremium++){
-            crearAsiento(numeroAsientoPorFila, (int) duracion, 100, "Clase Premium", numeroFilaPremium);
+            crearAsiento(numeroAsientoPorFila, (int) duracion, precioPremium, "Clase Premium", numeroFilaPremium);
         }
 
         for(int numeroFilaTurista = 5; numeroFilaTurista <= cantidadFilaTurista; numeroFilaTurista++){
-            crearAsiento(numeroAsientoPorFila, (int) duracion, 75, "Clase Turista", numeroFilaTurista);
+            crearAsiento(numeroAsientoPorFila, (int) duracion, precioTurista, "Clase Turista", numeroFilaTurista);
         }
     }
 
-    private void crearAsiento(int numeroAsientoPorFila, int duracion, int precio, String Clase_Turista, int numeroFilaTurista) {
+    private void crearAsiento(int numeroAsientoPorFila, int duracion, int precio, String Clase, int numeroFilaTurista) {
         Random random = new Random();
         int min = 1;
         int max = 6;
@@ -51,10 +54,10 @@ public class Vuelo {
             int numeroAsientoAleatorio2 = random.nextInt(max - min + 1) + min;
             Asiento a;
             if (numeroAsiento % numeroAsientoAleatorio2 == 0) {
-                a = new Asiento(numeroAsiento, true, ((duracion / 60) * precio), Clase_Turista, numeroFilaTurista, this);
+                a = new Asiento(numeroAsiento, true, ((duracion / 60) * precio), Clase, numeroFilaTurista, this);
 
             } else {
-                a = new Asiento(numeroAsiento, false, ((duracion / 60) * precio), Clase_Turista, numeroFilaTurista, this);
+                a = new Asiento(numeroAsiento, false, ((duracion / 60) * precio), Clase, numeroFilaTurista, this);
             }
             this.asientos.add(a);
         }
@@ -124,6 +127,13 @@ public class Vuelo {
         return lista;
     }
 
+    public int getPrecioPremium() {
+        return precioPremium;
+    }
+
+    public int getPrecioTurista() {
+        return precioTurista;
+    }
 }
 
 

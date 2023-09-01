@@ -68,6 +68,50 @@ public class ReservaAsiento extends Reserva{
         String fechaFormateada = fechaActual.format(formatoFecha);
         return fechaFormateada;
     }
+
+    public int getCantidadAsientos() {
+        return reservas.getAsientos().size();
+    }
+
+    public int cantidadAsientosReservadosPremium() {
+        int cantidad = 0;
+        return cantidadReserva("Premium", cantidad);
+    }
+
+    public int cantidadAsientosReservadosTurista() {
+        int cantidad = 0;
+        return cantidadReserva("Turista", cantidad);
+    }
+
+    private int cantidadReserva(String tipo, int cantidad) {
+        for (Asiento a : reservas.getAsientos()) {
+            if (a.getTipo().equalsIgnoreCase(tipo)) {
+                cantidad++;
+            }
+        }
+        return cantidad;
+    }
+
+
+    public double generarCostoTotalPremium() {
+        double total  = 0.0;
+        for (Asiento a : reservas.getAsientos()){
+            if (a.getTipo().equalsIgnoreCase("Premium")){
+                total += a.getPrecio();
+            }
+        }
+        return total;
+    }
+
+    public double generarCostoTotalTurista() {
+        double total  = 0.0;
+        for (Asiento a : reservas.getAsientos()){
+            if (a.getTipo().equalsIgnoreCase("Turista")){
+                total += a.getPrecio();
+            }
+        }
+        return total;
+    }
 }
 
 
