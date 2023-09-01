@@ -54,13 +54,12 @@ public class Asiento {
     @Override
     public String toString() {
         String cadena = "num_asiento:" + this.numero + " Estado:" + this.estaReservado
-                + " Precio:" + this.precio + " Tipo:" + this.tipo;
+                + " Precio:" + this.precio + " Tipo:" + this.tipo + "Num Fila" + this.numFila;
         return cadena;
     }
 
     public int getNumFila() {
         return numFila;
     }
-
 
 }
