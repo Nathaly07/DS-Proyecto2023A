@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Vuelo {
 
@@ -43,11 +44,16 @@ public class Vuelo {
     }
 
     private void crearAsiento(int numeroAsientoPorFila, int duracion, int precio, String Clase_Turista, int numeroFilaTurista) {
+        Random random = new Random();
+        int min = 1;
+        int max = 6;
         for (int numeroAsiento = 1; numeroAsiento <= numeroAsientoPorFila; numeroAsiento++) {
+            int numeroAsientoAleatorio2 = random.nextInt(max - min + 1) + min;
             Asiento a;
-            if (numeroAsiento % 3 == 0) {
+            if (numeroAsiento % numeroAsientoAleatorio2 == 0) {
                 a = new Asiento(numeroAsiento, true, ((duracion / 60) * precio), Clase_Turista, numeroFilaTurista);
-            }else {
+
+            } else {
                 a = new Asiento(numeroAsiento, false, ((duracion / 60) * precio), Clase_Turista, numeroFilaTurista);
             }
             this.asientos.add(a);
@@ -111,11 +117,17 @@ public class Vuelo {
     public List<Integer> getFila(int fila){
         List<Integer> lista = new ArrayList<>();
         for(Asiento a: this.asientos){
-            if(a.isEstaReservado() == true){
+            if(a.isEstaReservado() == false && a.getNumFila() == fila){
                 lista.add(a.getNumero());
             }
         }
         return lista;
+    }
+
+    public void Imprimir(){
+        for (Asiento a: this.asientos) {
+            System.out.println(a.toString());
+        }
     }
 }
 

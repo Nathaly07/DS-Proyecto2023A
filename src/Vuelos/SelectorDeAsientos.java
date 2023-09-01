@@ -38,6 +38,7 @@ public class SelectorDeAsientos extends JFrame{
     private JPanel pnlVIPAsientos;
     private JPanel pnlTextoTurista;
     private JPanel pnlBotonesTurista;
+    private JLabel fila;
     private Vuelo v;
 
     public SelectorDeAsientos() {
@@ -62,36 +63,42 @@ public class SelectorDeAsientos extends JFrame{
         btnF1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                fila.setText("1");
                 botones(1);
             }
         });
         btnF2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                fila.setText("2");
                 botones(2);
             }
         });
         btnF3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                fila.setText("3");
                 botones(3);
             }
         });
         btnF4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                fila.setText("4");
                 botones(4);
             }
         });
         btnF5.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                fila.setText("5");
                 botones(5);
             }
         });
         btnF6.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                fila.setText("6");
                 botones(6);
             }
         });
@@ -119,6 +126,8 @@ public class SelectorDeAsientos extends JFrame{
                 botones(10);
             }
         });
+        fila.setVisible(false);
+        habilitarBotones(false);
     }
 
     public void setVuelo(Vuelo v){
@@ -133,6 +142,7 @@ public class SelectorDeAsientos extends JFrame{
         setVisible(true);
     }
     private void botones(int fila){
+        habilitarBotones(true);
         List<Integer> lista = v.getFila(fila);
         for (int i: lista) {
             switch (i) {
@@ -158,5 +168,14 @@ public class SelectorDeAsientos extends JFrame{
                     break;
             }
         }
+    }
+    public void habilitarBotones(boolean bandera){
+        btnA1.setEnabled(bandera);
+        btnA2.setEnabled(bandera);
+        btnA3.setEnabled(bandera);
+        btnA4.setEnabled(bandera);
+        btnA5.setEnabled(bandera);
+        btnA6.setEnabled(bandera);
+
     }
 }
