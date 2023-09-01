@@ -1,7 +1,9 @@
 package Vuelos;
 
 import Principal.Login;
+import Reservas.ReservaAsiento;
 import Vuelos.Logica.*;
+import Reservas.ReservaAsiento;
 
 import javax.swing.*;
 
@@ -33,8 +35,9 @@ public class ModuloVuelos extends JFrame{
     private GestorVuelos g = new GestorVuelos();
     private SelectorDeAsientos selectorDeAsientos = new SelectorDeAsientos();
     private JDateChooser dateChooserInicio = new JDateChooser();
-
+    private PagoVuelos pagoVuelos = new PagoVuelos();
     private  Vuelo v;
+    private ReservaAsiento asientoReservado;
 
 
     public ModuloVuelos(Login login){
@@ -72,7 +75,7 @@ public class ModuloVuelos extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 if(v != null) {
                     selectorDeAsientos.setVuelo(g.seleccionarVuelo(v));
-                    mostrarPantallaEmergente(ModuloVuelos.this);
+                    mostrarSelectorDeAsiento(ModuloVuelos.this);
                 } else{
                     JOptionPane.showMessageDialog(null, "Seleccione un vuelo", "Aviso", JOptionPane.ERROR_MESSAGE);
 
@@ -98,8 +101,36 @@ public class ModuloVuelos extends JFrame{
         confirmarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PagoVuelos pagoVuelos = new PagoVuelos();
-                pagoVuelos.crearframe();
+                if(asientoReservado != null) {
+                    selectorDeAsientos.setVuelo(g.seleccionarVuelo(v));
+                    mostrarPagoVuelos(ModuloVuelos.this);
+                } else{
+                    JOptionPane.showMessageDialog(null, "Previamente debe reservar su/s asiento/s", "Aviso", JOptionPane.ERROR_MESSAGE);
+
+                }
+            }
+        });
+        eliminarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(asientoReservado != null) {
+                    JOptionPane.showMessageDialog(null, "Su reserva ha sido eliminada", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+                } else{
+                    JOptionPane.showMessageDialog(null, "Previamente debe reservar su/s asiento/s", "Aviso", JOptionPane.ERROR_MESSAGE);
+
+                }
+            }
+        });
+        cambiarReservaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(asientoReservado != null) {
+                    selectorDeAsientos.setVuelo(g.seleccionarVuelo(v));
+                    mostrarSelectorDeAsiento(ModuloVuelos.this);
+                } else{
+                    JOptionPane.showMessageDialog(null, "Seleccione un vuelo", "Aviso", JOptionPane.ERROR_MESSAGE);
+
+                }
             }
         });
     }
@@ -113,21 +144,19 @@ public class ModuloVuelos extends JFrame{
         setVisible(true);
     }
 
-    private void mostrarPantallaEmergente(JFrame parentFrame) {
+    private void mostrarSelectorDeAsiento(JFrame parentFrame) {
         JDialog dialog = new JDialog(parentFrame, "Pantalla Emergente", true);
-
-        // Configurar el contenido de la pantalla emergente
-        //JLabel label = new JLabel("Esto es una pantalla emergente.");
-
         dialog.add(selectorDeAsientos.pnlPrincipalAsientos);
-
-        // Configurar el tamaño de la pantalla emergente
         dialog.setSize(804, 604);
-
-        // Centrar la pantalla emergente en la ventana principal
         dialog.setLocationRelativeTo(parentFrame);
+        dialog.setVisible(true);
+    }
 
-        // Hacer visible la pantalla emergente
+    private void mostrarPagoVuelos(JFrame parentFrame) {
+        JDialog dialog = new JDialog(parentFrame, "Pantalla Emergente", true);
+        dialog.add(pagoVuelos.JPPagoVuelos);
+        dialog.setSize(804, 604);
+        dialog.setLocationRelativeTo(parentFrame);
         dialog.setVisible(true);
     }
     public void MostrarTabla(){

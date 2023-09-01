@@ -1,13 +1,25 @@
 package Vuelos;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class PagoVuelos extends JFrame {
 
 
-    private JPanel JPPagoVuelos;
+    public JPanel JPPagoVuelos;
     private JButton cerrarButton;
     private JButton pagarButton;
+
+    public PagoVuelos() {
+        cerrarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            }
+        });
+    }
 
     public void crearframe() {
         setTitle("Confirmar Reserva");
