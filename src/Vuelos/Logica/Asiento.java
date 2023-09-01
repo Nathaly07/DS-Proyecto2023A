@@ -15,7 +15,7 @@ public class Asiento {
 
     public Asiento(int numero,boolean estadoReservado, double precio, String tipo, int numFila) {
         this.numero = numero;
-        this.estaReservado = false;
+        this.estaReservado = estadoReservado;
         this.precio = precio;
         this.tipo = tipo;
         this.numFila = numFila;
@@ -61,4 +61,6 @@ public class Asiento {
     public int getNumFila() {
         return numFila;
     }
+
+
 }

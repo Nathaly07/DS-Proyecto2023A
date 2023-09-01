@@ -24,7 +24,7 @@ public class ReservaAsiento {
     }
 
     public void crearReserva(String fecha){
-        this.costo = calcularCostoTotal();
+        this.costo = generarCostoTotal();
         this.fecha_vuelo = fecha;
         this.fecha = fechaAutomatica();
     }
@@ -41,7 +41,7 @@ public class ReservaAsiento {
         System.out.println(cadena);
     }
 
-    public double calcularCostoTotal() {
+    public double generarCostoTotal() {
         double total  = 0.0;
         for (Asiento a : reservas.getAsientos()){
             total += a.getPrecio();
