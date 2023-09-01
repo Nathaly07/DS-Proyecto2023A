@@ -64,9 +64,9 @@ public class Vuelo {
         return estaDisponible;
     }
 
-    public Asiento seleccionarAsiento(int num) {
+    public Asiento seleccionarAsiento(Asiento asiento) {
         for (Asiento a : this.asientos) {
-            if (a.getNumero() == num) {
+            if (a.getNumero() == asiento.getNumero() && a.getNumFila() == asiento.getNumFila()) {
                 return a;
             }
         }
