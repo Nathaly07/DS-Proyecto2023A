@@ -57,19 +57,7 @@ public class ModuloVuelos extends JFrame{
         buscarVuelosButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                boolean bandera = false;
-                if(dateChooserInicio.getDate() == null){
-                    bandera = true;
-                }
-                if(!origen.getText().isEmpty() && !destino.getText().isEmpty() && !bandera ){
-                    g.mostarVuelosFiltrados(table1, g.filtar(origen.getText(),destino.getText(),dateChooserInicio.getDate().toString()));
-                } else if(!origen.getText().isEmpty() && !destino.getText().isEmpty()){
-                    g.mostarVuelosFiltrados(table1, g.buscarVuelo(origen.getText(), destino.getText()));
-                } else if(!bandera && origen.getText().isEmpty() && destino.getText().isEmpty()){
-                    g.mostarVuelosFiltrados(table1, g.buscarVueloFecha(dateChooserInicio.getDate().toString()));
-                } else{
-                    JOptionPane.showMessageDialog(null, "Datos incompletos", "Aviso", JOptionPane.ERROR_MESSAGE);
-                }
+                g.mostarVuelosFiltrados(table1, g.buscarVuelo(origen.getText(), destino.getText()));
             }
         });
         mostrarCatalogoButton.addActionListener(new ActionListener() {
@@ -100,14 +88,20 @@ public class ModuloVuelos extends JFrame{
                 int fila = table1.getSelectedRow();
                 if (fila != -1) {
                     v = new Vuelo(table1.getValueAt(fila, 0).toString(),
-                    table1.getValueAt(fila, 1).toString(),
-                    table1.getValueAt(fila, 3).toString(),
-                    table1.getValueAt(fila, 2).toString(),
-                    Integer.parseInt(table1.getValueAt(fila, 4).toString()));
+                            table1.getValueAt(fila, 1).toString(),
+                            table1.getValueAt(fila, 3).toString(),
+                            table1.getValueAt(fila, 2).toString(),
+                            Integer.parseInt(table1.getValueAt(fila, 4).toString()));
                 }
             }
         });
-        dateChooserInicio.getDate();
+        confirmarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                PagoVuelos pagoVuelos = new PagoVuelos();
+                pagoVuelos.crearframe();
+            }
+        });
     }
 
     public void crearframe() {
