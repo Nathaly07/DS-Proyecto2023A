@@ -15,7 +15,7 @@ public class Asiento {
 
     public Asiento(int numero,boolean estadoReservado, double precio, String tipo, int numFila) {
         this.numero = numero;
-        this.estaReservado = false;
+        this.estaReservado = estadoReservado;
         this.precio = precio;
         this.tipo = tipo;
         this.numFila = numFila;
@@ -54,11 +54,12 @@ public class Asiento {
     @Override
     public String toString() {
         String cadena = "num_asiento:" + this.numero + " Estado:" + this.estaReservado
-                + " Precio:" + this.precio + " Tipo:" + this.tipo;
+                + " Precio:" + this.precio + " Tipo:" + this.tipo + "Num Fila" + this.numFila;
         return cadena;
     }
 
     public int getNumFila() {
         return numFila;
     }
+
 }

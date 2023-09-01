@@ -170,6 +170,12 @@
                           <text value="Seleccionar asiento:"/>
                         </properties>
                       </component>
+                      <component id="c95a9" class="javax.swing.JLabel" binding="fila">
+                        <constraints border-constraint="Center"/>
+                        <properties>
+                          <text value="Label"/>
+                        </properties>
+                      </component>
                     </children>
                   </grid>
                   <grid id="3e627" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
