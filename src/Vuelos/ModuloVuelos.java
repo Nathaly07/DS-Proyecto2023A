@@ -16,8 +16,8 @@ import java.awt.event.MouseEvent;
 public class ModuloVuelos extends JFrame{
     private JButton mostrarCatalogoButton;
     public JPanel plnPrincipalVuelos;
-    private JTextField textField1;
-    private JTextField textField2;
+    private JTextField origen;
+    private JTextField destino;
     private JTable table1;
     private JPanel pnlListaVuelos;
     private JPanel pnlCalendario;
@@ -57,7 +57,7 @@ public class ModuloVuelos extends JFrame{
         buscarVuelosButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                g.mostarVuelosFiltrados(table1, g.buscarVuelo(textField1.getText(),textField2.getText()));
+                g.mostarVuelosFiltrados(table1, g.buscarVuelo(origen.getText(), destino.getText()));
             }
         });
         mostrarCatalogoButton.addActionListener(new ActionListener() {
@@ -88,10 +88,10 @@ public class ModuloVuelos extends JFrame{
                 int fila = table1.getSelectedRow();
                 if (fila != -1) {
                     v = new Vuelo(table1.getValueAt(fila, 0).toString(),
-                    table1.getValueAt(fila, 1).toString(),
-                    table1.getValueAt(fila, 3).toString(),
-                    table1.getValueAt(fila, 2).toString(),
-                    Integer.parseInt(table1.getValueAt(fila, 4).toString()));
+                            table1.getValueAt(fila, 1).toString(),
+                            table1.getValueAt(fila, 3).toString(),
+                            table1.getValueAt(fila, 2).toString(),
+                            Integer.parseInt(table1.getValueAt(fila, 4).toString()));
                 }
             }
         });
