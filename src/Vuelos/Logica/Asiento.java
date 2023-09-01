@@ -22,6 +22,11 @@ public class Asiento {
         this.numFila = numFila;
         this.vuelo = vuelo;
     }
+    public Asiento(int numero,int numFila) {
+        this.numero = numero;
+        this.numFila = numFila;
+    }
+
 
     public int getNumero() {
         return numero;

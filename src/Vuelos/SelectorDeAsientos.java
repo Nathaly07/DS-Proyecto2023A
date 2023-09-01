@@ -1,11 +1,15 @@
 package Vuelos;
 
+import Vuelos.Logica.Asiento;
+import Vuelos.Logica.CarritoAsientos;
 import Vuelos.Logica.Vuelo;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SelectorDeAsientos extends JFrame{
@@ -39,27 +43,15 @@ public class SelectorDeAsientos extends JFrame{
     private JPanel pnlTextoTurista;
     private JPanel pnlBotonesTurista;
     private JLabel fila;
+    private JTable table1;
+    private JButton btnEliminarRegistro;
     private Vuelo v;
+    private Asiento a;
+
+    private CarritoAsientos carrito = new CarritoAsientos();
 
     public SelectorDeAsientos() {
-        btnF1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
 
-            }
-        });
-        btnA1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-        btnA1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
         btnF1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -105,29 +97,100 @@ public class SelectorDeAsientos extends JFrame{
         btnF7.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                fila.setText("7");
                 botones(7);
             }
         });
         btnF8.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                fila.setText("8");
                 botones(8);
             }
         });
         btnF9.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                fila.setText("9");
                 botones(9);
             }
         });
         btnF10.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                fila.setText("10");
                 botones(10);
             }
         });
         fila.setVisible(false);
         habilitarBotones(false);
+        btnA1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MostrarTabla(1);
+                botones(Integer.parseInt(fila.getText()));
+            }
+        });
+        btnA2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MostrarTabla(2);
+                botones(Integer.parseInt(fila.getText()));
+
+            }
+        });
+        btnA3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MostrarTabla(3);
+                botones(Integer.parseInt(fila.getText()));
+            }
+        });
+        btnA4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MostrarTabla(4);
+                botones(Integer.parseInt(fila.getText()));
+
+            }
+        });
+        btnA5.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MostrarTabla(5);
+                botones(Integer.parseInt(fila.getText()));
+            }
+        });
+        btnA6.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MostrarTabla(6);
+                botones(Integer.parseInt(fila.getText()));
+            }
+        });
+        btnEliminarRegistro.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(a != null) {
+                    carrito.eliminar(a);
+                    carrito.mostarCarrito(table1);
+                    botones(Integer.parseInt(fila.getText()));
+                } else{
+                    JOptionPane.showMessageDialog(null, "Seleccione un asiento", "Aviso", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+        table1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int fila = table1.getSelectedRow();
+                if (fila != -1) {
+                    a = new Asiento(Integer.parseInt(table1.getValueAt(fila, 0).toString()),
+                            Integer.parseInt(table1.getValueAt(fila, 1).toString())
+                    );
+                }
+            }
+        });
     }
 
     public void setVuelo(Vuelo v){
@@ -144,6 +207,9 @@ public class SelectorDeAsientos extends JFrame{
     private void botones(int fila){
         habilitarBotones(true);
         List<Integer> lista = v.getFila(fila);
+        System.out.println(lista.toString());
+        lista.addAll(asientosSeleccionables(fila));
+        System.out.println(lista.toString());
         for (int i: lista) {
             switch (i) {
                 case 1:
@@ -176,6 +242,18 @@ public class SelectorDeAsientos extends JFrame{
         btnA4.setEnabled(bandera);
         btnA5.setEnabled(bandera);
         btnA6.setEnabled(bandera);
-
+    }
+    public void MostrarTabla(int numAsiento){
+        carrito.añadir(v.seleccionarAsiento(new Asiento(numAsiento,Integer.parseInt(fila.getText()))));
+        carrito.mostarCarrito(table1);
+    }
+    public List<Integer> asientosSeleccionables(int fila){
+        List<Integer> asientosHabilitados = new ArrayList<>();
+        for (int i = 0; i < table1.getRowCount(); i++) {
+            if(Integer.parseInt(table1.getValueAt(i,1).toString()) == fila){
+                asientosHabilitados.add(Integer.parseInt(table1.getValueAt(i,0).toString()));
+            }
+        }
+        return asientosHabilitados;
     }
 }
