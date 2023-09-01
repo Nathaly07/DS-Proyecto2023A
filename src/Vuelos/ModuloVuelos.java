@@ -95,6 +95,13 @@ public class ModuloVuelos extends JFrame{
                 }
             }
         });
+        confirmarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                PagoVuelos pagoVuelos = new PagoVuelos();
+                pagoVuelos.crearframe();
+            }
+        });
     }
 
     public void crearframe() {
