@@ -10,12 +10,15 @@ public class ReservaAsiento extends Reserva{
     private String fecha;
     private String fecha_vuelo;
     private double costo;
+    //private int numeroDeReservas;
 
     private CarritoAsientos reservas;
 
-    public ReservaAsiento(String IDReserva, String IDUsuario) {
+    public ReservaAsiento( String IDUsuario, String IDReserva, CarritoAsientos reservas) {
         super(IDUsuario,IDReserva);
-        reservas = new CarritoAsientos();
+        //String IDReserva = String.valueOf((numeroDeReservas++));
+        this.reservas = reservas;
+        this.fecha_vuelo = reservas.getVuelo().getFecha();
 
     }
 
@@ -37,22 +40,17 @@ public class ReservaAsiento extends Reserva{
         reservas.eliminar(a);
     }
 
-    public void crearReserva(String fecha){
-        this.costo = generarCostoTotal();
-        this.fecha_vuelo = fecha;
-        this.fecha = fechaAutomatica();
-    }
     public void ModificarReserva() {
 
     }
 
-    public void imprimirDetalle() {
+    public String imprimirDetalle() {
         String cadena = "Fecha Reserva: " + fecha +"\nfecha de vuelo: " + fecha_vuelo+
                 "\n costo: " + costo + "\nAsientos Reservados:\n";
         for (Asiento a : reservas.getAsientos()){
             cadena += a.toString();
         }
-        System.out.println(cadena);
+        return cadena;
     }
 
     public double generarCostoTotal() {
@@ -67,6 +65,10 @@ public class ReservaAsiento extends Reserva{
         DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String fechaFormateada = fechaActual.format(formatoFecha);
         return fechaFormateada;
+    }
+
+    public CarritoAsientos getReservas() {
+        return reservas;
     }
 }
 

@@ -51,10 +51,10 @@ public class Vuelo {
             int numeroAsientoAleatorio2 = random.nextInt(max - min + 1) + min;
             Asiento a;
             if (numeroAsiento % numeroAsientoAleatorio2 == 0) {
-                a = new Asiento(numeroAsiento, true, ((duracion / 60) * precio), Clase_Turista, numeroFilaTurista, this);
+                a = new Asiento(numeroAsiento, true, ((duracion / 60) * precio), Clase_Turista, numeroFilaTurista);
 
             } else {
-                a = new Asiento(numeroAsiento, false, ((duracion / 60) * precio), Clase_Turista, numeroFilaTurista, this);
+                a = new Asiento(numeroAsiento, false, ((duracion / 60) * precio), Clase_Turista, numeroFilaTurista);
             }
             this.asientos.add(a);
         }

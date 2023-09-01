@@ -47,10 +47,12 @@ public class SelectorDeAsientos extends JFrame{
     private JButton btnEliminarRegistro;
     private Vuelo v;
     private Asiento a;
+    private ModuloVuelos moduloVuelos;
 
-    private CarritoAsientos carrito = new CarritoAsientos();
+    private CarritoAsientos carrito ;
 
-    public SelectorDeAsientos() {
+    public SelectorDeAsientos(ModuloVuelos moduloVuelos) {
+        this.moduloVuelos = moduloVuelos;
 
         btnF1.addActionListener(new ActionListener() {
             @Override
@@ -191,10 +193,21 @@ public class SelectorDeAsientos extends JFrame{
                 }
             }
         });
+        confirmarSelecciónButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                moduloVuelos.crearReserva(carrito);
+                moduloVuelos.actualizar();
+                moduloVuelos.cerrarDialog();
+
+
+            }
+        });
     }
 
     public void setVuelo(Vuelo v){
         this.v = v;
+        carrito = new CarritoAsientos(v);
     }
     public void crearframe() {
         setTitle("Selector de asientos");
@@ -207,9 +220,7 @@ public class SelectorDeAsientos extends JFrame{
     private void botones(int fila){
         habilitarBotones(true);
         List<Integer> lista = v.getFila(fila);
-        System.out.println(lista.toString());
         lista.addAll(asientosSeleccionables(fila));
-        System.out.println(lista.toString());
         for (int i: lista) {
             switch (i) {
                 case 1:

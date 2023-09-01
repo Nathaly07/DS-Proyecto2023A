@@ -1,6 +1,7 @@
 package Vuelos;
 
 import Principal.Login;
+import Reservas.ReservaAsiento;
 import Vuelos.Logica.*;
 
 import javax.swing.*;
@@ -31,13 +32,18 @@ public class ModuloVuelos extends JFrame{
     private JButton cambiarReservaButton;
     private JTable table3;
     private GestorVuelos g = new GestorVuelos();
-    private SelectorDeAsientos selectorDeAsientos = new SelectorDeAsientos();
+    private GestorReservasAsiento gestorReservasAsiento = new GestorReservasAsiento();
+    private SelectorDeAsientos selectorDeAsientos;
     private JDateChooser dateChooserInicio = new JDateChooser();
+    private CarritoAsientos carritoAsientos = new CarritoAsientos();
 
     private  Vuelo v;
+    private JDialog dialog ;
 
 
     public ModuloVuelos(Login login){
+
+        selectorDeAsientos = new SelectorDeAsientos(this);
         pnlListaVuelos.setVisible(true);
         mostrarCatalogoButton.addActionListener(e -> pnlListaVuelos.setVisible(true));
         //regresarButton.addActionListener(e -> {
@@ -114,7 +120,7 @@ public class ModuloVuelos extends JFrame{
     }
 
     private void mostrarPantallaEmergente(JFrame parentFrame) {
-        JDialog dialog = new JDialog(parentFrame, "Pantalla Emergente", true);
+        this.dialog = new JDialog(parentFrame, "Pantalla Emergente", true);
 
         // Configurar el contenido de la pantalla emergente
         //JLabel label = new JLabel("Esto es una pantalla emergente.");
@@ -129,9 +135,32 @@ public class ModuloVuelos extends JFrame{
 
         // Hacer visible la pantalla emergente
         dialog.setVisible(true);
+
+
     }
+
+    public void cerrarDialog(){
+        dialog.dispose();
+        actualizar();
+    }
+
+
     public void MostrarTabla(){
         g.mostrarVuelos(table1);
     }
 
+
+    public void actualizar(){
+        //ReservaAsiento reservaAsiento = new ReservaAsiento("001", "001");
+        //gestorReservasAsiento.agregarResarva( new ReservaAsiento("001", "001", ));
+        gestorReservasAsiento.mostrarReservas(table2);
+
+    }
+
+
+    public void crearReserva(CarritoAsientos carrito) {
+        ReservaAsiento reservaAsiento = new ReservaAsiento("001", "001", carrito);
+        gestorReservasAsiento.agregarResarva(reservaAsiento);
+
+    }
 }

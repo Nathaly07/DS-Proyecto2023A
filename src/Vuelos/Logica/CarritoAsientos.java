@@ -9,8 +9,12 @@ import java.util.List;
 public class CarritoAsientos {
 
     private List<Asiento> asientos;
-
-    public CarritoAsientos() {
+    private  Vuelo vuelo;
+public CarritoAsientos(){
+    asientos = new ArrayList<>();
+}
+    public CarritoAsientos(Vuelo vuelo) {
+        this.vuelo = vuelo;
         asientos = new ArrayList<>();
     }
 
@@ -78,5 +82,9 @@ public class CarritoAsientos {
     public void mostarCarrito(JTable tabla){
         TablaCarrito modelo = new TablaCarrito(this.asientos);
         tabla.setModel(modelo);
+    }
+
+    public Vuelo getVuelo() {
+        return vuelo;
     }
 }
