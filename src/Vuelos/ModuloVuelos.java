@@ -35,10 +35,12 @@ public class ModuloVuelos extends JFrame{
     private GestorReservasAsiento gestorReservasAsiento = new GestorReservasAsiento();
     private SelectorDeAsientos selectorDeAsientos;
     private JDateChooser dateChooserInicio = new JDateChooser();
+    private ReservaAsiento asientoReservado;
+    private PagoVuelos pagoVuelos = new PagoVuelos();
     private CarritoAsientos carritoAsientos = new CarritoAsientos();
-
     private  Vuelo v;
     private JDialog dialog ;
+
 
 
     public ModuloVuelos(Login login){
@@ -104,8 +106,36 @@ public class ModuloVuelos extends JFrame{
         confirmarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PagoVuelos pagoVuelos = new PagoVuelos();
-                pagoVuelos.crearframe();
+                if(asientoReservado != null) {
+                    selectorDeAsientos.setVuelo(g.seleccionarVuelo(v));
+                    mostrarPagoVuelos(ModuloVuelos.this);
+                } else{
+                    JOptionPane.showMessageDialog(null, "Previamente debe reservar su/s asiento/s", "Aviso", JOptionPane.ERROR_MESSAGE);
+
+                }
+            }
+        });
+        eliminarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(asientoReservado != null) {
+                    JOptionPane.showMessageDialog(null, "Su reserva ha sido eliminada", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+                } else{
+                    JOptionPane.showMessageDialog(null, "Previamente debe reservar su/s asiento/s", "Aviso", JOptionPane.ERROR_MESSAGE);
+
+                }
+            }
+        });
+        cambiarReservaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(asientoReservado != null) {
+                    selectorDeAsientos.setVuelo(g.seleccionarVuelo(v));
+                    mostrarSelectorDeAsiento(ModuloVuelos.this);
+                } else{
+                    JOptionPane.showMessageDialog(null, "Seleccione un vuelo", "Aviso", JOptionPane.ERROR_MESSAGE);
+
+                }
             }
         });
     }
@@ -147,6 +177,21 @@ public class ModuloVuelos extends JFrame{
 
     public void MostrarTabla(){
         g.mostrarVuelos(table1);
+    }
+    private void mostrarPagoVuelos(JFrame parentFrame) {
+        JDialog dialog = new JDialog(parentFrame, "Pantalla Emergente", true);
+        dialog.add(pagoVuelos.JPPagoVuelos);
+        dialog.setSize(804, 604);
+        dialog.setLocationRelativeTo(parentFrame);
+        dialog.setVisible(true);
+    }
+
+    private void mostrarSelectorDeAsiento(JFrame parentFrame) {
+        JDialog dialog = new JDialog(parentFrame, "Pantalla Emergente", true);
+        dialog.add(selectorDeAsientos.pnlPrincipalAsientos);
+        dialog.setSize(804, 604);
+        dialog.setLocationRelativeTo(parentFrame);
+        dialog.setVisible(true);
     }
 
 
