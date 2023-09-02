@@ -39,6 +39,11 @@ public class ReservaAsiento extends Reserva{
     public void cancelarReserva(Asiento a) {
         reservas.eliminar(a);
     }
+    public void crearReserva(String fecha){
+        this.costo = generarCostoTotal();
+        this.fecha_vuelo = fecha;
+        this.fecha = fechaAutomatica();
+    }
 
     public void ModificarReserva() {
 
@@ -67,9 +72,54 @@ public class ReservaAsiento extends Reserva{
         return fechaFormateada;
     }
 
+    public int getCantidadAsientos() {
+        return reservas.getAsientos().size();
+    }
+
+    public int cantidadAsientosReservadosPremium() {
+        int cantidad = 0;
+        return cantidadReserva("Premium", cantidad);
+    }
+
+    public int cantidadAsientosReservadosTurista() {
+        int cantidad = 0;
+        return cantidadReserva("Turista", cantidad);
+    }
+
+    private int cantidadReserva(String tipo, int cantidad) {
+        for (Asiento a : reservas.getAsientos()) {
+            if (a.getTipo().equalsIgnoreCase(tipo)) {
+                cantidad++;
+            }
+        }
+        return cantidad;
+    }
+
+
+    public double generarCostoTotalPremium() {
+        double total  = 0.0;
+        for (Asiento a : reservas.getAsientos()){
+            if (a.getTipo().equalsIgnoreCase("Premium")){
+                total += a.getPrecio();
+            }
+        }
+        return total;
+    }
+
+    public double generarCostoTotalTurista() {
+        double total  = 0.0;
+        for (Asiento a : reservas.getAsientos()){
+            if (a.getTipo().equalsIgnoreCase("Turista")){
+                total += a.getPrecio();
+            }
+        }
+        return total;
+    }
     public CarritoAsientos getReservas() {
         return reservas;
     }
 }
+
+
 
 
