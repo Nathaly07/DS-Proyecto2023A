@@ -5,7 +5,7 @@ import javax.swing.*;
 public class PagoVuelos extends JFrame {
 
 
-    private JPanel JPPagoVuelos;
+    public JPanel JPPagoVuelos;
     private JButton cerrarButton;
     private JButton pagarButton;
 
