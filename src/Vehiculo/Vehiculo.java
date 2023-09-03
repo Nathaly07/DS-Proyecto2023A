@@ -75,7 +75,7 @@ public class Vehiculo {
     }
 
     private void rentar() {
-        CarritoRentas.agregarRenta(this);
+        GestorRentas.agregarRenta(this);
         estadoRentaVehiculo = "RENTADO";
 
     }

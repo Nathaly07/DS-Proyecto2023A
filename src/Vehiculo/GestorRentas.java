@@ -4,11 +4,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class CarritoRentas {
+public class GestorRentas {
     private static ArrayList<Renta> rentas;
     private static Renta renta = new Renta();
 
-    public CarritoRentas() {
+    public GestorRentas() {
         this.rentas = new ArrayList<Renta>();
     }
 

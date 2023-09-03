@@ -1,7 +1,6 @@
 package Vehiculo;
 
 import Principal.Login;
-import Principal.Módulos;
 import com.toedter.calendar.JDateChooser;
 
 import javax.swing.*;
@@ -19,6 +18,7 @@ public class UIVehiculos extends JPanel {
     private JTextField txtRetorno;
     private JLabel lblOrigen;
     private JLabel lblRetorno;
+    private JScrollPane scroll;
     private JButton actualizarCatalogoButton;
     private JTable table1;
     private JDateChooser dateChooserInicio = new JDateChooser();
@@ -26,12 +26,12 @@ public class UIVehiculos extends JPanel {
 
     //Clases diagrama
     private  CatalogoVehiculos catalogoVehiculos;
-    private static CarritoRentas carritoRentas;
+    private static GestorRentas gestorRentas;
 
 
     public UIVehiculos(Login login) {
         catalogoVehiculos = new CatalogoVehiculos();
-        carritoRentas = new CarritoRentas();
+        gestorRentas = new GestorRentas();
 
 
         btnCatalogo.addActionListener(e -> { // METODO DESPLEGAR CATALOGO
@@ -41,14 +41,14 @@ public class UIVehiculos extends JPanel {
 
             }else{
                 catalogoVehiculos.mostrarVehiculos(pnlCatalogo1);
-                CarritoRentas.getRenta().recolectarDatosRenta(lblOrigen.getText(),lblRetorno.getText(),dateChooserFinal.getDate(),dateChooserInicio.getDate());
+                GestorRentas.getRenta().recolectarDatosRenta(lblOrigen.getText(),lblRetorno.getText(),dateChooserFinal.getDate(),dateChooserInicio.getDate());
             }
 
 
         });
         btnCarrito.addActionListener(e -> { // METODO VER RENTAS
             table1 = new JTable();
-            carritoRentas.verInfoCarrito(table1,pnlCatalogo1);
+            gestorRentas.verInfoCarrito(table1,pnlCatalogo1);
         });
 
 
