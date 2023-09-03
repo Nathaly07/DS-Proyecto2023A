@@ -1,83 +1,61 @@
 package Vuelos.Logica;
 
-
-import Vuelos.DAO.AsientoDAO;
-
-import javax.swing.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Vuelo {
-    private int cod_vuelo, capacidad;
-    private String origen, destino, hora_salida, hora_llegada;
-    private String fecha;
-    private int duracion;
-    private boolean estaDisponible;
-    private List<Asiento> asientos;
 
-    public Vuelo(int cod_vuelo, String origen, String destino, String hora_salida, String hora_llegada, String fecha, int duracion, int estaDisponible) {
-        this.cod_vuelo = cod_vuelo;
+    private  String origen, destino, hora_salida;
+    private  String fecha;
+    private  int duracion;
+    private  int estaDisponible;
+    private  List<Asiento> asientos;
+    private  int numeroAsientos = 60;
+
+
+    public Vuelo(String origen, String destino, String hora_salida, String fecha, int duracion) {
         this.origen = origen;
         this.destino = destino;
         this.hora_salida = hora_salida;
-        this.hora_llegada = hora_llegada;
         this.fecha = fecha;
         this.duracion = duracion;
-        if (estaDisponible == 0) {
-
-            this.estaDisponible = true;
-        } else {
-
-            this.estaDisponible = false;
-        }
-        this.asientos = null;
-        setAsientos();
+        this.estaDisponible = 1;
+        this.asientos = new ArrayList<>();
+        GenerarAsientos(duracion);
     }
 
-    public Vuelo(int cod_vuelo,List<Asiento> asientos, String origen, String destino, String hora_salida, String hora_llegada, String fecha, int duracion, int estaDisponible) {
-        this.cod_vuelo = cod_vuelo;
-        this.asientos = asientos;
-        this.origen = origen;
-        this.destino = destino;
-        this.hora_salida = hora_salida;
-        this.hora_llegada = hora_llegada;
-        this.fecha = fecha;
-        this.duracion = duracion;
-        if (estaDisponible == 0) {
 
-            this.estaDisponible = true;
-        } else {
+    private void GenerarAsientos(int duracion){
+        int numeroAsientoPorFila = 6;
+        int cantidadFilaPremium = 4;
+        int cantidadFilaTurista = 10;
 
-            this.estaDisponible = false;
+        for(int numeroFilaPremium = 1; numeroFilaPremium <= cantidadFilaPremium; numeroFilaPremium++){
+            crearAsiento(numeroAsientoPorFila, (int) duracion, 100, "Clase Premium", numeroFilaPremium);
+        }
+
+        for(int numeroFilaTurista = 5; numeroFilaTurista <= cantidadFilaTurista; numeroFilaTurista++){
+            crearAsiento(numeroAsientoPorFila, (int) duracion, 75, "Clase Turista", numeroFilaTurista);
         }
     }
 
-    public void setAsientos() {
-        AsientoDAO asientos = new AsientoDAO();
-        this.asientos = asientos.BuscarAsientos(this.cod_vuelo);
-    }
-
-
-    public void consultarAsientosDisponibles() {
-        AsientoDAO asientoDAO = new AsientoDAO();
-        List<Asiento> asientosDis = new ArrayList<>();
-        for (Asiento a : this.asientos) {
-            if (a.isEstaReservado()) {
-                System.out.println(a.toString());
+    private void crearAsiento(int numeroAsientoPorFila, int duracion, int precio, String Clase_Turista, int numeroFilaTurista) {
+        for (int numeroAsiento = 1; numeroAsiento <= numeroAsientoPorFila; numeroAsiento++) {
+            Asiento a;
+            if (numeroAsiento % 3 == 0) {
+                a = new Asiento(numeroAsiento, true, ((duracion / 60) * precio), Clase_Turista, numeroFilaTurista);
+                this.asientos.add(a);
+                continue;
             }
+            a = new Asiento(numeroAsiento, false, ((duracion / 60) * precio), Clase_Turista, numeroFilaTurista);
+            this.asientos.add(a);
         }
     }
 
-
-    public void actualizarInformacion() {
-
-    }
-
-    public int getCod_vuelo() {
-        return cod_vuelo;
-    }
-
-    public boolean isEstaDisponible() {
+    public  int getEstaDisponible() {
         return estaDisponible;
     }
 
@@ -92,7 +70,7 @@ public class Vuelo {
 
     @Override
     public String toString() {
-        return "Vuelo{ ccodigo vuelo: "+ this.cod_vuelo + " origen=" + origen + ", destino=" + destino + ", hora_salida=" + hora_salida + ", hora_llegada=" + hora_llegada + ", fecha=" + fecha + ", duracion=" + duracion + ", estaDisponible=" + estaDisponible + '}';
+        return "Vuelo{ "+ " origen=" + origen + ", destino=" + destino + ", hora_salida=" + hora_salida +", fecha=" + fecha + ", duracion=" + duracion + ", estaDisponible=" + estaDisponible + '}';
     }
 
     public void mostrarVuelo() {
@@ -110,5 +88,28 @@ public class Vuelo {
     public String getDestino() {
         return destino;
     }
+
+    public String getHora_salida() {
+        return hora_salida;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public int getDuracion() {
+        return duracion;
+    }
+
+    public List<Asiento> getAsientos() {
+        return asientos;
+    }
+
+    public int getNumeroAsientos() {
+        return numeroAsientos;
+    }
+
+
 }
+
 

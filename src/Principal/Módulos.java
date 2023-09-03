@@ -2,7 +2,6 @@ package Principal;
 
 import Hospedaje.InterfacesDeUsuario.MenuHospedaje;
 import ModuloRentaVehiculos.ModuloRentaVehiculos;
-import Hospedaje.InterfacesDeUsuario.MenuHospedaje;
 
 import Seguros.InterfazSeguros;
 import Tours.ModuloTours;
@@ -28,7 +27,15 @@ public class Módulos extends JFrame {
     public Módulos(Login login) {
         this.login = login;
 
-        btnVuelos.addActionListener(e -> reservarVuelo());
+        btnVuelos.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ModuloVuelos moduloVuelos= new ModuloVuelos(login);
+                setPanel(moduloVuelos.plnPrincipalVuelos);
+                crearFrame();
+            }
+        });
+
         btnExit.addActionListener(e -> {
             LoginInterfaz loginInterfaz = new LoginInterfaz(login);
             loginInterfaz.crearFrame();
@@ -49,8 +56,9 @@ public class Módulos extends JFrame {
         toursButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ModuloTours moduloTours = new ModuloTours();
-                moduloTours.crearFrame();
+                ModuloTours moduloTours = new ModuloTours("Reservas - Tour");
+                setPanel(moduloTours.pnlOpcionesTours);
+                crearFrame();
             }
         });
         btnHospedaje.addActionListener(e -> {
@@ -61,6 +69,7 @@ public class Módulos extends JFrame {
 
 
     public void crearFrame() {
+        setTitle("Agencia de Viajes");
         setSize(1000, 700);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -74,11 +83,6 @@ public class Módulos extends JFrame {
         pnlContenido.add(pnlMódulos);
     }
 
-    private void reservarVuelo() {
-        ModuloVuelos moduloVuelos = new ModuloVuelos(login);
-        moduloVuelos.crearframe();
-        dispose();
-    }
     public void rentarVehiculo() {
         ModuloRentaVehiculos rentaVehiculos = new ModuloRentaVehiculos(this.login);
         rentaVehiculos.crearFrame();
