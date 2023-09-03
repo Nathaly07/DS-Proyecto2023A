@@ -51,16 +51,7 @@ public class UIVehiculos extends JFrame {
             carritoRentas.verInfoCarrito(table1,pnlCatalogo1);
         });
 
-        btnRegresar.addActionListener(e -> {
-            Módulos módulos = new Módulos(login);
-            módulos.crearFrame();
-            dispose();
-        });
 
-        btnSalir.addActionListener(e -> {
-            dispose();
-            System.exit(0);
-        });
         //calendario
         pnlCalendario1.add(dateChooserInicio);
         pnlCalendario2.add(dateChooserFinal);
