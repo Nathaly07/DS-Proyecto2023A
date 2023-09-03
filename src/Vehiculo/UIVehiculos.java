@@ -1,4 +1,4 @@
-package ModuloRentaVehiculos;
+package Vehiculo;
 
 import Principal.Login;
 import Principal.Módulos;
@@ -7,7 +7,7 @@ import com.toedter.calendar.JDateChooser;
 import javax.swing.*;
 
 public class UIVehiculos extends JFrame {
-    private JPanel pnlPrincipal;
+    public JPanel pnlPrincipal;
     private JButton btnCatalogo;
     private JPanel pnlCalendario1;
     private JPanel pnlCatalogo1;

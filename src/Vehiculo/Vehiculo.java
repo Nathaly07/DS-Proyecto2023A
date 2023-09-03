@@ -1,4 +1,4 @@
-package ModuloRentaVehiculos;
+package Vehiculo;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

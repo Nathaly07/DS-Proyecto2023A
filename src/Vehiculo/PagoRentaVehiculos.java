@@ -1,4 +1,4 @@
-package ModuloRentaVehiculos;
+package Vehiculo;
 
 import Pagos.Pago;
 
