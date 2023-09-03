@@ -6,7 +6,7 @@ import com.toedter.calendar.JDateChooser;
 
 import javax.swing.*;
 
-public class ModuloRentaVehiculos extends JFrame {
+public class UIVehiculos extends JFrame {
     private JPanel pnlPrincipal;
     private JButton btnCatalogo;
     private JPanel pnlCalendario1;
@@ -29,7 +29,7 @@ public class ModuloRentaVehiculos extends JFrame {
     private static CarritoRentas carritoRentas;
 
 
-    public ModuloRentaVehiculos(Login login) {
+    public UIVehiculos(Login login) {
         catalogoVehiculos = new CatalogoVehiculos();
         carritoRentas = new CarritoRentas();
 

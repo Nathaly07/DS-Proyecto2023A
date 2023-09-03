@@ -1,7 +1,7 @@
 package Principal;
 
 import Hospedaje.InterfacesDeUsuario.MenuHospedaje;
-import ModuloRentaVehiculos.ModuloRentaVehiculos;
+import ModuloRentaVehiculos.UIVehiculos;
 
 import Seguros.InterfazSeguros;
 import Tours.ModuloTours;
@@ -84,7 +84,7 @@ public class Módulos extends JFrame {
     }
 
     public void rentarVehiculo() {
-        ModuloRentaVehiculos rentaVehiculos = new ModuloRentaVehiculos(this.login);
+        UIVehiculos rentaVehiculos = new UIVehiculos(this.login);
         rentaVehiculos.crearFrame();
         dispose();
     }
