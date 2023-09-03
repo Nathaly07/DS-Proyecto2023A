@@ -6,7 +6,7 @@ import com.toedter.calendar.JDateChooser;
 
 import javax.swing.*;
 
-public class UIVehiculos extends JFrame {
+public class UIVehiculos extends JPanel {
     public JPanel pnlPrincipal;
     private JButton btnCatalogo;
     private JPanel pnlCalendario1;
@@ -59,18 +59,13 @@ public class UIVehiculos extends JFrame {
     }
 
     public void crearFrame() {
-            setTitle("Modulo Renta Vehiculos");
             setSize(1000, 600);
-            setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             //setResizable(false);
             //Agregando scroll
             final JScrollPane scroller = new JScrollPane(pnlPrincipal,  JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
             scroller.setViewportView(pnlPrincipal);
-
-            setLocationRelativeTo(null);
             //add(pnlPrincipal);
             this.add(scroller);
-            this.pack();
             setVisible(true);
 
     }
