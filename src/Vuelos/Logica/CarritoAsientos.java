@@ -4,30 +4,30 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class ListaAsientos {
+public class CarritoAsientos {
 
     private List<Asiento> asientos;
-    private int contador;
+    private Vuelo vuelo;
 
-    public ListaAsientos() {
+    public CarritoAsientos() {
         asientos = new ArrayList<>();
     }
 
-    public ListaAsientos(List<Asiento> asientos, int contador) {
+    public CarritoAsientos(List<Asiento> asientos, Vuelo vuelo) {
         this.asientos = asientos;
-        this.contador = contador;
+        this.vuelo = vuelo;
     }
 
     public void añadir(Asiento a) {
         this.asientos.add(a);
     }
 
-    public void eliminar(int num) {
+    public void eliminar(Asiento a) {
         Iterator<Asiento> iterador = asientos.iterator();
         while (iterador.hasNext()) {
-            Asiento a = iterador.next();
-            a.CancelarReservaAsiento();
-            if (a.getNumero() == num) {
+            Asiento i = iterador.next();
+            i.CancelarReservaAsiento();
+            if (i.getNumero() == a.getNumero()) {
                 iterador.remove();
                 break;
             }
@@ -38,4 +38,3 @@ public class ListaAsientos {
     }
 
 }
-

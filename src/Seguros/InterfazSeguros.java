@@ -1,6 +1,10 @@
 package Seguros;
 
+import com.toedter.calendar.JDateChooser;
+
 import javax.swing.*;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class InterfazSeguros extends JFrame {
@@ -42,80 +46,20 @@ public class InterfazSeguros extends JFrame {
     private JTextField textField1;
     private JTextField txtCoberturasViajes1000;
     private JTextField txtCoberturasViajes5000;
+    private JPanel pnlFechaInicio;
     private ModuloSeguros moduloSeguro = new ModuloSeguros();
+    private JDateChooser fechaInicioSeguro = new JDateChooser();
 
     public InterfazSeguros() {
+        pnlFechaInicio.add(fechaInicioSeguro);
+
         btnCrearSeguro.addActionListener(e -> {
             int ID_Seguro = (int) (Math.random() * 5000 + 1000);
             lblID.setText(String.valueOf(ID_Seguro));
 
-            String dia = "", mes = "", año = "";
-            if (cmbFechaVencimiento.getSelectedIndex() == 1) {
-                if (Integer.parseInt(txtFechaInicioMes.getText()) == 9) {
-                    año = Integer.toString(Integer.parseInt(txtFechaInicioAño.getText()) + 1);
-                    mes = "12";
-                }
-                if (Integer.parseInt(txtFechaInicioMes.getText()) == 10) {
-                    año = Integer.toString(Integer.parseInt(txtFechaInicioAño.getText()) + 1);
-                    mes = "1";
-                }
-                if (Integer.parseInt(txtFechaInicioMes.getText()) == 11) {
-                    año = Integer.toString(Integer.parseInt(txtFechaInicioAño.getText()) + 1);
-                    mes = "2";
-                }
-                if (Integer.parseInt(txtFechaInicioMes.getText()) == 12) {
-                    año = Integer.toString(Integer.parseInt(txtFechaInicioAño.getText()) + 1);
-                    mes = "3";
-                }
-                if (Integer.parseInt(txtFechaInicioMes.getText()) < 9) {
-                    mes = Integer.toString(Integer.parseInt(txtFechaInicioMes.getText()) + 3);
-                    año = txtFechaInicioAño.getText();
-                }
-                dia = txtFechaInicioDia.getText();
-            }
-            if (cmbFechaVencimiento.getSelectedIndex() == 2) {
-                if (Integer.parseInt(txtFechaInicioMes.getText()) == 6) {
-                    año = Integer.toString(Integer.parseInt(txtFechaInicioAño.getText()) + 1);
-                    mes = "12";
-                }
-                if (Integer.parseInt(txtFechaInicioMes.getText()) == 7) {
-                    año = Integer.toString(Integer.parseInt(txtFechaInicioAño.getText()) + 1);
-                    mes = "1";
-                }
-                if (Integer.parseInt(txtFechaInicioMes.getText()) == 8) {
-                    año = Integer.toString(Integer.parseInt(txtFechaInicioAño.getText()) + 1);
-                    mes = "2";
-                }
-                if (Integer.parseInt(txtFechaInicioMes.getText()) == 9) {
-                    año = Integer.toString(Integer.parseInt(txtFechaInicioAño.getText()) + 1);
-                    mes = "3";
-                }
-                if (Integer.parseInt(txtFechaInicioMes.getText()) == 10) {
-                    año = Integer.toString(Integer.parseInt(txtFechaInicioAño.getText()) + 1);
-                    mes = "4";
-                }
-                if (Integer.parseInt(txtFechaInicioMes.getText()) == 11) {
-                    año = Integer.toString(Integer.parseInt(txtFechaInicioAño.getText()) + 1);
-                    mes = "5";
-                }
-                if (Integer.parseInt(txtFechaInicioMes.getText()) == 12) {
-                    año = Integer.toString(Integer.parseInt(txtFechaInicioAño.getText()) + 1);
-                    mes = "6";
-                }
-                if (Integer.parseInt(txtFechaInicioMes.getText()) < 6) {
-                    mes = Integer.toString(Integer.parseInt(txtFechaInicioMes.getText()) + 6);
-                    año = txtFechaInicioAño.getText();
-                }
-                dia = txtFechaInicioDia.getText();
-            }
-            if (cmbFechaVencimiento.getSelectedIndex() == 3) {
-                mes = txtFechaInicioMes.getText();
-                año = Integer.toString(Integer.parseInt(txtFechaInicioAño.getText()) + 1);
-                dia = txtFechaInicioDia.getText();
-            }
-            lblFechaDeVencimiento.setText(dia + "/" + mes + "/" + año);
+            sumarMesesAFecha(fechaInicioSeguro.getDate(), cmbFechaVencimiento.getSelectedIndex());
 
-            Date fechaInicio = new Date(txtFechaInicioDia.getText() + "/" + txtFechaInicioMes.getText() + "/" + txtFechaInicioAño.getText());
+            Date fechaInicio = fechaInicioSeguro.getDate();
             Date fechaVencimiento = new Date(lblFechaDeVencimiento.getText());
             int ID = Integer.parseInt(lblID.getText());
             int destino = Integer.parseInt(txtDestino.getText());
@@ -215,8 +159,26 @@ public class InterfazSeguros extends JFrame {
             Date fecha = new Date(this.txtFechaPago.getText());
             this.moduloSeguro.procesarPagoSeguro(ID_Seguro, fecha);
         });
+    }
 
+    private void sumarMesesAFecha(Date fechaCalendar, int meses) {
+        int númeroMesASumar = 0;
+        SimpleDateFormat formatoDeFecha = new SimpleDateFormat("d MMM y");
 
+        if (meses == 1){
+            númeroMesASumar = 3;
+        } else if(meses == 2) {
+            númeroMesASumar = 6;
+        } else if (meses == 3) {
+            númeroMesASumar = 12;
+        }
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(fechaCalendar);
+        calendar.add(Calendar.MONTH, númeroMesASumar);
+        Date fechaFinal = calendar.getTime();
+        String fechaVencimiento = formatoDeFecha.format(fechaFinal);
+        lblFechaDeVencimiento.setText(fechaVencimiento);
     }
 
 }

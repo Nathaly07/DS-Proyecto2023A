@@ -1,0 +1,6 @@
+New York, Los Angeles, 08:00, 2023-08-25,180
+Miami, Chicago, 08:00, 2023-08-25,180
+London, Paris, 08:00, 2023-08-25,180
+Tokyo, Sydney, 08:00, 2023-08-25,180
+San Francisco, Seattle, 08:00, 2023-08-25,180
+New York, Los Angeles, 08:00, 2023-08-25,180
