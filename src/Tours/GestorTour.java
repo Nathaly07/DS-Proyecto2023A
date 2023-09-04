@@ -4,24 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 public class GestorTour {
     private List<Tour> tours;
-    private List<Parada> paradas;
 
     public GestorTour() {
         this.tours = new ArrayList<>();
-        this.paradas = new ArrayList<>();
-    }
-// Metodo para retorna el tour
 
-    public Tour getTour(String nombre) {
-        for (Tour tour : this.tours) {
-            if (tour.getTourID().equalsIgnoreCase(nombre)) {
-                return tour;
-            }
-        }
-        return null;
+        //this.tours.add(new Tour("T001", "Ruta del", 10));
     }
-// Obtener los tours disponibles
 
+    // Obtener los tours disponibles
     public List<Tour> getToursDisponibles() {
         List<Tour> toursDisponibles = new ArrayList<>();
         for (Tour tour : this.tours) {
@@ -32,89 +22,19 @@ public class GestorTour {
         return toursDisponibles;
     }
 
-//Agregar Tours.Tour
-
-    public void nuevoTour(Tour tour) {
-        this.tours.add(tour);
-    }
-//Actualizar Tours.Tour
-
-    public void actualizarTour(String id, Tour changes) {
+    //Buscar Tour por nombre
+    public Tour buscarTour(String nombreTour) {
         for (Tour tour : this.tours) {
-            if (tour.getTourID().equalsIgnoreCase(id)) {
-                // Actualizar los atributos necesarios según los cambios
-                tour.setNombre(changes.getNombre());
-                tour.setPrecio(changes.getPrecio());
-                break;
+            if (tour.getNombre().equals(nombreTour)) {
+                return tour;
             }
         }
+        return null;
     }
-//Eliminar Tours.Tour
-
-    public void eliminarTour(String id) {
-        Tour tourAEliminar = null;
-        for (Tour tour : this.tours) {
-            if (tour.getTourID().equalsIgnoreCase(id)) {
-                tourAEliminar = tour;
-                break;
-            }
-        }
-        if (tourAEliminar != null) {
-            this.tours.remove(tourAEliminar);
-        }
-    }
-//Promocionar Tours.Tour
-
-    public String promocionarTour(String nombre) {
-        Tour tourPromocionado = getTour(nombre);
-
-        if (tourPromocionado != null) {
-            String promocion = "¡Promoción de Tours.Tour!\n";
-            promocion += "Nombre: " + tourPromocionado.getNombre() + "\n";
-            promocion += "Precio: $" + tourPromocionado.getPrecio() + "\n";
-            promocion += "Duración: " + tourPromocionado.getDuracion() + " horas\n";
-
-            return promocion;
-        } else {
-            return "Tours.Tour no encontrado.";
-        }
-    }
-
-    // Agregar una nueva parada
-    public void nuevaParada(Parada parada) {
-        this.paradas.add(parada);
-    }
-
-    //Eliminar Tours.Parada
-    public void eliminarParada(int id) {
-        Parada paradaAEliminar = null;
-        for (Parada parada : this.paradas) {
-            if (parada.getParadaId().equals(id)) {
-                paradaAEliminar = parada;
-                break;
-            }
-        }
-        if (paradaAEliminar != null) {
-            paradas.remove(paradaAEliminar);
-        }
-    }
-//Buscar Tour
-public Tour buscarTour(String id) {
-    for (Tour tour : this.tours) {
-        if (tour.getTourID().equals(id)) {
-            return tour;
-        }
-    }
-    return null;
-}
 
     //Obtener lista de Tours
     public List<Tour> getTours() {
         return this.tours;
     }
 
-    // Obtener la lista de paradas
-    public List<Parada> getParadas() {
-        return this.paradas;
-    }
 }
