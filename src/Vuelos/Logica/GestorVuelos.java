@@ -40,9 +40,6 @@ public class GestorVuelos {
     public void mostrarVuelos(JTable tabla){
         TablaVuelos modelo = new TablaVuelos(this.vuelos);
         tabla.setModel(modelo);
-        for(Vuelo v : this.vuelos){
-            System.out.println(v.toString());
-        }
     }
     public List<Vuelo> buscarVuelo(String origen, String destino) {
         List<Vuelo> vuelosEncontrados = new ArrayList<>();
@@ -57,9 +54,10 @@ public class GestorVuelos {
 
     public List<Vuelo> buscarVueloFecha(String fecha) {
         List<Vuelo> vuelosEncontrados = new ArrayList<>();
-
+        String cadena = fecha(fecha);
+        System.out.println(cadena);
         for (Vuelo vuelo : this.vuelos) {
-            if (fecha.equalsIgnoreCase(vuelo.getFecha())) {
+            if (cadena.equalsIgnoreCase(vuelo.getFecha())) {
                 vuelosEncontrados.add(vuelo);
             }
         }
@@ -68,9 +66,9 @@ public class GestorVuelos {
 
     public List<Vuelo> filtar(String origen, String destino, String fecha) {
         List<Vuelo> vuelosEncontrados = new ArrayList<>();
-
+        String cadena = fecha(fecha);
         for (Vuelo vuelo : this.vuelos) {
-            if (vuelo.getOrigen().equalsIgnoreCase(origen) && vuelo.getDestino().equalsIgnoreCase(destino) && vuelo.getFecha().equalsIgnoreCase(fecha)) {
+            if (vuelo.getOrigen().equalsIgnoreCase(origen) && vuelo.getDestino().equalsIgnoreCase(destino) && vuelo.getFecha().equalsIgnoreCase(cadena)) {
                 vuelosEncontrados.add(vuelo);
             }
         }
@@ -88,7 +86,7 @@ public class GestorVuelos {
 
     private static class TablaVuelos extends AbstractTableModel {
     private final String[] COLUMNS = {"Origen","Destino", "Fecha", "Hora salida",
-        "Duracion", "Numero de asientos"};
+        "Duracion", "Num. Asientos"};
     private List<Vuelo> vuelos;
 
     public TablaVuelos(List<Vuelo> vuelos){
@@ -144,6 +142,11 @@ public class GestorVuelos {
             }
         }
         return null;
+    }
+    private String fecha(String cadena){
+        String[] partes = cadena.split(" ");
+        String fecha = partes[2] + " "+ partes[1] + " " + partes[5];
+        return fecha;
     }
 
 }

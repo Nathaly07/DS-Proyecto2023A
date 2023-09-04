@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Vuelo {
 
@@ -14,6 +15,9 @@ public class Vuelo {
     private  int estaDisponible;
     private  List<Asiento> asientos;
     private  int numeroAsientos = 60;
+
+    private int precioPremium = 100;
+    private int precioTurista = 75;
 
 
     public Vuelo(String origen, String destino, String hora_salida, String fecha, int duracion) {
@@ -34,23 +38,27 @@ public class Vuelo {
         int cantidadFilaTurista = 10;
 
         for(int numeroFilaPremium = 1; numeroFilaPremium <= cantidadFilaPremium; numeroFilaPremium++){
-            crearAsiento(numeroAsientoPorFila, (int) duracion, 100, "Clase Premium", numeroFilaPremium);
+            crearAsiento(numeroAsientoPorFila, (int) duracion, precioPremium, "Clase Premium", numeroFilaPremium);
         }
 
         for(int numeroFilaTurista = 5; numeroFilaTurista <= cantidadFilaTurista; numeroFilaTurista++){
-            crearAsiento(numeroAsientoPorFila, (int) duracion, 75, "Clase Turista", numeroFilaTurista);
+            crearAsiento(numeroAsientoPorFila, (int) duracion, precioTurista, "Clase Turista", numeroFilaTurista);
         }
     }
 
-    private void crearAsiento(int numeroAsientoPorFila, int duracion, int precio, String Clase_Turista, int numeroFilaTurista) {
+    private void crearAsiento(int numeroAsientoPorFila, int duracion, int precio, String Clase, int numeroFilaTurista) {
+        Random random = new Random();
+        int min = 1;
+        int max = 6;
         for (int numeroAsiento = 1; numeroAsiento <= numeroAsientoPorFila; numeroAsiento++) {
+            int numeroAsientoAleatorio2 = random.nextInt(max - min + 1) + min;
             Asiento a;
-            if (numeroAsiento % 3 == 0) {
-                a = new Asiento(numeroAsiento, true, ((duracion / 60) * precio), Clase_Turista, numeroFilaTurista);
-                this.asientos.add(a);
-                continue;
+            if (numeroAsiento % numeroAsientoAleatorio2 == 0) {
+                a = new Asiento(numeroAsiento, true, ((duracion / 60) * precio), Clase, numeroFilaTurista, this);
+
+            } else {
+                a = new Asiento(numeroAsiento, false, ((duracion / 60) * precio), Clase, numeroFilaTurista, this);
             }
-            a = new Asiento(numeroAsiento, false, ((duracion / 60) * precio), Clase_Turista, numeroFilaTurista);
             this.asientos.add(a);
         }
     }
@@ -59,9 +67,9 @@ public class Vuelo {
         return estaDisponible;
     }
 
-    public Asiento seleccionarAsiento(int num) {
+    public Asiento seleccionarAsiento(Asiento asiento) {
         for (Asiento a : this.asientos) {
-            if (a.getNumero() == num) {
+            if (a.getNumero() == asiento.getNumero() && a.getNumFila() == asiento.getNumFila()) {
                 return a;
             }
         }
@@ -109,7 +117,23 @@ public class Vuelo {
         return numeroAsientos;
     }
 
+    public List<Integer> getFila(int fila){
+        List<Integer> lista = new ArrayList<>();
+        for(Asiento a: this.asientos){
+            if(a.isEstaReservado() == false && a.getNumFila() == fila){
+                lista.add(a.getNumero());
+            }
+        }
+        return lista;
+    }
 
+    public int getPrecioPremium() {
+        return precioPremium;
+    }
+
+    public int getPrecioTurista() {
+        return precioTurista;
+    }
 }
 
 
