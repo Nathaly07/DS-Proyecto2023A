@@ -4,13 +4,13 @@ import Reservas.ReservaTour;
 
 import java.util.ArrayList;
 
-class PagoTour {
+public class PagoReserva {
 
     private double tarifaImpuesto = 0.12;
     private double tarifaDevolucion = 0.4;
     private ReservaTour Reserva;
 
-    public PagoTour(ReservaTour reserva) {
+    public PagoReserva(ReservaTour reserva) {
         this.Reserva = reserva;
     }
 
@@ -32,15 +32,9 @@ class PagoTour {
         return (float)(this.calcularPrecioNeto() * this.tarifaImpuesto);
     }
 
-    public double calcularDevolucion() {
-        int dias = this.Reserva.tiempoTrasCancelar();
-        if(dias <= 15){
-            return this.calcularPrecioFinal();
-        }else if (dias > 15 && dias <= 30){
-            return this.calcularPrecioFinal() * this.tarifaDevolucion;
-        }
+    public void calcularDevolucion(int diasAntesInicioTour) {
 
-        return 0;
+
     }
 }
 

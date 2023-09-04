@@ -1,162 +1,150 @@
 package Reservas;
 
-import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.swing.JOptionPane;
 
 import java.time.LocalDate;
-import java.text.SimpleDateFormat;
+import java.util.concurrent.TimeUnit;
+
+import Principal.Login;
+import Seguros.GestorSeguros;
+import Tours.PagoReserva;
 import Tours.Tour;
-import Tours.Gestion_Tour;
+import Tours.GestorTour;
 
 
-public class ReservaTour extends Reserva{
-    private boolean activado;
-    private int numeroPersonas;
-    private boolean seguroActivado;
+public class ReservaTour {
     private String fechaCreacion;
-    private String fechaConfirmacion;
+    private boolean estadoReserva;
+    private int numeroPersonas;
+    private String segurosActivos;
     private ArrayList<Tour> toursAgregados;
-    private Gestion_Tour gestionTour;
+    private String fechaConfirmacionPago;
+    private GestorTour gestorTour;
+    private PagoReserva pagoReserva;
+    private Login login;
+    private GestorSeguros gestorSeguros;
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/M/yy");
 
-    private SimpleDateFormat format = new SimpleDateFormat("dd/M/yy");
-
-    public ReservaTour(String usuarioID, String reservaID, Gestion_Tour gestionTour, String fechaCreacion, int numeroPersonas, boolean seguroActivado, ArrayList<Tour> toursAgregados) {
-        super(usuarioID, reservaID);
-        this.toursAgregados = new ArrayList<Tour>();
-        this.gestionTour = gestionTour;
-        this.fechaCreacion = fechaCreacion;
+    public ReservaTour(int numeroPersonas, GestorTour gestorTour, PagoReserva pagoReserva, Login login, GestorSeguros gestorSeguros) {
+        this.fechaCreacion = dateFormat.format(Calendar.getInstance().getTime());
+        this.estadoReserva = false;
         this.numeroPersonas = numeroPersonas;
-        this.seguroActivado = seguroActivado;
-        this.activado = true;
+        // this.segurosActivos = this.getSegurosUsuarioActual;
+        this.toursAgregados = new ArrayList<Tour>();
+        this.fechaConfirmacionPago = "Sin confirmar";
+        this.gestorTour = gestorTour;
+        this.pagoReserva = pagoReserva;
+        this.login = login;
+        this.gestorSeguros = gestorSeguros;
     }
 
     public void setNumeroPersonas(int numeroPersonas) {
         this.numeroPersonas = numeroPersonas;
     }
 
-    public void setActivado(boolean activado) { this.activado = activado; }
-
-    public void setSeguroActivado(boolean seguroActivado) { this.seguroActivado = seguroActivado; }
-
-    public void setFechaCreacion(String fechaCreacion) { this.fechaCreacion = fechaCreacion; }
-
-    public void setFechaConfirmacion(String fechaConfirmacion) { this.fechaConfirmacion = fechaConfirmacion; }
-
-    public void setToursAgregados(ArrayList<Tour> toursAgregados) { this.toursAgregados = toursAgregados; }
-
-    public void setGestionTour(Gestion_Tour gestionTour) { this.gestionTour = gestionTour; }
-
     public int getNumeroPersonas() {
-        return numeroPersonas;
+        return this.numeroPersonas;
     }
 
-    public boolean isActivado() { return activado; }
+    public void cancelarReserva() {
+        if (this.estadoReserva) {
+            Date fechaActual = Calendar.getInstance().getTime();
+            Date fechaAuxiliar;
+            Date fechaMasProxima;
+            long difEnMilis = Long.MAX_VALUE;
+            long auxDifEnMilis = 0;
 
-    public boolean isSeguroActivado() { return seguroActivado; }
-
-    public String getFechaCreacion() { return fechaCreacion; }
-
-    public String getFechaConfirmacion() { return fechaConfirmacion; }
-
-    public Gestion_Tour getGestionTour() { return gestionTour; }
-
-    public void agregarTour(Tour tour){
-        if (tour.getDisponibilidad() >= this.numeroPersonas) {
-            this.toursAgregados.add(tour);
+            for (Tour tour: this.toursAgregados) {
+                fechaAuxiliar = tour.getFechaInicio();
+                auxDifEnMilis = fechaAuxiliar.getTime() - fechaActual.getTime();
+                if (auxDifEnMilis < difEnMilis) {
+                    fechaMasProxima = fechaAuxiliar;
+                    difEnMilis = auxDifEnMilis;
+                }
+            }
+            long difEnDias = TimeUnit.DAYS.convert(difEnMilis, TimeUnit.MILLISECONDS);
             JOptionPane.showMessageDialog(null,
-                    "El tour se ha agregado correctamente.",
+                    "Ha cancelado su reserva a " + difEnDias + " días del inicio del tour \n" +
+                            "más próximo reservado",
+                    "Reserva Tour",
+                    JOptionPane.WARNING_MESSAGE);
+            this.pagoReserva.calcularDevolucion((int)difEnDias);
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    "Ha cancelado su reserva exitosamente",
+                    "Reserva Tour",
+                    JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
+    public void agregarTour(Tour tour) throws ParseException {
+        boolean isAvailable = true;
+        Date fechaCreacionReserva = dateFormat.parse(this.fechaCreacion);
+        Date fechaInicioTour = dateFormat.parse(tour.getFechaInicio());
+        long difEnMilis = fechaInicioTour.getTime() - fechaCreacionReserva.getTime();
+
+        if (difEnMilis <= 0) {
+            JOptionPane.showMessageDialog(null,
+                    "No existen mínimo 30 días de diferencia respecto al inicio del tour\n" +
+                            "No es posible agregar el Tour",
                     "Reserva Tour",
                     JOptionPane.WARNING_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(null,
-                    "El tour no se puede agregar porque se ha excedido el limite de usuarios.",
-                    "Reserva Tour",
-                    JOptionPane.WARNING_MESSAGE);
+            long difEnDias = TimeUnit.DAYS.convert(difEnMilis, TimeUnit.MILLISECONDS);
+
+            if (difEnDias < 30) {
+                JOptionPane.showMessageDialog(null,
+                        "No existen mínimo 30 días de diferencia respecto al inicio del tour\n" +
+                                "No es posible agregar el Tour",
+                        "Reserva Tour",
+                        JOptionPane.WARNING_MESSAGE);
+            } else {
+                if (tour.getDisponibilidad() >= this.numeroPersonas) {
+                    this.toursAgregados.add(tour);
+                    JOptionPane.showMessageDialog(null,
+                            "El tour se ha agregado correctamente.",
+                            "Reserva Tour",
+                            JOptionPane.WARNING_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null,
+                            "El número de personas en la reserva excede la disponibilidad del tour\n" +
+                                    "No es posible agregar el Tour",
+                            "Reserva Tour",
+                            JOptionPane.WARNING_MESSAGE);
+                }
+            }
         }
     }
 
-    public void eliminarTour(String nombreTour){
-        this.toursAgregados.remove(this.buscarTour(nombreTour));
-    }
-
-    public Tour buscarTour(String nombreTour){
-        return this.gestionTour.getTour(nombreTour);
-    }
-
-    public int tiempoSinConfirmar(){
-        LocalDate fecha = LocalDate.now();
-        Date fechaActual = null;
-        try {
-            fechaActual = format.parse(fecha.toString());
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
-        int milisecondsByDay = 86400000;
-        int dias = 10;
-        return dias;
-    }
-
-    public int tiempoTrasCancelar(){
-        LocalDate fecha = LocalDate.now();
-        Date fechaActual = null;
-        try {
-            fechaActual = format.parse(fecha.toString());
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
-        int milisecondsByDay = 86400000;
-        int dias = 10;
-        return dias;
-    }
-
-    public ArrayList<Tour> getToursAgregados() {
-        return toursAgregados;
-    }
-
-    public String getPRE_InfoReserva(){
-        String info = "";
-
-        for (Tour x: toursAgregados ) {
-            info += "\nTour: " + x.getNombre();
-            info += "\nPrecio: " + x.getPrecio();
-        }
-
-        return info;
-    }
-
-    public String getInfoReserva(){
-        String info = "";
-
-        for (Tour x: toursAgregados ) {
-            info += "\n" + x.toString();
-        }
-
-        return info;
-    }
-
-
-    @Override
-    public void cancelarReserva() {
-        if (this.activado = true){
-            this.activado = false;
-        }else {
-            JOptionPane.showMessageDialog(null, 
-                                            "La reserva ya ha sido cancelada", 
-                                            "Reserva Tours.Tour",
-                                            JOptionPane.WARNING_MESSAGE);
+    // -1 -> Reserva ya fue confirmada
+    public int tiempoSinConfirmar() throws ParseException {
+        if (!this.estadoReserva) {
+            Date fechaCreacionReserva = dateFormat.parse(this.fechaCreacion);
+            Date fechaActual = Calendar.getInstance().getTime();
+            long difEnMilis = fechaActual.getTime() - fechaCreacionReserva.getTime();
+            return (int) (TimeUnit.DAYS.convert(difEnMilis, TimeUnit.MILLISECONDS));
+        } else {
+            return -1;
         }
     }
 
-    @Override
-    public void modificarReserva() {
-        
+    public void removerTourAgregado(Tour tour){
+        this.toursAgregados.remove(tour);
     }
 
+    public void confirmarReserva() {
+        this.estadoReserva = true;
+        this.pagoReserva.pagar(this.toursAgregados);
+    }
 
-    
+    public String getSegurosUsuarioActual() {
+        return "";
+    }
+
 }

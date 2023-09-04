@@ -2,11 +2,11 @@ package Tours;
 
 import java.util.ArrayList;
 import java.util.List;
-public class Gestion_Tour {
+public class GestorTour {
     private List<Tour> tours;
     private List<Parada> paradas;
 
-    public Gestion_Tour() {
+    public GestorTour() {
         this.tours = new ArrayList<>();
         this.paradas = new ArrayList<>();
     }

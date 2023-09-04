@@ -11,8 +11,8 @@ import javax.swing.*;
 
 public class ModuloTours extends JFrame{
 
-    private Gestion_Tour gestionTour = new Gestion_Tour();
-    private Gestion_Reserva gestionReserva = new Gestion_Reserva();
+    private GestorTour gestionTour = new GestorTour();
+    private GestionReserva gestionReserva = new GestionReserva();
     public JPanel pnlOpcionesTours;
     private JButton mostrarToursDisponiblesButton;
     private JPanel panelTours;
@@ -83,7 +83,7 @@ public class ModuloTours extends JFrame{
 //                } else {
 //                    reserva.setFechaConfirmacion(fechaActual.toString());
 //
-//                    PagoTour pagoTour = new PagoTour(reserva);
+//                    PagoReserva pagoTour = new PagoReserva(reserva);
 //                    double valorTotal = pagoTour.calcularPrecioFinal();
 //                    Pago pago = new Pago(valorTotal, metodoPago);
 //                    pago.pagar();
@@ -102,7 +102,7 @@ public class ModuloTours extends JFrame{
 //                if (reserva == null){
 //                    JOptionPane.showMessageDialog(null, "Reserva no encontrada");
 //                } else {
-//                    PagoTour pagoTour = new PagoTour(reserva);
+//                    PagoReserva pagoTour = new PagoReserva(reserva);
 //                    double valorDevolucion = pagoTour.calcularDevolucion();
 //                    gestionReserva.cancelar(idReserva);
 //                    JOptionPane.showMessageDialog(null,

@@ -1,15 +1,14 @@
 package Tours;
-import Reservas.Reserva;
 import Reservas.ReservaTour;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Gestion_Reserva {
+public class GestionReserva {
 
     private List<ReservaTour> reservas;
 
-    public Gestion_Reserva() {
+    public GestionReserva() {
         this.reservas = new ArrayList<>();
     }
 

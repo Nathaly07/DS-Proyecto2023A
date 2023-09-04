@@ -14,12 +14,12 @@ public class Tour {
     private String info_guia;
     private String duracion;
     private int limite_usuarios;
-    private Gestion_Reserva gestion_reserva;
+    private GestionReserva gestion_reserva;
 
 
     //Constructor
 
-    public Tour(String tourID, String nombre, double precio, String info_guia, String duracion, int limite_usuarios, Gestion_Reserva gestion_reserva) {
+    public Tour(String tourID, String nombre, double precio, String info_guia, String duracion, int limite_usuarios, GestionReserva gestion_reserva) {
         this.tourID = tourID;
         this.nombre = nombre;
         this.precio = precio;
