@@ -1,4 +1,4 @@
-package ModuloRentaVehiculos;
+package Vehiculo;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -75,7 +75,7 @@ public class Vehiculo {
     }
 
     private void rentar() {
-        CarritoRentas.agregarRenta(this);
+        GestorRentas.agregarRenta(this);
         estadoRentaVehiculo = "RENTADO";
 
     }
