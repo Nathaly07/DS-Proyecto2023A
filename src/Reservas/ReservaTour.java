@@ -1,4 +1,4 @@
-package Tours;
+package Reservas;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
