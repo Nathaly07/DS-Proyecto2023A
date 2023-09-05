@@ -146,7 +146,7 @@ public class ModuloTours extends JFrame{
             JLabel duracionLabel = new JLabel("Duracion: ");
             JTextField duracionTF = new JTextField(aux.getDuracion());
             JLabel limiteUsuariosLabel = new JLabel("Limite usuarios: ");
-            JTextField limiteUsuariosTF = new JTextField(aux.getLimite_usuarios());
+            JTextField limiteUsuariosTF = new JTextField(aux.getLimiteUsuarios());
 
             JButton botonReservar = new JButton("Reservar");
 
@@ -202,7 +202,7 @@ public class ModuloTours extends JFrame{
             JLabel duracionLabel = new JLabel("Duracion: ");
             JTextField duracionTF = new JTextField(aux.getDuracion());
             JLabel limiteUsuariosLabel = new JLabel("Limite usuarios: ");
-            JTextField limiteUsuariosTF = new JTextField(aux.getLimite_usuarios());
+            JTextField limiteUsuariosTF = new JTextField(aux.getLimiteUsuarios());
 
 
             nombreLabel.setBounds(10, yPos, 100, 25);

@@ -1,18 +1,15 @@
 package Tours;
 
-import Reservas.ReservaTour;
-
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Tour {
     private String nombre;
     private double precio;
     private ArrayList <String> paradasTuristicas;
     private ArrayList <String> actividadesTuristicas;
-    private String info_guia;
+    private String infoGuia;
     private String duracion;
-    private int limite_usuarios;
+    private int limiteUsuarios;
     private int disponibilidad;
     private String fechaInicio;
     private String fechaFin;
@@ -21,15 +18,15 @@ public class Tour {
 
     //Constructor
 
-    public Tour(String nombre, double precio, ArrayList<String> paradasTuristicas, ArrayList<String> actividadesTuristicas, String info_guia, String duracion, int limite_usuarios,int disponibilidad, String fechaInicio, String fechaFin) {
+    public Tour(String nombre, double precio, ArrayList<String> paradasTuristicas, ArrayList<String> actividadesTuristicas, String infoGuia, String duracion, int limiteUsuarios, String fechaInicio, String fechaFin) {
         this.nombre = nombre;
         this.precio = precio;
         this.paradasTuristicas = paradasTuristicas;
         this.actividadesTuristicas = actividadesTuristicas;
-        this.info_guia = info_guia;
+        this.infoGuia = infoGuia;
         this.duracion = duracion;
-        this.limite_usuarios = limite_usuarios;
-        this.disponibilidad = disponibilidad;
+        this.limiteUsuarios = limiteUsuarios;
+        this.disponibilidad = limiteUsuarios;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
     }
@@ -43,32 +40,18 @@ public class Tour {
         return precio;
     }
 
-    public int reservarTour(int numPersonas){
-        return getDisponibilidad()-numPersonas;
+    public void reservarTour(int numPersonas){
+        this.disponibilidad -= numPersonas;
     }
 
-    public int cancelarReserva(int numPersonas){
-        return getDisponibilidad()+numPersonas;
+    public void cancelarReserva(int numPersonas){
+        this.disponibilidad += numPersonas;
     }
 
-    public int getLimite_usuarios() {
-        return limite_usuarios;
+    public int getLimiteUsuarios() {
+        return limiteUsuarios;
     }
 
-    //public int getDisponibilidad (){
-     //   int result = 0;
-     //   int contReservas = 0;
-//<<<<<<< HEAD
-     //   for (ReservaTour reserva : this.gestion_reserva.getReservas()) {
-     //       contReservas += this.gestion_reserva.totalPersonasPorTour(this.nom);
-       // }
-//=======
-        /*for (ReservaTour reserva : this.gestion_reserva.reservaciones) {
-            contReservas += reserva.getNumeroPersonas();
-        }*/
-//>>>>>>> 2bfb696a5fa4c4b8f965b0620b53a7803c090156
-       // return result = this.limite_usuarios - contReservas;
-  //  }
     public int getDisponibilidad(){
         return this.disponibilidad;
     }
@@ -92,7 +75,7 @@ public class Tour {
             }
         }
 
-        info += "Guia: " + this.info_guia + "\n";
+        info += "Guia: " + this.infoGuia + "\n";
         info += "Duracion: " + this.duracion + "\n";
         info += "Precio: $" + this.precio;
 
