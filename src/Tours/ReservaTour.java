@@ -1,4 +1,4 @@
-package Reservas;
+package Tours;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -22,7 +22,7 @@ public class ReservaTour {
     private String fechaCreacion;
     private boolean estadoReserva;
     private int numeroPersonas;
-    private String segurosActivos;
+    private boolean seguroActivo;
     private ArrayList<Tour> toursAgregados;
     private String fechaConfirmacionPago;
     private GestorTour gestorTour;
@@ -77,7 +77,7 @@ public class ReservaTour {
             this.pagoReserva.calcularDevolucion((int)difEnDias);
         } else {
             JOptionPane.showMessageDialog(null,
-                    "Ha cancelado su reserva exitosamente",
+                    "Ha cancelado su reserva",
                     "Reserva Tour",
                     JOptionPane.WARNING_MESSAGE);
         }
@@ -143,7 +143,7 @@ public class ReservaTour {
         this.pagoReserva.pagar(this.toursAgregados);
     }
 
-    public String getSegurosUsuarioActual() {
+    public void tieneSeguroActivo() {
         return "";
     }
 

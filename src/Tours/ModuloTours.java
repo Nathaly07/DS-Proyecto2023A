@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.text.SimpleDateFormat;
 
-import Reservas.ReservaTour;
-
 import javax.swing.*;
 
 public class ModuloTours extends JFrame{
