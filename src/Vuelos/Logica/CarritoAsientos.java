@@ -84,6 +84,9 @@ public CarritoAsientos(){
         tabla.setModel(modelo);
     }
 
+    public void Limpiar(){
+        this.asientos = new ArrayList<>();
+    }
     public Vuelo getVuelo() {
         return vuelo;
     }

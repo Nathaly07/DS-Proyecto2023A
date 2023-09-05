@@ -198,9 +198,20 @@ public class SelectorDeAsientos extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 moduloVuelos.crearReserva(carrito);
                 moduloVuelos.actualizar();
+                carrito.Limpiar();
+                habilitarBotones(false);
+                carrito.mostarCarrito(table1);
                 moduloVuelos.cerrarDialog();
 
-
+            }
+        });
+        cancelarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carrito.Limpiar();
+                habilitarBotones(false);
+                carrito.mostarCarrito(table1);
+                moduloVuelos.cerrarDialog();
             }
         });
     }
@@ -208,11 +219,12 @@ public class SelectorDeAsientos extends JFrame{
     public void setVuelo(Vuelo v){
         this.v = v;
         carrito = new CarritoAsientos(v);
+
     }
     public void crearframe() {
         setTitle("Selector de asientos");
         setSize(804, 604);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);

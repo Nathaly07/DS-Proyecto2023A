@@ -2,9 +2,12 @@ package Reservas;
 
 import Vuelos.Logica.Asiento;
 import Vuelos.Logica.CarritoAsientos;
+import Vuelos.Logica.Vuelo;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+
 public class ReservaAsiento extends Reserva{
 
     private String fecha;
@@ -32,8 +35,10 @@ public class ReservaAsiento extends Reserva{
 
     }
 
-    public void reservar(Asiento a) {
-        reservas.añadir(a);
+    public void reservar() {
+        for(Asiento a: reservas.getAsientos()){
+            a.reservar();
+        }
     }
 
     public void cancelarReserva(Asiento a) {

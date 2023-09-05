@@ -106,13 +106,15 @@ public class ModuloVuelos extends JFrame{
         confirmarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(asientoReservado != null) {
+                selectorDeAsientos.setVuelo(g.seleccionarVuelo(v));
+                mostrarPagoVuelos(ModuloVuelos.this);
+                /*if(asientoReservado != null) {
                     selectorDeAsientos.setVuelo(g.seleccionarVuelo(v));
                     mostrarPagoVuelos(ModuloVuelos.this);
                 } else{
                     JOptionPane.showMessageDialog(null, "Previamente debe reservar su/s asiento/s", "Aviso", JOptionPane.ERROR_MESSAGE);
 
-                }
+                }*/
             }
         });
         eliminarButton.addActionListener(new ActionListener() {
@@ -163,6 +165,8 @@ public class ModuloVuelos extends JFrame{
         // Centrar la pantalla emergente en la ventana principal
         dialog.setLocationRelativeTo(parentFrame);
 
+        dialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+
         // Hacer visible la pantalla emergente
         dialog.setVisible(true);
 
@@ -205,6 +209,7 @@ public class ModuloVuelos extends JFrame{
 
     public void crearReserva(CarritoAsientos carrito) {
         ReservaAsiento reservaAsiento = new ReservaAsiento("001", "001", carrito);
+        reservaAsiento.reservar();
         gestorReservasAsiento.agregarResarva(reservaAsiento);
 
     }
