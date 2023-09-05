@@ -12,26 +12,27 @@ import java.time.LocalDate;
 import java.util.concurrent.TimeUnit;
 
 import Principal.Login;
+import Reservas.Reserva;
 import Seguros.GestorSeguros;
 import Tours.PagoReserva;
 import Tours.Tour;
 import Tours.GestorTour;
 
 
-public class ReservaTour {
+public class ReservaTour extends Reserva {
     private String fechaCreacion;
     private boolean estadoReserva;
     private int numeroPersonas;
-    private String segurosActivos;
+    private boolean seguroActivo;
     private ArrayList<Tour> toursAgregados;
     private String fechaConfirmacionPago;
     private GestorTour gestorTour;
     private PagoReserva pagoReserva;
-    private Login login;
     private GestorSeguros gestorSeguros;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/M/yy");
 
     public ReservaTour(int numeroPersonas, GestorTour gestorTour, PagoReserva pagoReserva, Login login, GestorSeguros gestorSeguros) {
+        super(login);
         this.fechaCreacion = dateFormat.format(Calendar.getInstance().getTime());
         this.estadoReserva = false;
         this.numeroPersonas = numeroPersonas;
@@ -40,7 +41,6 @@ public class ReservaTour {
         this.fechaConfirmacionPago = "Sin confirmar";
         this.gestorTour = gestorTour;
         this.pagoReserva = pagoReserva;
-        this.login = login;
         this.gestorSeguros = gestorSeguros;
     }
 
@@ -52,6 +52,7 @@ public class ReservaTour {
         return this.numeroPersonas;
     }
 
+    @Override
     public void cancelarReserva() {
         if (this.estadoReserva) {
             Date fechaActual = Calendar.getInstance().getTime();
@@ -77,11 +78,14 @@ public class ReservaTour {
             this.pagoReserva.calcularDevolucion((int)difEnDias);
         } else {
             JOptionPane.showMessageDialog(null,
-                    "Ha cancelado su reserva exitosamente",
+                    "Ha cancelado su reserva",
                     "Reserva Tour",
                     JOptionPane.WARNING_MESSAGE);
         }
     }
+
+    @Override
+    public void modificarReserva() {}
 
     public void agregarTour(Tour tour) throws ParseException {
         boolean isAvailable = true;
@@ -143,7 +147,7 @@ public class ReservaTour {
         this.pagoReserva.pagar(this.toursAgregados);
     }
 
-    public String getSegurosUsuarioActual() {
+    public void tieneSeguroActivo() {
         return "";
     }
 

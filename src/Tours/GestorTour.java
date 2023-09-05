@@ -1,5 +1,10 @@
 package Tours;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.nio.Buffer;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 public class GestorTour {
@@ -7,8 +12,7 @@ public class GestorTour {
 
     public GestorTour() {
         this.tours = new ArrayList<>();
-
-        //this.tours.add(new Tour("T001", "Ruta del", 10));
+        this.leerDatos();
     }
 
     // Obtener los tours disponibles
@@ -37,4 +41,39 @@ public class GestorTour {
         return this.tours;
     }
 
+    private void leerDatos(){
+        ArrayList<String> paradasList = new ArrayList<>();
+        ArrayList<String> actividadesList = new ArrayList<>();
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        Tour tour;
+
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("tours.txt"));
+
+            String linea = "";
+            while ((linea = br.readLine()) != null) {
+                String[] datos = linea.split(",");
+                
+                String[] paradas = datos[3].replace('[', ' ').replace(']', ' ').trim().split(";");
+                String[] actividades = datos[4].replace('[', ' ').replace(']', ' ').trim().split(";");
+                Date fechaInicio = formato.parse(datos[8]);
+                Date fechaFin = formato.parse(datos[datos.length-1]);
+
+                for(int i = 0; i < paradas.length; i++){
+                    paradasList.add(paradas[i]);
+                }
+
+                for(int i = 0; i < actividades.length; i++){
+                    actividadesList.add(actividades[i]);
+                }
+
+                tour = new Tour(datos[1] , Double.parseDouble(datos[2]),paradasList, actividadesList, datos[5], datos[6],Integer.parseInt(datos[7]), fechaInicio, fechaFin);
+                this.tours.add(tour);
+            }
+            br.close();
+
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
 }

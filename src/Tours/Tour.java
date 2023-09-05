@@ -4,7 +4,6 @@ import Reservas.ReservaTour;
 
 import java.util.ArrayList;
 import java.util.Date;
-import javax.swing.JOptionPane;
 
 public class Tour {
     private String nombre;
@@ -36,7 +35,10 @@ public class Tour {
     }
 
     //Getters y Setters
-
+    public String getNombre() {
+        return nombre;
+    }
+    
     public double getPrecio() {
         return precio;
     }
