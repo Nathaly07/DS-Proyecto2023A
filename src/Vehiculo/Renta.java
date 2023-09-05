@@ -1,4 +1,4 @@
-package ModuloRentaVehiculos;
+package Vehiculo;
 
 import Reservas.Reserva;
 
