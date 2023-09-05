@@ -14,14 +14,15 @@ public class Tour {
     private String info_guia;
     private String duracion;
     private int limite_usuarios;
-    private Date fechaInicio;
-    private Date fechaFin;
-    private GestionReserva gestion_reserva;
+    private int disponibilidad;
+    private String fechaInicio;
+    private String fechaFin;
+
 
 
     //Constructor
 
-    public Tour(String nombre, double precio, ArrayList<String> paradasTuristicas, ArrayList<String> actividadesTuristicas, String info_guia, String duracion, int limite_usuarios, Date fechaInicio, Date fechaFin, GestionReserva gestion_reserva) {
+    public Tour(String nombre, double precio, ArrayList<String> paradasTuristicas, ArrayList<String> actividadesTuristicas, String info_guia, String duracion, int limite_usuarios,int disponibilidad, String fechaInicio, String fechaFin) {
         this.nombre = nombre;
         this.precio = precio;
         this.paradasTuristicas = paradasTuristicas;
@@ -29,9 +30,9 @@ public class Tour {
         this.info_guia = info_guia;
         this.duracion = duracion;
         this.limite_usuarios = limite_usuarios;
+        this.disponibilidad = disponibilidad;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
-        this.gestion_reserva = gestion_reserva;
     }
 
     //Getters y Setters
@@ -40,26 +41,36 @@ public class Tour {
         return precio;
     }
 
+    public int reservarTour(int numPersonas){
+        return getDisponibilidad()-numPersonas;
+    }
+
+    public int cancelarReserva(int numPersonas){
+        return getDisponibilidad()+numPersonas;
+    }
+
     public int getLimite_usuarios() {
         return limite_usuarios;
     }
 
-    public int getDisponibilidad (){
-        int result = 0;
-        int contReservas = 0;
+    //public int getDisponibilidad (){
+     //   int result = 0;
+     //   int contReservas = 0;
 //<<<<<<< HEAD
-        for (ReservaTour reserva : this.gestion_reserva.getReservas()) {
-            contReservas += this.gestion_reserva.totalPersonasPorTour(this.nombre);
-        }
+     //   for (ReservaTour reserva : this.gestion_reserva.getReservas()) {
+     //       contReservas += this.gestion_reserva.totalPersonasPorTour(this.nom);
+       // }
 //=======
         /*for (ReservaTour reserva : this.gestion_reserva.reservaciones) {
             contReservas += reserva.getNumeroPersonas();
         }*/
 //>>>>>>> 2bfb696a5fa4c4b8f965b0620b53a7803c090156
-        return result = this.limite_usuarios - contReservas;
+       // return result = this.limite_usuarios - contReservas;
+  //  }
+    public int getDisponibilidad(){
+        return this.disponibilidad;
     }
-
-    public Date getFechaInicio() {
+    public String getFechaInicio() {
         return fechaInicio;
     }
 
