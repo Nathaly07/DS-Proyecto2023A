@@ -34,7 +34,6 @@ public class PagoReserva {
 
     public void calcularDevolucion(int diasAntesInicioTour) {
 
-
     }
 }
 

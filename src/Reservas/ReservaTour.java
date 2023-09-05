@@ -52,6 +52,10 @@ public class ReservaTour extends Reserva {
         return this.numeroPersonas;
     }
 
+    public ArrayList<Tour> getToursAgregados() {
+        return this.toursAgregados;
+    }
+
     @Override
     public void cancelarReserva() {
         if (this.estadoReserva) {
@@ -62,7 +66,11 @@ public class ReservaTour extends Reserva {
             long auxDifEnMilis = 0;
 
             for (Tour tour: this.toursAgregados) {
-                fechaAuxiliar = tour.getFechaInicio();
+                try {
+                    fechaAuxiliar = this.dateFormat.parse(tour.getFechaInicio());
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
                 auxDifEnMilis = fechaAuxiliar.getTime() - fechaActual.getTime();
                 if (auxDifEnMilis < difEnMilis) {
                     fechaMasProxima = fechaAuxiliar;
@@ -147,8 +155,6 @@ public class ReservaTour extends Reserva {
         this.pagoReserva.pagar(this.toursAgregados);
     }
 
-    public void tieneSeguroActivo() {
-        return "";
-    }
+    public void tieneSeguroActivo() {}
 
 }
