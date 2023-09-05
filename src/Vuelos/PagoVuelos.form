@@ -142,6 +142,7 @@
         </constraints>
         <properties>
           <editable value="false"/>
+          <text value=""/>
         </properties>
       </component>
       <component id="1deaf" class="javax.swing.JTextField" binding="textField2" default-binding="true">

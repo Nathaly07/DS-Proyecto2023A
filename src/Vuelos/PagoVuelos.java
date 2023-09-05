@@ -1,6 +1,9 @@
 package Vuelos;
 
 import Reservas.Reserva;
+import Reservas.ReservaAsiento;
+import Vuelos.Logica.Asiento;
+import Vuelos.Logica.CarritoAsientos;
 import Vuelos.Logica.PagoReservaAsiento;
 import Vuelos.Logica.Vuelo;
 
@@ -30,11 +33,19 @@ public class PagoVuelos extends JFrame {
 
     private Vuelo vuelo;
 
+    private Asiento asiento;
+
+    private SelectorDeAsientos selectorDeAsientos;
+    private CarritoAsientos carrito;
+
+
+
     public PagoVuelos() {
-        cerrarButton.addActionListener(e -> dispose());
-        pagarButton.addActionListener(e -> {
-            JOptionPane.showMessageDialog(null, "Pago realizado con éxito");
-            dispose();
+        cerrarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
         });
         textField1.addActionListener(new ActionListener() {
             @Override
@@ -95,6 +106,7 @@ public class PagoVuelos extends JFrame {
     }
 
 
-
-
+    public void setAsiento(CarritoAsientos carrito) {
+        this.carrito = carrito;
+    }
 }

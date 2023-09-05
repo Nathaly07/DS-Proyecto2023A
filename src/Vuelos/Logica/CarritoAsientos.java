@@ -18,7 +18,6 @@ public CarritoAsientos(){
         asientos = new ArrayList<>();
     }
 
-
     public void añadir(Asiento a) {
         this.asientos.add(a);
     }
@@ -60,7 +59,10 @@ public CarritoAsientos(){
                 default ->  "-";
 
             };
+
         }
+
+
         @Override
         public boolean isCellEditable(int row,int column){
             return false;
@@ -90,4 +92,11 @@ public CarritoAsientos(){
     public Vuelo getVuelo() {
         return vuelo;
     }
+
+    public void setAsientos(List<Asiento> asientos) {
+        this.asientos = asientos;
+    }
+
+
+
 }

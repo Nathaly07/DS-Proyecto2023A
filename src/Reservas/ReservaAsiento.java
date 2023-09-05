@@ -1,5 +1,6 @@
 package Reservas;
 
+import Principal.Login;
 import Vuelos.Logica.Asiento;
 import Vuelos.Logica.CarritoAsientos;
 import Vuelos.Logica.Vuelo;
@@ -17,8 +18,8 @@ public class ReservaAsiento extends Reserva{
 
     private CarritoAsientos reservas;
 
-    public ReservaAsiento( String IDUsuario, String IDReserva, CarritoAsientos reservas) {
-        super(IDUsuario,IDReserva);
+    public ReservaAsiento(Login login, CarritoAsientos reservas) {
+        super(login);
         //String IDReserva = String.valueOf((numeroDeReservas++));
         this.reservas = reservas;
         this.fecha_vuelo = reservas.getVuelo().getFecha();

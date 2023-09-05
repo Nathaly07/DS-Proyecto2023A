@@ -279,4 +279,8 @@ public class SelectorDeAsientos extends JFrame{
         }
         return asientosHabilitados;
     }
+
+    public  CarritoAsientos getCarrito() {
+        return carrito;
+    }
 }

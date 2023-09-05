@@ -1,11 +1,13 @@
 package Vuelos.Logica;
 
 import Reservas.ReservaAsiento;
+import Vuelos.SelectorDeAsientos;
 
 import java.util.List;
 
 public class PagoReservaAsiento {
     private double monto;
+    private SelectorDeAsientos selectorDeAsientos;
     private List<ReservaAsiento> reservas;
 
 
