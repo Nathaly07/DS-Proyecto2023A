@@ -1,38 +1,20 @@
 package Reservas;
 
+import Principal.Login;
+import Principal.Usuario;
+
 public abstract class Reserva {
 
-    private String usuarioID;
-    private String reservaID;
+    Login login;
 
-    public Reserva(String usuarioID, String reservaID) {
-        this.usuarioID = usuarioID;
-        this.reservaID = reservaID;
+    public Reserva(Login login) {
+        this.login = login;
     }
-
     public abstract void cancelarReserva();
     public abstract void modificarReserva();
 
-    // Esto deberia devolver el objeto del usuario logueado actualmente no un INT
-    // Modificar cuando la clase Usuario sea creada y usada junto al login
-    public int buscarUsuarioActual() {
-        return 0;
-    }
-
-    public String getReservaID() {
-        return reservaID;
-    }
-
-    public void setReservaID(String reservaID) {
-        this.reservaID = reservaID;
-    }
-
-    public String getUsuarioID() {
-        return usuarioID;
-    }
-
-    public void setUsuarioID(String usuarioID) {
-        this.usuarioID = usuarioID;
+    public Usuario buscarUsuarioActual() {
+        return this.login.getUsuarioVerificado();
     }
 
 }
