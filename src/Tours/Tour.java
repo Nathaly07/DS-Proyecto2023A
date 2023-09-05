@@ -35,7 +35,10 @@ public class Tour {
     }
 
     //Getters y Setters
-
+    public String getNombre() {
+        return nombre;
+    }
+    
     public double getPrecio() {
         return precio;
     }
