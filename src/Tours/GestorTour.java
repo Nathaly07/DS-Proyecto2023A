@@ -2,10 +2,8 @@ package Tours;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.nio.Buffer;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 public class GestorTour {
     private List<Tour> tours;
@@ -44,7 +42,6 @@ public class GestorTour {
     private void leerDatos(){
         ArrayList<String> paradasList = new ArrayList<>();
         ArrayList<String> actividadesList = new ArrayList<>();
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         Tour tour;
 
         try {
@@ -56,16 +53,12 @@ public class GestorTour {
                 
                 String[] paradas = datos[3].replace('[', ' ').replace(']', ' ').trim().split(";");
                 String[] actividades = datos[4].replace('[', ' ').replace(']', ' ').trim().split(";");
-                Date fechaInicio = formato.parse(datos[8]);
-                Date fechaFin = formato.parse(datos[datos.length-1]);
+                String fechaInicio = datos[8];
+                String fechaFin =  datos[datos.length-1];
 
-                for(int i = 0; i < paradas.length; i++){
-                    paradasList.add(paradas[i]);
-                }
+                Collections.addAll(paradasList, paradas);
 
-                for(int i = 0; i < actividades.length; i++){
-                    actividadesList.add(actividades[i]);
-                }
+                Collections.addAll(actividadesList, actividades);
 
                 tour = new Tour(datos[1] , Double.parseDouble(datos[2]),paradasList, actividadesList, datos[5], datos[6],Integer.parseInt(datos[7]), fechaInicio, fechaFin);
                 this.tours.add(tour);
