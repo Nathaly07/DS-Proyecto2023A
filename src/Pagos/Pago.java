@@ -9,6 +9,11 @@ public class Pago {
     private String modoPago; //"Paypal", "Transferencia", "Tarjeta de Credito"
     private Date FechaPago;
 
+    public Pago(double montoAPagar, String modoPago) {
+        this.montoAPagar = montoAPagar;
+        this.modoPago = modoPago;
+    }
+
     public Pago(double montoAPagar, String modoPago, Date fechaPago) {
         this.montoAPagar = montoAPagar;
         this.modoPago = modoPago;

@@ -21,8 +21,7 @@ public class RegistrarInterfaz extends JFrame {
                     txtNombre.getText(),
                     txtApellido.getText(),
                     txtEmail.getText(),
-                    contraseñaRegistro,
-                    txtRol.getText());
+                    contraseñaRegistro);
             lblIDUsuario.setText(String.valueOf(usuario.getID_Usuario()));
             login.registrarUsuario(usuario);
 

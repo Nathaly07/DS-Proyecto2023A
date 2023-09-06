@@ -110,7 +110,7 @@ public class CrearReserva extends JFrame {
         Habitacion[] habitaciones = new Habitacion[1];
         habitaciones[0] = habitacionSeleccionada;
         ReservaHospedaje reserva = new ReservaHospedaje(
-                new Usuario("alex", "padilla", "ap", "12", "admin"),
+                new Usuario("alex", "padilla", "ap", "12"),
                 Integer.toString(habitacionSeleccionada.getHabitacionID()),
                 numeroPersonas,
                 habitaciones,
