@@ -73,9 +73,6 @@ public class Vehiculo {
 
     }
 
-    public void actualizarPrecioRenta(){
-        //TODO: implementar o eliminar
-    }
 
     private void rentar() {
         GestoReservaVehiculo.agregarRenta(this);

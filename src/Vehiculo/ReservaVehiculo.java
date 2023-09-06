@@ -101,8 +101,6 @@ public class ReservaVehiculo {
         this.ciudadDeEntrega = ciudadOrigen;
         this.fechaInicio = fechaInicio;
         this.fechaRetorno = fechaFinal;
-        //TODO quitar Prints
-        System.out.println(ciudadOrigen+"\n"+ciudadRetorno+"\n"+fechaInicio+"\n"+fechaRetorno);
     }
 
 

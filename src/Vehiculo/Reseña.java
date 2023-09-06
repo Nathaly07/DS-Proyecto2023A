@@ -11,8 +11,9 @@ public class Reseña {
                 this.calificacion = calificacion;
         }
 
-        public void editarOpinion(){
-                //TODO implementar o eliminar
+        public void editarOpinion(String nuevaOpinion, int nuevaCalificacion) {
+                this.opinion = nuevaOpinion;
+                this.calificacion = nuevaCalificacion;
         }
 
         @Override
