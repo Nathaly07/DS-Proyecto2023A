@@ -3,7 +3,7 @@ package Vehiculo;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-
+//TODO: La clase gestor es un antipatrón podemos usar solo la renta en lugar del gestor.
 public class GestorRentas {
     private static ArrayList<Renta> rentas;
     private static Renta renta = new Renta();

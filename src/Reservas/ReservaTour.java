@@ -14,7 +14,7 @@ import Tours.Tour;
 import Tours.Gestion_Tour;
 
 
-public class ReservaTour extends Reserva{
+public class ReservaTour {
     private boolean activado;
     private int numeroPersonas;
     private boolean seguroActivado;
@@ -24,15 +24,27 @@ public class ReservaTour extends Reserva{
     private Gestion_Tour gestionTour;
 
     private SimpleDateFormat format = new SimpleDateFormat("dd/M/yy");
+    //TODO ELIMINAR LOS ID's cambiar por login
+    private String usuarioID;
+    private String reservaID;
 
     public ReservaTour(String usuarioID, String reservaID, Gestion_Tour gestionTour, String fechaCreacion, int numeroPersonas, boolean seguroActivado, ArrayList<Tour> toursAgregados) {
-        super(usuarioID, reservaID);
+        this.usuarioID = usuarioID;
+        this.reservaID = reservaID;
         this.toursAgregados = new ArrayList<Tour>();
         this.gestionTour = gestionTour;
         this.fechaCreacion = fechaCreacion;
         this.numeroPersonas = numeroPersonas;
         this.seguroActivado = seguroActivado;
         this.activado = true;
+    }
+
+    public String getUsuarioID() {
+        return usuarioID;
+    }
+
+    public String getReservaID() {
+        return reservaID;
     }
 
     public void setNumeroPersonas(int numeroPersonas) {
@@ -140,7 +152,7 @@ public class ReservaTour extends Reserva{
     }
 
 
-    @Override
+    //TODO: implementar su propios metodos de cancelar reserva Y modificación
     public void cancelarReserva() {
         if (this.activado = true){
             this.activado = false;
@@ -152,7 +164,7 @@ public class ReservaTour extends Reserva{
         }
     }
 
-    @Override
+
     public void modificarReserva() {
         
     }
