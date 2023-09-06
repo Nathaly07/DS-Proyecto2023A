@@ -3,11 +3,11 @@ package Tours;
 import Principal.Login;
 import Principal.Usuario;
 import Reservas.ReservaTour;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,9 +56,11 @@ public class ModuloTours extends JFrame{
     private JPanel pnlLista;
     private JPanel pnlLista2;
     private JList listToursModificar;
+    private JScrollPane scrollPanelLista;
     private Tour tour; //para prueba
     private ReservaTour reservaTour;
-    private ReservaTour reservaTourConfirmar;
+    private ReservaTour reservaTourConfirmar = null;
+    private String metodoPagoConfirmar = "";
 
     List<Tour> tours;
 
@@ -135,10 +137,34 @@ public class ModuloTours extends JFrame{
 
         this.setReservasUsuario();
 
+        btnAgregarTour.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    agregarTour();
+                } catch (ParseException ex) {
+                    throw new RuntimeException(ex);
+                }
+                mostrarReserva(list1);
+            }
+        });
+
+        btnEliminarTour.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                eliminarTour();
+                mostrarReserva(list1);
+            }
+        });
+
         btnConfirmar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                try {
+                    gestionReserva.confirmarReserva(reservaTourConfirmar, metodoPagoConfirmar);
+                } catch (ParseException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
         comboBox2.addActionListener(new ActionListener() {
@@ -160,6 +186,24 @@ public class ModuloTours extends JFrame{
                 }
 
                 listTours.setModel(toursEnReservaModel);
+            }
+        });
+        tarjetaRadioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                metodoPagoConfirmar = tarjetaRadioButton.getText();
+            }
+        });
+        transferenciaRadioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                metodoPagoConfirmar = transferenciaRadioButton.getText();
+            }
+        });
+        efectivoRadioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                metodoPagoConfirmar = efectivoRadioButton.getText();
             }
         });
     }
@@ -196,6 +240,24 @@ public class ModuloTours extends JFrame{
         }
 
         list.setModel(model);
+    }
+
+    public void mostrarReserva(JList list){
+        DefaultListModel<String> model = new DefaultListModel<>();
+        ArrayList<Tour> tours = this.reservaTour.getToursAgregados();
+
+        for(Tour i: tours){
+            model.addElement(i.informacionRelevante());
+        }
+        list.setModel(model);
+    }
+
+    public void agregarTour() throws ParseException {
+        this.reservaTour.agregarTour((Tour)list1.getSelectedValue());
+    }
+
+    public void eliminarTour(){
+        this.reservaTour.removerTourAgregado((Tour)list1.getSelectedValue());
     }
 
    /* public void buscarToursDisponibles(){
