@@ -1,21 +1,36 @@
 package Hospedaje.Reservas;
 
 import Hospedaje.Habitaciones.Habitacion;
-import Hospedaje.Pagos.PagoHospedaje;
-import Reservas.Reserva;
+import Principal.Usuario;
 
+
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class ReservaHospedaje extends Reserva {
+public class ReservaHospedaje implements Serializable {
+    private static final long serialVersionUID = 3L;
     private int numeroPersonas;
     private Date fechaCreacion;
     private EstadoReserva estadoReserva;
     private Date fechaInicio;
     private Date fechaFin;
     private Habitacion habitaciones[];
-    public ReservaHospedaje(String userId, String reservaId, int numeroPersonas, Habitacion[] habitaciones, Date fechaCreacion, Date fechaInicio, Date fechaFin) {
-        super(userId, reservaId);
+    //TODO CAMBIAR Id's por login
+    private Usuario user;
+    private String reservaId;
+
+    public Usuario getUser() {
+        return user;
+    }
+
+    public String getReservaId() {
+        return reservaId;
+    }
+
+    public ReservaHospedaje(Usuario user, String reservaId, int numeroPersonas, Habitacion[] habitaciones, Date fechaCreacion, Date fechaInicio, Date fechaFin) {
+        this.user = user;
+        this.reservaId = reservaId;
         this.numeroPersonas = numeroPersonas;
         this.fechaCreacion = fechaCreacion;
         this.fechaInicio = fechaInicio;
@@ -24,12 +39,12 @@ public class ReservaHospedaje extends Reserva {
         this.estadoReserva = EstadoReserva.PENDIENTE;
     }
 
-    @Override
+    //TODO IMPLEMENTAR SUS PROPIOS METODOS
     public void cancelarReserva() {
         this.estadoReserva = EstadoReserva.CANCELADA;
     }
 
-    @Override
+
     public void modificarReserva() {
 
     }
@@ -65,9 +80,6 @@ public class ReservaHospedaje extends Reserva {
         return habitaciones;
     }
 
-    public String getReservaId() {
-        return this.reservaID;
-    }
     public void confirmarReserva() {
         this.estadoReserva = EstadoReserva.CONFIRMADA;
     }

@@ -3,9 +3,13 @@ package Hospedaje.InterfacesDeUsuario;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+import Hospedaje.Criteria.CriteriaCiudad;
 import Hospedaje.Habitaciones.Habitacion;
 import Hospedaje.ModuloHospedaje;
+import Hospedaje.Reservas.GestionReservas;
 import Hospedaje.Reservas.ReservaHospedaje;
+import Principal.Login;
+import Principal.Usuario;
 import com.toedter.calendar.JDateChooser;
 
 import java.awt.event.MouseAdapter;
@@ -14,7 +18,8 @@ import java.util.Date;
 import java.util.List;
 
 public class CrearReserva extends JFrame {
-    private ModuloHospedaje moduloHospedaje;
+    private GestionReservas gestionReservas;
+    private Login login;
     private JPanel jpReservaInicio;
     private JPanel jPHospedajes;
     private JPanel jpReservaFinal;
@@ -30,10 +35,11 @@ public class CrearReserva extends JFrame {
     private JTable tbHabitacionesDisponibles;
     private DefaultTableModel tbModeloHabitacionesDisponibles;
 
+
     JDateChooser reservacionInicio  = new JDateChooser();
     JDateChooser reservacionFinal  = new JDateChooser();
-    public CrearReserva(ModuloHospedaje moduloHospedaje) {
-        this.moduloHospedaje = moduloHospedaje;
+    public CrearReserva(Login login, GestionReservas gestionReservas) {
+        this.gestionReservas = gestionReservas;
 
         //Calendar
         jpReservaInicio.add(reservacionInicio);
@@ -80,7 +86,9 @@ public class CrearReserva extends JFrame {
 
         this.tbHabitacionesDisponibles.setModel(tbModeloHabitacionesDisponibles);
 
-        this.habitacionesDisponibles= moduloHospedaje.buscarHabitacionesDisponibles(reservacionInicio.getDate(), reservacionFinal.getDate());
+        this.habitacionesDisponibles = this.gestionReservas.getHabitacionesDisponibles(reservacionInicio.getDate(), reservacionFinal.getDate());
+        CriteriaCiudad criteriaCiudad = new CriteriaCiudad(comboBox1.getSelectedItem().toString());
+        this.habitacionesDisponibles = criteriaCiudad.meetCriteria(this.habitacionesDisponibles);
         this.habitacionesDisponibles.forEach(this::agregarHabitacionATabla);
 
         tbHabitacionesDisponibles.addMouseListener(new MouseAdapter() {
@@ -89,7 +97,7 @@ public class CrearReserva extends JFrame {
                 if (e.getClickCount() == 2) { // Verificar si es un doble clic
                     int filaSeleccionada = tbHabitacionesDisponibles.getSelectedRow();
                     if (filaSeleccionada != -1) {
-                        Habitacion habitacionSeleccionada = habitacionesDisponibles.get(filaSeleccionada);
+                        Habitacion habitacionSeleccionada = habitacionesDisponibles.get(filaSeleccionada - 1);
                         confirmarReserva(habitacionSeleccionada);
                     }
                 }
@@ -102,15 +110,15 @@ public class CrearReserva extends JFrame {
         Habitacion[] habitaciones = new Habitacion[1];
         habitaciones[0] = habitacionSeleccionada;
         ReservaHospedaje reserva = new ReservaHospedaje(
-                "1",
-                "1",
+                new Usuario("alex", "padilla", "ap", "12", "admin"),
+                Integer.toString(habitacionSeleccionada.getHabitacionID()),
                 numeroPersonas,
                 habitaciones,
                 new Date(),
                 reservacionInicio.getDate(),
                 reservacionFinal.getDate()
         );
-        ConfirmarReserva confirmarReserva = new ConfirmarReserva(this.moduloHospedaje, reserva);
+        ConfirmarReserva confirmarReserva = new ConfirmarReserva(this.gestionReservas, reserva);
         confirmarReserva.crearFrame();
         dispose();
     }

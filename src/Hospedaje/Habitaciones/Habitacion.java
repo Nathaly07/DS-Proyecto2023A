@@ -1,8 +1,10 @@
 package Hospedaje.Habitaciones;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Habitacion {
+public class Habitacion implements Serializable {
+    private static final long serialVersionUID = 1L;
     private int habitacionID;
     private double precioPorNoche;
     private int limiteUsuarios;
@@ -31,11 +33,19 @@ public class Habitacion {
         return this.limiteUsuarios;
     }
 
+    public String getCiudad() {
+        return this.hotel.getCiudad();
+    }
+
     public String getInfo(){
         return "\nHabitaciónId: " + this.habitacionID +
                 "\nPrecioPorNoche: " + this.precioPorNoche +
                 "\nLímite de Usuarios: " + this.limiteUsuarios +
                 "\nHotel: " + this.hotel.getNombre() + "\n";
+    }
+
+    public int getHabitacionId() {
+        return this.habitacionID;
     }
 
 }

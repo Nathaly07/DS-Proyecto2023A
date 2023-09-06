@@ -35,9 +35,9 @@ public class UIVehiculos extends JPanel {
 
 
         btnCatalogo.addActionListener(e -> { // METODO DESPLEGAR CATALOGO
-
-            if (txtOrigen.getText().isEmpty() || txtRetorno.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(null,"Por favor ingrese todos los datos");
+            int fechaValida = dateChooserFinal.getDate().compareTo(dateChooserInicio.getDate());
+            if (txtOrigen.getText().isEmpty() || txtRetorno.getText().isEmpty() || fechaValida<0) {
+                JOptionPane.showMessageDialog(null,"Datos no validos");
 
             }else{
                 catalogoVehiculos.mostrarVehiculos(pnlCatalogo1);
