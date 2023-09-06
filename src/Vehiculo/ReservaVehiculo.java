@@ -135,7 +135,7 @@ public class ReservaVehiculo {
             Date fechaFinDate = dateFormat.parse(fechaFin);
 
 
-            recolectarDatosReserva(ciudadEntrega, ciudadRetorno, fechaInicioDate, fechaFinDate);
+            recolectarDatosReserva(ciudadEntrega, ciudadRetorno, fechaFinDate,fechaInicioDate);
         } catch (ParseException e) {
             System.out.println("El formato de la fecha es incorrecto (dd-mm-aaaa): " + e.getMessage());
         }
