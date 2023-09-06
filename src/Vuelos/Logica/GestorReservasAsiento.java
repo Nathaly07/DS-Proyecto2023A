@@ -1,6 +1,6 @@
 package Vuelos.Logica;
 
-import Reservas.ReservaAsiento;
+import Vuelos.ReservaAsiento;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
