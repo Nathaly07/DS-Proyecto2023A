@@ -23,7 +23,9 @@ public class ReservaVehiculo {
     }
 
     public void reservar() {
-
+        PagoReservaVehiculos pagoRentaVehiculos = new PagoReservaVehiculos(calcularReserva(), "transferencia");
+        pagoRentaVehiculos.pagar();
+        estadoReserva = "PAGADO";
     }
 
     public void agregarVehiculo(Vehiculo vehiculo) {
@@ -72,9 +74,7 @@ public class ReservaVehiculo {
 
 
         btnPagar.addActionListener(e -> {
-            PagoReservaVehiculos pagoRentaVehiculos = new PagoReservaVehiculos(calcularReserva(), "transferencia");
-            pagoRentaVehiculos.pagar();
-            estadoReserva = "PAGADO";
+            reservar();
         });
 
         btnEliminarReserva.addActionListener(e -> {
