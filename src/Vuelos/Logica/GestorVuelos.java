@@ -86,7 +86,7 @@ public class GestorVuelos {
 
     private static class TablaVuelos extends AbstractTableModel {
     private final String[] COLUMNS = {"Origen","Destino", "Fecha", "Hora salida",
-        "Duracion", "Num. Asientos"};
+        "Duracion", "Asientos Disponibles"};
     private List<Vuelo> vuelos;
 
     public TablaVuelos(List<Vuelo> vuelos){
@@ -110,7 +110,7 @@ public class GestorVuelos {
                 case 2 -> vuelos.get(rowIndex).getFecha();
                 case 3 -> vuelos.get(rowIndex).getHora_salida();
                 case 4 -> vuelos.get(rowIndex).getDuracion();
-                case 5 -> vuelos.get(rowIndex).getNumeroAsientos();
+                case 5 -> vuelos.get(rowIndex).asientosDisponibles();
                 default ->  "-";
 
             };
