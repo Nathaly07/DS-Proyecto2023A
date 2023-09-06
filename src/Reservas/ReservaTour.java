@@ -95,7 +95,7 @@ public class ReservaTour extends Reserva {
                     "Reserva Tour",
                     JOptionPane.WARNING_MESSAGE);
         }
-        this.cantidadReservas -= 1;
+
     }
 
     @Override
