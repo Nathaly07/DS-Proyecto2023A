@@ -1,6 +1,6 @@
 package Vuelos.Logica;
 
-import Reservas.Reserva;
+
 import Vuelos.Logica.Asiento;
 import Vuelos.Logica.CarritoAsientos;
 import Vuelos.Logica.Vuelo;
