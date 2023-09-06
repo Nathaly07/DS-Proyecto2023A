@@ -12,7 +12,7 @@ import javax.swing.*;
 public class ModuloTours extends JFrame{
 
     private GestorTour gestionTour = new GestorTour();
-    private GestionReserva gestionReserva = new GestionReserva();
+    private GestorReserva gestionReserva = new GestorReserva();
     public JPanel pnlOpcionesTours;
     private JButton mostrarToursDisponiblesButton;
     private JPanel panelTours;
