@@ -381,7 +381,7 @@
                   <text value="Número de Personas:"/>
                 </properties>
               </component>
-              <component id="e2863" class="javax.swing.JSpinner" default-binding="true">
+              <component id="e2863" class="javax.swing.JSpinner" binding="jspNumPersonasModificar">
                 <constraints>
                   <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
                     <preferred-size width="160" height="30"/>
@@ -410,7 +410,7 @@
                   <text value="Tours en la reservar:"/>
                 </properties>
               </component>
-              <component id="54a6d" class="javax.swing.JButton">
+              <component id="54a6d" class="javax.swing.JButton" binding="btnAgregarTourModificar">
                 <constraints>
                   <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -418,7 +418,7 @@
                   <text value="Agregar Tour"/>
                 </properties>
               </component>
-              <component id="a2fe" class="javax.swing.JButton">
+              <component id="a2fe" class="javax.swing.JButton" binding="btnEliminarTourModificar">
                 <constraints>
                   <grid row="7" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -426,7 +426,7 @@
                   <text value="Eliminar Tour"/>
                 </properties>
               </component>
-              <component id="f2e85" class="javax.swing.JButton">
+              <component id="f2e85" class="javax.swing.JButton" binding="btnModificarReserva">
                 <constraints>
                   <grid row="10" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -502,7 +502,7 @@
                     <properties/>
                     <border type="none"/>
                     <children>
-                      <component id="b1a44" class="javax.swing.JList">
+                      <component id="b1a44" class="javax.swing.JList" binding="listToursReservaModificar">
                         <constraints/>
                         <properties/>
                       </component>
