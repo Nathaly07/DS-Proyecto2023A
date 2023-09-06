@@ -29,7 +29,7 @@ public class Vehiculo {
         this.imagenVehiculo = imagenVehiculo;
     }
 
-    public void mostrarInformacionVehiculo(JPanel panel){
+    public void mostrarInformacionVehiculo(JPanel panel) {
 
 
         JLabel modelolabel = new JLabel("Modelo " + modelo);
@@ -39,17 +39,17 @@ public class Vehiculo {
         JLabel precioDeRentalabel = new JLabel("Precio De Renta " + precioDeRenta);
         JLabel estadoRentalabel = new JLabel("Estado de Renta " + estadoReservaVehiculo);
 
-        String reseniasAcumuladas="Reseñas: ";
-        for(Reseña reseniaAux: reseñas){
+        String reseniasAcumuladas = "Reseñas: ";
+        for (Reseña reseniaAux : reseñas) {
             reseniasAcumuladas += reseniaAux.toString() + " ";
         }
         JLabel resenias = new JLabel(reseniasAcumuladas);
 
         //Imagen
-        JLabel imagen = new JLabel(new ImageIcon(imagenVehiculo.getImage().getScaledInstance(150,100, Image.SCALE_DEFAULT)));
+        JLabel imagen = new JLabel(new ImageIcon(imagenVehiculo.getImage().getScaledInstance(150, 100, Image.SCALE_DEFAULT)));
 
         JButton btnRentar = new JButton("Rentar");
-        btnRentar.setPreferredSize(new Dimension(100,20));
+        btnRentar.setPreferredSize(new Dimension(100, 20));
 
         btnRentar.addActionListener(e -> {
             rentar();
@@ -80,21 +80,29 @@ public class Vehiculo {
 
     }
 
-    public double getPrecioDeRenta(){
+    public double getPrecioDeRenta() {
         return this.precioDeRenta;
     }
 
-    public String getNumPlaca(){
+    public String getNumPlaca() {
         return this.numPlaca;
     }
 
     @Override
     public String toString() {
-        return numPlaca  + " " + modelo + " $" + precioDeRenta;
+        return numPlaca + " " + modelo + " $" + precioDeRenta;
     }
 
     public void agregarDatosTabla(DefaultTableModel model) {
         Object[] infoFila = {modelo, numPlaca, numPuerta, capacidadPasajeros, precioDeRenta, estadoReservaVehiculo};
         model.addRow(infoFila);
+    }
+
+    public void cambiarEstado() {
+        if (estadoReservaVehiculo.equals("RENTADO")) {
+            estadoReservaVehiculo = "NO RENTADO";
+        } else {
+            estadoReservaVehiculo = "RENTADO";
+        }
     }
 }
