@@ -29,9 +29,7 @@ public class ModuloTours extends JFrame{
     private JLabel lblFechaConfirmacion;
     private JLabel lblTours;
     private JSpinner spinner1;
-    private JComboBox comboBox1;
     private JLabel lblPersonas;
-    private JLabel lblSeguroCrear;
     private JList list1;
     private JList list2;
     private JLabel lbl1;
@@ -48,6 +46,8 @@ public class ModuloTours extends JFrame{
     private JRadioButton tarjetaRadioButton;
     private JRadioButton transferenciaRadioButton;
     private JRadioButton efectivoRadioButton;
+    private JPanel pnlLista;
+    private JPanel pnlLista2;
     private Tour tour; //para prueba
     private ReservaTour reservaTour;
 
