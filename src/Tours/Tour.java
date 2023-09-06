@@ -63,7 +63,7 @@ public class Tour {
     public String informacionRelevante(){
         String info = "";
 
-        info += "Tour: " + this.nombre + "\n";
+        info += this.nombre + ", ";
         info += "Paradas: \n";
 
         int contador = 0;
