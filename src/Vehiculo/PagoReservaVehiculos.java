@@ -14,11 +14,11 @@ public class PagoReservaVehiculos {
     }
 
     private double calcularValorTotal() {
-        return montoAPagar*1.12;
+        return montoAPagar * 1.12;
     }
 
     public void pagar() {
-        pago = new Pago(calcularValorTotal(),modoPago);
+        pago = new Pago(calcularValorTotal(), modoPago);
         pago.pagar();
     }
 }

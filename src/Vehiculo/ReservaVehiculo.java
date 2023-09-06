@@ -7,6 +7,9 @@ import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 
 public class ReservaVehiculo {
     ArrayList<Vehiculo> vehiculos;
@@ -125,6 +128,27 @@ public class ReservaVehiculo {
     public void modificarReserva(String ciudadEntrega, String ciudadRetorno, String fechaInicio, String fechaFin) {
         //TODO IMPLEMENTAR
         System.out.println("hola");
+
+        //Guardar nuevos datos de la reserva
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy"); // Define el formato de fecha esperado
+
+        try {
+            Date fechaInicioDate = dateFormat.parse(fechaInicio);
+            Date fechaFinDate = dateFormat.parse(fechaFin);
+
+
+            recolectarDatosReserva(ciudadEntrega, ciudadRetorno, fechaInicioDate, fechaFinDate);
+        } catch (ParseException e) {
+            System.out.println("El formato de la fecha es incorrecto (dd-mm-aaaa): " + e.getMessage());
+        }
+
+        System.out.println(ciudadEntrega);
+        System.out.println(ciudadRetorno);
+        System.out.println(fechaInicio);
+        System.out.println(fechaFin);
+
+
     }
 
     public void recolectarDatosReserva(String ciudadOrigen, String ciudadRetorno, Date fechaFinal, Date fechaInicio) {
