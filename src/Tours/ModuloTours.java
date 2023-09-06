@@ -22,12 +22,8 @@ public class ModuloTours extends JFrame{
     private JButton cancelarReservaButton;
     private JTabbedPane tabbedPane1;
     private JPanel pnlBuscarReserva;
-    private JButton btnBuscar;
-    private JTextField campoID;
     private JList listTours;
-    private JLabel lblReservaId;
     private JLabel lblNPersonas;
-    private JLabel lblSeguro;
     private JLabel lblFechaCreacion;
     private JLabel lblFechaConfirmacion;
     private JLabel lblTours;
@@ -42,12 +38,15 @@ public class ModuloTours extends JFrame{
     private JButton btnAgregarTour;
     private JButton btnEliminarTour;
     private JButton btnCrearReserva;
-    private JTextField textField1;
-    private JButton btnBuscarParaModificar;
     private JLabel lbl3;
     private JPanel pnlCrearReserva;
     private JPanel pnlModificarReserva;
     private JButton btnConfirmar;
+    private JComboBox comboBox2;
+    private JComboBox comboBox3;
+    private JRadioButton tarjetaRadioButton;
+    private JRadioButton transferenciaRadioButton;
+    private JRadioButton efectivoRadioButton;
     private Tour tour; //para prueba
     private ReservaTour reservaTour;
 
