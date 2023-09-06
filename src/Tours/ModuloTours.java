@@ -13,6 +13,7 @@ public class ModuloTours extends JFrame{
 
     private GestorTour gestionTour = new GestorTour();
     private GestorReserva gestionReserva = new GestorReserva();
+    private PagoReserva pagoReserva = new PagoReserva();
     public JPanel pnlOpcionesTours;
     private JButton mostrarToursDisponiblesButton;
     private JPanel panelTours;
@@ -112,6 +113,7 @@ public class ModuloTours extends JFrame{
 //                }
 //            }
 //        });
+
     }
 
 /*    public void crearFrame() {
