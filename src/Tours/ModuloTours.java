@@ -283,7 +283,7 @@ public class ModuloTours extends JFrame{
     }
 
     public void eliminarTour(){
-        String tours = list1.getSelectedValue().toString();
+        String tours = list2.getSelectedValue().toString();
         String[] nombreTour = tours.split(",");
         String Ntour = nombreTour[0];
         this.listatemp.remove(this.gestionTour.buscarTour(Ntour));
