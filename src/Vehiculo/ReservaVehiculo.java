@@ -90,7 +90,11 @@ public class ReservaVehiculo {
     }
 
     public void cancelarReserva() {
-        //TODO IMPLEMENTAR
+        for(Vehiculo vehiculos: this.vehiculos){
+            eliminarVehiculo(vehiculos);
+        }
+        this.estadoReserva = "CANCELADO";
+        JOptionPane.showMessageDialog(null, "La reserva ha sido cancelada.");
 
     }
 
