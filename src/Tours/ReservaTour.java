@@ -13,14 +13,17 @@ import java.util.concurrent.TimeUnit;
 
 public class ReservaTour {
     private static int cantidadReservas = 0;
-    private int numReserva;
+    
     private String nombreUsuario;
     private String apellidoUsuario;
+
+    private int numReserva;
     private String fechaCreacion = "-";
     private boolean estadoReserva;
     private int numeroPersonas;
     private ArrayList<Tour> toursAgregados;
     private String fechaConfirmacionPago = "-";
+
     private GestorTour gestorTour;
     private PagoReserva pagoReserva;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/M/yy");
