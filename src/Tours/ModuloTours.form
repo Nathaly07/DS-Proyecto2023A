@@ -398,7 +398,7 @@
                   <text value="Tours en la reservar:"/>
                 </properties>
               </component>
-              <component id="b1a44" class="javax.swing.JList" default-binding="true">
+              <component id="b1a44" class="javax.swing.JList">
                 <constraints>
                   <grid row="4" column="3" row-span="5" col-span="2" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="50"/>
@@ -406,7 +406,7 @@
                 </constraints>
                 <properties/>
               </component>
-              <component id="9eaaa" class="javax.swing.JList" default-binding="true">
+              <component id="9eaaa" class="javax.swing.JList" binding="listToursModificar">
                 <constraints>
                   <grid row="4" column="1" row-span="5" col-span="1" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
                     <preferred-size width="150" height="50"/>

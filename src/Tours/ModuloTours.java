@@ -2,6 +2,8 @@ package Tours;
 
 import Reservas.ReservaTour;
 
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +50,7 @@ public class ModuloTours extends JFrame{
     private JRadioButton efectivoRadioButton;
     private JPanel pnlLista;
     private JPanel pnlLista2;
+    private JList listToursModificar;
     private Tour tour; //para prueba
     private ReservaTour reservaTour;
 
@@ -55,6 +58,11 @@ public class ModuloTours extends JFrame{
 
     public ModuloTours(String head){
         super (head);
+
+
+
+
+
 //        panelTours.setVisible(false);
 //        panelReserva.setVisible(false);
 //        mostrarToursDisponiblesButton.addActionListener(e -> {
@@ -113,21 +121,38 @@ public class ModuloTours extends JFrame{
 //                }
 //            }
 //        });
+        //Listener para mostrar los tours
+        pnlCrearReserva.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentShown(ComponentEvent e) {
+                super.componentShown(e);
+                mostrarToursDisponibles(list1);
+            }
+        });
 
+
+        pnlModificarReserva.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentShown(ComponentEvent e) {
+                super.componentShown(e);
+                mostrarToursDisponibles(listToursModificar);
+            }
+        });
     }
 
-/*    public void crearFrame() {
+    //Metodo para mostrar tours disponibles
+    private void mostrarToursDisponibles(JList list){
+        DefaultListModel<String> model = new DefaultListModel<>();
+        List<Tour> toursDispo = this.gestionTour.getToursDisponibles();
 
-        setSize(670, 500);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setResizable(false);
-        setLocationRelativeTo(null);
-        add(pnlOpcionesTours);
-        setVisible(true);
+        for (Tour i : toursDispo){
+            model.addElement(i.informacionRelevante());
+        }
 
-    }*/
+        list.setModel(model);
+    }
 
-    public void buscarToursDisponibles(){
+   /* public void buscarToursDisponibles(){
         int yPos = 10;
 
         Tour tour1 = new Tour("01", "Tour 1", 100.2, "Guia", "1 mes", 100, gestionReserva);
@@ -236,6 +261,6 @@ public class ModuloTours extends JFrame{
             JOptionPane.showMessageDialog(null,"Aceptado Existosamente");
         });
         panelReserva.add(botonAceptar);
-    }
+    }*/
 
 }
