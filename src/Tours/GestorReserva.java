@@ -22,6 +22,10 @@ public class GestorReserva {
         this.leerDatos();
     }
 
+    public ArrayList<ReservaTour> getReservaciones() {
+        return reservaciones;
+    }
+
     private void leerDatos(){
         ArrayList<Tour> toursAgregados = new ArrayList<>();
         ReservaTour reservaTour;
@@ -92,18 +96,31 @@ public class GestorReserva {
     }
 
     public void confirmarReserva(ReservaTour reservaAPagar, String metodoPago) throws ParseException {
-        if (reservaAPagar.tiempoSinConfirmar() > 10) {
+        if (reservaAPagar.equals(null)) {
             JOptionPane.showMessageDialog(null,
-                    "La reserva ha excedido el número de días sin confirmar.\n" +
-                            "Por tanto, se cancela automáticamente la reserva.\n" +
-                            "No es posible pagar la reserva.",
+                    "Seleccione una reserva por favor",
                     "Gestor Reserva",
                     JOptionPane.WARNING_MESSAGE);
-            reservaAPagar.cancelarReserva();
-            this.removerReserva(reservaAPagar);
+        } else if(metodoPago.equalsIgnoreCase("")){
+            JOptionPane.showMessageDialog(null,
+                    "Seleccione un método de pago por favor",
+                    "Gestor Reserva",
+                    JOptionPane.WARNING_MESSAGE);
         } else {
-            reservaAPagar.confirmarReserva(metodoPago);
+            if (reservaAPagar.tiempoSinConfirmar() > 10) {
+                JOptionPane.showMessageDialog(null,
+                        "La reserva ha excedido el número de días sin confirmar.\n" +
+                                "Por tanto, se cancela automáticamente la reserva.\n" +
+                                "No es posible pagar la reserva.",
+                        "Gestor Reserva",
+                        JOptionPane.WARNING_MESSAGE);
+                reservaAPagar.cancelarReserva();
+                this.removerReserva(reservaAPagar);
+            } else {
+                reservaAPagar.confirmarReserva(metodoPago);
+            }
         }
+
     }
 
     public ReservaTour buscarReserva(int numReserva) {

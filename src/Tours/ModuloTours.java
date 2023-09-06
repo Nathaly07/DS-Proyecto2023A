@@ -4,7 +4,10 @@ import Principal.Login;
 import Principal.Usuario;
 import Reservas.ReservaTour;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 33d1e6317feafa855f96f7b9156e52b643db3759
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
@@ -60,7 +63,8 @@ public class ModuloTours extends JFrame{
     private JList listToursModificar;
     private Tour tour; //para prueba
     private ReservaTour reservaTour;
-    private ReservaTour reservaTourConfirmar;
+    private ReservaTour reservaTourConfirmar = null;
+    private String metodoPagoConfirmar = "";
 
     List<Tour> tours;
 
@@ -160,7 +164,11 @@ public class ModuloTours extends JFrame{
         btnConfirmar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                try {
+                    gestionReserva.confirmarReserva(reservaTourConfirmar, metodoPagoConfirmar);
+                } catch (ParseException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
         comboBox2.addActionListener(new ActionListener() {
@@ -168,19 +176,49 @@ public class ModuloTours extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 String opcion = (String)comboBox2.getSelectedItem();
                 int numReserva = Integer.parseInt(opcion.split("-")[0]);
+
                 reservaTourConfirmar = gestionReserva.buscarReserva(numReserva);
                 lblNPersonas.setText(lblNPersonas.getText() + " " + reservaTourConfirmar.getNumeroPersonas());
                 lblFechaCreacion.setText(lblFechaCreacion.getText() + " " + reservaTourConfirmar.getFechaCreacion());
-                lblFechaConfirmacion.setText(lblFechaConfirmacion.getText() + " " reservaTourConfirmar.getFechaConfirmacionPago())
+                lblFechaConfirmacion.setText(lblFechaConfirmacion.getText() + " " + reservaTourConfirmar.getFechaConfirmacionPago());
+
+                DefaultListModel toursEnReservaModel = new DefaultListModel<>();
+                ArrayList<Tour> toursEnReservaList = reservaTourConfirmar.getToursAgregados();
+
+                for(Tour tour: toursEnReservaList) {
+                    toursEnReservaModel.addElement(tour.informacionRelevante());
+                }
+
+                listTours.setModel(toursEnReservaModel);
+            }
+        });
+        tarjetaRadioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                metodoPagoConfirmar = tarjetaRadioButton.getText();
+            }
+        });
+        transferenciaRadioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                metodoPagoConfirmar = transferenciaRadioButton.getText();
+            }
+        });
+        efectivoRadioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                metodoPagoConfirmar = efectivoRadioButton.getText();
             }
         });
     }
 
+
     public void setReservasUsuario() {
         String nombreUsuario = this.usuarioVerificado.getNombre();
         String apellidoUsuario = this.usuarioVerificado.getApellido();
+        ArrayList<ReservaTour> reservas = this.gestionReserva.getReservaciones();
 
-        for (ReservaTour reserva: this.gestionReserva.getReservaciones) {
+        for (ReservaTour reserva: reservas) {
             if ((reserva.getNombreUsuario().equalsIgnoreCase(nombreUsuario)) && (reserva.getApellidoUsuario().equalsIgnoreCase(apellidoUsuario))) {
                 this.comboBox2.addItem(reserva.getNumReserva() + "-" + reserva.getNombreUsuario() + " " + reserva.getApellidoUsuario());
                 this.comboBox3.addItem(reserva.getNumReserva() + "-" + reserva.getNombreUsuario() + " " + reserva.getApellidoUsuario());
