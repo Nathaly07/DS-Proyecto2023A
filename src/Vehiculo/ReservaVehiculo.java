@@ -102,7 +102,6 @@ public class ReservaVehiculo {
         panel.add(btnEliminarReserva);
         panel.revalidate();
         panel.repaint();
-
     }
 
     private void liberarAutos() {
