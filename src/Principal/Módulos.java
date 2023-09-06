@@ -68,10 +68,6 @@ public class Módulos extends JFrame {
                 crearFrame();
             }
         });
-        btnHospedaje.addActionListener(e -> {
-            MenuHospedaje menuHospedaje = new MenuHospedaje(login);
-            menuHospedaje.crearFrame();
-        });
     }
 
 

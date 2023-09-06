@@ -1,7 +1,7 @@
 package Hospedaje.Reservas;
 
 import Hospedaje.Criteria.CriteriaDisponibilidadHabitaciones;
-import Hospedaje.Criteria.HospedajeCriteria;
+import Hospedaje.Criteria.CriteriaDoble;
 import Hospedaje.Habitaciones.GestionHabitaciones;
 import Hospedaje.Habitaciones.Habitacion;
 import Hospedaje.Pagos.PagoHospedaje;
@@ -12,27 +12,18 @@ import java.util.Date;
 import java.util.List;
 
 public class GestionReservas {
-    private final String filePath = "src/Hospedaje/Reservas/data/reservas.txt";
-    private List<ReservaHospedaje> reservas;
-    private GestionHabitaciones gestion_habitaciones;
+    private final List<ReservaHospedaje> reservas;
+    private final GestionHabitaciones gestionHabitaciones;
 
-    public GestionReservas(GestionHabitaciones gestion_habitaciones) {
-        this.gestion_habitaciones = gestion_habitaciones;
-        this.reservas = new ArrayList<>();
-        Date fechaCreacion = new Date();
-        Date fechaInicio = new Date();
-        Date fechaFin = new Date();
-        Habitacion habitacion1 = gestion_habitaciones.getHabitaciones().get(1);
-        Habitacion habitacion2 = gestion_habitaciones.getHabitaciones().get(2);
-        Habitacion[] habitaciones = {habitacion1, habitacion2};
-
-        this.reservas.add(new ReservaHospedaje("1" , "1", 2, habitaciones, fechaCreacion, fechaInicio, fechaFin));
+    public GestionReservas(GestionHabitaciones gestionHabitaciones) {
+        this.gestionHabitaciones = gestionHabitaciones;
+        //this.reservas = new ArrayList<ReservaHospedaje>();
+        this.reservas = this.leer();
     }
-
     public List<Habitacion> getHabitacionesDisponibles(Date reservarDesde, Date reservarHasta) {
-        List<Habitacion> habitaciones = this.gestion_habitaciones.getHabitaciones();
-        HospedajeCriteria criteriaDisponibles = new CriteriaDisponibilidadHabitaciones(reservarDesde, reservarHasta);
-        return criteriaDisponibles.meetCriteria(habitaciones, reservas);
+        List<Habitacion> habitaciones = this.gestionHabitaciones.getHabitaciones();
+        CriteriaDoble criteriaDisponibles = new CriteriaDisponibilidadHabitaciones(reservarDesde, reservarHasta);
+        return criteriaDisponibles.meetCriteria(habitaciones, this.reservas);
     }
     public List<ReservaHospedaje> getReservas() {
         return reservas;
@@ -40,6 +31,7 @@ public class GestionReservas {
 
     public boolean crearReserva(ReservaHospedaje reserva) {
         this.reservas.add(reserva);
+        this.guardar();
         return true; // Reserva creada exitosamente
     }
 
@@ -47,6 +39,7 @@ public class GestionReservas {
         for (ReservaHospedaje reserva : reservas) {
             if (reserva.getReservaId().equals(reservaId)) {
                 this.reservas.remove(reserva);
+                this.guardar();
                 return true; // Reserva cancelada exitosamente
             }
         }
@@ -57,18 +50,20 @@ public class GestionReservas {
         for (int i = 0; i < reservas.size(); i++) {
             if (reservas.get(i).getReservaId().equals(reservaId)) {
                 this.reservas.set(i, nuevaReserva);
+                this.guardar();
                 return true; // Reserva actualizada exitosamente
             }
         }
         return false; // Reserva no encontrada
     }
 
-    public boolean confirmarReserva(String reservaId, String metodoPago) {
+    public boolean confirmarReserva(ReservaHospedaje reservaAConfirmar, String metodoPago) {
         for (ReservaHospedaje reserva : reservas) {
-            if (reserva.getReservaId().equals(reservaId)) {
+            if (reserva == reservaAConfirmar) {
                 PagoHospedaje pago = new PagoHospedaje(reserva, metodoPago);
                 pago.pagar();
                 reserva.confirmarReserva();
+                this.guardar();
                 return true; // Reserva confirmada exitosamente
             }
         }
@@ -76,29 +71,34 @@ public class GestionReservas {
     }
 
 
-    private void serialize(GestionReservas user) {
+    private void guardar() {
+        String basePath = new File("").getAbsolutePath();
+        String filePath = basePath.concat("/src/Hospedaje/data/reservas.txt");
         try {
             FileOutputStream fos = new FileOutputStream(filePath);
             ObjectOutputStream outputStream = new ObjectOutputStream(fos);
-            outputStream.writeObject(user);
+            outputStream.writeObject(this.reservas);
             outputStream.close();
+            fos.close();
         } catch (IOException ex) {
             System.err.println(ex);
         }
     }
 
-    private GestionReservas deserialize() {
-        GestionReservas gestionReservas = null;
-
+    private List<ReservaHospedaje> leer() {
+        List<ReservaHospedaje> reservasGuardadas = null;
+        String basePath = new File("").getAbsolutePath();
+        String filePath = basePath.concat("/src/Hospedaje/data/reservas.txt");
         try {
             FileInputStream fis = new FileInputStream(filePath);
             ObjectInputStream inputStream = new ObjectInputStream(fis);
-            gestionReservas = (GestionReservas) inputStream.readObject();
+            reservasGuardadas = (List<ReservaHospedaje>) inputStream.readObject();
             inputStream.close();
+            fis.close();
         } catch (IOException | ClassNotFoundException ex) {
             System.err.println(ex);
         }
 
-        return gestionReservas;
+        return reservasGuardadas;
     }
 }

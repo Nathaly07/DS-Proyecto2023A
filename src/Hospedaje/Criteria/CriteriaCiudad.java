@@ -5,22 +5,22 @@ import Hospedaje.Habitaciones.Habitacion;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CriteriaCiudadHabitaciones implements HabitacionesCriteria {
+public class CriteriaCiudad implements CriteriaSimple<Habitacion> {
     private String ciudad;
 
-    public CriteriaCiudadHabitaciones(String ciudad) {
+    public CriteriaCiudad(String ciudad) {
         this.ciudad = ciudad;
     }
     @Override
     public List<Habitacion> meetCriteria(List<Habitacion> habitaciones) {
-        List<Habitacion> habitacionesCiudad = new ArrayList<>();
+        List<Habitacion> habitacionesPorCiudad = new ArrayList<>();
 
         for (Habitacion habitacion : habitaciones) {
             if (habitacion.getCiudad().equals(ciudad)) {
-                habitacionesCiudad.add(habitacion);
+                habitacionesPorCiudad.add(habitacion);
             }
         }
 
-        return habitacionesCiudad;
+        return habitacionesPorCiudad;
     };
 }
