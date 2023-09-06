@@ -1,18 +1,20 @@
 package Seguros;
 
+import javax.swing.*;
 import java.util.Date;
 
 public class SeguroMédico extends Seguro {
     private String[] coberturas;
     private int nivelSeguro;
 
-    public SeguroMédico(int ID_Seguro, String propietario, String[] condiciones, String[] beneficiarios, Date fechaDeInicio, Date fechaDeVencimiento, float primaSinRecargo, String[] coberturas) {
-        super(ID_Seguro, propietario, condiciones, beneficiarios, fechaDeInicio, fechaDeVencimiento, primaSinRecargo);
+    public SeguroMédico(String propietario, String[] condiciones, String[] beneficiarios, Date fechaDeInicio, Date fechaDeVencimiento, float primaSinRecargo, String[] coberturas, int nivelSeguro) {
+        super(propietario, condiciones, beneficiarios, fechaDeInicio, fechaDeVencimiento, primaSinRecargo);
         this.coberturas = coberturas;
+        this.nivelSeguro = nivelSeguro;
     }
 
     @Override
-    float indemnizar(float valorGastado, String motivo) {
+    void indemnizar(float valorGastado, String motivo) {
         float porcentajeCubierto = 0.0f;
         for (String cobertura : coberturas) {
             if (motivo.equalsIgnoreCase(cobertura)) {
@@ -26,7 +28,7 @@ public class SeguroMédico extends Seguro {
                 break;
             }
         }
-        return porcentajeCubierto;
+        JOptionPane.showMessageDialog(null, "Te daremos: " + porcentajeCubierto + "$");
     }
 
     float calcularPrimaTotal() {

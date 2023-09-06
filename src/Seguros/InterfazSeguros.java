@@ -3,9 +3,12 @@ package Seguros;
 import com.toedter.calendar.JDateChooser;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 public class InterfazSeguros extends JFrame {
     public JPanel pnlOpcionesSeguro;
@@ -22,7 +25,6 @@ public class InterfazSeguros extends JFrame {
     private JTextField txtFechaInicio;
     private JButton btnCrearSeguro;
     private JComboBox cmbFechaVencimiento;
-    private JLabel lblID;
     private JTextField txtFechaInicioMes;
     private JTextField txtFechaInicioAño;
     private JTextField txtFechaInicioDia;
@@ -30,7 +32,6 @@ public class InterfazSeguros extends JFrame {
     private JButton btnCancelarSeguro;
     private JButton btnRenovar;
     private JTextField txtFechaRenovación;
-    private JTextField txtIDSeguro;
     private JLabel lblFechaDeVencimiento;
     private JTabbedPane tbdTiposDeSeguro;
     private JTextField txtDestino;
@@ -38,38 +39,41 @@ public class InterfazSeguros extends JFrame {
     private JTextField txtCoberturasMédico;
     private JTextField txtMontoAPagar;
     private JButton pagarButton;
-    private JTextField txtIDSeguroPago;
     private JTextField txtFechaPago;
     private JTextField txtValorGastado;
     private JTextField txtMotivo;
     private JButton btnIndemnizar;
-    private JTextField textField1;
+    private JTextField txtProp;
     private JTextField txtCoberturasViajes1000;
     private JTextField txtCoberturasViajes5000;
     private JPanel pnlFechaInicio;
-    private ModuloSeguros moduloSeguro = new ModuloSeguros();
+    private JTable tblSeguros;
+    private JButton btnDesplegarSeguros;
+    private JLabel lblProp;
+    private JTextField txtNivel;
+    private JLabel lblNivel;
+    private JLabel lblNivelSeguroDeVida;
+    private JTextField txtNivelSeguroDeVida;
+    private JComboBox cmbTiposDePago;
+    private JLabel lblMontoAPagar;
+    private GestorSeguros gestorSeguros = new GestorSeguros();
     private JDateChooser fechaInicioSeguro = new JDateChooser();
+
 
     public InterfazSeguros() {
         pnlFechaInicio.add(fechaInicioSeguro);
 
         btnCrearSeguro.addActionListener(e -> {
-            int ID_Seguro = (int) (Math.random() * 5000 + 1000);
-            lblID.setText(String.valueOf(ID_Seguro));
-
             sumarMesesAFecha(fechaInicioSeguro.getDate(), cmbFechaVencimiento.getSelectedIndex());
 
             Date fechaInicio = fechaInicioSeguro.getDate();
             Date fechaVencimiento = new Date(lblFechaDeVencimiento.getText());
-            int ID = Integer.parseInt(lblID.getText());
             int destino = Integer.parseInt(txtDestino.getText());
             float primaSinRecargo = Float.parseFloat(txtPrima.getText());
             String[] condiciones = txtCondiciones.getText().split(",");
             String[] beneficiarios = txtBeneficiarios.getText().split(",");
 
-
             if (tbdTiposDeSeguro.getSelectedIndex() == 0) {
-
                 String[] coberturas500 = txtCoberturasViajes500.getText().split(",");
                 String[] coberturas1000 = txtCoberturasViajes1000.getText().split(",");
                 String[] coberturas5000 = txtCoberturasViajes5000.getText().split(",");
@@ -96,7 +100,6 @@ public class InterfazSeguros extends JFrame {
                 }
 
                 Seguro seguroDeViajes = new SeguroDeViajes(
-                        ID,
                         txtPropietario.getText(),
                         condiciones,
                         beneficiarios,
@@ -106,58 +109,101 @@ public class InterfazSeguros extends JFrame {
                         destino,
                         coberturas
                 );
-                this.moduloSeguro.procesarCreaciónSeguro(seguroDeViajes);
+                this.gestorSeguros.procesarCreaciónSeguro(seguroDeViajes);
             } else if (tbdTiposDeSeguro.getSelectedIndex() == 1) {
                 String[] coberturas = txtCoberturasMédico.getText().split(",");
                 Seguro seguroMédico = new SeguroMédico(
-                        ID,
                         txtPropietario.getText(),
                         condiciones,
                         beneficiarios,
                         fechaInicio,
                         fechaVencimiento,
                         primaSinRecargo,
-                        coberturas
+                        coberturas,
+                        Integer.parseInt(txtNivel.getText())
                 );
-                this.moduloSeguro.procesarCreaciónSeguro(seguroMédico);
+                this.gestorSeguros.procesarCreaciónSeguro(seguroMédico);
             } else if (tbdTiposDeSeguro.getSelectedIndex() == 2) {
-                float montoAPagar = Float.parseFloat(txtMontoAPagar.getText());
                 Seguro seguroDeVida = new SeguroDeVida(
-                        ID,
                         txtPropietario.getText(),
                         condiciones,
                         beneficiarios,
                         fechaInicio,
                         fechaVencimiento,
                         primaSinRecargo,
-                        montoAPagar
+                        Integer.parseInt(txtNivel.getText())
                 );
-                this.moduloSeguro.procesarCreaciónSeguro(seguroDeVida);
+                this.gestorSeguros.procesarCreaciónSeguro(seguroDeVida);
             }
         });
 
         btnCancelarSeguro.addActionListener(e -> {
-            int ID_Seguro = Integer.parseInt(this.txtSeguroCancelar.getText());
-            this.moduloSeguro.procesarCancelarSeguro(ID_Seguro);
-
+            int numSeguro = tblSeguros.getSelectedRow();
+            if (numSeguro < 0) {
+                JOptionPane.showMessageDialog(null, "No has seleccionado ningún seguro.");
+            } else {
+                int indiceSeguro = Integer.parseInt(tblSeguros.getValueAt(numSeguro, 0).toString()) - 1;
+                Seguro seguro = gestorSeguros.buscarSeguro(txtProp.getText()).get(indiceSeguro);
+                gestorSeguros.eliminarSeguro(seguro);
+                btnDesplegarSeguros.doClick();
+            }
         });
 
         btnRenovar.addActionListener(e -> {
-            int ID_Seguro = Integer.parseInt(this.txtIDSeguro.getText());
-            Date fecha = new Date(this.txtFechaRenovación.getText());
-            this.moduloSeguro.procesarRenovarSeguro(ID_Seguro, fecha);
+            int numSeguro = tblSeguros.getSelectedRow();
+            if (numSeguro < 0) {
+                JOptionPane.showMessageDialog(null, "No has seleccionado ningún seguro.");
+            } else {
+                int indiceSeguro = Integer.parseInt(tblSeguros.getValueAt(numSeguro, 0).toString()) - 1;
+                gestorSeguros.buscarSeguro(txtProp.getText()).get(indiceSeguro).renovar((new Date(txtFechaRenovación.getText())));
+                btnDesplegarSeguros.doClick();
+            }
         });
 
         btnIndemnizar.addActionListener(e -> {
-            int ID_Seguro = Integer.parseInt(this.textField1.getText());
-            float montoPedido = Float.parseFloat(this.txtValorGastado.getText());
-            this.moduloSeguro.procesarIndemnización(ID_Seguro, this.txtMotivo.getText(), montoPedido);
+            int numSeguro = tblSeguros.getSelectedRow();
+            if (numSeguro < 0) {
+                JOptionPane.showMessageDialog(null, "No has seleccionado ningún seguro.");
+            } else {
+                float montoPedido = Float.parseFloat(this.txtValorGastado.getText());
+                int indiceSeguro = Integer.parseInt(tblSeguros.getValueAt(numSeguro, 0).toString()) - 1;
+                gestorSeguros.buscarSeguro(txtProp.getText()).get(indiceSeguro).indemnizar(montoPedido, this.txtMotivo.getText());
+            }
         });
 
         pagarButton.addActionListener(e -> {
-            int ID_Seguro = Integer.parseInt(this.txtIDSeguroPago.getText());
-            Date fecha = new Date(this.txtFechaPago.getText());
-            this.moduloSeguro.procesarPagoSeguro(ID_Seguro, fecha);
+            int numSeguro = tblSeguros.getSelectedRow();
+
+            if (numSeguro < 0) {
+                JOptionPane.showMessageDialog(null, "No has seleccionado ningún seguro.");
+            } else{
+                int indiceSeguro = Integer.parseInt(tblSeguros.getValueAt(numSeguro, 0).toString()) - 1;
+                Seguro seguroPagar=gestorSeguros.buscarSeguro(txtProp.getText()).get(indiceSeguro);
+                seguroPagar.pagar(Double.parseDouble(txtMontoAPagar.getText()), Objects.requireNonNull(cmbTiposDePago.getSelectedItem()).toString(),
+                        new Date(txtFechaPago.getText()));
+            }
+        });
+
+        btnDesplegarSeguros.addActionListener(e -> {
+            ArrayList<Seguro> seguros = gestorSeguros.buscarSeguro(txtProp.getText());
+            DefaultTableModel model = new DefaultTableModel();
+            model.setColumnCount(0);
+            model.setRowCount(0);
+            model.addColumn("num_Seguro");
+            model.addColumn("Fecha Inicio");
+            model.addColumn("Fecha Vencimiento");
+            model.addColumn("Tipo de Seguro");
+            model.addColumn("Prima");
+
+            for (Seguro seguro : seguros) {
+                model.addRow(new Object[]{seguros.indexOf(seguro) + 1,
+                        seguro.getFechaDeInicio().toString(),
+                        seguro.getFechaDeVencimiento().toString(),
+                        seguro.getClass().toString(),
+                        seguro.getPrimaSinRecargo()});
+            }
+
+            tblSeguros.setModel(model);
         });
     }
 
@@ -165,9 +211,9 @@ public class InterfazSeguros extends JFrame {
         int númeroMesASumar = 0;
         SimpleDateFormat formatoDeFecha = new SimpleDateFormat("d MMM y");
 
-        if (meses == 1){
+        if (meses == 1) {
             númeroMesASumar = 3;
-        } else if(meses == 2) {
+        } else if (meses == 2) {
             númeroMesASumar = 6;
         } else if (meses == 3) {
             númeroMesASumar = 12;
@@ -180,5 +226,4 @@ public class InterfazSeguros extends JFrame {
         String fechaVencimiento = formatoDeFecha.format(fechaFinal);
         lblFechaDeVencimiento.setText(fechaVencimiento);
     }
-
 }

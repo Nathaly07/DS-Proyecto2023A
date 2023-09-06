@@ -1,20 +1,21 @@
 package Seguros;
 
+import javax.swing.*;
 import java.util.Date;
 
 public class SeguroDeViajes extends Seguro {
     private int destino;
     private String[][] coberturas;
 
-    public SeguroDeViajes(int ID_Seguro, String propietario, String[] condiciones, String[] beneficiarios, Date fechaDeInicio, Date fechaDeVencimiento, float primaSinRecargo, int destino, String[][] coberturas) {
-        super(ID_Seguro, propietario, condiciones, beneficiarios, fechaDeInicio, fechaDeVencimiento, primaSinRecargo);
+    public SeguroDeViajes(String propietario, String[] condiciones, String[] beneficiarios, Date fechaDeInicio, Date fechaDeVencimiento, float primaSinRecargo, int destino, String[][] coberturas) {
+        super(propietario, condiciones, beneficiarios, fechaDeInicio, fechaDeVencimiento, primaSinRecargo);
         this.destino = destino;
         this.coberturas = coberturas;
     }
 
 
     @Override
-    float indemnizar(float valorGastado, String motivo) {
+    void indemnizar(float valorGastado, String motivo) {
         float cantidadAPagar = 0.0f;
         for (String[] cobertura : coberturas) {
             if (motivo.equalsIgnoreCase(cobertura[0])) {
@@ -25,7 +26,7 @@ public class SeguroDeViajes extends Seguro {
                 }
             }
         }
-        return cantidadAPagar;
+        JOptionPane.showMessageDialog(null, "Te daremos: " + cantidadAPagar + "$");
     }
 
     float calcularPrimaTotal() {
