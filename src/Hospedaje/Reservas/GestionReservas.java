@@ -5,9 +5,11 @@ import Hospedaje.Criteria.CriteriaDoble;
 import Hospedaje.Habitaciones.GestionHabitaciones;
 import Hospedaje.Habitaciones.Habitacion;
 import Hospedaje.Pagos.PagoHospedaje;
+import Principal.Usuario;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -57,6 +59,17 @@ public class GestionReservas {
         return false; // Reserva no encontrada
     }
 
+    public boolean eliminarReserva(ReservaHospedaje reserva) {
+        for (int i = 0; i < reservas.size(); i++) {
+            if (reservas.get(i).getReservaId().equals(reserva.getReservaId())) {
+                this.reservas.remove(i);
+                this.guardar();
+                return true; // Reserva eliminada exitosamente
+            }
+        }
+        return false; // Reserva no encontrada
+    }
+
     public boolean confirmarReserva(ReservaHospedaje reservaAConfirmar, String metodoPago) {
         for (ReservaHospedaje reserva : reservas) {
             if (reserva == reservaAConfirmar) {
@@ -68,6 +81,16 @@ public class GestionReservas {
             }
         }
         return false; // Reserva no encontrada
+    }
+
+    public List<ReservaHospedaje> getReservasPorUsuario(Usuario usuario) {
+        List<ReservaHospedaje> reservasDelUsuario = new ArrayList<ReservaHospedaje>();
+        for (ReservaHospedaje reserva : reservas) {
+            if (reserva.getUsuario().getEmail().equals(usuario.getEmail())) {
+                reservasDelUsuario.add(reserva);
+            }
+        }
+        return reservasDelUsuario;
     }
 
 

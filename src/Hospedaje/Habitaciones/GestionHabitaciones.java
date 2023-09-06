@@ -10,8 +10,8 @@ public class GestionHabitaciones {
     private List<Habitacion> habitaciones;
 
     public GestionHabitaciones() {
-        // this.habitaciones = leer();
-        habitaciones = new ArrayList<>();
+        this.habitaciones = leer();
+        /*habitaciones = new ArrayList<>();
         habitaciones.add(new Habitacion(101, 150.00, 2,  new Hotel("Hotel Quito", "Calle Principal 123", "Quito", 5)));
         habitaciones.add(new Habitacion(102, 200.00, 3,  new Hotel("Hotel Guayaquil", "Avenida Secundaria 456", "Guayaquil", 4)));
         habitaciones.add(new Habitacion(103, 120.00, 2,  new Hotel("Hotel Manta", "Calle Manta 789", "Manta", 3)));
@@ -43,7 +43,7 @@ public class GestionHabitaciones {
         habitaciones.add(new Habitacion(222, 120.00, 2, new Hotel("Hotel Manta", "Calle Manta 789", "Manta", 3)));
         habitaciones.add(new Habitacion(223, 330.00, 4, new Hotel("Hotel Cuenca", "Avenida Cuenca 321", "Cuenca", 4)));
         this.guardar();
-
+        */
     }
 
     public List<Habitacion> getHabitaciones() {
