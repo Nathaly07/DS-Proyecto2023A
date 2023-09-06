@@ -4,12 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 //TODO: La clase gestor es un antipatrón podemos usar solo la renta en lugar del gestor.
-public class GestorRentas {
-    private static ArrayList<Renta> rentas;
-    private static Renta renta = new Renta();
+public class GestoReservaVehiculo {
+    private static ArrayList<ReservaVehiculo> rentas;
+    private static ReservaVehiculo renta = new ReservaVehiculo();
 
-    public GestorRentas() {
-        this.rentas = new ArrayList<Renta>();
+    public GestoReservaVehiculo() {
+        this.rentas = new ArrayList<ReservaVehiculo>();
     }
 
     public static void agregarRenta(Vehiculo vehiculo){
@@ -36,13 +36,13 @@ public class GestorRentas {
         if(rentas.isEmpty()){
             JOptionPane.showMessageDialog(null,"NO HAY NINGUNA RENTA");
         }else{
-            for(Renta renta1: rentas){
-                renta1.verInfoRenta(table,panel);
+            for(ReservaVehiculo renta1: rentas){
+                renta1.verInfoReserva(table,panel);
             }
         }
     }
 
-    public static Renta getRenta() {
+    public static ReservaVehiculo getRenta() {
         return renta;
     }
 }

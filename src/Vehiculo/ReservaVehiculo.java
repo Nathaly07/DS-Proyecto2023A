@@ -1,23 +1,25 @@
 package Vehiculo;
 
+import Principal.Usuario;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-public class Renta  {
+public class ReservaVehiculo {
     ArrayList<Vehiculo> vehiculos;
-    private String ciudadRetorno, ciudadDeEntrega, estadoRenta;
-    private int idArrendatario; //TODO: eliminar el id Del Arrendatario
+    private String ciudadRetorno, ciudadDeEntrega, estadoReserva;
+    private Usuario usuario; //TODO: Log in pilas
     private Date fechaInicio, fechaRetorno;
 
-    public Renta(){
-        this.estadoRenta="NO PAGADO";
+    public ReservaVehiculo(){
+        this.estadoReserva ="NO PAGADO";
         this.vehiculos = new ArrayList<>();
     }
 
-    public void rentar(){
+    public void reservar(){
 
     }
 
@@ -30,7 +32,7 @@ public class Renta  {
         //TODO Implementar
     }
 
-    public double calcularRenta(){
+    public double calcularReserva(){
         //Calcular dias
         //recores los vechiculos
         long diferenciaDias = fechaRetorno.getTime() - fechaInicio.getTime();
@@ -48,21 +50,21 @@ public class Renta  {
 
 
     public boolean verificarEstado(){
-        return estadoRenta.equals("NO PAGADO");
+        return estadoReserva.equals("NO PAGADO");
     }
 
-    public void verInfoRenta(JTable table, JPanel panel){
+    public void verInfoReserva(JTable table, JPanel panel){
 
-        JLabel precioFinal = new JLabel("Precio Final Renta: "+calcularRenta());
-        JLabel estadoDeRenta = new JLabel("Estado de Renta: "+estadoRenta);
+        JLabel precioFinal = new JLabel("Precio Final Renta: "+ calcularReserva());
+        JLabel estadoDeRenta = new JLabel("Estado de Renta: "+ estadoReserva);
         DefaultTableModel model = new DefaultTableModel();
 
         JButton btnPagar = new JButton("Pagar");
 
         btnPagar.addActionListener(e -> {
-            PagoRentaVehiculos pagoRentaVehiculos = new PagoRentaVehiculos(calcularRenta(),"transferencia");
+            PagoReservaVehiculos pagoRentaVehiculos = new PagoReservaVehiculos(calcularReserva(),"transferencia");
             pagoRentaVehiculos.pagar();
-            estadoRenta = "PAGADO";
+            estadoReserva = "PAGADO";
         });
 
         model.addColumn("Modelo");
@@ -94,7 +96,7 @@ public class Renta  {
     public void modificarReserva() {
         //TODO IMPLEMENTAR
     }
-    public void recolectarDatosRenta(String ciudadOrigen, String ciudadRetorno, Date fechaFinal, Date fechaInicio){
+    public void recolectarDatosReserva(String ciudadOrigen, String ciudadRetorno, Date fechaFinal, Date fechaInicio){
         this.ciudadRetorno = ciudadRetorno;
         this.ciudadDeEntrega = ciudadOrigen;
         this.fechaInicio = fechaInicio;

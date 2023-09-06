@@ -11,11 +11,11 @@ public class Vehiculo {
 
     private int numPuerta, capacidadPasajeros;
     private double precioDeRenta;
-    private String numPlaca, modelo, estadoRentaVehiculo;
+    private String numPlaca, modelo, estadoReservaVehiculo;
     private ImageIcon imagenVehiculo;
 
-    public String getEstadoRentaVehiculo() {
-        return estadoRentaVehiculo;
+    public String getEstadoReservaVehiculo() {
+        return estadoReservaVehiculo;
     }
 
     public Vehiculo(ArrayList<Reseña> reseñas, int numPuerta, int capacidadPasajeros, double precioDeRenta, String numPlaca, String modelo, ImageIcon imagenVehiculo) {
@@ -25,7 +25,7 @@ public class Vehiculo {
         this.precioDeRenta = precioDeRenta;
         this.numPlaca = numPlaca;
         this.modelo = modelo;
-        this.estadoRentaVehiculo = "NO RENTADO";
+        this.estadoReservaVehiculo = "NO RENTADO";
         this.imagenVehiculo = imagenVehiculo;
     }
 
@@ -37,7 +37,7 @@ public class Vehiculo {
         JLabel numPuertalabel = new JLabel("Numero de Puertas: " + numPuerta);
         JLabel capacidadPasajeroslabel = new JLabel("Cantidad de pasajeros " + capacidadPasajeros);
         JLabel precioDeRentalabel = new JLabel("Precio De Renta " + precioDeRenta);
-        JLabel estadoRentalabel = new JLabel("Estado de Renta " + estadoRentaVehiculo);
+        JLabel estadoRentalabel = new JLabel("Estado de Renta " + estadoReservaVehiculo);
 
         String reseniasAcumuladas="Reseñas: ";
         for(Reseña reseniaAux: reseñas){
@@ -49,11 +49,11 @@ public class Vehiculo {
         JLabel imagen = new JLabel(new ImageIcon(imagenVehiculo.getImage().getScaledInstance(150,100, Image.SCALE_DEFAULT)));
 
         JButton btnRentar = new JButton("Rentar");
-
+        btnRentar.setPreferredSize(new Dimension(100,20));
 
         btnRentar.addActionListener(e -> {
             rentar();
-            estadoRentalabel.setText(estadoRentaVehiculo);
+            estadoRentalabel.setText(estadoReservaVehiculo);
             panel.revalidate();
             panel.repaint();
         });
@@ -78,8 +78,8 @@ public class Vehiculo {
     }
 
     private void rentar() {
-        GestorRentas.agregarRenta(this);
-        estadoRentaVehiculo = "RENTADO";
+        GestoReservaVehiculo.agregarRenta(this);
+        estadoReservaVehiculo = "RENTADO";
 
     }
 
@@ -97,7 +97,7 @@ public class Vehiculo {
     }
 
     public void agregarDatosTabla(DefaultTableModel model) {
-        Object[] infoFila = {modelo, numPlaca, numPuerta, capacidadPasajeros, precioDeRenta, estadoRentaVehiculo};
+        Object[] infoFila = {modelo, numPlaca, numPuerta, capacidadPasajeros, precioDeRenta, estadoReservaVehiculo};
         model.addRow(infoFila);
     }
 }
