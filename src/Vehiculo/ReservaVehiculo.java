@@ -28,8 +28,9 @@ public class ReservaVehiculo {
         JOptionPane.showMessageDialog(null,"SE HA AGREGADO EL CARRO DE PLACAS: " + vehiculo.getNumPlaca());
     }
 
-    public void eliminarVehiculo(){
-        //TODO Implementar
+    public void eliminarVehiculo(Vehiculo vehiculo){
+        this.vehiculos.remove(vehiculo);
+        JOptionPane.showMessageDialog(null,"SE HA ELIMINADO EL VEHICULO: " + vehiculo.getNumPlaca());
     }
 
     public double calcularReserva(){
