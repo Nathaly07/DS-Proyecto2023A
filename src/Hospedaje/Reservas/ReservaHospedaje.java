@@ -1,8 +1,6 @@
 package Hospedaje.Reservas;
 
 import Hospedaje.Habitaciones.Habitacion;
-import Hospedaje.Pagos.PagoHospedaje;
-import Reservas.Reserva;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

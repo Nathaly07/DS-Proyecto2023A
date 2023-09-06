@@ -1,15 +1,11 @@
 package Tours;
 
-import Reservas.ReservaTour;
-
 import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
-import java.text.ParseException;
 
 public class GestorReserva {
 
@@ -37,7 +33,7 @@ public class GestorReserva {
 
             String linea = "";
             while ((linea = br.readLine()) != null) {
-                String[] datos = linea.split(",");
+                String[] datos = linea.split("_");
                 int tamanio = datos.length;
 
                 //Para leer en caso de que haya más de 1 tour
