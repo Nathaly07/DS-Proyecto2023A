@@ -63,14 +63,10 @@ public class Módulos extends JFrame {
         toursButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ModuloTours moduloTours = new ModuloTours("Reservas - Tour");
+                ModuloTours moduloTours = new ModuloTours("Reservas - Tour", login.getUsuarioVerificado());
                 setPanel(moduloTours.pnlOpcionesTours);
                 crearFrame();
             }
-        });
-        btnHospedaje.addActionListener(e -> {
-            MenuHospedaje menuHospedaje = new MenuHospedaje(login);
-            menuHospedaje.crearFrame();
         });
     }
 

@@ -59,23 +59,12 @@ public class CatalogoVehiculos {
     }
 
     public void mostrarVehiculos(JPanel panel) {
-        panel.setLayout(new GridLayout(0,3));
+        panel.setLayout(new GridLayout(0, 3));
         panel.removeAll();
         for (Vehiculo vehiculo : vehiculos) {
-            vehiculo.mostrarInformacionVehiculo(panel);
+            if (!vehiculo.getEstadoReservaVehiculo().equals("RENTADO"))
+                vehiculo.mostrarInformacionVehiculo(panel);
         }
-    }
-
-    public void añadirVehiculoAlCatalogo(){
-        //TODO implementar
-
-    }
-    public void eliminarVehiculoAlCatalogo(){
-        //TODO implementar
-    }
-
-    public void actualizarCatalogo(){
-        //TODO implementar
     }
 
 

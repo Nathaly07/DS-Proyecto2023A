@@ -1,21 +1,21 @@
-package Vehiculo;
-
-import Reservas.Reserva;
+package ModuloRentaVehiculos;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
+import Vehiculo.*;
 
-public class Renta extends Reserva {
+public class Renta {
     ArrayList<Vehiculo> vehiculos;
+
     private String ciudadRetorno, ciudadDeEntrega, estadoRenta;
     private int idArrendatario;
     private Date fechaInicio, fechaRetorno;
 
     public Renta(){
-        super("1","rv1"); //TODO: debemos ver que cambie este, no tratar de mandarle en el constructor quemado
+        //super("1","rv1"); //TODO: debemos ver que cambie este, no tratar de mandarle en el constructor quemado
         this.estadoRenta="NO PAGADO";
         this.vehiculos = new ArrayList<>();
     }
@@ -63,7 +63,7 @@ public class Renta extends Reserva {
         JButton btnPagar = new JButton("Pagar");
 
         btnPagar.addActionListener(e -> {
-            PagoRentaVehiculos pagoRentaVehiculos = new PagoRentaVehiculos(calcularRenta(),"transferencia");
+            PagoReservaVehiculos pagoRentaVehiculos = new PagoReservaVehiculos(calcularRenta(),"transferencia");
             pagoRentaVehiculos.pagar();
             estadoRenta = "PAGADO";
         });
@@ -89,16 +89,7 @@ public class Renta extends Reserva {
 
     }
 
-    //Metodos heredados del padre
-    @Override
-    public void cancelarReserva() {
 
-    }
-
-    @Override
-    public void modificarReserva() {
-
-    }
     public void recolectarDatosRenta(String ciudadOrigen, String ciudadRetorno, Date fechaFinal, Date fechaInicio){
         this.ciudadRetorno = ciudadRetorno;
         this.ciudadDeEntrega = ciudadOrigen;

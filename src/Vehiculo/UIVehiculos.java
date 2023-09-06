@@ -26,22 +26,22 @@ public class UIVehiculos extends JPanel {
 
     //Clases diagrama
     private  CatalogoVehiculos catalogoVehiculos;
-    private static GestorRentas gestorRentas;
+    private static GestoReservaVehiculo gestorRentas;
 
 
     public UIVehiculos(Login login) {
         catalogoVehiculos = new CatalogoVehiculos();
-        gestorRentas = new GestorRentas();
+        gestorRentas = new GestoReservaVehiculo();
 
 
         btnCatalogo.addActionListener(e -> { // METODO DESPLEGAR CATALOGO
-
-            if (txtOrigen.getText().isEmpty() || txtRetorno.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(null,"Por favor ingrese todos los datos");
+            int fechaValida = dateChooserFinal.getDate().compareTo(dateChooserInicio.getDate());
+            if (txtOrigen.getText().isEmpty() || txtRetorno.getText().isEmpty() || fechaValida<0) {
+                JOptionPane.showMessageDialog(null,"Datos no validos");
 
             }else{
                 catalogoVehiculos.mostrarVehiculos(pnlCatalogo1);
-                GestorRentas.getRenta().recolectarDatosRenta(lblOrigen.getText(),lblRetorno.getText(),dateChooserFinal.getDate(),dateChooserInicio.getDate());
+                GestoReservaVehiculo.getRenta().recolectarDatosReserva(txtOrigen.getText(),txtRetorno.getText(),dateChooserFinal.getDate(),dateChooserInicio.getDate());
             }
 
 

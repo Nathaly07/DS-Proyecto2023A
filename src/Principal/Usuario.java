@@ -1,6 +1,8 @@
 package Principal;
 
-public class Usuario {
+import java.io.Serializable;
+
+public class Usuario implements Serializable {
     private int ID_Usuario;
     private String nombre;
     private String apellido;
@@ -8,13 +10,12 @@ public class Usuario {
     private String password;
     private String rol;
 
-    public Usuario(String nombre, String apellido, String email, String password, String rol) {
+    public Usuario(String nombre, String apellido, String email, String password) {
         this.ID_Usuario = (int) (Math.random() * 5000 + 1000);
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
         this.password = password;
-        this.rol = rol;
     }
 
     public boolean iniciarSesión(String password) {
@@ -22,12 +23,11 @@ public class Usuario {
     }
 
 
-    public void actualizarDatos(String nombre, String apellido, String email, String password, String rol) {
+    public void actualizarDatos(String nombre, String apellido, String email, String password) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
         this.password = password;
-        this.rol = rol;
     }
 
     public int getID_Usuario() {
@@ -49,10 +49,4 @@ public class Usuario {
     public String getPassword() {
         return this.password;
     }
-
-    public String getRol() {
-        return this.rol;
-    }
-
-
 }

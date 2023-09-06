@@ -1,6 +1,8 @@
 package Seguros;
 
+import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class GestorSeguros {
     private ArrayList<Seguro> Seguros = new ArrayList<Seguro>();
@@ -9,28 +11,30 @@ public class GestorSeguros {
 
     }
 
-    public void agregarSeguro(Seguro seguro) {
-        this.Seguros.add(seguro);
-    }
-
-    public boolean eliminarSeguro(int ID_Seguro) {
-        Seguro seguroEliminar = buscarSeguro(ID_Seguro);
+    public void eliminarSeguro(Seguro seguroEliminar) {
         if (seguroEliminar != null) {
             this.Seguros.remove(seguroEliminar);
-            return true;
+            JOptionPane.showMessageDialog(null, "Seguro eliminado");
         } else {
-            return false;
+            JOptionPane.showMessageDialog(null, "Seguro no eliminado");
         }
     }
 
-    public Seguro buscarSeguro(int ID_Seguro) {
-        Seguro seguroBuscar = null;
+
+    public ArrayList<Seguro> buscarSeguro (String propietario){
+        ArrayList<Seguro> SeguroPropietarios = new ArrayList<>();
         for (Seguro seguro : Seguros) {
-            if (seguro.getID_Seguro() == ID_Seguro) {
-                seguroBuscar = seguro;
-                break;
+            if (seguro.getPropietario().equalsIgnoreCase(propietario)) {
+                SeguroPropietarios.add(seguro);
             }
         }
-        return seguroBuscar;
+        return SeguroPropietarios;
     }
+
+    public void procesarCreaciónSeguro (Seguro seguro){
+        this.Seguros.add(seguro);
+        JOptionPane.showMessageDialog(null, "Se ha creado el seguro con éxito.");
+    }
+
+
 }
