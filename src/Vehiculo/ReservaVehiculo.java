@@ -62,6 +62,11 @@ public class ReservaVehiculo {
 
         JButton btnPagar = new JButton("Pagar");
         JButton btnModificar = new JButton("Modificar");
+
+        btnModificar.addActionListener(e -> {
+            panel.add(new PanelModificacion(this).panelModificarReserva);
+        });
+
         JButton btnEliminarReserva = new JButton("Eliminar");
 
         btnPagar.addActionListener(e -> {
@@ -102,8 +107,9 @@ public class ReservaVehiculo {
 
     }
 
-    public void modificarReserva() {
+    public void modificarReserva(String ciudadEntrega, String ciudadRetorno, String fechaInicio, String fechaFin) {
         //TODO IMPLEMENTAR
+        System.out.println("hola");
     }
     public void recolectarDatosReserva(String ciudadOrigen, String ciudadRetorno, Date fechaFinal, Date fechaInicio){
         this.ciudadRetorno = ciudadRetorno;
@@ -112,5 +118,19 @@ public class ReservaVehiculo {
         this.fechaRetorno = fechaFinal;
     }
 
+    public String getCiudadRetorno() {
+        return ciudadRetorno;
+    }
 
+    public String getCiudadDeEntrega() {
+        return ciudadDeEntrega;
+    }
+
+    public Date getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public Date getFechaRetorno() {
+        return fechaRetorno;
+    }
 }

@@ -41,7 +41,7 @@ public class UIVehiculos extends JPanel {
 
             }else{
                 catalogoVehiculos.mostrarVehiculos(pnlCatalogo1);
-                GestoReservaVehiculo.getRenta().recolectarDatosReserva(lblOrigen.getText(),lblRetorno.getText(),dateChooserFinal.getDate(),dateChooserInicio.getDate());
+                GestoReservaVehiculo.getRenta().recolectarDatosReserva(txtOrigen.getText(),txtRetorno.getText(),dateChooserFinal.getDate(),dateChooserInicio.getDate());
             }
 
 
