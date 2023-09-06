@@ -31,6 +31,12 @@ public class Vuelo {
         GenerarAsientos(duracion);
     }
 
+    public Vuelo(String origen, String destino, String hora_salida, String fecha) {
+        this.origen = origen;
+        this.destino = destino;
+        this.hora_salida = hora_salida;
+        this.fecha = fecha;
+    }
 
     private void GenerarAsientos(int duracion){
         int numeroAsientoPorFila = 6;

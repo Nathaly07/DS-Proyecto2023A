@@ -35,7 +35,7 @@ public void quitarReserva(ReservaAsiento r){
     }
 
     private static class TablaReservas extends AbstractTableModel {
-        private final String[] COLUMNS = {"Fecha", "Origen", "Destino", "Hora salida", "Num. Asientos"};
+        private final String[] COLUMNS = {"Fecha", "Origen", "Destino", "Hora salida","Fecha Vuelo", "Num. Asientos"};
         private List<ReservaAsiento> reservas;
         public TablaReservas(List<ReservaAsiento> reservas){
             this.reservas = reservas;
@@ -58,7 +58,8 @@ public void quitarReserva(ReservaAsiento r){
                 case 1 -> reservas.get(rowIndex).getReservas().getVuelo().getOrigen();
                 case 2 -> reservas.get(rowIndex).getReservas().getVuelo().getDestino();
                 case 3 -> reservas.get(rowIndex).getReservas().getVuelo().getHora_salida();
-                case 4 -> reservas.get(rowIndex).getReservas().getVuelo().getNumeroAsientos();
+                case 4 -> reservas.get(rowIndex).getReservas().getVuelo().getFecha();
+                case 5 -> reservas.get(rowIndex).getReservas().getVuelo().getNumeroAsientos();
                 default -> "-";
 
             };

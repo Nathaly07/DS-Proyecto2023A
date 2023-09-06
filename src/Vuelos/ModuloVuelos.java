@@ -29,8 +29,8 @@ public class ModuloVuelos extends JFrame{
     private JButton confirmarButton;
     private JButton eliminarButton;
     private JTable table2;
+    private JButton btnModificarReserva;
     private JButton cambiarReservaButton;
-    private JTable table3;
     private GestorVuelos g = new GestorVuelos();
     private GestorReservasAsiento gestorReservasAsiento = new GestorReservasAsiento();
     private SelectorDeAsientos selectorDeAsientos;
@@ -81,8 +81,12 @@ public class ModuloVuelos extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(v != null) {
-                    selectorDeAsientos.setVuelo(g.seleccionarVuelo(v));
-                    mostrarPantallaEmergente(ModuloVuelos.this);
+                    if(VerificarReserva()) {
+                        selectorDeAsientos.setVuelo(g.seleccionarVuelo(v));
+                        mostrarPantallaEmergente(ModuloVuelos.this);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Ya existe un reserva con ese vuelo", "Aviso", JOptionPane.ERROR_MESSAGE);
+                    }
                 } else{
                     JOptionPane.showMessageDialog(null, "Seleccione un vuelo", "Aviso", JOptionPane.ERROR_MESSAGE);
 
@@ -110,13 +114,13 @@ public class ModuloVuelos extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 selectorDeAsientos.setVuelo(g.seleccionarVuelo(v));
                 mostrarPagoVuelos(ModuloVuelos.this);
-                /*if(asientoReservado != null) {
+                if(asientoReservado != null) {
                     selectorDeAsientos.setVuelo(g.seleccionarVuelo(v));
                     mostrarPagoVuelos(ModuloVuelos.this);
                 } else{
                     JOptionPane.showMessageDialog(null, "Previamente debe reservar su/s asiento/s", "Aviso", JOptionPane.ERROR_MESSAGE);
 
-                }*/
+                }
             }
         });
         eliminarButton.addActionListener(new ActionListener() {
@@ -144,6 +148,18 @@ public class ModuloVuelos extends JFrame{
                     JOptionPane.showMessageDialog(null, "Seleccione un vuelo", "Aviso", JOptionPane.ERROR_MESSAGE);
 
                 }
+            }
+        });
+        btnModificarReserva.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        table2.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
             }
         });
     }
@@ -206,8 +222,6 @@ public class ModuloVuelos extends JFrame{
 
 
     public void actualizar(){
-        //ReservaAsiento reservaAsiento = new ReservaAsiento("001", "001");
-        //gestorReservasAsiento.agregarResarva( new ReservaAsiento("001", "001", ));
         gestorReservasAsiento.mostrarReservas(table2);
 
     }
@@ -217,7 +231,20 @@ public class ModuloVuelos extends JFrame{
         ReservaAsiento reservaAsiento = new ReservaAsiento(login, carrito);
         reservaAsiento.reservar();
         gestorReservasAsiento.agregarResarva(reservaAsiento);
+    }
 
+    public boolean VerificarReserva(){
+        ComparadorVuelo com = new ComparadorVuelo();
+        for (int i = 0; i < table2.getRowCount(); i++) {
+            Vuelo aux = new Vuelo(table2.getValueAt(i,1).toString(),
+                    table2.getValueAt(i,2).toString(),
+                    table2.getValueAt(i,3).toString(),
+                    table2.getValueAt(i,4).toString());
+            if(com.compare(aux, this.v) == 1 ){
+                return false;
+            }
+        }
+        return true;
     }
 }
 

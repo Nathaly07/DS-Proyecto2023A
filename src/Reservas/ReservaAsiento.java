@@ -19,7 +19,7 @@ public class ReservaAsiento extends Reserva{
     private CarritoAsientos reservas;
 
     public ReservaAsiento(Login login, CarritoAsientos reservas) {
-        super(login);
+        //super(login);
         //String IDReserva = String.valueOf((numeroDeReservas++));
         this.reservas = reservas;
         this.fecha_vuelo = reservas.getVuelo().getFecha();
