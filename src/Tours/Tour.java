@@ -15,7 +15,6 @@ public class Tour {
     private String fechaFin;
 
 
-
     //Constructor
 
     public Tour(String nombre, double precio, ArrayList<String> paradasTuristicas, ArrayList<String> actividadesTuristicas, String infoGuia, String duracion, int limiteUsuarios, String fechaInicio, String fechaFin) {
@@ -44,7 +43,7 @@ public class Tour {
         this.disponibilidad -= numPersonas;
     }
 
-    public void cancelarReserva(int numPersonas){
+    public void cancelarReservaTour(int numPersonas){
         this.disponibilidad += numPersonas;
     }
 
