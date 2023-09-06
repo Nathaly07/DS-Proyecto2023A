@@ -5,11 +5,9 @@ import javax.swing.table.DefaultTableModel;
 
 import Hospedaje.Criteria.CriteriaCiudad;
 import Hospedaje.Habitaciones.Habitacion;
-import Hospedaje.ModuloHospedaje;
 import Hospedaje.Reservas.GestionReservas;
 import Hospedaje.Reservas.ReservaHospedaje;
 import Principal.Login;
-import Principal.Usuario;
 import com.toedter.calendar.JDateChooser;
 
 import java.awt.event.MouseAdapter;
@@ -23,23 +21,21 @@ public class CrearReserva extends JFrame {
     private JPanel jpReservaInicio;
     private JPanel jPHospedajes;
     private JPanel jpReservaFinal;
-    private JTextField nombresYApellidosTextField;
+    private JLabel txtNombreCompleto;
     private JComboBox comboBox1;
-    private JLabel txtNombres;
     private JTextField txtNinos;
     private JTextField txtAdultos;
-    private JTextField txtHabitaciones;
     private JButton btnVerificarDisponibilidad;
     private JButton cancelarButton;
     private List<Habitacion> habitacionesDisponibles;
     private JTable tbHabitacionesDisponibles;
     private DefaultTableModel tbModeloHabitacionesDisponibles;
 
-
     JDateChooser reservacionInicio  = new JDateChooser();
     JDateChooser reservacionFinal  = new JDateChooser();
     public CrearReserva(Login login, GestionReservas gestionReservas) {
         this.gestionReservas = gestionReservas;
+        this.login = login;
 
         //Calendar
         jpReservaInicio.add(reservacionInicio);
@@ -52,6 +48,8 @@ public class CrearReserva extends JFrame {
         cancelarButton.addActionListener(e -> {
             dispose();
         });
+
+        this.txtNombreCompleto.setText(login.getUsuarioVerificado().getNombre() + " " + login.getUsuarioVerificado().getApellido());
     }
 
     public void crearFrame() {
@@ -110,7 +108,7 @@ public class CrearReserva extends JFrame {
         Habitacion[] habitaciones = new Habitacion[1];
         habitaciones[0] = habitacionSeleccionada;
         ReservaHospedaje reserva = new ReservaHospedaje(
-                new Usuario("alex", "padilla", "ap", "12"),
+                this.login.getUsuarioVerificado(),
                 Integer.toString(habitacionSeleccionada.getHabitacionID()),
                 numeroPersonas,
                 habitaciones,

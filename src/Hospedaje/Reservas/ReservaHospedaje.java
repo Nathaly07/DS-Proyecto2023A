@@ -83,4 +83,12 @@ public class ReservaHospedaje implements Serializable {
     public void confirmarReserva() {
         this.estadoReserva = EstadoReserva.CONFIRMADA;
     }
+
+    public Usuario getUsuario() {
+        return user;
+    }
+
+    public int getNumeroPersonas() {
+        return numeroPersonas;
+    }
 }
