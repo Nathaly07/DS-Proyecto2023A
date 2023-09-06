@@ -51,16 +51,16 @@ public class GestorTour {
             while ((linea = br.readLine()) != null) {
                 String[] datos = linea.split(",");
                 
-                String[] paradas = datos[3].replace('[', ' ').replace(']', ' ').trim().split(";");
-                String[] actividades = datos[4].replace('[', ' ').replace(']', ' ').trim().split(";");
-                String fechaInicio = datos[8];
+                String[] paradas = datos[2].replace('[', ' ').replace(']', ' ').trim().split(";");
+                String[] actividades = datos[3].replace('[', ' ').replace(']', ' ').trim().split(";");
+                String fechaInicio = datos[7];
                 String fechaFin =  datos[datos.length-1];
 
                 Collections.addAll(paradasList, paradas);
 
                 Collections.addAll(actividadesList, actividades);
 
-                tour = new Tour(datos[1] , Double.parseDouble(datos[2]),paradasList, actividadesList, datos[5], datos[6],Integer.parseInt(datos[7]), fechaInicio, fechaFin);
+                tour = new Tour(datos[0] , Double.parseDouble(datos[1]),paradasList, actividadesList, datos[4], datos[5],Integer.parseInt(datos[6]), fechaInicio, fechaFin);
                 this.tours.add(tour);
             }
             br.close();
