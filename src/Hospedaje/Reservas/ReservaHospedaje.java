@@ -2,20 +2,33 @@ package Hospedaje.Reservas;
 
 import Hospedaje.Habitaciones.Habitacion;
 import Hospedaje.Pagos.PagoHospedaje;
-import Reservas.Reserva;
+
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class ReservaHospedaje extends Reserva {
+public class ReservaHospedaje {
     private int numeroPersonas;
     private Date fechaCreacion;
     private EstadoReserva estadoReserva;
     private Date fechaInicio;
     private Date fechaFin;
     private Habitacion habitaciones[];
+    //TODO CAMBIAR Id's por login
+    private String userId;
+    private String reservaId;
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public String getReservaId() {
+        return reservaId;
+    }
+
     public ReservaHospedaje(String userId, String reservaId, int numeroPersonas, Habitacion[] habitaciones, Date fechaCreacion, Date fechaInicio, Date fechaFin) {
-        super(userId, reservaId);
+        this.userId = userId;
+        this.reservaId = reservaId;
         this.numeroPersonas = numeroPersonas;
         this.fechaCreacion = fechaCreacion;
         this.fechaInicio = fechaInicio;
@@ -24,12 +37,12 @@ public class ReservaHospedaje extends Reserva {
         this.estadoReserva = EstadoReserva.PENDIENTE;
     }
 
-    @Override
+    //TODO IMPLEMENTAR SUS PROPIOS METODOS
     public void cancelarReserva() {
         this.estadoReserva = EstadoReserva.CANCELADA;
     }
 
-    @Override
+
     public void modificarReserva() {
 
     }
@@ -65,9 +78,6 @@ public class ReservaHospedaje extends Reserva {
         return habitaciones;
     }
 
-    public String getReservaId() {
-        return this.reservaID;
-    }
     public void confirmarReserva() {
         this.estadoReserva = EstadoReserva.CONFIRMADA;
     }

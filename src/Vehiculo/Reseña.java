@@ -12,7 +12,7 @@ public class Reseña {
         }
 
         public void editarOpinion(){
-                //TODO implementar
+                //TODO implementar o eliminar
         }
 
         @Override
