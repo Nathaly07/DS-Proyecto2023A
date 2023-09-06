@@ -1,18 +1,19 @@
 package Seguros;
 
+import javax.swing.*;
 import java.util.Date;
 
 public class SeguroDeVida extends Seguro {
-    private float montoAPagar;
+
     private int nivelSeguro;
 
-    public SeguroDeVida(int ID_Seguro, String propietario, String[] condiciones, String[] beneficiarios, Date fechaDeInicio, Date fechaDeVencimiento, float primaSinRecargo, float montoAPagar) {
-        super(ID_Seguro, propietario, condiciones, beneficiarios, fechaDeInicio, fechaDeVencimiento, primaSinRecargo);
-        this.montoAPagar = montoAPagar;
+    public SeguroDeVida(String propietario, String[] condiciones, String[] beneficiarios, Date fechaDeInicio, Date fechaDeVencimiento, float primaSinRecargo, int nivelSeguro  ) {
+        super(propietario, condiciones, beneficiarios, fechaDeInicio, fechaDeVencimiento, primaSinRecargo);
+        this.nivelSeguro = nivelSeguro;
     }
 
     @Override
-    float indemnizar(float valorPedido, String motivo) {
+    void indemnizar(float valorPedido, String motivo) {
         float totalMonto = 0;
         if (valorPedido <= 400000 && motivo.equalsIgnoreCase("muerte")) {
             if (nivelSeguro == 1) {
@@ -25,7 +26,7 @@ public class SeguroDeVida extends Seguro {
                 totalMonto = 400000;
             }
         }
-        return totalMonto;
+        JOptionPane.showMessageDialog(null, "Te daremos: " + totalMonto + " $");
     }
 
     @Override
