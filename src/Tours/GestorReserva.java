@@ -65,8 +65,6 @@ public class GestorReserva {
         Tour tourResultado;
         ArrayList<String> paradasList = new ArrayList<>();
         ArrayList<String> actividadesList = new ArrayList<>();
-        Tour tour;
-        String linea = "";
         String[] datosALeer = datos.split(",");
 
         String[] paradas = datosALeer[2].replace('[', ' ').replace(']', ' ').trim().split(";");
