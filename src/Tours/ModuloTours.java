@@ -168,6 +168,7 @@ public class ModuloTours extends JFrame{
         comboBox3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                listatemp = new ArrayList<Tour>();
                 String opcion = (String)comboBox3.getSelectedItem();
                 int numReserva = Integer.parseInt(opcion.split("-")[0]);
                 reservaTourModificar = gestionReserva.buscarReserva(numReserva);
@@ -184,6 +185,7 @@ public class ModuloTours extends JFrame{
 
                 for(Tour tour: toursList) {
                     toursModel.addElement(tour.informacionRelevante());
+                    listatemp.add(tour);
                 }
                 listToursReservaModificar.setModel(toursModel);
 
@@ -205,7 +207,7 @@ public class ModuloTours extends JFrame{
                 String tours = listToursReservaModificar.getSelectedValue().toString();
                 String[] nombreTour = tours.split(",");
                 String Ntour = nombreTour[0];
-                listatemp.add(gestionTour.buscarTour(Ntour));
+                listatemp.remove(gestionTour.buscarTour(Ntour));
                 mostrarReserva(listToursReservaModificar);
             }
         });
