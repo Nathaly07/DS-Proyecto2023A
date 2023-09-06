@@ -159,6 +159,14 @@ public class ModuloTours extends JFrame{
             }
         });
 
+        btnCrearReserva.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                crearReserva();
+                gestionReserva.agregarReserva(reservaTour);
+            }
+        });
+
         btnConfirmar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
