@@ -22,6 +22,10 @@ public class GestorReserva {
         this.leerDatos();
     }
 
+    public ArrayList<ReservaTour> getReservaciones() {
+        return reservaciones;
+    }
+
     private void leerDatos(){
         ArrayList<Tour> toursAgregados = new ArrayList<>();
         ReservaTour reservaTour;
