@@ -1,7 +1,6 @@
 package Tours;
 
 import Pagos.Pago;
-import Reservas.ReservaTour;
 
 import javax.swing.*;
 import java.util.ArrayList;

@@ -1,7 +1,5 @@
 package ModuloRentaVehiculos;
 
-import Reservas.Reserva;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;

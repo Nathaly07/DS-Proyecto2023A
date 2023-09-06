@@ -1,17 +1,14 @@
 package Tours;
 
-import Principal.Login;
 import Principal.Usuario;
-import Reservas.ReservaTour;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.text.ParseException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.text.SimpleDateFormat;
 
 import javax.swing.*;
 
@@ -57,6 +54,7 @@ public class ModuloTours extends JFrame{
     private JPanel pnlLista2;
     private JList listToursModificar;
     private JScrollPane scrollPanelLista;
+    private JPanel pnlTourList;
     private Tour tour; //para prueba
     private ReservaTour reservaTour;
     private ReservaTour reservaTourConfirmar = null;

@@ -1,15 +1,11 @@
 package Tours;
 
-import Reservas.ReservaTour;
-
 import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
-import java.text.ParseException;
 
 public class GestorReserva {
 

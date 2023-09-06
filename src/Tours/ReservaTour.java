@@ -1,4 +1,4 @@
-package Reservas;
+package Tours;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -8,19 +8,10 @@ import java.util.Date;
 
 import javax.swing.JOptionPane;
 
-import java.time.LocalDate;
 import java.util.concurrent.TimeUnit;
 
-import Principal.Login;
-import Principal.Usuario;
-import Reservas.Reserva;
-import Seguros.GestorSeguros;
-import Tours.PagoReserva;
-import Tours.Tour;
-import Tours.GestorTour;
 
-
-public class ReservaTour extends Reserva {
+public class ReservaTour {
     private static int cantidadReservas = 0;
     private int numReserva;
     private String nombreUsuario;
@@ -35,7 +26,6 @@ public class ReservaTour extends Reserva {
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/M/yy");
 
     public ReservaTour(String nombreUsuario, String apellidoUsuario, int numeroPersonas, GestorTour gestorTour, PagoReserva pagoReserva) {
-        super(null);
         this.numReserva = this.cantidadReservas;
         this.nombreUsuario = nombreUsuario;
         this.apellidoUsuario = apellidoUsuario;
@@ -87,7 +77,6 @@ public class ReservaTour extends Reserva {
         return this.toursAgregados;
     }
 
-    @Override
     public void cancelarReserva() {
         if (this.estadoReserva) {
             Date fechaActual = Calendar.getInstance().getTime();
@@ -123,9 +112,6 @@ public class ReservaTour extends Reserva {
         }
 
     }
-
-    @Override
-    public void modificarReserva() {}
 
     public void agregarTour(Tour tour) throws ParseException {
         boolean isAvailable = true;
