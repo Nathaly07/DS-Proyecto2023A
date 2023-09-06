@@ -112,6 +112,7 @@ public class ModuloTours extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 crearReserva();
                 gestionReserva.agregarReserva(reservaTour);
+                listatemp = new ArrayList<Tour>();
             }
         });
 
@@ -176,8 +177,15 @@ public class ModuloTours extends JFrame{
                 for(Tour tour: toursList) {
                     toursModel.addElement(tour.informacionRelevante());
                 }
-
                 listToursModificar.setModel(toursModel);
+
+                toursModel = new DefaultListModel<>();
+                toursList = reservaTourModificar.getToursAgregados();
+
+                for(Tour tour: toursList) {
+                    toursModel.addElement(tour.informacionRelevante());
+                }
+                listToursReservaModificar.setModel(toursModel);
 
             }
         });
@@ -206,6 +214,11 @@ public class ModuloTours extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 reservaTourModificar.setToursAgregados(listatemp);
                 reservaTourModificar.setNumeroPersonas((Integer)jspNumPersonasModificar.getValue());
+                JOptionPane.showMessageDialog(null,
+                        "Se ha modificado su reserva exitosamente",
+                        "Gestor Reserva",
+                        JOptionPane.WARNING_MESSAGE);
+                listatemp = new ArrayList<Tour>();
             }
         });
     }
