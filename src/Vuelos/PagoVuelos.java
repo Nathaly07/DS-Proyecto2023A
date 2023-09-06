@@ -1,6 +1,6 @@
 package Vuelos;
 
-import Reservas.Reserva;
+import Reservas.ReservaAsiento;
 import Vuelos.Logica.PagoReservaAsiento;
 import Vuelos.Logica.Vuelo;
 
@@ -26,7 +26,7 @@ public class PagoVuelos extends JFrame {
 
     private PagoReservaAsiento pagoReservaAsiento;
     private double costoTotal;
-    private Reserva reserva;
+    private ReservaAsiento reserva;
 
     private Vuelo vuelo;
 

@@ -14,8 +14,11 @@ public class Vehiculo {
     private String numPlaca, modelo, estadoRentaVehiculo;
     private ImageIcon imagenVehiculo;
 
+    public String getEstadoRentaVehiculo() {
+        return estadoRentaVehiculo;
+    }
 
-    public Vehiculo(ArrayList<Reseña> reseñas, int numPuerta, int capacidadPasajeros, double precioDeRenta, String numPlaca, String modelo,ImageIcon imagenVehiculo) {
+    public Vehiculo(ArrayList<Reseña> reseñas, int numPuerta, int capacidadPasajeros, double precioDeRenta, String numPlaca, String modelo, ImageIcon imagenVehiculo) {
         this.reseñas = reseñas;
         this.numPuerta = numPuerta;
         this.capacidadPasajeros = capacidadPasajeros;
@@ -70,8 +73,8 @@ public class Vehiculo {
 
     }
 
-    public void actualizarPreciorRenta(){
-        //TODO: implementar
+    public void actualizarPrecioRenta(){
+        //TODO: implementar o eliminar
     }
 
     private void rentar() {
