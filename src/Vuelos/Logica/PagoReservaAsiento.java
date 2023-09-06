@@ -2,6 +2,7 @@ package Vuelos.Logica;
 
 import javax.swing.*;
 
+
 public class PagoReservaAsiento {
     private double monto;
     private ReservaAsiento reserva;
