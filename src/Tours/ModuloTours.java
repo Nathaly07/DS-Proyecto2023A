@@ -150,7 +150,7 @@ public class ModuloTours extends JFrame{
                 reservaTourConfirmar = gestionReserva.buscarReserva(numReserva);
                 lblNPersonas.setText(lblNPersonas.getText() + " " + reservaTourConfirmar.getNumeroPersonas());
                 lblFechaCreacion.setText(lblFechaCreacion.getText() + " " + reservaTourConfirmar.getFechaCreacion());
-                lblFechaConfirmacion.setText(lblFechaConfirmacion.getText() + " " reservaTourConfirmar.getFechaConfirmacionPago());
+                lblFechaConfirmacion.setText(lblFechaConfirmacion.getText() + " " + reservaTourConfirmar.getFechaConfirmacionPago());
 
                 DefaultListModel toursEnReservaModel = new DefaultListModel<>();
                 ArrayList<Tour> toursEnReservaList = reservaTourConfirmar.getToursAgregados();
@@ -164,11 +164,13 @@ public class ModuloTours extends JFrame{
         });
     }
 
+
     public void setReservasUsuario() {
         String nombreUsuario = this.usuarioVerificado.getNombre();
         String apellidoUsuario = this.usuarioVerificado.getApellido();
+        ArrayList<ReservaTour> reservas = this.gestionReserva.getReservaciones();
 
-        for (ReservaTour reserva: this.gestionReserva.getReservaciones) {
+        for (ReservaTour reserva: reservas) {
             if ((reserva.getNombreUsuario().equalsIgnoreCase(nombreUsuario)) && (reserva.getApellidoUsuario().equalsIgnoreCase(apellidoUsuario))) {
                 this.comboBox2.addItem(reserva.getNumReserva() + "-" + reserva.getNombreUsuario() + " " + reserva.getApellidoUsuario());
                 this.comboBox3.addItem(reserva.getNumReserva() + "-" + reserva.getNombreUsuario() + " " + reserva.getApellidoUsuario());
