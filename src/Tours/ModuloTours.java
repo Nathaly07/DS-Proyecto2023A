@@ -112,7 +112,9 @@ public class ModuloTours extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 crearReserva();
                 gestionReserva.agregarReserva(reservaTour);
+                reservaTour.setToursAgregados(listatemp);
                 listatemp = new ArrayList<Tour>();
+                setReservasUsuario();
             }
         });
 
@@ -133,6 +135,9 @@ public class ModuloTours extends JFrame{
                 int numReserva = Integer.parseInt(opcion.split("-")[0]);
 
                 reservaTourConfirmar = gestionReserva.buscarReserva(numReserva);
+                lblNPersonas.setText("# de personas:");
+                lblFechaCreacion.setText("Fecha de Creacion de Reserva:");
+                lblFechaConfirmacion.setText("Fecha de Confirmacion de Reserva:");
                 lblNPersonas.setText(lblNPersonas.getText() + " " + reservaTourConfirmar.getNumeroPersonas());
                 lblFechaCreacion.setText(lblFechaCreacion.getText() + " " + reservaTourConfirmar.getFechaCreacion());
                 lblFechaConfirmacion.setText(lblFechaConfirmacion.getText() + " " + reservaTourConfirmar.getFechaConfirmacionPago());
@@ -221,6 +226,7 @@ public class ModuloTours extends JFrame{
                         "Gestor Reserva",
                         JOptionPane.WARNING_MESSAGE);
                 listatemp = new ArrayList<Tour>();
+                setReservasUsuario();
             }
         });
     }
@@ -230,7 +236,6 @@ public class ModuloTours extends JFrame{
         String nombreUsuario = this.usuarioVerificado.getNombre();
         String apellidoUsuario = this.usuarioVerificado.getApellido();
         ArrayList<ReservaTour> reservas = this.gestionReserva.getReservaciones();
-
         for (ReservaTour reserva: reservas) {
             if ((reserva.getNombreUsuario().equalsIgnoreCase(nombreUsuario)) && (reserva.getApellidoUsuario().equalsIgnoreCase(apellidoUsuario))) {
                 this.comboBox2.addItem(reserva.getNumReserva() + "-" + reserva.getNombreUsuario() + " " + reserva.getApellidoUsuario());

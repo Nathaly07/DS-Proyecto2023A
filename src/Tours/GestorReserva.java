@@ -29,7 +29,7 @@ public class GestorReserva {
         int i;
 
         try {
-            BufferedReader br = new BufferedReader(new FileReader("reservas.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("src/Tours/datos/reservas.txt"));
 
             String linea = "";
             while ((linea = br.readLine()) != null) {

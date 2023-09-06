@@ -45,7 +45,7 @@ public class GestorTour {
         Tour tour;
 
         try {
-            BufferedReader br = new BufferedReader(new FileReader("tours.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("src/Tours/datos/tours.txt"));
 
             String linea = "";
             while ((linea = br.readLine()) != null) {
