@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.util.concurrent.TimeUnit;
 
 import Principal.Login;
+import Principal.Usuario;
 import Reservas.Reserva;
 import Seguros.GestorSeguros;
 import Tours.PagoReserva;
@@ -20,28 +21,26 @@ import Tours.GestorTour;
 
 
 public class ReservaTour extends Reserva {
+    private Usuario usuario;
     private String fechaCreacion;
     private boolean estadoReserva;
     private int numeroPersonas;
-    private boolean seguroActivo;
     private ArrayList<Tour> toursAgregados;
     private String fechaConfirmacionPago;
     private GestorTour gestorTour;
     private PagoReserva pagoReserva;
-    private GestorSeguros gestorSeguros;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/M/yy");
 
-    public ReservaTour(int numeroPersonas, GestorTour gestorTour, PagoReserva pagoReserva, Login login, GestorSeguros gestorSeguros) {
+    public ReservaTour(Usuario usuario, int numeroPersonas, GestorTour gestorTour, PagoReserva pagoReserva, Login login) {
         super(login);
+        this.usuario = usuario;
         this.fechaCreacion = dateFormat.format(Calendar.getInstance().getTime());
         this.estadoReserva = false;
         this.numeroPersonas = numeroPersonas;
-        // this.segurosActivos = this.getSegurosUsuarioActual;
         this.toursAgregados = new ArrayList<Tour>();
         this.fechaConfirmacionPago = "Sin confirmar";
         this.gestorTour = gestorTour;
         this.pagoReserva = pagoReserva;
-        this.gestorSeguros = gestorSeguros;
     }
 
     public void setNumeroPersonas(int numeroPersonas) {
@@ -83,7 +82,7 @@ public class ReservaTour extends Reserva {
                             "más próximo reservado",
                     "Reserva Tour",
                     JOptionPane.WARNING_MESSAGE);
-            this.pagoReserva.calcularDevolucion((int)difEnDias);
+            this.pagoReserva.calcularDevolucion((int)difEnDias, this.toursAgregados);
         } else {
             JOptionPane.showMessageDialog(null,
                     "Ha cancelado su reserva",
@@ -152,9 +151,8 @@ public class ReservaTour extends Reserva {
 
     public void confirmarReserva() {
         this.estadoReserva = true;
+        this.fechaConfirmacionPago = this.dateFormat.format(Calendar.getInstance().getTime());
         this.pagoReserva.pagar(this.toursAgregados);
     }
-
-    public void tieneSeguroActivo() {}
 
 }
