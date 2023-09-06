@@ -125,8 +125,6 @@ public class ReservaVehiculo {
     }
 
     public void modificarReserva(String ciudadEntrega, String ciudadRetorno, String fechaInicio, String fechaFin) {
-        //TODO IMPLEMENTAR
-        System.out.println("hola");
 
         //Guardar nuevos datos de la reserva
 

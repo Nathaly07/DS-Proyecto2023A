@@ -27,7 +27,6 @@ public class GestoReservaVehiculo {
     }
 
     public static void eliminarRenta() {
-        //TODO: implementar
         rentas.remove(renta);
         renta = new ReservaVehiculo();
     }
