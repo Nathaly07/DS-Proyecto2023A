@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class CriteriaDisponibilidadHabitaciones implements HospedajeCriteria<Habitacion, ReservaHospedaje> {
+public class CriteriaDisponibilidadHabitaciones implements CriteriaDoble<Habitacion, ReservaHospedaje> {
     private Date reservarDesde;
     private Date reservarHasta;
 
@@ -20,16 +20,11 @@ public class CriteriaDisponibilidadHabitaciones implements HospedajeCriteria<Hab
     public List<Habitacion> meetCriteria(List<Habitacion> habitaciones, List<ReservaHospedaje> reservas) {
         List<Habitacion> habitacionesDisponibles = new ArrayList<>(habitaciones);
 
-        for (ReservaHospedaje reserva : reservas) {
-            Date fechaInicioReserva = reserva.getFechaInicio();
-            Date fechaFinReserva = reserva.getFechaFin();
+        List<ReservaHospedaje> reservasFiltradas = new CriteriaPorFechas(reservarDesde, reservarHasta).meetCriteria(reservas);
 
-            // Si la reserva coincide con el rango de fechas solicitado, eliminamos todas las habitaciones de esa reserva de la lista de disponibles
-            if (!(fechaInicioReserva.after(reservarHasta) || fechaFinReserva.before(reservarDesde))) {
-                for (Habitacion habitacion : reserva.getHabitaciones()) {
-                    habitacionesDisponibles.remove(habitacion);
-                }
-            }
+        // Eliminar habitaciones que concuerden con el id de las reservas filtradas
+        for (ReservaHospedaje reserva : reservasFiltradas) {
+            habitacionesDisponibles.removeIf(habitacion -> habitacion.getHabitacionId() == (reserva.getHabitaciones()[0].getHabitacionId()));
         }
 
         return habitacionesDisponibles;

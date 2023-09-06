@@ -1,6 +1,8 @@
 package Principal;
 
-public class Usuario {
+import java.io.Serializable;
+
+public class Usuario implements Serializable {
     private int ID_Usuario;
     private String nombre;
     private String apellido;

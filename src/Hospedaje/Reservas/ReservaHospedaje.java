@@ -1,13 +1,15 @@
 package Hospedaje.Reservas;
 
 import Hospedaje.Habitaciones.Habitacion;
-import Hospedaje.Pagos.PagoHospedaje;
+import Principal.Usuario;
 
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class ReservaHospedaje {
+public class ReservaHospedaje implements Serializable {
+    private static final long serialVersionUID = 3L;
     private int numeroPersonas;
     private Date fechaCreacion;
     private EstadoReserva estadoReserva;
@@ -15,19 +17,19 @@ public class ReservaHospedaje {
     private Date fechaFin;
     private Habitacion habitaciones[];
     //TODO CAMBIAR Id's por login
-    private String userId;
+    private Usuario user;
     private String reservaId;
 
-    public String getUserId() {
-        return userId;
+    public Usuario getUser() {
+        return user;
     }
 
     public String getReservaId() {
         return reservaId;
     }
 
-    public ReservaHospedaje(String userId, String reservaId, int numeroPersonas, Habitacion[] habitaciones, Date fechaCreacion, Date fechaInicio, Date fechaFin) {
-        this.userId = userId;
+    public ReservaHospedaje(Usuario user, String reservaId, int numeroPersonas, Habitacion[] habitaciones, Date fechaCreacion, Date fechaInicio, Date fechaFin) {
+        this.user = user;
         this.reservaId = reservaId;
         this.numeroPersonas = numeroPersonas;
         this.fechaCreacion = fechaCreacion;
