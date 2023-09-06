@@ -60,15 +60,19 @@ public class ReservaTour extends Reserva {
     public int getNumeroPersonas() {
         return this.numeroPersonas;
     }
-
-
-
     public java.lang.String getNombreUsuario() {
         return this.nombreUsuario;
     }
 
     public String getApellidoUsuario() {
         return this.apellidoUsuario;
+    }
+    public void setFechaCreacion(String fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+
+    public void setToursAgregados(ArrayList<Tour> toursAgregados) {
+        this.toursAgregados = toursAgregados;
     }
 
     public ArrayList<Tour> getToursAgregados() {

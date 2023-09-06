@@ -1,16 +1,22 @@
 package Tours;
 
 import Reservas.Reserva;
+import Reservas.ReservaTour;
 
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.text.ParseException;
 
 public class GestorReserva {
 
     private ArrayList<Reserva> reservaciones;
+    private GestorTour gestorTour;
+    private PagoReserva pagoReserva;
 
     public GestorReserva() {
         this.reservaciones = new ArrayList<>();
@@ -18,9 +24,10 @@ public class GestorReserva {
     }
 
     private void leerDatos(){
-        ArrayList<String> paradasList = new ArrayList<>();
-        ArrayList<String> actividadesList = new ArrayList<>();
+        ArrayList<Tour> toursAgregados = new ArrayList<>();
+        ReservaTour reservaTour;
         Tour tour;
+        int i;
 
         try {
             BufferedReader br = new BufferedReader(new FileReader("reservas.txt"));
@@ -28,18 +35,21 @@ public class GestorReserva {
             String linea = "";
             while ((linea = br.readLine()) != null) {
                 String[] datos = linea.split(",");
+                int tamanio = datos.length;
 
-                String[] paradas = datos[3].replace('[', ' ').replace(']', ' ').trim().split(";");
-                String[] actividades = datos[4].replace('[', ' ').replace(']', ' ').trim().split(";");
-                String fechaInicio = datos[8];
-                String fechaFin =  datos[datos.length-1];
+                //Para leer en caso de que haya más de 1 tour
+                for (i = 4; i < tamanio; i++) {
+                    tour = leerTours(datos[i]);
+                    toursAgregados.add(tour);
+                }
 
-                Collections.addAll(paradasList, paradas);
+                String fechaCreacion = datos[2];
 
-                Collections.addAll(actividadesList, actividades);
+                reservaTour = new ReservaTour(datos[0], datos[1], Integer.parseInt(datos[3]),gestorTour, pagoReserva);
+                reservaTour.setFechaCreacion(fechaCreacion);
+                reservaTour.setToursAgregados(toursAgregados);
 
-                tour = new Tour(datos[1] , Double.parseDouble(datos[2]),paradasList, actividadesList, datos[5], datos[6],Integer.parseInt(datos[7]), fechaInicio, fechaFin);
-                this.reservaciones.add(tour);
+                this.reservaciones.add(reservaTour);
             }
             br.close();
 
@@ -48,26 +58,53 @@ public class GestorReserva {
         }
     }
 
-    public void removerReserva(Reserva reservaARemover){
-        Reserva reservaACancelar = null;
+    private Tour leerTours(String datos) {
+        Tour tourResultado;
+        ArrayList<String> paradasList = new ArrayList<>();
+        ArrayList<String> actividadesList = new ArrayList<>();
+        Tour tour;
+        String linea = "";
+        String[] datosALeer = datos.split(",");
+
+        String[] paradas = datosALeer[2].replace('[', ' ').replace(']', ' ').trim().split(";");
+        String[] actividades = datosALeer[3].replace('[', ' ').replace(']', ' ').trim().split(";");
+        String fechaInicio = datosALeer[7];
+        String fechaFin =  datosALeer[datosALeer.length-1];
+
+        Collections.addAll(paradasList, paradas);
+
+        Collections.addAll(actividadesList, actividades);
+
+        tourResultado = new Tour(datosALeer[0] , Double.parseDouble(datosALeer[1]),paradasList, actividadesList, datosALeer[4], datosALeer[5],Integer.parseInt(datosALeer[6]), fechaInicio, fechaFin);
+        return tourResultado;
+    }
+
+    public void removerReserva(ReservaTour reservaARemover){
         for (Reserva reserva : this.reservaciones) {
             if (reserva.equals(reservaARemover)) {
-                this.reservaciones.remove(reservaACancelar);
+                this.reservaciones.remove(reserva);
                 break;
             }
         }
     }
-    public void agregarReserva(Reserva reservaAAgregar) {
+
+    public void agregarReserva(ReservaTour reservaAAgregar) {
         this.reservaciones.add(reservaAAgregar);
     }
 
-    public Reserva buscarReserva(String idReserva){
-        for (Reserva reserva: this.reservaciones){
-            if(reserva.getReservaID().equalsIgnoreCase(idReserva)) {
-                return reserva;
-            }
+    public void confirmarReserva(ReservaTour reservaAPagar, String metodoPago) throws ParseException {
+        if (reservaAPagar.tiempoSinConfirmar() > 10) {
+            JOptionPane.showMessageDialog(null,
+                    "La reserva ha excedido el número de días sin confirmar.\n" +
+                            "Por tanto, se cancela automáticamente la reserva.\n" +
+                            "No es posible pagar la reserva.",
+                    "Reserva Tour",
+                    JOptionPane.WARNING_MESSAGE);
+            reservaAPagar.cancelarReserva();
+            this.removerReserva(reservaAPagar);
+        } else {
+            reservaAPagar.confirmarReserva(metodoPago);
         }
-        return null;
     }
 
 }

@@ -4,8 +4,13 @@ import Principal.Login;
 import Principal.Usuario;
 import Reservas.ReservaTour;
 
+<<<<<<< HEAD
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+=======
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+>>>>>>> dc0ea494cb30d8e7d3afd8d20bff455c2cbbde46
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,9 +39,7 @@ public class ModuloTours extends JFrame{
     private JLabel lblFechaConfirmacion;
     private JLabel lblTours;
     private JSpinner spinner1;
-    private JComboBox comboBox1;
     private JLabel lblPersonas;
-    private JLabel lblSeguroCrear;
     private JList list1;
     private JList list2;
     private JLabel lbl1;
@@ -53,6 +56,9 @@ public class ModuloTours extends JFrame{
     private JRadioButton tarjetaRadioButton;
     private JRadioButton transferenciaRadioButton;
     private JRadioButton efectivoRadioButton;
+    private JPanel pnlLista;
+    private JPanel pnlLista2;
+    private JList listToursModificar;
     private Tour tour; //para prueba
     private ReservaTour reservaTour;
     private ReservaTour reservaTourConfirmar;
@@ -61,7 +67,15 @@ public class ModuloTours extends JFrame{
 
     public ModuloTours(String head, Usuario usuarioVerificado){
         super (head);
+<<<<<<< HEAD
         this.usuarioVerificado = usuarioVerificado;
+=======
+
+
+
+
+
+>>>>>>> dc0ea494cb30d8e7d3afd8d20bff455c2cbbde46
 //        panelTours.setVisible(false);
 //        panelReserva.setVisible(false);
 //        mostrarToursDisponiblesButton.addActionListener(e -> {
@@ -120,6 +134,14 @@ public class ModuloTours extends JFrame{
 //                }
 //            }
 //        });
+        //Listener para mostrar los tours
+        pnlCrearReserva.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentShown(ComponentEvent e) {
+                super.componentShown(e);
+                mostrarToursDisponibles(list1);
+            }
+        });
 
         this.setReservasUsuario();
 
@@ -149,20 +171,29 @@ public class ModuloTours extends JFrame{
                 this.comboBox3.addItem(reserva.getNumReserva() + "-" + reserva.getNombreUsuario() + " " + reserva.getApellidoUsuario());
             }
         }
+
+        pnlModificarReserva.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentShown(ComponentEvent e) {
+                super.componentShown(e);
+                mostrarToursDisponibles(listToursModificar);
+            }
+        });
     }
 
-/*    public void crearFrame() {
+    //Metodo para mostrar tours disponibles
+    private void mostrarToursDisponibles(JList list){
+        DefaultListModel<String> model = new DefaultListModel<>();
+        List<Tour> toursDispo = this.gestionTour.getToursDisponibles();
 
-        setSize(670, 500);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setResizable(false);
-        setLocationRelativeTo(null);
-        add(pnlOpcionesTours);
-        setVisible(true);
+        for (Tour i : toursDispo){
+            model.addElement(i.informacionRelevante());
+        }
 
-    }*/
+        list.setModel(model);
+    }
 
-    public void buscarToursDisponibles(){
+   /* public void buscarToursDisponibles(){
         int yPos = 10;
 
         Tour tour1 = new Tour("01", "Tour 1", 100.2, "Guia", "1 mes", 100, gestionReserva);
@@ -271,6 +302,6 @@ public class ModuloTours extends JFrame{
             JOptionPane.showMessageDialog(null,"Aceptado Existosamente");
         });
         panelReserva.add(botonAceptar);
-    }
+    }*/
 
 }
