@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +59,8 @@ public class ModuloTours extends JFrame{
     private JList listToursModificar;
     private Tour tour; //para prueba
     private ReservaTour reservaTour;
-    private ReservaTour reservaTourConfirmar;
+    private ReservaTour reservaTourConfirmar = null;
+    private String metodoPagoConfirmar = "";
 
     List<Tour> tours;
 
@@ -138,7 +140,11 @@ public class ModuloTours extends JFrame{
         btnConfirmar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                try {
+                    gestionReserva.confirmarReserva(reservaTourConfirmar, metodoPagoConfirmar);
+                } catch (ParseException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
         comboBox2.addActionListener(new ActionListener() {
@@ -160,6 +166,24 @@ public class ModuloTours extends JFrame{
                 }
 
                 listTours.setModel(toursEnReservaModel);
+            }
+        });
+        tarjetaRadioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                metodoPagoConfirmar = tarjetaRadioButton.getText();
+            }
+        });
+        transferenciaRadioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                metodoPagoConfirmar = transferenciaRadioButton.getText();
+            }
+        });
+        efectivoRadioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                metodoPagoConfirmar = efectivoRadioButton.getText();
             }
         });
     }
