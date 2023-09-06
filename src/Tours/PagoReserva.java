@@ -9,12 +9,8 @@ import java.util.ArrayList;
 public class PagoReserva {
 
     private double tarifaImpuesto = 0.12;
-    private double tarifaDevolucion = 0.4;
-    private ReservaTour Reserva;
 
-    public PagoReserva(ReservaTour reserva) {
-        this.Reserva = reserva;
-    }
+    public PagoReserva() {}
 
     public float calcularPrecioNeto(ArrayList<Tour> tours) {
         float precioNeto = 0;

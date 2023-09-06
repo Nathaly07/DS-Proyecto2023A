@@ -21,6 +21,8 @@ import Tours.GestorTour;
 
 
 public class ReservaTour extends Reserva {
+    private static int cantidadReservas = 0;
+    private int numReserva;
     private String nombreUsuario;
     private String apellidoUsuario;
     private String fechaCreacion;
@@ -34,6 +36,7 @@ public class ReservaTour extends Reserva {
 
     public ReservaTour(String nombreUsuario, String apellidoUsuario, int numeroPersonas, GestorTour gestorTour, PagoReserva pagoReserva) {
         super(null);
+        this.numReserva = this.cantidadReservas;
         this.nombreUsuario = nombreUsuario;
         this.apellidoUsuario = apellidoUsuario;
         this.fechaCreacion = dateFormat.format(Calendar.getInstance().getTime());
@@ -43,6 +46,7 @@ public class ReservaTour extends Reserva {
         this.fechaConfirmacionPago = "Sin confirmar";
         this.gestorTour = gestorTour;
         this.pagoReserva = pagoReserva;
+        this.cantidadReservas += 1;
     }
 
     public void setNumeroPersonas(int numeroPersonas) {
@@ -91,6 +95,7 @@ public class ReservaTour extends Reserva {
                     "Reserva Tour",
                     JOptionPane.WARNING_MESSAGE);
         }
+        this.cantidadReservas -= 1;
     }
 
     @Override
