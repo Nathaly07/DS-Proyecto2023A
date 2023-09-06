@@ -1,7 +1,11 @@
 package Tours;
 
+import Principal.Login;
+import Principal.Usuario;
 import Reservas.ReservaTour;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +18,7 @@ public class ModuloTours extends JFrame{
     private GestorTour gestionTour = new GestorTour();
     private GestorReserva gestionReserva = new GestorReserva();
     private PagoReserva pagoReserva = new PagoReserva();
+    private Usuario usuarioVerificado;
     public JPanel pnlOpcionesTours;
     private JButton mostrarToursDisponiblesButton;
     private JPanel panelTours;
@@ -50,11 +55,13 @@ public class ModuloTours extends JFrame{
     private JRadioButton efectivoRadioButton;
     private Tour tour; //para prueba
     private ReservaTour reservaTour;
+    private ReservaTour reservaTourConfirmar;
 
     List<Tour> tours;
 
-    public ModuloTours(String head){
+    public ModuloTours(String head, Usuario usuarioVerificado){
         super (head);
+        this.usuarioVerificado = usuarioVerificado;
 //        panelTours.setVisible(false);
 //        panelReserva.setVisible(false);
 //        mostrarToursDisponiblesButton.addActionListener(e -> {
@@ -114,6 +121,34 @@ public class ModuloTours extends JFrame{
 //            }
 //        });
 
+        this.setReservasUsuario();
+
+        btnConfirmar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        comboBox2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String opcion = (String)comboBox2.getSelectedItem();
+                int numReserva = Integer.parseInt(opcion.split("-")[0]);
+                reservaTourConfirmar = gestionReserva.buscarReserva(numReserva);
+            }
+        });
+    }
+
+    public void setReservasUsuario() {
+        String nombreUsuario = this.usuarioVerificado.getNombre();
+        String apellidoUsuario = this.usuarioVerificado.getApellido();
+
+        for (ReservaTour reserva: this.gestionReserva.getReservaciones) {
+            if ((reserva.getNombreUsuario().equalsIgnoreCase(nombreUsuario)) && (reserva.getApellidoUsuario().equalsIgnoreCase(apellidoUsuario))) {
+                this.comboBox2.addItem(reserva.getNumReserva() + "-" + reserva.getNombreUsuario() + " " + reserva.getApellidoUsuario());
+                this.comboBox3.addItem(reserva.getNumReserva() + "-" + reserva.getNombreUsuario() + " " + reserva.getApellidoUsuario());
+            }
+        }
     }
 
 /*    public void crearFrame() {

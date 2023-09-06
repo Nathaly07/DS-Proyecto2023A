@@ -53,8 +53,22 @@ public class ReservaTour extends Reserva {
         this.numeroPersonas = numeroPersonas;
     }
 
+    public int getNumReserva() {
+        return this.numReserva;
+    }
+
     public int getNumeroPersonas() {
         return this.numeroPersonas;
+    }
+
+
+
+    public java.lang.String getNombreUsuario() {
+        return this.nombreUsuario;
+    }
+
+    public String getApellidoUsuario() {
+        return this.apellidoUsuario;
     }
 
     public ArrayList<Tour> getToursAgregados() {
