@@ -3,11 +3,14 @@ package Tours;
 import Reservas.Reserva;
 import Reservas.ReservaTour;
 
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.text.ParseException;
 
 public class GestorReserva {
 
@@ -76,17 +79,32 @@ public class GestorReserva {
         return tourResultado;
     }
 
-    public void removerReserva(Reserva reservaARemover){
-        Reserva reservaACancelar = null;
+    public void removerReserva(ReservaTour reservaARemover){
         for (Reserva reserva : this.reservaciones) {
             if (reserva.equals(reservaARemover)) {
-                this.reservaciones.remove(reservaACancelar);
+                this.reservaciones.remove(reserva);
                 break;
             }
         }
     }
-    public void agregarReserva(Reserva reservaAAgregar) {
+
+    public void agregarReserva(ReservaTour reservaAAgregar) {
         this.reservaciones.add(reservaAAgregar);
+    }
+
+    public void confirmarReserva(ReservaTour reservaAPagar) throws ParseException {
+        if (reservaAPagar.tiempoSinConfirmar() > 10) {
+            JOptionPane.showMessageDialog(null,
+                    "La reserva ha excedido el número de días sin confirmar.\n" +
+                            "Por tanto, se cancela automáticamente la reserva.\n" +
+                            "No es posible pagar la reserva.",
+                    "Reserva Tour",
+                    JOptionPane.WARNING_MESSAGE);
+            reservaAPagar.cancelarReserva();
+            this.removerReserva(reservaAPagar);
+        } else {
+            //pagoReserva.pagar();
+        }
     }
 
 }
