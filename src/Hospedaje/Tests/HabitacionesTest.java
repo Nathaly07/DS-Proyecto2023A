@@ -1,13 +1,13 @@
 package Hospedaje.Tests;
 
-import Hospedaje.Habitaciones.Gestion_Habitaciones;
+import Hospedaje.Habitaciones.GestionHabitaciones;
 import Hospedaje.Habitaciones.Habitacion;
 
 import java.util.List;
 
 public class HabitacionesTest {
     public static void main(String[] args) {
-        Gestion_Habitaciones gestion_habitaciones = new Gestion_Habitaciones();
+        GestionHabitaciones gestion_habitaciones = new GestionHabitaciones();
         // Habitaciones Totales
         List<Habitacion> habitaciones = gestion_habitaciones.getHabitaciones();
         System.out.println("Habitaciones totales: " + habitaciones.size());

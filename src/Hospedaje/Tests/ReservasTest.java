@@ -1,17 +1,15 @@
 package Hospedaje.Tests;
 
-import Hospedaje.Habitaciones.Gestion_Habitaciones;
-import Hospedaje.Habitaciones.Habitacion;
-import Hospedaje.Reservas.Gestion_Reservas;
+import Hospedaje.Habitaciones.GestionHabitaciones;
+import Hospedaje.Reservas.GestionReservas;
 import Hospedaje.Reservas.ReservaHospedaje;
-import Reservas.Reserva;
 
 import java.util.List;
 
 public class ReservasTest {
     public static void main(String[] args) {
-        Gestion_Habitaciones gestion_habitaciones = new Gestion_Habitaciones();
-        Gestion_Reservas gestion_reservas = new Gestion_Reservas(gestion_habitaciones);
+        GestionHabitaciones gestion_habitaciones = new GestionHabitaciones();
+        GestionReservas gestion_reservas = new GestionReservas(gestion_habitaciones);
 
         // Reservas Totales
         List<ReservaHospedaje> reservas = gestion_reservas.getReservas();

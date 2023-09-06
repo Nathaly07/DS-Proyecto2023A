@@ -2,19 +2,21 @@ package Hospedaje.Reservas;
 
 import Hospedaje.Criteria.CriteriaDisponibilidadHabitaciones;
 import Hospedaje.Criteria.HospedajeCriteria;
-import Hospedaje.Habitaciones.Gestion_Habitaciones;
+import Hospedaje.Habitaciones.GestionHabitaciones;
 import Hospedaje.Habitaciones.Habitacion;
 import Hospedaje.Pagos.PagoHospedaje;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Gestion_Reservas {
+public class GestionReservas {
+    private final String filePath = "src/Hospedaje/Reservas/data/reservas.txt";
     private List<ReservaHospedaje> reservas;
-    private Gestion_Habitaciones gestion_habitaciones;
+    private GestionHabitaciones gestion_habitaciones;
 
-    public Gestion_Reservas(Gestion_Habitaciones gestion_habitaciones) {
+    public GestionReservas(GestionHabitaciones gestion_habitaciones) {
         this.gestion_habitaciones = gestion_habitaciones;
         this.reservas = new ArrayList<>();
         Date fechaCreacion = new Date();
@@ -71,5 +73,32 @@ public class Gestion_Reservas {
             }
         }
         return false; // Reserva no encontrada
+    }
+
+
+    private void serialize(GestionReservas user) {
+        try {
+            FileOutputStream fos = new FileOutputStream(filePath);
+            ObjectOutputStream outputStream = new ObjectOutputStream(fos);
+            outputStream.writeObject(user);
+            outputStream.close();
+        } catch (IOException ex) {
+            System.err.println(ex);
+        }
+    }
+
+    private GestionReservas deserialize() {
+        GestionReservas gestionReservas = null;
+
+        try {
+            FileInputStream fis = new FileInputStream(filePath);
+            ObjectInputStream inputStream = new ObjectInputStream(fis);
+            gestionReservas = (GestionReservas) inputStream.readObject();
+            inputStream.close();
+        } catch (IOException | ClassNotFoundException ex) {
+            System.err.println(ex);
+        }
+
+        return gestionReservas;
     }
 }

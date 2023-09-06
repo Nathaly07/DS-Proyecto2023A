@@ -3,10 +3,10 @@ package Hospedaje.Habitaciones;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Gestion_Habitaciones {
+public class GestionHabitaciones {
     private List<Habitacion> habitaciones;
 
-    public Gestion_Habitaciones() {
+    public GestionHabitaciones() {
         habitaciones = new ArrayList<>();
         habitaciones.add(new Habitacion(101, 150.00, 2,  new Hotel("Hotel Quito", "Calle Principal 123", "Quito", 5)));
         habitaciones.add(new Habitacion(102, 200.00, 3,  new Hotel("Hotel Guayaquil", "Avenida Secundaria 456", "Guayaquil", 4)));

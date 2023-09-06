@@ -1,8 +1,8 @@
 package Hospedaje.Tests;
 
-import Hospedaje.Habitaciones.Gestion_Habitaciones;
+import Hospedaje.Habitaciones.GestionHabitaciones;
 import Hospedaje.Habitaciones.Habitacion;
-import Hospedaje.Reservas.Gestion_Reservas;
+import Hospedaje.Reservas.GestionReservas;
 import Hospedaje.Reservas.ReservaHospedaje;
 
 import java.text.SimpleDateFormat;
@@ -13,8 +13,8 @@ public class TestCriteriaDisponibilidad {
     public static void main(String[] args) {
         try {
             // Crear una instancia de Gestion_Habitaciones y Gestion_Reservas
-            Gestion_Habitaciones gestionHabitaciones = new Gestion_Habitaciones();
-            Gestion_Reservas gestionReservas = new Gestion_Reservas(gestionHabitaciones);
+            GestionHabitaciones gestionHabitaciones = new GestionHabitaciones();
+            GestionReservas gestionReservas = new GestionReservas(gestionHabitaciones);
 
             // Definir las fechas para buscar habitaciones disponibles
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");

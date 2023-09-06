@@ -31,6 +31,10 @@ public class Habitacion {
         return this.limiteUsuarios;
     }
 
+    public String getCiudad() {
+        return this.hotel.getCiudad();
+    }
+
     public String getInfo(){
         return "\nHabitaciónId: " + this.habitacionID +
                 "\nPrecioPorNoche: " + this.precioPorNoche +
