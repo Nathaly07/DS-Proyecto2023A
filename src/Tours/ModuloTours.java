@@ -62,6 +62,8 @@ public class ModuloTours extends JFrame{
     private ReservaTour reservaTourConfirmar = null;
     private String metodoPagoConfirmar = "";
 
+    private ArrayList<Tour> listatemp = new ArrayList<>();
+
     List<Tour> tours;
 
     public ModuloTours(String head, Usuario usuarioVerificado){
@@ -253,14 +255,22 @@ public class ModuloTours extends JFrame{
     }
 
     public void agregarTour() throws ParseException {
+
         String tours = list1.getSelectedValue().toString();
         String[] nombreTour = tours.split(",");
         String Ntour = nombreTour[0];
-        this.reservaTour.agregarTour(this.gestionTour.buscarTour(Ntour));
+        this.listatemp.add(this.gestionTour.buscarTour(Ntour));
     }
 
     public void eliminarTour(){
-        this.reservaTour.removerTourAgregado((Tour)list1.getSelectedValue());
+        String tours = list1.getSelectedValue().toString();
+        String[] nombreTour = tours.split(",");
+        String Ntour = nombreTour[0];
+        this.listatemp.remove(this.gestionTour.buscarTour(Ntour));
+    }
+
+    public void crearReserva(){
+        reservaTour = new ReservaTour(this.usuarioVerificado.getNombre(), this.usuarioVerificado.getApellido(), (int)this.spinner1.getValue() ,this.gestionTour, this.pagoReserva);
     }
 
    /* public void buscarToursDisponibles(){
