@@ -10,12 +10,17 @@ public class CarritoAsientos {
 
     private List<Asiento> asientos;
     private  Vuelo vuelo;
-public CarritoAsientos(){
+    public CarritoAsientos(){
     asientos = new ArrayList<>();
 }
     public CarritoAsientos(Vuelo vuelo) {
         this.vuelo = vuelo;
         asientos = new ArrayList<>();
+    }
+
+    public CarritoAsientos(List<Asiento> asientos, Vuelo vuelo) {
+        this.asientos = asientos;
+        this.vuelo = vuelo;
     }
 
     public void añadir(Asiento a) {
