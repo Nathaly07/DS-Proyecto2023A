@@ -3,11 +3,6 @@ package Tours;
 import Principal.Login;
 import Principal.Usuario;
 import Reservas.ReservaTour;
-
-<<<<<<< HEAD
-
-=======
->>>>>>> 33d1e6317feafa855f96f7b9156e52b643db3759
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
@@ -61,6 +56,7 @@ public class ModuloTours extends JFrame{
     private JPanel pnlLista;
     private JPanel pnlLista2;
     private JList listToursModificar;
+    private JScrollPane scrollPanelLista;
     private Tour tour; //para prueba
     private ReservaTour reservaTour;
     private ReservaTour reservaTourConfirmar = null;
