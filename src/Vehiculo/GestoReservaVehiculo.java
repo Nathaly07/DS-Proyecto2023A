@@ -3,7 +3,6 @@ package Vehiculo;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-//TODO: La clase gestor es un antipatrón podemos usar solo la renta en lugar del gestor.
 public class GestoReservaVehiculo {
     private static ArrayList<ReservaVehiculo> rentas;
     private static ReservaVehiculo renta = new ReservaVehiculo();
@@ -32,7 +31,7 @@ public class GestoReservaVehiculo {
 
     public  void verInfoCarrito(JTable table, JPanel panel){
         panel.removeAll();
-        panel.setLayout(new GridLayout(0,1));
+        panel.setLayout(new BoxLayout(panel,1));
         if(rentas.isEmpty()){
             JOptionPane.showMessageDialog(null,"NO HAY NINGUNA RENTA");
         }else{

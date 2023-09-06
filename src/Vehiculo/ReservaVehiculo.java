@@ -61,6 +61,8 @@ public class ReservaVehiculo {
         DefaultTableModel model = new DefaultTableModel();
 
         JButton btnPagar = new JButton("Pagar");
+        JButton btnModificar = new JButton("Modificar");
+        JButton btnEliminarReserva = new JButton("Eliminar");
 
         btnPagar.addActionListener(e -> {
             PagoReservaVehiculos pagoRentaVehiculos = new PagoReservaVehiculos(calcularReserva(),"transferencia");
@@ -84,6 +86,8 @@ public class ReservaVehiculo {
         panel.add(new JScrollPane(table));
         panel.add(precioFinal);
         panel.add(btnPagar);
+        panel.add(btnModificar);
+        panel.add(btnEliminarReserva);
         panel.revalidate();
         panel.repaint();
 
