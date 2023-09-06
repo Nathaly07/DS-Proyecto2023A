@@ -253,7 +253,10 @@ public class ModuloTours extends JFrame{
     }
 
     public void agregarTour() throws ParseException {
-        this.reservaTour.agregarTour((Tour)list1.getSelectedValue());
+        String tours = list1.getSelectedValue().toString();
+        String[] nombreTour = tours.split(",");
+        String Ntour = nombreTour[0];
+        this.reservaTour.agregarTour(this.gestionTour.buscarTour(Ntour));
     }
 
     public void eliminarTour(){
