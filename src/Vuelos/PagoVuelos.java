@@ -1,17 +1,11 @@
 package Vuelos;
 
-import Reservas.Reserva;
-import Reservas.ReservaAsiento;
-import Vuelos.Logica.Asiento;
-import Vuelos.Logica.CarritoAsientos;
 import Vuelos.Logica.PagoReservaAsiento;
-import Vuelos.Logica.Vuelo;
+import Vuelos.Logica.ReservaAsiento;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ContainerAdapter;
-import java.awt.event.ContainerEvent;
 
 public class PagoVuelos extends JFrame {
 
@@ -19,78 +13,29 @@ public class PagoVuelos extends JFrame {
     public JPanel JPPagoVuelos;
     private JButton cerrarButton;
     private JButton pagarButton;
-    private JTextField textField1;
-    private JTextField textField2;
-    private JTextField textField5;
-    private JTextField textField6;
-    private JTextField textField7;
-    private JTextField textField8;
-    private JTextField textField9;
-
-    private PagoReservaAsiento pagoReservaAsiento;
-    private double costoTotal;
-    private Reserva reserva;
-
-    private Vuelo vuelo;
-
-    private Asiento asiento;
-
-    private SelectorDeAsientos selectorDeAsientos;
-    private CarritoAsientos carrito;
-
-
-
-    public PagoVuelos() {
+    private JTextField numVip;
+    private JTextField numTu;
+    private JTextField valorVip;
+    private JTextField valortur;
+    private JTextField subtotal;
+    private JTextField iva;
+    private JTextField total;
+    private PagoReservaAsiento pago;
+    private ModuloVuelos moduloVuelos;
+    public PagoVuelos(ModuloVuelos moduloVuelos) {
+        this.moduloVuelos = moduloVuelos;
         cerrarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose();
+                moduloVuelos.cerrarDialog();
             }
         });
-        textField1.addActionListener(new ActionListener() {
+        pagarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                pagoReservaAsiento.cantidadAsientosPremiumReservados();
-            }
-        });
-        textField2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                pagoReservaAsiento.cantidadAsientosTuristaReservados();
-            }
-        });
+                pago.Pagar();
+                moduloVuelos.cerrarDialog();
 
-        textField5.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                pagoReservaAsiento.calcularCostoTotalPremium();
-            }
-        });
-
-        textField6.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                pagoReservaAsiento.calcularCostoTotalTurista();
-            }
-        });
-        textField7.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                pagoReservaAsiento.calcularCostoTotalReservados();
-            }
-        });
-
-        textField8.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                pagoReservaAsiento.calcularIVA();
-            }
-        });
-
-        textField9.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                pagoReservaAsiento.calcularCostoTotal();
             }
         });
     }
@@ -104,9 +49,15 @@ public class PagoVuelos extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
     }
+    public void InicioDatos(ReservaAsiento reserva){
+        numVip.setText(reserva.cantidadAsientosReservadosPremium() +"");
+        numTu.setText(reserva.cantidadAsientosReservadosTurista() +"");
+        valorVip.setText(reserva.generarCostoTotalPremium() +"");
+        valortur.setText(reserva.generarCostoTotalTurista() + "" );
+        subtotal.setText(reserva.generarCostoTotal() +"");
+        pago = new PagoReservaAsiento(reserva);
+        iva.setText(pago.calcularIVA()+ "");
+        total.setText(pago.calcularCostoTotalReservados() +"");
 
-
-    public void setAsiento(CarritoAsientos carrito) {
-        this.carrito = carrito;
     }
 }

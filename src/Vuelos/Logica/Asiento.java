@@ -7,7 +7,6 @@ public class Asiento {
 
     private int numero;
     private boolean estaReservado;
-
     private double precio;
     private String tipo;
 
@@ -40,21 +39,12 @@ public class Asiento {
         return estaReservado;
     }
 
-
-
     public void CancelarReservaAsiento(){
         this.estaReservado = false;
     }
 
     public void reservar() {
         this.estaReservado = true;
-    }
-
-    @Override
-    public String toString() {
-        String cadena = "num_asiento:" + this.numero + " Estado:" + this.estaReservado
-                + " Precio:" + this.precio + " Tipo:" + this.tipo + "Num Fila" + this.numFila;
-        return cadena;
     }
 
     public int getNumFila() {

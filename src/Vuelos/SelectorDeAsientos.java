@@ -196,9 +196,9 @@ public class SelectorDeAsientos extends JFrame{
         confirmarSelecciónButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                moduloVuelos.crearReserva(carrito);
+                CarritoAsientos aux = carrito;
+                moduloVuelos.crearReserva(aux);
                 moduloVuelos.actualizar();
-                carrito.Limpiar();
                 habilitarBotones(false);
                 carrito.mostarCarrito(table1);
                 moduloVuelos.cerrarDialog();
@@ -219,6 +219,8 @@ public class SelectorDeAsientos extends JFrame{
     public void setVuelo(Vuelo v){
         this.v = v;
         carrito = new CarritoAsientos(v);
+        carrito.Limpiar();
+        carrito.mostarCarrito(table1);
 
     }
     public void crearframe() {
@@ -280,7 +282,4 @@ public class SelectorDeAsientos extends JFrame{
         return asientosHabilitados;
     }
 
-    public  CarritoAsientos getCarrito() {
-        return carrito;
-    }
 }

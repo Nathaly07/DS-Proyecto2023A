@@ -1,6 +1,6 @@
-package Reservas;
+package Vuelos.Logica;
 
-import Principal.Login;
+import Reservas.Reserva;
 import Vuelos.Logica.Asiento;
 import Vuelos.Logica.CarritoAsientos;
 import Vuelos.Logica.Vuelo;
@@ -9,31 +9,19 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-public class ReservaAsiento extends Reserva{
+public class ReservaAsiento {
 
     private String fecha;
     private String fecha_vuelo;
     private double costo;
-    //private int numeroDeReservas;
+    private EstadoReserva estado;
 
     private CarritoAsientos reservas;
 
-    public ReservaAsiento(Login login, CarritoAsientos reservas) {
-        //super(login);
-        //String IDReserva = String.valueOf((numeroDeReservas++));
+    public ReservaAsiento(CarritoAsientos reservas) {
         this.reservas = reservas;
         this.fecha_vuelo = reservas.getVuelo().getFecha();
-
-    }
-
-    @Override
-    public void cancelarReserva() {
-
-    }
-
-    @Override
-    public void modificarReserva() {
-
+        this.estado = EstadoReserva.Pendiente;
     }
 
     public void reservar() {
@@ -42,12 +30,15 @@ public class ReservaAsiento extends Reserva{
         }
     }
 
-    public void cancelarReserva(Asiento a) {
-        reservas.eliminar(a);
+    public void cancelarReserva() {
+        for(Asiento a: reservas.getAsientos()){
+            a.CancelarReservaAsiento();
+        }
+        this.CambiarEstado(EstadoReserva.cancelado);
     }
-    public void crearReserva(String fecha){
+    public void crearReserva(){
         this.costo = generarCostoTotal();
-        this.fecha_vuelo = fecha;
+        this.fecha_vuelo = reservas.getVuelo().getFecha();
         this.fecha = fechaAutomatica();
     }
 
@@ -55,21 +46,9 @@ public class ReservaAsiento extends Reserva{
 
     }
 
-    public String imprimirDetalle() {
-        String cadena = "Fecha Reserva: " + fecha +"\nfecha de vuelo: " + fecha_vuelo+
-                "\n costo: " + costo + "\nAsientos Reservados:\n";
-        for (Asiento a : reservas.getAsientos()){
-            cadena += a.toString();
-        }
-        return cadena;
-    }
 
     public double generarCostoTotal() {
-        double total  = 0.0;
-        for (Asiento a : reservas.getAsientos()){
-            total += a.getPrecio();
-        }
-        return total;
+        return generarCostoTotalPremium()+ generarCostoTotalTurista();
     }
     private String fechaAutomatica(){
         LocalDate fechaActual = LocalDate.now();
@@ -83,16 +62,15 @@ public class ReservaAsiento extends Reserva{
     }
 
     public int cantidadAsientosReservadosPremium() {
-        int cantidad = 0;
-        return cantidadReserva("Premium", cantidad);
+        return cantidadReserva("Premium");
     }
 
     public int cantidadAsientosReservadosTurista() {
-        int cantidad = 0;
-        return cantidadReserva("Turista", cantidad);
+        return cantidadReserva("Turista");
     }
 
-    private int cantidadReserva(String tipo, int cantidad) {
+    private int cantidadReserva(String tipo) {
+        int cantidad= 0;
         for (Asiento a : reservas.getAsientos()) {
             if (a.getTipo().equalsIgnoreCase(tipo)) {
                 cantidad++;
@@ -121,8 +99,21 @@ public class ReservaAsiento extends Reserva{
         }
         return total;
     }
+
+    public EstadoReserva getEstado() {
+        return estado;
+    }
+
     public CarritoAsientos getReservas() {
-        return reservas;
+        return  this.reservas;
+    }
+
+    public void CambiarEstado(EstadoReserva estado){
+        this.estado = estado;
+    }
+
+    public String getFecha() {
+        return fecha;
     }
 }
 

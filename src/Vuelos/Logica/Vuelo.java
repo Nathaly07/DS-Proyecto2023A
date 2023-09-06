@@ -44,11 +44,11 @@ public class Vuelo {
         int cantidadFilaTurista = 10;
 
         for(int numeroFilaPremium = 1; numeroFilaPremium <= cantidadFilaPremium; numeroFilaPremium++){
-            crearAsiento(numeroAsientoPorFila, (int) duracion, precioPremium, "Clase Premium", numeroFilaPremium);
+            crearAsiento(numeroAsientoPorFila, (int) duracion, precioPremium, "Premium", numeroFilaPremium);
         }
 
         for(int numeroFilaTurista = 5; numeroFilaTurista <= cantidadFilaTurista; numeroFilaTurista++){
-            crearAsiento(numeroAsientoPorFila, (int) duracion, precioTurista, "Clase Turista", numeroFilaTurista);
+            crearAsiento(numeroAsientoPorFila, (int) duracion, precioTurista, "Turista", numeroFilaTurista);
         }
     }
 
@@ -119,8 +119,15 @@ public class Vuelo {
         return asientos;
     }
 
-    public int getNumeroAsientos() {
-        return numeroAsientos;
+
+    public int asientosDisponibles(){
+        int contador = 0;
+        for(Asiento a: this.asientos){
+            if(a.isEstaReservado() == false){
+                contador++;
+            }
+        }
+        return contador;
     }
 
     public List<Integer> getFila(int fila){
