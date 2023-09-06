@@ -4,13 +4,12 @@ import Principal.Login;
 import Principal.Usuario;
 import Reservas.ReservaTour;
 
-<<<<<<< HEAD
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-=======
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
->>>>>>> dc0ea494cb30d8e7d3afd8d20bff455c2cbbde46
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -138,6 +137,26 @@ public class ModuloTours extends JFrame{
 
         this.setReservasUsuario();
 
+        btnAgregarTour.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    agregarTour();
+                } catch (ParseException ex) {
+                    throw new RuntimeException(ex);
+                }
+                mostrarReserva(list1);
+            }
+        });
+
+        btnEliminarTour.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                eliminarTour();
+                mostrarReserva(list1);
+            }
+        });
+
         btnConfirmar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -187,6 +206,24 @@ public class ModuloTours extends JFrame{
         }
 
         list.setModel(model);
+    }
+
+    public void mostrarReserva(JList list){
+        DefaultListModel<String> model = new DefaultListModel<>();
+        ArrayList<Tour> tours = this.reservaTour.getToursAgregados();
+
+        for(Tour i: tours){
+            model.addElement(i.informacionRelevante());
+        }
+        list.setModel(model);
+    }
+
+    public void agregarTour() throws ParseException {
+        this.reservaTour.agregarTour((Tour)list1.getSelectedValue());
+    }
+
+    public void eliminarTour(){
+        this.reservaTour.removerTourAgregado((Tour)list1.getSelectedValue());
     }
 
    /* public void buscarToursDisponibles(){
