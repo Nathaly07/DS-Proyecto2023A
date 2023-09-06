@@ -92,7 +92,7 @@ public class GestorReserva {
         this.reservaciones.add(reservaAAgregar);
     }
 
-    public void confirmarReserva(ReservaTour reservaAPagar) throws ParseException {
+    public void confirmarReserva(ReservaTour reservaAPagar, String metodoPago) throws ParseException {
         if (reservaAPagar.tiempoSinConfirmar() > 10) {
             JOptionPane.showMessageDialog(null,
                     "La reserva ha excedido el número de días sin confirmar.\n" +
@@ -103,7 +103,7 @@ public class GestorReserva {
             reservaAPagar.cancelarReserva();
             this.removerReserva(reservaAPagar);
         } else {
-            //pagoReserva.pagar();
+            reservaAPagar.confirmarReserva(metodoPago);
         }
     }
 
