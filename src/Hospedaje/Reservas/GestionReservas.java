@@ -19,7 +19,6 @@ public class GestionReservas {
 
     public GestionReservas(GestionHabitaciones gestionHabitaciones) {
         this.gestionHabitaciones = gestionHabitaciones;
-        //this.reservas = new ArrayList<ReservaHospedaje>();
         this.reservas = this.leer();
     }
     public List<Habitacion> getHabitacionesDisponibles(Date reservarDesde, Date reservarHasta) {
