@@ -1,6 +1,5 @@
 package Tours;
 
-import Reservas.Reserva;
 import Reservas.ReservaTour;
 
 import javax.swing.*;
@@ -14,7 +13,7 @@ import java.text.ParseException;
 
 public class GestorReserva {
 
-    private ArrayList<Reserva> reservaciones;
+    private ArrayList<ReservaTour> reservaciones;
     private GestorTour gestorTour;
     private PagoReserva pagoReserva;
 
@@ -80,7 +79,7 @@ public class GestorReserva {
     }
 
     public void removerReserva(ReservaTour reservaARemover){
-        for (Reserva reserva : this.reservaciones) {
+        for (ReservaTour reserva : this.reservaciones) {
             if (reserva.equals(reservaARemover)) {
                 this.reservaciones.remove(reserva);
                 break;
@@ -98,13 +97,29 @@ public class GestorReserva {
                     "La reserva ha excedido el número de días sin confirmar.\n" +
                             "Por tanto, se cancela automáticamente la reserva.\n" +
                             "No es posible pagar la reserva.",
-                    "Reserva Tour",
+                    "Gestor Reserva",
                     JOptionPane.WARNING_MESSAGE);
             reservaAPagar.cancelarReserva();
             this.removerReserva(reservaAPagar);
         } else {
             reservaAPagar.confirmarReserva(metodoPago);
         }
+    }
+
+    public ReservaTour buscarReserva(int numReserva) {
+        ReservaTour reservaResultado = null;
+        for (ReservaTour reserva : this.reservaciones) {
+            if (reserva.getNumReserva() == numReserva) {
+                reservaResultado = reserva;
+            }
+        }
+        if (reservaResultado.equals(null)) {
+            JOptionPane.showMessageDialog(null,
+                    "No existe la reserva que se busca.",
+                    "Gestor Reserva",
+                    JOptionPane.WARNING_MESSAGE);
+        }
+        return reservaResultado;
     }
 
 }
