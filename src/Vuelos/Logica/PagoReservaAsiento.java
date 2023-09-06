@@ -1,6 +1,6 @@
 package Vuelos.Logica;
 
-import Reservas.ReservaAsiento;
+import Vuelos.ReservaAsiento;
 
 import java.util.List;
 

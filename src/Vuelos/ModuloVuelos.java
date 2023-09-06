@@ -1,7 +1,6 @@
 package Vuelos;
 
 import Principal.Login;
-import Reservas.ReservaAsiento;
 import Vuelos.Logica.*;
 
 import javax.swing.*;
