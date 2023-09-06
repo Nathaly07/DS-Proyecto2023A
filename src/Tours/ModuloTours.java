@@ -4,13 +4,10 @@ import Principal.Login;
 import Principal.Usuario;
 import Reservas.ReservaTour;
 
-<<<<<<< HEAD
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-=======
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
->>>>>>> dc0ea494cb30d8e7d3afd8d20bff455c2cbbde46
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -149,10 +146,20 @@ public class ModuloTours extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 String opcion = (String)comboBox2.getSelectedItem();
                 int numReserva = Integer.parseInt(opcion.split("-")[0]);
+
                 reservaTourConfirmar = gestionReserva.buscarReserva(numReserva);
                 lblNPersonas.setText(lblNPersonas.getText() + " " + reservaTourConfirmar.getNumeroPersonas());
                 lblFechaCreacion.setText(lblFechaCreacion.getText() + " " + reservaTourConfirmar.getFechaCreacion());
-                lblFechaConfirmacion.setText(lblFechaConfirmacion.getText() + " " reservaTourConfirmar.getFechaConfirmacionPago())
+                lblFechaConfirmacion.setText(lblFechaConfirmacion.getText() + " " reservaTourConfirmar.getFechaConfirmacionPago());
+
+                DefaultListModel toursEnReservaModel = new DefaultListModel<>();
+                ArrayList<Tour> toursEnReservaList = reservaTourConfirmar.getToursAgregados();
+
+                for(Tour tour: toursEnReservaList) {
+                    toursEnReservaModel.addElement(tour.informacionRelevante());
+                }
+
+                listTours.setModel(toursEnReservaModel);
             }
         });
     }
