@@ -21,7 +21,8 @@ import Tours.GestorTour;
 
 
 public class ReservaTour extends Reserva {
-    private Usuario usuario;
+    private String nombreUsuario;
+    private String apellidoUsuario;
     private String fechaCreacion;
     private boolean estadoReserva;
     private int numeroPersonas;
@@ -31,9 +32,10 @@ public class ReservaTour extends Reserva {
     private PagoReserva pagoReserva;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/M/yy");
 
-    public ReservaTour(Usuario usuario, int numeroPersonas, GestorTour gestorTour, PagoReserva pagoReserva, Login login) {
-        super(login);
-        this.usuario = usuario;
+    public ReservaTour(String nombreUsuario, String apellidoUsuario, int numeroPersonas, GestorTour gestorTour, PagoReserva pagoReserva) {
+        super(null);
+        this.nombreUsuario = nombreUsuario;
+        this.apellidoUsuario = apellidoUsuario;
         this.fechaCreacion = dateFormat.format(Calendar.getInstance().getTime());
         this.estadoReserva = false;
         this.numeroPersonas = numeroPersonas;
