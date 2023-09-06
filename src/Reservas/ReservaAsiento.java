@@ -5,29 +5,32 @@ import Vuelos.Logica.CarritoAsientos;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-public class ReservaAsiento extends Reserva{
+public class ReservaAsiento {
 
     private String fecha;
     private String fecha_vuelo;
     private double costo;
+    protected String usuarioID;
+    protected String reservaID;
     //private int numeroDeReservas;
 
     private CarritoAsientos reservas;
-
+    //TODO: eliminar los ID's de usuario->Instanciar un Login
     public ReservaAsiento( String IDUsuario, String IDReserva, CarritoAsientos reservas) {
-        super(IDUsuario,IDReserva);
         //String IDReserva = String.valueOf((numeroDeReservas++));
+        this.reservaID = IDReserva;
+        this.usuarioID = IDUsuario;
         this.reservas = reservas;
         this.fecha_vuelo = reservas.getVuelo().getFecha();
 
     }
 
-    @Override
+    //TODO: implementar de forma individual los metodos
     public void cancelarReserva() {
 
     }
 
-    @Override
+
     public void modificarReserva() {
 
     }

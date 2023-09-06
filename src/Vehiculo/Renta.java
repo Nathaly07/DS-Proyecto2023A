@@ -1,21 +1,18 @@
 package Vehiculo;
 
-import Reservas.Reserva;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-public class Renta extends Reserva {
+public class Renta  {
     ArrayList<Vehiculo> vehiculos;
     private String ciudadRetorno, ciudadDeEntrega, estadoRenta;
-    private int idArrendatario;
+    private int idArrendatario; //TODO: eliminar el id Del Arrendatario
     private Date fechaInicio, fechaRetorno;
 
     public Renta(){
-        super("1","rv1"); //TODO: debemos ver que cambie este, no tratar de mandarle en el constructor quemado
         this.estadoRenta="NO PAGADO";
         this.vehiculos = new ArrayList<>();
     }
@@ -89,15 +86,13 @@ public class Renta extends Reserva {
 
     }
 
-    //Metodos heredados del padre
-    @Override
     public void cancelarReserva() {
+        //TODO IMPLEMENTAR
 
     }
 
-    @Override
     public void modificarReserva() {
-
+        //TODO IMPLEMENTAR
     }
     public void recolectarDatosRenta(String ciudadOrigen, String ciudadRetorno, Date fechaFinal, Date fechaInicio){
         this.ciudadRetorno = ciudadRetorno;

@@ -1,5 +1,4 @@
 package Tours;
-import Reservas.Reserva;
 import Reservas.ReservaTour;
 
 import java.util.ArrayList;

@@ -68,7 +68,7 @@ public class ConfirmarReserva extends JFrame{
     public void agregarReservaATabla(ReservaHospedaje reserva) {
         // Agregar una nueva fila al modelo de la tabla
         tbModeloReservas.addRow(new Object[]{
-                reserva.getReservaID(),
+                reserva.getReservaId(),
                 reserva.getHabitaciones()[0].getHotel().getNombre(),
                 reserva.getHabitaciones()[0].getHotel().getCiudad(),
                 reserva.getHabitaciones()[0].getPrecioPorNoche(),
