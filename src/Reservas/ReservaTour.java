@@ -53,6 +53,14 @@ public class ReservaTour extends Reserva {
         return this.numeroPersonas;
     }
 
+    public void setFechaCreacion(String fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+
+    public void setToursAgregados(ArrayList<Tour> toursAgregados) {
+        this.toursAgregados = toursAgregados;
+    }
+
     public ArrayList<Tour> getToursAgregados() {
         return this.toursAgregados;
     }
