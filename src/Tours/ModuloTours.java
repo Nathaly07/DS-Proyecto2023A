@@ -67,15 +67,8 @@ public class ModuloTours extends JFrame{
 
     public ModuloTours(String head, Usuario usuarioVerificado){
         super (head);
-<<<<<<< HEAD
         this.usuarioVerificado = usuarioVerificado;
-=======
 
-
-
-
-
->>>>>>> dc0ea494cb30d8e7d3afd8d20bff455c2cbbde46
 //        panelTours.setVisible(false);
 //        panelReserva.setVisible(false);
 //        mostrarToursDisponiblesButton.addActionListener(e -> {
@@ -157,6 +150,9 @@ public class ModuloTours extends JFrame{
                 String opcion = (String)comboBox2.getSelectedItem();
                 int numReserva = Integer.parseInt(opcion.split("-")[0]);
                 reservaTourConfirmar = gestionReserva.buscarReserva(numReserva);
+                lblNPersonas.setText(lblNPersonas.getText() + " " + reservaTourConfirmar.getNumeroPersonas());
+                lblFechaCreacion.setText(lblFechaCreacion.getText() + " " + reservaTourConfirmar.getFechaCreacion());
+                lblFechaConfirmacion.setText(lblFechaConfirmacion.getText() + " " reservaTourConfirmar.getFechaConfirmacionPago())
             }
         });
     }

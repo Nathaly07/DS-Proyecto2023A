@@ -25,11 +25,11 @@ public class ReservaTour extends Reserva {
     private int numReserva;
     private String nombreUsuario;
     private String apellidoUsuario;
-    private String fechaCreacion;
+    private String fechaCreacion = "-";
     private boolean estadoReserva;
     private int numeroPersonas;
     private ArrayList<Tour> toursAgregados;
-    private String fechaConfirmacionPago;
+    private String fechaConfirmacionPago = "-";
     private GestorTour gestorTour;
     private PagoReserva pagoReserva;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/M/yy");
@@ -55,6 +55,14 @@ public class ReservaTour extends Reserva {
 
     public int getNumReserva() {
         return this.numReserva;
+    }
+
+    public String getFechaCreacion() {
+        return this.fechaCreacion;
+    }
+
+    public String getFechaConfirmacionPago() {
+        return this.fechaConfirmacionPago;
     }
 
     public int getNumeroPersonas() {
