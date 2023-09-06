@@ -149,10 +149,10 @@ public class ReservaTour extends Reserva {
         this.toursAgregados.remove(tour);
     }
 
-    public void confirmarReserva() {
+    public void confirmarReserva(String metodoPago) {
         this.estadoReserva = true;
         this.fechaConfirmacionPago = this.dateFormat.format(Calendar.getInstance().getTime());
-        this.pagoReserva.pagar(this.toursAgregados);
+        this.pagoReserva.pagar(this.toursAgregados, metodoPago);
     }
 
 }
