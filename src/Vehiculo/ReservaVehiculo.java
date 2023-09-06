@@ -28,8 +28,9 @@ public class ReservaVehiculo {
         JOptionPane.showMessageDialog(null,"SE HA AGREGADO EL CARRO DE PLACAS: " + vehiculo.getNumPlaca());
     }
 
-    public void eliminarVehiculo(){
-        //TODO Implementar
+    public void eliminarVehiculo(Vehiculo vehiculo){
+        this.vehiculos.remove(vehiculo);
+        JOptionPane.showMessageDialog(null,"SE HA ELIMINADO EL VEHICULO: " + vehiculo.getNumPlaca());
     }
 
     public double calcularReserva(){
@@ -89,7 +90,11 @@ public class ReservaVehiculo {
     }
 
     public void cancelarReserva() {
-        //TODO IMPLEMENTAR
+        for(Vehiculo vehiculos: this.vehiculos){
+            eliminarVehiculo(vehiculos);
+        }
+        this.estadoReserva = "CANCELADO";
+        JOptionPane.showMessageDialog(null, "La reserva ha sido cancelada.");
 
     }
 
