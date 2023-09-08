@@ -59,10 +59,10 @@
             <properties/>
             <border type="none"/>
             <children>
-              <grid id="ac47" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+              <grid id="ac47" layout-manager="GridLayoutManager" row-count="2" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                 <margin top="0" left="0" bottom="0" right="0"/>
                 <constraints>
-                  <tabbedpane title="Reservar"/>
+                  <tabbedpane title="Pagos"/>
                 </constraints>
                 <properties/>
                 <border type="none"/>
@@ -72,12 +72,12 @@
                       <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <text value="Confirmar"/>
+                      <text value="Confirmar reserva"/>
                     </properties>
                   </component>
                   <scrollpane id="c44bf">
                     <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="7" hsize-policy="7" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
+                      <grid row="0" column="0" row-span="1" col-span="3" vsize-policy="7" hsize-policy="7" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties/>
                     <border type="none"/>
@@ -88,40 +88,32 @@
                       </component>
                     </children>
                   </scrollpane>
-                  <component id="e972f" class="javax.swing.JButton" binding="eliminarButton" default-binding="true">
+                  <component id="e972f" class="javax.swing.JButton" binding="cancelarButton" default-binding="true">
                     <constraints>
-                      <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <text value="Eliminar"/>
+                      <text value="Cancelar"/>
                     </properties>
                   </component>
                 </children>
               </grid>
-              <grid id="84a59" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+              <grid id="c6b70" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                 <margin top="0" left="0" bottom="0" right="0"/>
                 <constraints>
-                  <tabbedpane title="Modificar"/>
+                  <tabbedpane title="Registros"/>
                 </constraints>
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <component id="c3d36" class="javax.swing.JButton" binding="cambiarReservaButton" default-binding="true">
-                    <constraints>
-                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <text value="Cambiar Reserva"/>
-                    </properties>
-                  </component>
-                  <scrollpane id="4920c">
+                  <scrollpane id="def2c">
                     <constraints>
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties/>
                     <border type="none"/>
                     <children>
-                      <component id="71922" class="javax.swing.JTable" binding="table3">
+                      <component id="ed448" class="javax.swing.JTable" binding="table3">
                         <constraints/>
                         <properties/>
                       </component>

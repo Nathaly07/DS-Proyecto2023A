@@ -13,13 +13,14 @@ public class MenuHospedaje extends JFrame {
     public JPanel mainPanel;
     private JButton btnReservarHabitaciones;
     private JButton btnModificarReservas;
-    private JButton btnVerReservas;
     private JButton btnSalir;
 
     public MenuHospedaje(Login login){
         this.moduloHospedaje = new ModuloHospedaje();
         this.login = login;
-        btnReservarHabitaciones.addActionListener(e -> reservarHabitaciones());
+        btnReservarHabitaciones.addActionListener(e -> reservar());
+
+        btnModificarReservas.addActionListener(e -> modificarReservas());
 
         btnSalir.addActionListener(e -> {
             Módulos mod = new Módulos(login);
@@ -36,9 +37,14 @@ public class MenuHospedaje extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
-    public void reservarHabitaciones(){
+    public void reservar(){
         CrearReserva crearReserva = new CrearReserva(this.login, this.moduloHospedaje.getGestionReservas());
         crearReserva.crearFrame();
+    }
+
+    public void modificarReservas(){
+        VerReservas verReservas = new VerReservas(this.login, this.moduloHospedaje.getGestionReservas());
+        verReservas.crearFrame();
     }
 
 }

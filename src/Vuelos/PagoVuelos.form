@@ -134,7 +134,7 @@
           <text value="Pagar"/>
         </properties>
       </component>
-      <component id="1180d" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+      <component id="1180d" class="javax.swing.JTextField" binding="numVip">
         <constraints>
           <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -142,9 +142,10 @@
         </constraints>
         <properties>
           <editable value="false"/>
+          <text value=""/>
         </properties>
       </component>
-      <component id="1deaf" class="javax.swing.JTextField" binding="textField2" default-binding="true">
+      <component id="1deaf" class="javax.swing.JTextField" binding="numTu">
         <constraints>
           <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -163,7 +164,7 @@
           <text value="Detalles de la Reserva"/>
         </properties>
       </component>
-      <component id="fe826" class="javax.swing.JTextField" binding="textField5" default-binding="true">
+      <component id="fe826" class="javax.swing.JTextField" binding="valorVip">
         <constraints>
           <grid row="2" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -173,7 +174,7 @@
           <editable value="false"/>
         </properties>
       </component>
-      <component id="535a4" class="javax.swing.JTextField" binding="textField6" default-binding="true">
+      <component id="535a4" class="javax.swing.JTextField" binding="valortur">
         <constraints>
           <grid row="3" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -215,7 +216,7 @@
           <text value="Cantidad total a pagar:"/>
         </properties>
       </component>
-      <component id="ad08" class="javax.swing.JTextField" binding="textField8" default-binding="true">
+      <component id="ad08" class="javax.swing.JTextField" binding="iva">
         <constraints>
           <grid row="7" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -225,7 +226,7 @@
           <editable value="false"/>
         </properties>
       </component>
-      <component id="148e0" class="javax.swing.JTextField" binding="textField7" default-binding="true">
+      <component id="148e0" class="javax.swing.JTextField" binding="subtotal">
         <constraints>
           <grid row="6" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -235,7 +236,7 @@
           <editable value="false"/>
         </properties>
       </component>
-      <component id="d2d96" class="javax.swing.JTextField" binding="textField9" default-binding="true">
+      <component id="d2d96" class="javax.swing.JTextField" binding="total">
         <constraints>
           <grid row="9" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
