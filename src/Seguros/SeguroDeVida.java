@@ -8,8 +8,9 @@ import javax.swing.JOptionPane;
 public class SeguroDeVida extends Seguro {
     private int nivelSeguro;
 
-    public SeguroDeVida(Usuario propietario, String[] beneficiarios, Date fechaDeInicio, Date fechaDeVencimiento, float primaSinRecargo, int nivelSeguro) {
-        super(propietario, beneficiarios, fechaDeInicio, fechaDeVencimiento, primaSinRecargo);
+    public SeguroDeVida(Usuario propietario, String[] beneficiarios, Date fechaDeInicio, Date fechaDeVencimiento,int nivelSeguro, int estado) {
+        super(propietario, beneficiarios, fechaDeInicio, fechaDeVencimiento, estado);
+        super.setPrimaSinRecargo(400.0f);
         this.nivelSeguro = nivelSeguro;
     }
 

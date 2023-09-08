@@ -39,8 +39,8 @@ public class GestorSeguros {
         return segurosCliente;
     }
 
-    public void procesarCreaciónSeguro(Seguro seguro) {
+    public void agregarSeguro(Seguro seguro) {
         this.Seguros.add(seguro);
-        JOptionPane.showMessageDialog((Component)null, "Se ha creado el seguro con éxito.");
+        JOptionPane.showMessageDialog(null, "Tu seguro de VIAJE se ha creado exitosamente.", "Éxito", JOptionPane.WARNING_MESSAGE);
     }
 }

@@ -9,8 +9,9 @@ public class SeguroDeViajes extends Seguro {
     private int destino;
     private String[][] coberturas;
 
-    public SeguroDeViajes(Usuario propietario, String[] beneficiarios, Date fechaDeInicio, Date fechaDeVencimiento, float primaSinRecargo, int destino, String[][] coberturas) {
-        super(propietario, beneficiarios, fechaDeInicio, fechaDeVencimiento, primaSinRecargo);
+    public SeguroDeViajes(Usuario propietario, String[] beneficiarios, Date fechaDeInicio, Date fechaDeVencimiento, int destino, String[][] coberturas, int estado) {
+        super(propietario, beneficiarios, fechaDeInicio, fechaDeVencimiento, estado);
+        super.setPrimaSinRecargo(250.0f);
         this.destino = destino;
         this.coberturas = coberturas;
     }

@@ -19,12 +19,12 @@ public abstract class Seguro {
     private float primaSinRecargo;
     private int estado;
 
-    public Seguro(Usuario propietario, String[] beneficiarios, Date fechaDeInicio, Date fechaDeVencimiento, float primaSinRecargo) {
+    public Seguro(Usuario propietario, String[] beneficiarios, Date fechaDeInicio, Date fechaDeVencimiento, int estado) {
         this.propietario = propietario;
         this.beneficiarios = beneficiarios;
         this.fechaDeInicio = fechaDeInicio;
         this.fechaDeVencimiento = fechaDeVencimiento;
-        this.primaSinRecargo = primaSinRecargo;
+        this.estado = estado;
     }
 
     public boolean renovar(Date fecha) {
@@ -68,6 +68,13 @@ public abstract class Seguro {
 
     public float getPrimaSinRecargo() {
         return this.primaSinRecargo;
+    }
+    public void setPrimaSinRecargo(float valor) {
+        this.primaSinRecargo = valor ;
+    }
+
+    public int getEstado() {
+        return estado;
     }
 
     public void setFechaDeVencimiento(Date fechaDeVencimiento) {

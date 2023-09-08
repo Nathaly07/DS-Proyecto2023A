@@ -9,8 +9,9 @@ public class SeguroMédico extends Seguro {
     private String[] coberturas;
     private int nivelSeguro;
 
-    public SeguroMédico(Usuario propietario, String[] beneficiarios, Date fechaDeInicio, Date fechaDeVencimiento, float primaSinRecargo, String[] coberturas, int nivelSeguro) {
-        super(propietario, beneficiarios, fechaDeInicio, fechaDeVencimiento, primaSinRecargo);
+    public SeguroMédico(Usuario propietario, String[] beneficiarios, Date fechaDeInicio, Date fechaDeVencimiento, String[] coberturas, int nivelSeguro, int estado) {
+        super(propietario, beneficiarios, fechaDeInicio, fechaDeVencimiento, estado);
+        super.setPrimaSinRecargo(200.0f);
         this.coberturas = coberturas;
         this.nivelSeguro = nivelSeguro;
     }
