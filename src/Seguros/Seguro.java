@@ -6,7 +6,6 @@ import javax.swing.*;
 import java.util.Date;
 
 public abstract class Seguro {
-    //Brynator
     private String propietario;
     private String[] condiciones;
     private String[] beneficiarios;
