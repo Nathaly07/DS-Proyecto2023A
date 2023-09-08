@@ -1,40 +1,46 @@
 package Seguros;
 
-import javax.swing.*;
+import Principal.Usuario;
+import java.awt.Component;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Iterator;
+import javax.swing.JOptionPane;
 
 public class GestorSeguros {
-    private ArrayList<Seguro> Seguros = new ArrayList<Seguro>();
+    private ArrayList<Seguro> Seguros = new ArrayList();
+
+    public GestorSeguros() {
+    }
 
     public void GestorSeguros() {
-
     }
 
     public void eliminarSeguro(Seguro seguroEliminar) {
         if (seguroEliminar != null) {
             this.Seguros.remove(seguroEliminar);
-            JOptionPane.showMessageDialog(null, "Seguro eliminado");
+            JOptionPane.showMessageDialog((Component)null, "Seguro eliminado");
         } else {
-            JOptionPane.showMessageDialog(null, "Seguro no eliminado");
+            JOptionPane.showMessageDialog((Component)null, "Seguro no eliminado");
         }
+
     }
 
+    public ArrayList<Seguro> buscarSegurosCliente(Usuario cliente) {
+        ArrayList<Seguro> segurosCliente = new ArrayList();
+        Iterator var3 = this.Seguros.iterator();
 
-    public ArrayList<Seguro> buscarSeguro (String propietario){
-        ArrayList<Seguro> SeguroPropietarios = new ArrayList<>();
-        for (Seguro seguro : Seguros) {
-            if (seguro.getPropietario().equalsIgnoreCase(propietario)) {
-                SeguroPropietarios.add(seguro);
+        while(var3.hasNext()) {
+            Seguro seguro = (Seguro)var3.next();
+            if (cliente.getNombre().equalsIgnoreCase(seguro.getPropietario().getNombre())) {
+                segurosCliente.add(seguro);
             }
         }
-        return SeguroPropietarios;
+
+        return segurosCliente;
     }
 
-    public void procesarCreaciónSeguro (Seguro seguro){
+    public void procesarCreaciónSeguro(Seguro seguro) {
         this.Seguros.add(seguro);
-        JOptionPane.showMessageDialog(null, "Se ha creado el seguro con éxito.");
+        JOptionPane.showMessageDialog((Component)null, "Se ha creado el seguro con éxito.");
     }
-
-
 }

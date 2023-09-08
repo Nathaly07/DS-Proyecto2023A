@@ -61,6 +61,7 @@ public class InterfazSeguros extends JFrame {
 
 
     public InterfazSeguros() {
+        /*
         pnlFechaInicio.add(fechaInicioSeguro);
 
         btnCrearSeguro.addActionListener(e -> {
@@ -225,5 +226,8 @@ public class InterfazSeguros extends JFrame {
         Date fechaFinal = calendar.getTime();
         String fechaVencimiento = formatoDeFecha.format(fechaFinal);
         lblFechaDeVencimiento.setText(fechaVencimiento);
+    }
+
+         */
     }
 }
