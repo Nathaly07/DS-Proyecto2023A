@@ -1,6 +1,7 @@
 package Principal;
 
 import Hospedaje.InterfacesDeUsuario.MenuHospedaje;
+import Seguros.GestorSeguros;
 import Vehiculo.UIVehiculos;
 
 import Seguros.InterfazSeguro;

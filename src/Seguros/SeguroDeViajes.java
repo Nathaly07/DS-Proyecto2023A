@@ -9,30 +9,31 @@ public class SeguroDeViajes extends Seguro {
     private int destino;
     private String[][] coberturas;
 
-    public SeguroDeViajes(Usuario propietario, String[] beneficiarios, Date fechaDeInicio, Date fechaDeVencimiento, int destino, String[][] coberturas, int estado) {
+    public SeguroDeViajes(String estado){
+        super(estado);
+    }
+
+    public SeguroDeViajes(Usuario propietario, String[] beneficiarios, Date fechaDeInicio, Date fechaDeVencimiento, int destino, String[][] coberturas, String estado) {
         super(propietario, beneficiarios, fechaDeInicio, fechaDeVencimiento, estado);
         super.setPrimaSinRecargo(250.0f);
         this.destino = destino;
         this.coberturas = coberturas;
     }
 
-    void indemnizar(float valorGastado, String motivo) {
-        float cantidadAPagar = 0.0F;
-        String[][] var4 = this.coberturas;
-        int var5 = var4.length;
 
-        for(int var6 = 0; var6 < var5; ++var6) {
-            String[] cobertura = var4[var6];
+    @Override
+    void indemnizar(float valorGastado, String motivo) {
+        float cantidadAPagar = 0.0f;
+        for (String[] cobertura : coberturas) {
             if (motivo.equalsIgnoreCase(cobertura[0])) {
-                if (valorGastado <= Float.parseFloat(cobertura[1]) && valorGastado > 0.0F) {
+                if ((valorGastado <= Float.parseFloat(cobertura[1])) && (valorGastado > 0)) {
                     cantidadAPagar = valorGastado;
                 } else {
                     cantidadAPagar = Float.parseFloat(cobertura[1]);
                 }
             }
         }
-
-        JOptionPane.showMessageDialog((Component)null, "Te daremos: " + cantidadAPagar + "$");
+        JOptionPane.showMessageDialog(null, "Te daremos: " + cantidadAPagar + "$");
     }
 
     float calcularPrimaTotal() {

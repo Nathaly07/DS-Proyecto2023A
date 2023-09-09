@@ -15,12 +15,13 @@ public class InterfazSeguroViaje extends JFrame {
     private JButton btnAgregarCobertura;
     private JTextArea areaCoberturasAgregadas;
     private JButton btnCrearSeguro;
-    private SeguroDeViajes seguro;
-    private GestorSeguros gestor;
+    private JButton btnCancelar;
+    private SeguroDeViajes seguroDeViajes= new SeguroDeViajes("Inactivo");
+    private Usuario cliente;
 
 
-    public InterfazSeguroViaje(Usuario cliente, GestorSeguros gestor){
-        this.gestor = gestor;
+
+    public InterfazSeguroViaje(){
         this.btnCrearSeguro.addActionListener((e) -> {
             //Se extraen los beneficiarios-------------------------
             StringTokenizer tokens=new StringTokenizer(this.areaBeneficiarios.getText(), "\n");
@@ -76,10 +77,11 @@ public class InterfazSeguroViaje extends JFrame {
                     i++;
                 }
             }
-            //Creamos el seguro-----------------------------
-            this.seguro = new SeguroDeViajes(cliente,beneficiarios,fechaActual, fechaVencimiento, tipoDestino, coberturas, 1);
-            this.gestor.agregarSeguro(this.seguro);
+
+            this.seguroDeViajes = new SeguroDeViajes(this.cliente,beneficiarios,fechaActual, fechaVencimiento, tipoDestino, coberturas, "Activo");
+            JOptionPane.showMessageDialog(null, "Tu seguro de VIAJE se ha creado exitosamente.", "Éxito", JOptionPane.WARNING_MESSAGE);
             this.setVisible(false);
+
 
         });
 
@@ -126,10 +128,15 @@ public class InterfazSeguroViaje extends JFrame {
 
             }
         });
+        this.btnCancelar.addActionListener((e) -> {
+            this.setVisible(false);
+        });
+
 
     }
 
     public void crearFrame() {
+        this.limpiarEspacio();
         setTitle("Nuevo seguro de viaje");
         setSize(1000, 700);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -139,9 +146,24 @@ public class InterfazSeguroViaje extends JFrame {
         setVisible(true);
     }
 
-    public GestorSeguros getGestor(){
-        return this.gestor;
+    public void limpiarEspacio(){
+        this.areaCoberturasAgregadas.setText("-- Coberturas agregadas");
+        this.areaBeneficiarios.setText("-- Beneficiarios inscritos");
+        this.comboBoxTipoViaje.setSelectedIndex(0);
+        this.seguroDeViajes = new SeguroDeViajes("Inactivo");
+
+
     }
 
+    public void setSeguroDeViajes(SeguroDeViajes seguroDeViajes) {
+        this.seguroDeViajes = seguroDeViajes;
+    }
 
+    public SeguroDeViajes getSeguroDeViajes() {
+        return this.seguroDeViajes;
+    }
+
+    public void setCliente(Usuario cliente) {
+        this.cliente = cliente;
+    }
 }

@@ -8,6 +8,7 @@ package Seguros;
 import Pagos.Pago;
 import Principal.Usuario;
 import java.awt.Component;
+import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
@@ -17,9 +18,12 @@ public abstract class Seguro {
     private Date fechaDeInicio;
     private Date fechaDeVencimiento;
     private float primaSinRecargo;
-    private int estado;
+    private String estado;
 
-    public Seguro(Usuario propietario, String[] beneficiarios, Date fechaDeInicio, Date fechaDeVencimiento, int estado) {
+    public Seguro(String estado){
+        this.estado = estado;
+    }
+    public Seguro(Usuario propietario, String[] beneficiarios, Date fechaDeInicio, Date fechaDeVencimiento, String estado) {
         this.propietario = propietario;
         this.beneficiarios = beneficiarios;
         this.fechaDeInicio = fechaDeInicio;
@@ -27,24 +31,26 @@ public abstract class Seguro {
         this.estado = estado;
     }
 
-    public boolean renovar(Date fecha) {
-        if (fecha.after(this.fechaDeVencimiento)) {
-            this.fechaDeVencimiento = fecha;
-            return true;
-        } else {
-            return false;
-        }
+
+    public void newRenovar() {
+        Date fechaActual = new Date();
+        Calendar calendario = Calendar.getInstance();
+        calendario.setTime(fechaActual);
+        calendario.add(Calendar.MONTH, 1);
+        Date fechaVencimiento = calendario.getTime();
+        this.fechaDeVencimiento = fechaVencimiento;
+        this.setEstado("Activo");
+        JOptionPane.showMessageDialog(null, "Tu seguro se ha renovado exitosamente un mes más.", "Éxito", JOptionPane.WARNING_MESSAGE);
     }
 
-    public void pagar(double montoAPagar, String modoPago, Date fechaPago) {
-        if (montoAPagar == 0.0) {
-            JOptionPane.showMessageDialog((Component)null, "Pago no realizado");
-        } else {
-            Pago pagoSeguros = new Pago(montoAPagar, modoPago, fechaPago);
-            pagoSeguros.pagar();
-        }
 
+    //Ya no es necesario el monto a pagar porque siempre será la prima total. Y la fecha tampoco,
+    //porque, se asume que es la fecha actual.
+    public void pagar(String modoPago) {
+        Pago pagoSeguros = new Pago(this.calcularPrimaTotal(), modoPago, new Date());
+        pagoSeguros.pagar();
     }
+
 
     abstract void indemnizar(float var1, String var2);
 
@@ -73,8 +79,10 @@ public abstract class Seguro {
         this.primaSinRecargo = valor ;
     }
 
-    public int getEstado() {
-        return estado;
+    public String getEstado() {return estado;}
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public void setFechaDeVencimiento(Date fechaDeVencimiento) {
