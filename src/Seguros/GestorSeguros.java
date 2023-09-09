@@ -14,16 +14,18 @@ public class GestorSeguros {
     public GestorSeguros() {
     }
 
+    //Elimina el seguro de la lista.
     public void eliminarSeguro(Seguro seguroEliminar) {
         if (seguroEliminar != null) {
             this.Seguros.remove(seguroEliminar);
-            JOptionPane.showMessageDialog((Component)null, "Seguro eliminado");
+            JOptionPane.showMessageDialog(null, "Seguro eliminado con éxito.", "Adiós", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog((Component)null, "Seguro no eliminado");
+            JOptionPane.showMessageDialog((Component)null, "Seguro no eliminado", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
     }
 
+    //Busca todos los seguros de un solo cliente.
     public ArrayList<Seguro> buscarSegurosCliente(Usuario cliente) {
         ArrayList<Seguro> segurosCliente = new ArrayList<Seguro>();
         for(Seguro seguro: Seguros){
@@ -34,15 +36,18 @@ public class GestorSeguros {
         return segurosCliente;
     }
 
+    //Agrega el seguro a la lista.
     public void agregarSeguro(Seguro seguro) {
         this.Seguros.add(seguro);
 
     }
 
+    //Busca un seguro en específico por medio del indice que tiene en la lista.
     public Seguro buscarSeguroEspecifico(int indice){
         return this.Seguros.get(indice);
     }
 
+    //Solo inserta registros de seguros a el cliente logeado. Sirve para demostración.
     public void insertarSeguros(Usuario cliente) {
         File archivo = null;
         FileReader fr = null;

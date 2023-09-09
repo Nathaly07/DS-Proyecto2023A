@@ -18,11 +18,16 @@ public abstract class Seguro {
     private Date fechaDeInicio;
     private Date fechaDeVencimiento;
     private float primaSinRecargo;
+    //Se colocó un atributo estado para determinar si el seguro esta activo, inactivo o
+    // si el cliente ya cobró la indemnización.
     private String estado;
 
+    //Sirve para inicializar un seguro sin atributos más que el estado en el que está.
     public Seguro(String estado){
         this.estado = estado;
     }
+
+    //Se eliminaron las condiciones. No eran relevantes en el sistema.
     public Seguro(Usuario propietario, String[] beneficiarios, Date fechaDeInicio, Date fechaDeVencimiento, String estado) {
         this.propietario = propietario;
         this.beneficiarios = beneficiarios;
@@ -31,7 +36,8 @@ public abstract class Seguro {
         this.estado = estado;
     }
 
-
+    //Es una nueva forma de renovar el seguro. SOLO lo renueva por un 1 mes.
+    //Además coloca al seguro en estado activo.
     public void newRenovar() {
         Date fechaActual = new Date();
         Calendar calendario = Calendar.getInstance();
@@ -83,9 +89,5 @@ public abstract class Seguro {
 
     public void setEstado(String estado) {
         this.estado = estado;
-    }
-
-    public void setFechaDeVencimiento(Date fechaDeVencimiento) {
-        this.fechaDeVencimiento = fechaDeVencimiento;
     }
 }

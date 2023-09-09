@@ -13,6 +13,7 @@ public class SeguroDeViajes extends Seguro {
         super(estado);
     }
 
+    //Ya se coloca un valor fijo en la prima sin recargo.
     public SeguroDeViajes(Usuario propietario, String[] beneficiarios, Date fechaDeInicio, Date fechaDeVencimiento, int destino, String[][] coberturas, String estado) {
         super(propietario, beneficiarios, fechaDeInicio, fechaDeVencimiento, estado);
         super.setPrimaSinRecargo(250.0f);
@@ -31,9 +32,13 @@ public class SeguroDeViajes extends Seguro {
                 } else {
                     cantidadAPagar = Float.parseFloat(cobertura[1]);
                 }
+                JOptionPane.showMessageDialog(null, "Tu seguro si cubre tu situación.\nTe daremos: "+cantidadAPagar+" $. ", "Solicitud aceptada", JOptionPane.INFORMATION_MESSAGE);
+                this.setEstado("Cobrado");
+                break;
+            }else{
+                JOptionPane.showMessageDialog(null, "Lo sentimos mucho.\nTu seguro de viaje no cubre esa situación.", "Una disculpa", JOptionPane.INFORMATION_MESSAGE);
             }
         }
-        JOptionPane.showMessageDialog(null, "Te daremos: " + cantidadAPagar + "$");
     }
 
     float calcularPrimaTotal() {

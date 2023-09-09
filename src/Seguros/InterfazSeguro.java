@@ -23,18 +23,28 @@ public class InterfazSeguro extends JFrame {
     InterfazSeguroMedico interfazSeguroMedico = new InterfazSeguroMedico();
     InterfazSeguroVida interfazSeguroVida = new InterfazSeguroVida();
     InterfazRenovar interfazRenovar = new InterfazRenovar();
+    InterfazIndemnizar interfazIndemnizar = new InterfazIndemnizar();
+    InterfazCancelar interfazCancelar = new InterfazCancelar();
+
+    //Se pasa el cliente para saber cuales son sus seguros.
     public InterfazSeguro(Usuario cliente){
         this.gestorSeguros = new GestorSeguros();
         this.gestorSeguros.insertarSeguros(cliente);
         this.cliente = cliente;
         this.mostrarSeguros();
-        String[] opcionesNuevoSeguro = new String[]{"Seguro de viaje", "Seguro de médico", "Seguro de vida"};
+
+
 
         this.btnNuevoSeguro.addActionListener((e) -> {
+            //Array para mostrar las opciones al crear un nuevo seguro.
+            String[] opcionesNuevoSeguro = new String[]{"Seguro de viaje", "Seguro de médico", "Seguro de vida"};
+
+            //Dependiendo de que seleccione, se abrirá la ventana correspondiente.
             int tipoSeguro = JOptionPane.showOptionDialog((Component)null, "Por favor, indica que tipo de seguro deseas: ", "Nuevo seguro", -1, 3, (Icon)null, opcionesNuevoSeguro, opcionesNuevoSeguro[0]);
             if (tipoSeguro == -1) {
                 JOptionPane.showMessageDialog((Component)null, "Es una pena. Vuelve si deseas un nuevo seguro.");
             }else if(tipoSeguro == 0){
+                //Es necesario pasar el cliente, ya que, es necesario ligar el seguro con el usuario.
                 this.interfazSeguroViaje.setCliente(cliente);
                 interfazSeguroViaje.crearFrame();
             }else if(tipoSeguro == 1){
@@ -46,18 +56,38 @@ public class InterfazSeguro extends JFrame {
             }
         });
 
+        //Actualiza los datos de los seguros--------------IMPORTANTE????????????????????
         this.mostrarButton.addActionListener((e) -> {
             mostrarSeguros();
         });
 
+
+        //Los otros botones que abren las ventanas. En su mayoria, necesitan el cliente
+        // y el gestor de seguros, porque, dentro de cada interfaz se hace la acción con
+        // el gestor. Y despues, se lo "devuelve" a esta interfaz.
         this.btnRenovar.addActionListener((e) -> {
             this.interfazRenovar = new InterfazRenovar(this.cliente, this.gestorSeguros);
             this.interfazRenovar.crearFrame();
         });
 
+        this.btnIndemnizar.addActionListener((e) -> {
+            this.interfazIndemnizar = new InterfazIndemnizar(this.cliente, this.gestorSeguros);
+            this.interfazIndemnizar.crearFrame();
+        });
+
+        this.btnCancelar.addActionListener((e) -> {
+            this.interfazCancelar = new InterfazCancelar(this.cliente, this.gestorSeguros);
+            this.interfazCancelar.crearFrame();
+        });
+
 
     }
+
+    //Imprime todos los seguros del cliente.
     public void mostrarSeguros() {
+
+        //IMPORTANTE------------ La forma para pasar los objetos entre interfaces es complicado :(
+        // Fue la única forma que se me ocurrió. Esto se explica en el método.
         actualizarDatos();
         ArrayList<Seguro> seguros = this.gestorSeguros.buscarSegurosCliente(this.cliente);
         if(seguros!=null){
@@ -93,6 +123,13 @@ public class InterfazSeguro extends JFrame {
         }
 
     }
+
+    //IMPORTANTE--------------- Cuando la interfaz externa crea un objeto seguro,
+    // o hace un cambio en el gestor que fue transmitido por esta interfaz,
+    // será necesario que lo devuelva aquí, pero, no es sencillo hacer que regrese
+    // de forma "automática" o al finalizar la acción. Por eso, cada vez que hacemos
+    // una acción como crear un seguro, renovarlo, etc. SE DEBE PRESIONAR EL BOTÓN de
+    // "mostrar", de modo que, los cambios se registren en este gestor de seguros.
     public void actualizarDatos(){
         if(!this.interfazSeguroViaje.getSeguroDeViajes().getEstado().equalsIgnoreCase("Inactivo")){
             this.gestorSeguros.agregarSeguro(this.interfazSeguroViaje.getSeguroDeViajes());
@@ -109,6 +146,14 @@ public class InterfazSeguro extends JFrame {
         if(this.interfazRenovar.getGestorSeguros()!=null){
             this.gestorSeguros = this.interfazRenovar.getGestorSeguros();
             this.interfazRenovar.setGestorSeguros(null);
+        }
+        if(this.interfazIndemnizar.getGestorSeguros()!=null){
+            this.gestorSeguros = this.interfazIndemnizar.getGestorSeguros();
+            this.interfazIndemnizar.setGestorSeguros(null);
+        }
+        if(this.interfazCancelar.getGestorSeguros()!=null){
+            this.gestorSeguros = this.interfazCancelar.getGestorSeguros();
+            this.interfazCancelar.setGestorSeguros(null);
         }
     }
 

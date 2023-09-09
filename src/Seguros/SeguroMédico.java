@@ -12,6 +12,8 @@ public class SeguroMédico extends Seguro {
     public SeguroMédico(String estado){
         super(estado);
     }
+
+    //Ya se coloca un valor fijo en la prima sin recargo.
     public SeguroMédico(Usuario propietario, String[] beneficiarios, Date fechaDeInicio, Date fechaDeVencimiento, String[] coberturas, int nivelSeguro, String estado) {
         super(propietario, beneficiarios, fechaDeInicio, fechaDeVencimiento, estado);
         super.setPrimaSinRecargo(200.0f);
@@ -31,10 +33,13 @@ public class SeguroMédico extends Seguro {
                 } else if (nivelSeguro == 3) {
                     porcentajeCubierto = valorGastado;
                 }
+                JOptionPane.showMessageDialog(null, "Tu seguro si cubre tu situación.\nTe daremos: "+porcentajeCubierto+" $. ", "Solicitud aceptada", JOptionPane.INFORMATION_MESSAGE);
+                this.setEstado("Cobrado");
                 break;
+            }else{
+                JOptionPane.showMessageDialog(null, "Lo sentimos mucho.\nTu seguro médico no cubre ese problema.", "Una disculpa", JOptionPane.INFORMATION_MESSAGE);
             }
         }
-        JOptionPane.showMessageDialog(null, "Te daremos: " + porcentajeCubierto + "$");
     }
 
     float calcularPrimaTotal() {

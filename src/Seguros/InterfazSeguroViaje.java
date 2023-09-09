@@ -20,7 +20,7 @@ public class InterfazSeguroViaje extends JFrame {
     private Usuario cliente;
 
 
-
+    //Los siguientes pasos se repiten en la mayoria de interfaces para crear seguros.
     public InterfazSeguroViaje(){
         this.btnCrearSeguro.addActionListener((e) -> {
             //Se extraen los beneficiarios-------------------------
@@ -85,7 +85,7 @@ public class InterfazSeguroViaje extends JFrame {
 
         });
 
-
+        //Agrega el beneficiario al campo de texto de la derecha.
         this.btnAgregarBeneficiario.addActionListener((e) -> {
             String beneficiario = JOptionPane.showInputDialog(null, "Por favor, ingresa el NOMBRE de tu beneficiario", "Nuevo beneficiario", JOptionPane.QUESTION_MESSAGE);
             if(beneficiario != null){
@@ -93,6 +93,7 @@ public class InterfazSeguroViaje extends JFrame {
             }
         });
 
+        //Agrega la cobertura a la zona de texto de la derecha.
         this.btnAgregarCobertura.addActionListener((e) -> {
             String cobertura = JOptionPane.showInputDialog(null,
                     "Por favor, ingresa el NÚMERO de la cobertura a cubrir en el viaje:\n"
@@ -146,13 +147,12 @@ public class InterfazSeguroViaje extends JFrame {
         setVisible(true);
     }
 
+    //Limpia todos los campos. Y setea el seguro que tiene a "inactivo".
     public void limpiarEspacio(){
         this.areaCoberturasAgregadas.setText("-- Coberturas agregadas");
         this.areaBeneficiarios.setText("-- Beneficiarios inscritos");
         this.comboBoxTipoViaje.setSelectedIndex(0);
         this.seguroDeViajes = new SeguroDeViajes("Inactivo");
-
-
     }
 
     public void setSeguroDeViajes(SeguroDeViajes seguroDeViajes) {

@@ -12,6 +12,7 @@ public class SeguroDeVida extends Seguro {
         super(estado);
     }
 
+    //Ya se coloca un valor fijo en la prima sin recargo.
     public SeguroDeVida(Usuario propietario, String[] beneficiarios, Date fechaDeInicio, Date fechaDeVencimiento,int nivelSeguro, String estado) {
         super(propietario, beneficiarios, fechaDeInicio, fechaDeVencimiento, estado);
         super.setPrimaSinRecargo(400.0f);
@@ -30,9 +31,11 @@ public class SeguroDeVida extends Seguro {
             } else if (this.nivelSeguro == 4) {
                 totalMonto = 400000.0F;
             }
+            JOptionPane.showMessageDialog(null, "Tu seguro si cubre tu situación.\nTe daremos: "+totalMonto+" $. ", "Solicitud aceptada", JOptionPane.INFORMATION_MESSAGE);
+            this.setEstado("Cobrado");
+        }else{
+            JOptionPane.showMessageDialog(null, "Lo sentimos mucho.\nTu seguro de vida no lo cubre.", "Una disculpa", JOptionPane.INFORMATION_MESSAGE);
         }
-
-        JOptionPane.showMessageDialog((Component)null, "Te daremos: " + totalMonto + " $");
     }
 
     float calcularPrimaTotal() {
