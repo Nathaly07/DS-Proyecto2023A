@@ -9,9 +9,6 @@ public class SeguroDeViajes extends Seguro {
     private int destino;
     private String[][] coberturas;
 
-    public SeguroDeViajes(String estado){
-        super(estado);
-    }
 
     //Ya se coloca un valor fijo en la prima sin recargo.
     public SeguroDeViajes(Usuario propietario, String[] beneficiarios, Date fechaDeInicio, Date fechaDeVencimiento, int destino, String[][] coberturas, String estado) {

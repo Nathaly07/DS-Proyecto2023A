@@ -17,11 +17,8 @@ public class InterfazSeguroMedico extends JFrame {
     private JButton btnNuevoSeguro;
     private JButton btnCancelar;
 
-    private SeguroMédico seguroMédico= new SeguroMédico("Inactivo");
-    private Usuario cliente;
 
-
-    public InterfazSeguroMedico(){
+    public InterfazSeguroMedico(InterfazSeguro interfazSeguro){
         this.btnNuevoSeguro.addActionListener((e) -> {
             //Se extraen los beneficiarios-------------------------
             StringTokenizer tokens=new StringTokenizer(this.txtBeneficiarios.getText(), "\n");
@@ -58,7 +55,8 @@ public class InterfazSeguroMedico extends JFrame {
             }
 
             //Creamos el seguro
-            this.seguroMédico = new SeguroMédico(this.cliente, beneficiarios, fechaActual, fechaVencimiento, coberturas, nivelSeguro, "Activo");
+            SeguroMédico seguroMédico = new SeguroMédico(interfazSeguro.cliente, beneficiarios, fechaActual, fechaVencimiento, coberturas, nivelSeguro, "Activo");
+            interfazSeguro.gestorSeguros.agregarSeguro(seguroMédico);
             JOptionPane.showMessageDialog(null, "Tu seguro MÉDICO se ha creado exitosamente.", "Éxito", JOptionPane.WARNING_MESSAGE);
             this.setVisible(false);
 
@@ -115,7 +113,6 @@ public class InterfazSeguroMedico extends JFrame {
     }
 
     public void crearFrame() {
-        this.limpiarEspacio();
         setTitle("Nuevo seguro médico");
         setSize(1000, 700);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -123,24 +120,5 @@ public class InterfazSeguroMedico extends JFrame {
         setLocationRelativeTo(null);
         add(this.panelPrincipal);
         setVisible(true);
-    }
-
-    public void limpiarEspacio(){
-        this.txtCoberturas.setText("-- Coberturas agregadas");
-        this.txtBeneficiarios.setText("-- Beneficiarios inscritos");
-        this.comboNivelSeguro.setSelectedIndex(0);
-        this.seguroMédico = new SeguroMédico("Inactivo");
-    }
-
-    public void setSeguroMédico(SeguroMédico seguroMédico) {
-        this.seguroMédico = seguroMédico;
-    }
-
-    public SeguroMédico getSeguroMédico() {
-        return this.seguroMédico;
-    }
-
-    public void setCliente(Usuario cliente) {
-        this.cliente = cliente;
     }
 }

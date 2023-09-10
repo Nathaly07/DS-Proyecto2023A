@@ -12,16 +12,8 @@ public class InterfazIndemnizar extends JFrame {
     private JButton btnCancelar;
     private JPanel panelPrincipal;
 
-    private GestorSeguros gestorSeguros = null;
-    private Usuario cliente;
-
-    public InterfazIndemnizar(){
-
-    }
-    public InterfazIndemnizar(Usuario cliente, GestorSeguros gestorSeguros){
-        this.gestorSeguros = gestorSeguros;
-        this.cliente = cliente;
-        this.mostrarSeguros();
+    public InterfazIndemnizar(InterfazSeguro interfazSeguro){
+        this.mostrarSeguros(interfazSeguro);
 
         //Se busca al seguro por medio de su ID de la tabla. Y despues ejecuta la acción.
         this.btnIndemnizar.addActionListener((e) -> {
@@ -33,8 +25,8 @@ public class InterfazIndemnizar extends JFrame {
                 float valorGastado = Float.parseFloat(JOptionPane.showInputDialog(null, "¿Cuánto gastaste en el proceso?: ", "Valor gastado", JOptionPane.QUESTION_MESSAGE));
 
                 int numSeguro = (int) this.tblSeguros.getValueAt(fila,0)-1;
-                Seguro seguroIndemnizar = this.gestorSeguros.buscarSeguroEspecifico(numSeguro);
-                seguroIndemnizar.indemnizar(valorGastado, motivo);
+                interfazSeguro.gestorSeguros.buscarSeguroEspecifico(numSeguro).indemnizar(valorGastado, motivo);
+
                 this.setVisible(false);
 
             }
@@ -47,8 +39,8 @@ public class InterfazIndemnizar extends JFrame {
 
     //Imprime solo los seguros activos del cliente. De modo que, no puede gozar la indemnización
     // de seguros inactivos o ya cobrados.
-    public void mostrarSeguros() {
-        ArrayList<Seguro> seguros = this.gestorSeguros.buscarSegurosCliente(this.cliente);
+    public void mostrarSeguros(InterfazSeguro interfazSeguro) {
+        ArrayList<Seguro> seguros = interfazSeguro.gestorSeguros.buscarSegurosCliente(interfazSeguro.cliente);
         if(seguros!=null){
             DefaultTableModel model = new DefaultTableModel();
             model.setColumnCount(0);
@@ -86,19 +78,12 @@ public class InterfazIndemnizar extends JFrame {
     }
 
     public void crearFrame() {
+        setTitle("Proceso de indemnización");
         setSize(1000, 700);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
         setLocationRelativeTo(null);
         add(panelPrincipal);
         setVisible(true);
-    }
-
-    public GestorSeguros getGestorSeguros() {
-        return gestorSeguros;
-    }
-
-    public void setGestorSeguros(GestorSeguros gestorSeguros) {
-        this.gestorSeguros = gestorSeguros;
     }
 }

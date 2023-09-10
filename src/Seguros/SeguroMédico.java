@@ -9,9 +9,6 @@ public class SeguroMédico extends Seguro {
     private String[] coberturas;
     private int nivelSeguro;
 
-    public SeguroMédico(String estado){
-        super(estado);
-    }
 
     //Ya se coloca un valor fijo en la prima sin recargo.
     public SeguroMédico(Usuario propietario, String[] beneficiarios, Date fechaDeInicio, Date fechaDeVencimiento, String[] coberturas, int nivelSeguro, String estado) {

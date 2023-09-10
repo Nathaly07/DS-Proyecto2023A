@@ -22,10 +22,7 @@ public abstract class Seguro {
     // si el cliente ya cobró la indemnización.
     private String estado;
 
-    //Sirve para inicializar un seguro sin atributos más que el estado en el que está.
-    public Seguro(String estado){
-        this.estado = estado;
-    }
+
 
     //Se eliminaron las condiciones. No eran relevantes en el sistema.
     public Seguro(Usuario propietario, String[] beneficiarios, Date fechaDeInicio, Date fechaDeVencimiento, String estado) {

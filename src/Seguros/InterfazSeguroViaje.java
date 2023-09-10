@@ -16,12 +16,10 @@ public class InterfazSeguroViaje extends JFrame {
     private JTextArea areaCoberturasAgregadas;
     private JButton btnCrearSeguro;
     private JButton btnCancelar;
-    private SeguroDeViajes seguroDeViajes= new SeguroDeViajes("Inactivo");
-    private Usuario cliente;
 
 
     //Los siguientes pasos se repiten en la mayoria de interfaces para crear seguros.
-    public InterfazSeguroViaje(){
+    public InterfazSeguroViaje(InterfazSeguro interfazSeguro){
         this.btnCrearSeguro.addActionListener((e) -> {
             //Se extraen los beneficiarios-------------------------
             StringTokenizer tokens=new StringTokenizer(this.areaBeneficiarios.getText(), "\n");
@@ -78,7 +76,8 @@ public class InterfazSeguroViaje extends JFrame {
                 }
             }
 
-            this.seguroDeViajes = new SeguroDeViajes(this.cliente,beneficiarios,fechaActual, fechaVencimiento, tipoDestino, coberturas, "Activo");
+            SeguroDeViajes seguroDeViajes = new SeguroDeViajes(interfazSeguro.cliente,beneficiarios,fechaActual, fechaVencimiento, tipoDestino, coberturas, "Activo");
+            interfazSeguro.gestorSeguros.agregarSeguro(seguroDeViajes);
             JOptionPane.showMessageDialog(null, "Tu seguro de VIAJE se ha creado exitosamente.", "Éxito", JOptionPane.WARNING_MESSAGE);
             this.setVisible(false);
 
@@ -137,7 +136,6 @@ public class InterfazSeguroViaje extends JFrame {
     }
 
     public void crearFrame() {
-        this.limpiarEspacio();
         setTitle("Nuevo seguro de viaje");
         setSize(1000, 700);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -145,25 +143,5 @@ public class InterfazSeguroViaje extends JFrame {
         setLocationRelativeTo(null);
         add(panelSeguroViaje);
         setVisible(true);
-    }
-
-    //Limpia todos los campos. Y setea el seguro que tiene a "inactivo".
-    public void limpiarEspacio(){
-        this.areaCoberturasAgregadas.setText("-- Coberturas agregadas");
-        this.areaBeneficiarios.setText("-- Beneficiarios inscritos");
-        this.comboBoxTipoViaje.setSelectedIndex(0);
-        this.seguroDeViajes = new SeguroDeViajes("Inactivo");
-    }
-
-    public void setSeguroDeViajes(SeguroDeViajes seguroDeViajes) {
-        this.seguroDeViajes = seguroDeViajes;
-    }
-
-    public SeguroDeViajes getSeguroDeViajes() {
-        return this.seguroDeViajes;
-    }
-
-    public void setCliente(Usuario cliente) {
-        this.cliente = cliente;
     }
 }

@@ -13,15 +13,8 @@ public class InterfazCancelar extends JFrame{
     private JButton btnCancelar;
     private JPanel panelPrincipal;
 
-    private GestorSeguros gestorSeguros = null;
-    private Usuario cliente;
-
-    public InterfazCancelar(){}
-
-    public InterfazCancelar(Usuario cliente, GestorSeguros gestorSeguros){
-        this.gestorSeguros = gestorSeguros;
-        this.cliente = cliente;
-        this.mostrarSeguros();
+    public InterfazCancelar(InterfazSeguro interfazSeguro){
+        this.mostrarSeguros(interfazSeguro);
 
         // En resumen, se llama al gestor transmitido por la interfaz principal, y ejecuta la acción.
         this.btnEliminar.addActionListener((e) -> {
@@ -30,12 +23,12 @@ public class InterfazCancelar extends JFrame{
                 JOptionPane.showMessageDialog(null, "¡No has seleccionado ningún seguro!", "Error", JOptionPane.ERROR_MESSAGE);
             }else{
                 int numSeguro = (int) this.tblSeguros.getValueAt(fila,0)-1;
-                Seguro seguroEliminar = this.gestorSeguros.buscarSeguroEspecifico(numSeguro);
+                Seguro seguroEliminar = interfazSeguro.gestorSeguros.buscarSeguroEspecifico(numSeguro);
                 int eleccion = JOptionPane.showConfirmDialog(null, "¿Estas seguro de eliminar el contrato?\nEl procedimiento no se puede revertir.", "Advertencia", JOptionPane.YES_NO_OPTION );
                 if(eleccion==-1||eleccion==1){
                     JOptionPane.showMessageDialog(null, "Gracias por no hacerlo. Lo valoramos mucho.", "Buena decisión", JOptionPane.INFORMATION_MESSAGE);
                 }else{
-                    this.gestorSeguros.eliminarSeguro(seguroEliminar);
+                    interfazSeguro.gestorSeguros.eliminarSeguro(seguroEliminar);
                     this.setVisible(false);
                 }
             }
@@ -48,8 +41,8 @@ public class InterfazCancelar extends JFrame{
     }
 
     //Imprime TODOS los seguros del cliente.
-    public void mostrarSeguros() {
-        ArrayList<Seguro> seguros = this.gestorSeguros.buscarSegurosCliente(this.cliente);
+    public void mostrarSeguros(InterfazSeguro interfazSeguro) {
+        ArrayList<Seguro> seguros = interfazSeguro.gestorSeguros.buscarSegurosCliente(interfazSeguro.cliente);
         if(seguros!=null){
             DefaultTableModel model = new DefaultTableModel();
             model.setColumnCount(0);
@@ -85,19 +78,12 @@ public class InterfazCancelar extends JFrame{
     }
 
     public void crearFrame() {
+        setTitle("Proceso de cancelación");
         setSize(1000, 700);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
         setLocationRelativeTo(null);
         add(panelPrincipal);
         setVisible(true);
-    }
-
-    public GestorSeguros getGestorSeguros() {
-        return gestorSeguros;
-    }
-
-    public void setGestorSeguros(GestorSeguros gestorSeguros) {
-        this.gestorSeguros = gestorSeguros;
     }
 }

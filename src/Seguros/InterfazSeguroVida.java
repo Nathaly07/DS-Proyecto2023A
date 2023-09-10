@@ -14,10 +14,8 @@ public class InterfazSeguroVida extends JFrame {
     private JButton btnNuevoSeguro;
     private JPanel panelPrincipal;
     private JButton btnCancelar;
-    private SeguroDeVida seguroDeVida = new SeguroDeVida("Inactivo");
-    private Usuario cliente;
 
-    public InterfazSeguroVida(){
+    public InterfazSeguroVida(InterfazSeguro interfazSeguro){
         this.btnNuevoSeguro.addActionListener((e) -> {
             //Se extraen los beneficiarios-------------------------
             StringTokenizer tokens=new StringTokenizer(this.txtBeneficiario.getText(), "\n");
@@ -42,7 +40,8 @@ public class InterfazSeguroVida extends JFrame {
             int nivelSeguro = this.comboNivelSeguro.getSelectedIndex();
 
             //Se crea el seguro-------------------------------
-            this.seguroDeVida = new SeguroDeVida(this.cliente, beneficiarios, fechaActual, fechaVencimiento, nivelSeguro, "Activo" );
+            SeguroDeVida seguroDeVida = new SeguroDeVida(interfazSeguro.cliente, beneficiarios, fechaActual, fechaVencimiento, nivelSeguro, "Activo" );
+            interfazSeguro.gestorSeguros.agregarSeguro(seguroDeVida);
             JOptionPane.showMessageDialog(null, "Tu seguro de VIDA se ha creado exitosamente.", "Éxito", JOptionPane.WARNING_MESSAGE);
             this.setVisible(false);
         });
@@ -60,7 +59,6 @@ public class InterfazSeguroVida extends JFrame {
     }
 
     public void crearFrame() {
-        this.limpiarEspacio();
         setTitle("Nuevo seguro de vida");
         setSize(1000, 700);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -68,24 +66,6 @@ public class InterfazSeguroVida extends JFrame {
         setLocationRelativeTo(null);
         add(this.panelPrincipal);
         setVisible(true);
-    }
-
-    public void limpiarEspacio(){
-        this.txtBeneficiario.setText("-- Beneficiarios inscritos");
-        this.comboNivelSeguro.setSelectedIndex(0);
-        this.seguroDeVida = new SeguroDeVida("Inactivo");
-    }
-
-    public void setSeguroDeVida(SeguroDeVida seguroDeVida) {
-        this.seguroDeVida = seguroDeVida;
-    }
-
-    public SeguroDeVida getSeguroDeVida() {
-        return seguroDeVida;
-    }
-
-    public void setCliente(Usuario cliente) {
-        this.cliente = cliente;
     }
 
 }

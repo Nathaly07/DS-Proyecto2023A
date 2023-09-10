@@ -8,9 +8,7 @@ import javax.swing.JOptionPane;
 public class SeguroDeVida extends Seguro {
     private int nivelSeguro;
 
-    public SeguroDeVida(String estado){
-        super(estado);
-    }
+
 
     //Ya se coloca un valor fijo en la prima sin recargo.
     public SeguroDeVida(Usuario propietario, String[] beneficiarios, Date fechaDeInicio, Date fechaDeVencimiento,int nivelSeguro, String estado) {

@@ -17,14 +17,8 @@ public class InterfazSeguro extends JFrame {
     private JButton btnIndemnizar;
     private JButton btnCancelar;
     private JButton mostrarButton;
-    private Usuario cliente;
+    public Usuario cliente;
     public GestorSeguros gestorSeguros;
-    InterfazSeguroViaje interfazSeguroViaje = new InterfazSeguroViaje();
-    InterfazSeguroMedico interfazSeguroMedico = new InterfazSeguroMedico();
-    InterfazSeguroVida interfazSeguroVida = new InterfazSeguroVida();
-    InterfazRenovar interfazRenovar = new InterfazRenovar();
-    InterfazIndemnizar interfazIndemnizar = new InterfazIndemnizar();
-    InterfazCancelar interfazCancelar = new InterfazCancelar();
 
     //Se pasa el cliente para saber cuales son sus seguros.
     public InterfazSeguro(Usuario cliente){
@@ -45,50 +39,46 @@ public class InterfazSeguro extends JFrame {
                 JOptionPane.showMessageDialog((Component)null, "Es una pena. Vuelve si deseas un nuevo seguro.");
             }else if(tipoSeguro == 0){
                 //Es necesario pasar el cliente, ya que, es necesario ligar el seguro con el usuario.
-                this.interfazSeguroViaje.setCliente(cliente);
+                InterfazSeguroViaje interfazSeguroViaje = new InterfazSeguroViaje(this);
                 interfazSeguroViaje.crearFrame();
             }else if(tipoSeguro == 1){
-                this.interfazSeguroMedico.setCliente(cliente);
-                this.interfazSeguroMedico.crearFrame();
+                InterfazSeguroMedico interfazSeguroMedico = new InterfazSeguroMedico(this);
+                interfazSeguroMedico.crearFrame();
             }else if(tipoSeguro == 2){
-                this.interfazSeguroVida.setCliente(cliente);
-                this.interfazSeguroVida.crearFrame();
+                InterfazSeguroVida interfazSeguroVida = new InterfazSeguroVida(this);
+                interfazSeguroVida.crearFrame();
             }
         });
 
-        //Actualiza los datos de los seguros--------------IMPORTANTE????????????????????
+        //Actualiza los datos de los seguros
         this.mostrarButton.addActionListener((e) -> {
             mostrarSeguros();
         });
 
 
-        //Los otros botones que abren las ventanas. En su mayoria, necesitan el cliente
-        // y el gestor de seguros, porque, dentro de cada interfaz se hace la acción con
-        // el gestor. Y despues, se lo "devuelve" a esta interfaz.
+        //Los otros botones que abren las ventanas. Solo necesitan esta interfaz, porque, es
+        // el que almacena al cliente y al gestor.
         this.btnRenovar.addActionListener((e) -> {
-            this.interfazRenovar = new InterfazRenovar(this.cliente, this.gestorSeguros);
-            this.interfazRenovar.crearFrame();
+            InterfazRenovar interfazRenovar = new InterfazRenovar(this);
+            interfazRenovar.crearFrame();
         });
 
         this.btnIndemnizar.addActionListener((e) -> {
-            this.interfazIndemnizar = new InterfazIndemnizar(this.cliente, this.gestorSeguros);
-            this.interfazIndemnizar.crearFrame();
+            InterfazIndemnizar interfazIndemnizar = new InterfazIndemnizar(this);
+            interfazIndemnizar.crearFrame();
         });
 
         this.btnCancelar.addActionListener((e) -> {
-            this.interfazCancelar = new InterfazCancelar(this.cliente, this.gestorSeguros);
-            this.interfazCancelar.crearFrame();
+            InterfazCancelar interfazCancelar = new InterfazCancelar(this);
+            interfazCancelar.crearFrame();
         });
+
 
 
     }
 
     //Imprime todos los seguros del cliente.
     public void mostrarSeguros() {
-
-        //IMPORTANTE------------ La forma para pasar los objetos entre interfaces es complicado :(
-        // Fue la única forma que se me ocurrió. Esto se explica en el método.
-        actualizarDatos();
         ArrayList<Seguro> seguros = this.gestorSeguros.buscarSegurosCliente(this.cliente);
         if(seguros!=null){
             DefaultTableModel model = new DefaultTableModel();
@@ -122,39 +112,6 @@ public class InterfazSeguro extends JFrame {
             this.tblSegurosCliente.setModel(model);
         }
 
-    }
-
-    //IMPORTANTE--------------- Cuando la interfaz externa crea un objeto seguro,
-    // o hace un cambio en el gestor que fue transmitido por esta interfaz,
-    // será necesario que lo devuelva aquí, pero, no es sencillo hacer que regrese
-    // de forma "automática" o al finalizar la acción. Por eso, cada vez que hacemos
-    // una acción como crear un seguro, renovarlo, etc. SE DEBE PRESIONAR EL BOTÓN de
-    // "mostrar", de modo que, los cambios se registren en este gestor de seguros.
-    public void actualizarDatos(){
-        if(!this.interfazSeguroViaje.getSeguroDeViajes().getEstado().equalsIgnoreCase("Inactivo")){
-            this.gestorSeguros.agregarSeguro(this.interfazSeguroViaje.getSeguroDeViajes());
-            this.interfazSeguroViaje.setSeguroDeViajes(new SeguroDeViajes("Inactivo"));
-        }
-        if (!this.interfazSeguroMedico.getSeguroMédico().getEstado().equalsIgnoreCase("Inactivo")) {
-            this.gestorSeguros.agregarSeguro(this.interfazSeguroMedico.getSeguroMédico());
-            this.interfazSeguroMedico.setSeguroMédico(new SeguroMédico("Inactivo"));
-        }
-        if (!this.interfazSeguroVida.getSeguroDeVida().getEstado().equalsIgnoreCase("Inactivo")) {
-            this.gestorSeguros.agregarSeguro(this.interfazSeguroVida.getSeguroDeVida());
-            this.interfazSeguroVida.setSeguroDeVida(new SeguroDeVida("Inactivo"));
-        }
-        if(this.interfazRenovar.getGestorSeguros()!=null){
-            this.gestorSeguros = this.interfazRenovar.getGestorSeguros();
-            this.interfazRenovar.setGestorSeguros(null);
-        }
-        if(this.interfazIndemnizar.getGestorSeguros()!=null){
-            this.gestorSeguros = this.interfazIndemnizar.getGestorSeguros();
-            this.interfazIndemnizar.setGestorSeguros(null);
-        }
-        if(this.interfazCancelar.getGestorSeguros()!=null){
-            this.gestorSeguros = this.interfazCancelar.getGestorSeguros();
-            this.interfazCancelar.setGestorSeguros(null);
-        }
     }
 
     public void crearFrame() {
