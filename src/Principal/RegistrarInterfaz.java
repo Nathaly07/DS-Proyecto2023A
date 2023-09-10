@@ -11,26 +11,41 @@ public class RegistrarInterfaz extends JFrame {
     private JTextField txtRol;
     private JLabel lblIDUsuario;
     private JButton btnRegistrarse;
+    private JTextField txtUser;
+    private JButton btnCancelar;
     private Login login;
 
     public RegistrarInterfaz(Login login) {
         this.login = login;
         btnRegistrarse.addActionListener(e -> {
-            String contraseñaRegistro = new String(txtContraseña.getPassword());
-            Usuario usuario = new Usuario(
-                    txtNombre.getText(),
-                    txtApellido.getText(),
-                    txtEmail.getText(),
-                    contraseñaRegistro);
-            lblIDUsuario.setText(String.valueOf(usuario.getID_Usuario()));
-            login.registrarUsuario(usuario);
+            String password = new String(txtContraseña.getPassword());
+            String user = txtUser.getText();
+            String nombre = txtNombre.getText();
+            String apellido = txtApellido.getText();
+            String email = txtEmail.getText();
+            if((password.equalsIgnoreCase(""))||(user.equalsIgnoreCase(""))||(nombre.equalsIgnoreCase(""))||(apellido.equalsIgnoreCase(""))||(email.equalsIgnoreCase(""))){
+                JOptionPane.showMessageDialog(null, "¡No has llenado todos los campos!", "ERROR 01", JOptionPane.ERROR_MESSAGE);
+            }else {
+                Usuario usuario = new Usuario(txtUser.getText(),
+                        txtNombre.getText(),
+                        txtApellido.getText(),
+                        txtEmail.getText(),
+                        password);
+                login.registrarUsuario(usuario);
+                JOptionPane.showMessageDialog(null, "Usuario registrado con éxito.", "Gracias", JOptionPane.INFORMATION_MESSAGE);
+                dispose();
+            }
 
-            JOptionPane.showMessageDialog(null, "Usuario registrado con éxito. Su usuario es: " + lblIDUsuario.getText());
-            dispose();
+
+        });
+
+        btnCancelar.addActionListener(e -> {
+            this.dispose();
         });
     }
 
     public void crearFrame() {
+        setTitle("Registro de usuario");
         setSize(500, 350);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);

@@ -3,15 +3,14 @@ package Principal;
 import java.io.Serializable;
 
 public class Usuario implements Serializable {
-    private int ID_Usuario;
+    private String nombreUsuario;
     private String nombre;
     private String apellido;
     private String email;
     private String password;
-    private String rol;
 
-    public Usuario(String nombre, String apellido, String email, String password) {
-        this.ID_Usuario = (int) (Math.random() * 5000 + 1000);
+    public Usuario(String nombreUsuario,String nombre, String apellido, String email, String password) {
+        this.nombreUsuario = nombreUsuario;
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
@@ -24,14 +23,15 @@ public class Usuario implements Serializable {
 
 
     public void actualizarDatos(String nombre, String apellido, String email, String password) {
+        this.nombreUsuario = nombreUsuario;
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
         this.password = password;
     }
 
-    public int getID_Usuario() {
-        return this.ID_Usuario;
+    public String getNombreUsuario() {
+        return nombreUsuario;
     }
 
     public String getNombre() {
