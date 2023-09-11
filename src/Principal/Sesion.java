@@ -6,6 +6,8 @@ public class Sesion {
     private static Sesion instance;
     private Usuario usuarioVerificado;
     private GestorUsuarios gestor;
+    private String fechaComun = null;
+    private String destinoComun = null;
 
     private Sesion() {
         this.gestor = new GestorUsuarios();
@@ -45,5 +47,21 @@ public class Sesion {
 
     public void setUsuarioVerificado(Usuario usr) {
         this.usuarioVerificado = usr;
+    }
+
+    public String getFechaComun() {
+        return fechaComun;
+    }
+
+    public String getDestinoComun() {
+        return destinoComun;
+    }
+
+    public void setFechaComun(String fechaComun) {
+        this.fechaComun = fechaComun;
+    }
+
+    public void setDestinoComun(String destinoComun) {
+        this.destinoComun = destinoComun;
     }
 }

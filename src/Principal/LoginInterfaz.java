@@ -22,6 +22,13 @@ public class LoginInterfaz extends JFrame {
             if (sesion.validarUsuario(txtUsuario.getText(), passwordIngresada)) {
                 Módulos módulos = new Módulos(sesion);
                 módulos.crearFrame();
+                int eleccion = JOptionPane.showConfirmDialog(null, "¿Deseas organizar un plan para una fecha y destino específico?", "Organización de un plan", JOptionPane.YES_NO_OPTION);
+                if (eleccion == -1 || eleccion == 1) {
+                    JOptionPane.showMessageDialog(null, "No hay problema.\nSigue gozando de nuestros demás servicios.", "Está bien", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    InterfazDatosComunes interfazDatosComunes = new InterfazDatosComunes(this.sesion);
+                    interfazDatosComunes.crearFrame();
+                }
                 this.dispose();
             }
         });
@@ -34,7 +41,7 @@ public class LoginInterfaz extends JFrame {
             @Override
             public void keyPressed(KeyEvent e) {
                 super.keyPressed(e);
-                if (e.getKeyCode() == KeyEvent.VK_ENTER){
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     btnLogin.doClick();
                 }
             }
