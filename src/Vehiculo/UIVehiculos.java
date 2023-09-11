@@ -1,6 +1,6 @@
 package Vehiculo;
 
-import Principal.Login;
+import Principal.Sesion;
 import com.toedter.calendar.JDateChooser;
 
 import javax.swing.*;
@@ -29,7 +29,7 @@ public class UIVehiculos extends JPanel {
     private static GestoReservaVehiculo gestorRentas;
 
 
-    public UIVehiculos(Login login) {
+    public UIVehiculos(Sesion sesion) {
         catalogoVehiculos = new CatalogoVehiculos();
         gestorRentas = new GestoReservaVehiculo();
 
