@@ -26,25 +26,11 @@ public class GestionReservas {
         CriteriaDoble criteriaDisponibles = new CriteriaDisponibilidadHabitaciones(reservarDesde, reservarHasta);
         return criteriaDisponibles.meetCriteria(habitaciones, this.reservas);
     }
-    public List<ReservaHospedaje> getReservas() {
-        return reservas;
-    }
 
     public boolean crearReserva(ReservaHospedaje reserva) {
         this.reservas.add(reserva);
         this.guardar();
         return true; // Reserva creada exitosamente
-    }
-
-    public boolean cancelarReserva(String reservaId) {
-        for (ReservaHospedaje reserva : reservas) {
-            if (reserva.getReservaId().equals(reservaId)) {
-                this.reservas.remove(reserva);
-                this.guardar();
-                return true; // Reserva cancelada exitosamente
-            }
-        }
-        return false; // Reserva no encontrada
     }
 
     public boolean actualizarReserva(String reservaId, ReservaHospedaje nuevaReserva) {

@@ -1,7 +1,6 @@
 package Hospedaje.InterfacesDeUsuario;
 
 import Hospedaje.Habitaciones.GestionHabitaciones;
-import Hospedaje.ModuloHospedaje;
 import Hospedaje.Reservas.GestionReservas;
 import Principal.Login;
 import Principal.Módulos;
