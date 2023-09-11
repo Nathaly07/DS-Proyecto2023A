@@ -15,7 +15,7 @@ public class LoginInterfaz extends JFrame {
     private Login login;
 
     public LoginInterfaz() {
-        login = new Login();
+        login = Login.getInstance();
 
         btnLogin.addActionListener(e -> {
             String passwordIngresada = new String(txtContraseña.getPassword());

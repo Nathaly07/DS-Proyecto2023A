@@ -2,13 +2,21 @@ package Principal;
 
 import javax.swing.*;
 
-public class Login {
+public class Sesion {
+    private static Sesion instance;
     private Usuario usuarioVerificado;
     private GestorUsuarios gestor;
 
-    public Login() {
+    private Sesion() {
         this.gestor = new GestorUsuarios();
         this.gestor.insertarUsuarios();
+    }
+
+    public static Sesion getInstance() {
+        if (instance == null) {
+            instance = new Sesion();
+        }
+        return instance;
     }
 
     public boolean validarUsuario(String nombreUsuario, String contraseña) {
