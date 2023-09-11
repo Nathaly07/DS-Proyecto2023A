@@ -12,22 +12,22 @@ public class LoginInterfaz extends JFrame {
     private JLabel lblContraseña;
     private JLabel lblUsuario;
     private JButton btnRegistrarse;
-    private Login login;
+    private Sesion sesion;
 
     public LoginInterfaz() {
-        login = Login.getInstance();
+        sesion = Sesion.getInstance();
 
         btnLogin.addActionListener(e -> {
             String passwordIngresada = new String(txtContraseña.getPassword());
-            if (login.validarUsuario(txtUsuario.getText(), passwordIngresada)) {
-                Módulos módulos = new Módulos(login);
+            if (sesion.validarUsuario(txtUsuario.getText(), passwordIngresada)) {
+                Módulos módulos = new Módulos(sesion);
                 módulos.crearFrame();
                 this.dispose();
             }
         });
 
         btnRegistrarse.addActionListener(e -> {
-            RegistrarInterfaz registrarInterfaz = new RegistrarInterfaz(login);
+            RegistrarInterfaz registrarInterfaz = new RegistrarInterfaz(sesion);
             registrarInterfaz.crearFrame();
         });
         txtContraseña.addKeyListener(new KeyAdapter() {
@@ -41,19 +41,19 @@ public class LoginInterfaz extends JFrame {
         });
     }
 
-    public LoginInterfaz(Login log) {
-        this.login = log;
+    public LoginInterfaz(Sesion log) {
+        this.sesion = log;
         btnLogin.addActionListener(e -> {
             String passwordIngresada = new String(txtContraseña.getPassword());
-            if (login.validarUsuario(txtUsuario.getText(), passwordIngresada)) {
-                Módulos módulos = new Módulos(login);
+            if (sesion.validarUsuario(txtUsuario.getText(), passwordIngresada)) {
+                Módulos módulos = new Módulos(sesion);
                 módulos.crearFrame();
                 this.dispose();
             }
         });
 
         btnRegistrarse.addActionListener(e -> {
-            RegistrarInterfaz registrarInterfaz = new RegistrarInterfaz(login);
+            RegistrarInterfaz registrarInterfaz = new RegistrarInterfaz(sesion);
             registrarInterfaz.crearFrame();
         });
     }
