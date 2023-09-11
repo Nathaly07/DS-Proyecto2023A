@@ -15,10 +15,11 @@ public class LoginInterfaz extends JFrame {
     private Login login;
 
     public LoginInterfaz() {
-        login = new Login();
+        login = Login.getInstance();
+
         btnLogin.addActionListener(e -> {
             String passwordIngresada = new String(txtContraseña.getPassword());
-            if (login.validarUsuario(Integer.parseInt(txtUsuario.getText()), passwordIngresada)) {
+            if (login.validarUsuario(txtUsuario.getText(), passwordIngresada)) {
                 Módulos módulos = new Módulos(login);
                 módulos.crearFrame();
                 this.dispose();
@@ -44,7 +45,7 @@ public class LoginInterfaz extends JFrame {
         this.login = log;
         btnLogin.addActionListener(e -> {
             String passwordIngresada = new String(txtContraseña.getPassword());
-            if (login.validarUsuario(Integer.parseInt(txtUsuario.getText()), passwordIngresada)) {
+            if (login.validarUsuario(txtUsuario.getText(), passwordIngresada)) {
                 Módulos módulos = new Módulos(login);
                 módulos.crearFrame();
                 this.dispose();
@@ -58,6 +59,7 @@ public class LoginInterfaz extends JFrame {
     }
 
     public void crearFrame() {
+        setTitle("Iniciar sesión");
         setSize(1000, 700);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);

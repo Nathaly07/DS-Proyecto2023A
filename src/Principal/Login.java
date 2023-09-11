@@ -2,19 +2,28 @@ package Principal;
 
 import javax.swing.*;
 
-public class Login {
+public class Sesion {
+    private static Sesion instance;
     private Usuario usuarioVerificado;
     private GestorUsuarios gestor;
 
-    public Login() {
+    private Sesion() {
         this.gestor = new GestorUsuarios();
+        this.gestor.insertarUsuarios();
     }
 
-    public boolean validarUsuario(int ID_Usuario, String contraseña) {
+    public static Sesion getInstance() {
+        if (instance == null) {
+            instance = new Sesion();
+        }
+        return instance;
+    }
+
+    public boolean validarUsuario(String nombreUsuario, String contraseña) {
         boolean verificacion = false;
-        Usuario usuario = this.gestor.buscarUsuario(ID_Usuario);
+        Usuario usuario = this.gestor.buscarUsuario(nombreUsuario);
         if (usuario == null) {
-            JOptionPane.showMessageDialog(null, "Ese usuario no existe.");
+            JOptionPane.showMessageDialog(null, "¡Ese usuario no existe!", "ERROR 02", JOptionPane.ERROR_MESSAGE);
         } else {
             if (usuario.iniciarSesión(contraseña)) {
                 this.usuarioVerificado = usuario;
