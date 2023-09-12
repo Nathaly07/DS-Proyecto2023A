@@ -16,8 +16,8 @@ public class Vuelo {
     private  List<Asiento> asientos;
     private  int numeroAsientos = 60;
 
-    private int precioPremium = 100;
-    private int precioTurista = 75;
+    private int precioPremium = 150;
+    private int precioTurista = 100;
 
 
     public Vuelo(String origen, String destino, String hora_salida, String fecha, int duracion) {
@@ -60,10 +60,10 @@ public class Vuelo {
 //            int numeroAsientoAleatorio2 = random.nextInt(max - min + 1) + min;
             Asiento a;
             if (numeroAsiento  == 0) {
-                a = new Asiento(numeroAsiento, true, ((duracion / 60) * precio), Clase, numeroFilaTurista);
+                a = new Asiento(numeroAsiento, true, ((duracion* precio)/ 60), Clase, numeroFilaTurista);
 
             } else {
-                a = new Asiento(numeroAsiento, false, ((duracion / 60) * precio), Clase, numeroFilaTurista);
+                a = new Asiento(numeroAsiento, false, ((duracion*precio)/ 60), Clase, numeroFilaTurista);
             }
             this.asientos.add(a);
         }
