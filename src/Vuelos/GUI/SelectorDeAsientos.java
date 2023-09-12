@@ -1,4 +1,4 @@
-package Vuelos;
+package Vuelos.GUI;
 
 import Vuelos.Logica.Asiento;
 import Vuelos.Logica.CarritoAsientos;

@@ -2,12 +2,10 @@ package Vuelos.Logica;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableModel;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class GestorVuelos {
@@ -30,11 +28,9 @@ public class GestorVuelos {
                 int duracion = Integer.parseInt(partes[4]);
                 agregarVuelo(new Vuelo(origen,destino,hora_salida,fecha,duracion));
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
 
@@ -53,7 +49,7 @@ public class GestorVuelos {
         return vuelosEncontrados;
     }
 
-    public List<Vuelo> buscarVueloFecha(String fecha) {
+    public List<Vuelo> buscarVueloPorFecha(String fecha) {
         List<Vuelo> vuelosEncontrados = new ArrayList<>();
 
         for (Vuelo vuelo : this.vuelos) {
@@ -64,17 +60,17 @@ public class GestorVuelos {
         return vuelosEncontrados;
     }
 
-    public List<Vuelo> buscarVueloPorDestinoFecha(String destinoComun, String fechaComun) {
+    public List<Vuelo> buscarVueloPorDestinoFecha(String destino, String fecha) {
         List<Vuelo> vuelosEncontrados = new ArrayList<>();
         for (Vuelo vuelo : this.vuelos) {
-            if (fechaComun.equalsIgnoreCase(vuelo.getFecha()) && vuelo.getDestino().equalsIgnoreCase(destinoComun)) {
+            if (fecha.equalsIgnoreCase(vuelo.getFecha()) && vuelo.getDestino().equalsIgnoreCase(destino)) {
                 vuelosEncontrados.add(vuelo);
             }
         }
         return vuelosEncontrados;
     }
 
-    public List<Vuelo> filtar(String origen, String destino, String fecha) {
+    public List<Vuelo> filtrarVuelo(String origen, String destino, String fecha) {
         List<Vuelo> vuelosEncontrados = new ArrayList<>();
         for (Vuelo vuelo : this.vuelos) {
             if (vuelo.getOrigen().equalsIgnoreCase(origen) && vuelo.getDestino().equalsIgnoreCase(destino) && vuelo.getFecha().equalsIgnoreCase(fecha)) {
@@ -84,7 +80,7 @@ public class GestorVuelos {
         return vuelosEncontrados;
     }
 
-    public void mostarVuelosFiltrados(JTable tabla, List<Vuelo> vuelos){
+    public void mostrarVuelosFiltrados(JTable tabla, List<Vuelo> vuelos){
         if(vuelos.size() > 0) {
             TablaVuelos modelo = new TablaVuelos(vuelos);
             tabla.setModel(modelo);
@@ -93,8 +89,8 @@ public class GestorVuelos {
         }
 
     }
-    public void agregarVuelo(Vuelo v) {
-        this.vuelos.add(v);
+    public void agregarVuelo(Vuelo vuelo) {
+        this.vuelos.add(vuelo);
     }
 
 
@@ -123,7 +119,7 @@ public class GestorVuelos {
                 case 0 -> vuelos.get(rowIndex).getOrigen();
                 case 1 -> vuelos.get(rowIndex).getDestino();
                 case 2 -> vuelos.get(rowIndex).getFecha();
-                case 3 -> vuelos.get(rowIndex).getHora_salida();
+                case 3 -> vuelos.get(rowIndex).getHoraSalida();
                 case 4 -> vuelos.get(rowIndex).getDuracion();
                 case 5 -> vuelos.get(rowIndex).asientosDisponibles();
                 default ->  "-";
@@ -149,11 +145,11 @@ public class GestorVuelos {
         }
 
     }
-    public Vuelo seleccionarVuelo(Vuelo v) {
-        ComparadorVuelo com = new ComparadorVuelo();
-        for(Vuelo aux : this.vuelos){
-            if(com.compare(v,aux) == 1){
-                return aux;
+    public Vuelo seleccionarVuelo(Vuelo vuelo) {
+        ComparadorVuelo compararVuelo = new ComparadorVuelo();
+        for(Vuelo vueloSeleccionado : this.vuelos){
+            if(compararVuelo.compare(vuelo,vueloSeleccionado) == 1){
+                return vueloSeleccionado;
             }
         }
         return null;

@@ -3,8 +3,6 @@ package Vuelos.Logica;
 
 import Pagos.Pago;
 
-import javax.swing.*;
-
 
 public class PagoReservaAsiento {
     private double monto;
@@ -31,7 +29,7 @@ public class PagoReservaAsiento {
     }
 
     public void Pagar(String metodoPago){
-        this.reserva.CambiarEstado(EstadoReserva.Pagado);
+        this.reserva.cambiarEstado(EstadoReserva.Pagado);
         float precioFinal = Float.parseFloat(calcularCostoTotalReservados()+"");
         Pago pago = new Pago(precioFinal, metodoPago);
         pago.pagar();
