@@ -18,7 +18,7 @@ public class GestorTour {
     }
 
     // Obtener los tours disponibles
-    public List<Tour> getToursDisponibles(String destino, String fechaTentativa) {
+    public List<Tour> getToursDisponibles(String destino, Date fechaTentativa) {
         List<Tour> toursDisponibles = new ArrayList<>();
         List<Tour> toursDestino = getToursDestino(destino);
         System.out.println(toursDestino.toString());
@@ -39,7 +39,7 @@ public class GestorTour {
     }
 
     //Filtrar tour por fechas
-    public List<Tour> getToursFecha(String fechaTentativa){
+    public List<Tour> getToursFecha(Date fechaTentativa){
         if(fechaTentativa == null){
             return null;
         }
@@ -49,7 +49,7 @@ public class GestorTour {
         for(Tour tour: this.tours){
             try {
                 Date fechaTour = format.parse(tour.getFechaInicio());
-                Date fechaT = format.parse(fechaTentativa);
+                Date fechaT = format.parse(format.format(fechaTentativa));
                 if(fechaTour.after(fechaT)){
                     toursFinal.add(tour);
                 }

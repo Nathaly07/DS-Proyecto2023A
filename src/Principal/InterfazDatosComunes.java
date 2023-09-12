@@ -14,11 +14,10 @@ public class InterfazDatosComunes extends JFrame{
 
     public InterfazDatosComunes(Sesion sesion) {
         pnlFechaComun.add(fechaComun);
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
         btnConfirmarDatos.addActionListener(e -> {
             if(fechaComun.getDate() != null && cmbDestinoComun.getSelectedIndex() != 0) {
-                sesion.setFechaComun(format.format(fechaComun.getDate()));
+                sesion.setFechaComun(fechaComun.getDate());
                 sesion.setDestinoComun(cmbDestinoComun.getSelectedItem().toString());
                 JOptionPane.showMessageDialog(null, "Ahora, podrás hacer tu plan con estos datos.", "Muchas gracias", JOptionPane.INFORMATION_MESSAGE);
                 this.dispose();
