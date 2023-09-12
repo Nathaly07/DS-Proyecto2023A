@@ -1,14 +1,25 @@
 package Principal;
 
 import javax.swing.*;
+import java.util.Date;
 
-public class Login {
+public class Sesion {
+    private static Sesion instance;
     private Usuario usuarioVerificado;
     private GestorUsuarios gestor;
+    private Date fechaComun = null;
+    private String destinoComun = null;
 
-    public Login() {
+    private Sesion() {
         this.gestor = new GestorUsuarios();
         this.gestor.insertarUsuarios();
+    }
+
+    public static Sesion getInstance() {
+        if (instance == null) {
+            instance = new Sesion();
+        }
+        return instance;
     }
 
     public boolean validarUsuario(String nombreUsuario, String contraseña) {
@@ -37,5 +48,21 @@ public class Login {
 
     public void setUsuarioVerificado(Usuario usr) {
         this.usuarioVerificado = usr;
+    }
+
+    public Date getFechaComun() {
+        return fechaComun;
+    }
+
+    public String getDestinoComun() {
+        return destinoComun;
+    }
+
+    public void setFechaComun(Date fechaComun) {
+        this.fechaComun = fechaComun;
+    }
+
+    public void setDestinoComun(String destinoComun) {
+        this.destinoComun = destinoComun;
     }
 }

@@ -13,10 +13,10 @@ public class RegistrarInterfaz extends JFrame {
     private JButton btnRegistrarse;
     private JTextField txtUser;
     private JButton btnCancelar;
-    private Login login;
+    private Sesion sesion;
 
-    public RegistrarInterfaz(Login login) {
-        this.login = login;
+    public RegistrarInterfaz(Sesion sesion) {
+        this.sesion = sesion;
         btnRegistrarse.addActionListener(e -> {
             String password = new String(txtContraseña.getPassword());
             String user = txtUser.getText();
@@ -31,7 +31,7 @@ public class RegistrarInterfaz extends JFrame {
                         txtApellido.getText(),
                         txtEmail.getText(),
                         password);
-                login.registrarUsuario(usuario);
+                sesion.registrarUsuario(usuario);
                 JOptionPane.showMessageDialog(null, "Usuario registrado con éxito.", "Gracias", JOptionPane.INFORMATION_MESSAGE);
                 dispose();
             }

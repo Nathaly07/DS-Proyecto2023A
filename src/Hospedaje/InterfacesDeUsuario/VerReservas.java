@@ -6,7 +6,7 @@ import javax.swing.table.DefaultTableModel;
 import Hospedaje.Habitaciones.Habitacion;
 import Hospedaje.Reservas.GestionReservas;
 import Hospedaje.Reservas.ReservaHospedaje;
-import Principal.Login;
+import Principal.Sesion;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -14,7 +14,7 @@ import java.util.List;
 
 public class VerReservas extends JFrame {
     private GestionReservas gestionReservas;
-    private Login login;
+    private Sesion sesion;
     private JPanel jPReservas;
     private JLabel txtNombreCompleto;
     private JButton btnConsultar;
@@ -23,10 +23,10 @@ public class VerReservas extends JFrame {
     private JTable tbReservasRealizadas;
     private DefaultTableModel tbModeloReservas;
 
-    public VerReservas(Login login, GestionReservas gestionReservas) {
+    public VerReservas(Sesion sesion, GestionReservas gestionReservas) {
         this.gestionReservas = gestionReservas;
-        this.reservasUsuario = gestionReservas.getReservasPorUsuario(login.getUsuarioVerificado());
-        this.login = login;
+        this.reservasUsuario = gestionReservas.getReservasPorUsuario(sesion.getUsuarioVerificado());
+        this.sesion = sesion;
 
         btnConsultar.addActionListener(e -> {
             actualizarHabitaciones();
@@ -36,7 +36,7 @@ public class VerReservas extends JFrame {
             dispose();
         });
 
-        this.txtNombreCompleto.setText(login.getUsuarioVerificado().getNombre() + " " + login.getUsuarioVerificado().getApellido());
+        this.txtNombreCompleto.setText(sesion.getUsuarioVerificado().getNombre() + " " + sesion.getUsuarioVerificado().getApellido());
     }
 
     public void crearFrame() {
@@ -49,7 +49,7 @@ public class VerReservas extends JFrame {
     }
 
     public void actualizarHabitaciones() {
-        this.reservasUsuario = gestionReservas.getReservasPorUsuario(login.getUsuarioVerificado());
+        this.reservasUsuario = gestionReservas.getReservasPorUsuario(sesion.getUsuarioVerificado());
         this.tbModeloReservas = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {

@@ -1,6 +1,6 @@
 package Vuelos;
 
-import Principal.Login;
+import Principal.Sesion;
 
 import Vuelos.Logica.ReservaAsiento;
 
@@ -39,14 +39,13 @@ public class ModuloVuelos extends JFrame{
     private JDateChooser dateChooserInicio = new JDateChooser();
     private PagoVuelos pagoVuelos;
     private  Vuelo v,v2;
-
     private JDialog dialog ;
-    private Login login;
+    private Sesion sesion;
 
 
 
-    public ModuloVuelos(Login login){
-        this.login = login;
+    public ModuloVuelos(Sesion sesion){
+        this.sesion = sesion;
 
         selectorDeAsientos = new SelectorDeAsientos(this);
         pagoVuelos = new PagoVuelos(this);
