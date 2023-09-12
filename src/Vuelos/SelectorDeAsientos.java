@@ -197,10 +197,12 @@ public class SelectorDeAsientos extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 CarritoAsientos aux = carrito;
-                moduloVuelos.crearReserva(aux);
-                moduloVuelos.actualizar();
-                habilitarBotones(false);
-                carrito.mostarCarrito(table1);
+                if(aux.getAsientos().size() > 0){
+                    moduloVuelos.crearReserva(aux);
+                    moduloVuelos.actualizar();
+                    habilitarBotones(false);
+                    carrito.mostarCarrito(table1);
+                }
                 moduloVuelos.cerrarDialog();
 
             }

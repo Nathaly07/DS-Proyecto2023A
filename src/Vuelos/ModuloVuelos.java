@@ -1,6 +1,6 @@
 package Vuelos;
 
-import Principal.Login;
+import Principal.Sesion;
 
 import Vuelos.Logica.ReservaAsiento;
 
@@ -14,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.SimpleDateFormat;
 
 
 public class ModuloVuelos extends JFrame{
@@ -38,14 +39,13 @@ public class ModuloVuelos extends JFrame{
     private JDateChooser dateChooserInicio = new JDateChooser();
     private PagoVuelos pagoVuelos;
     private  Vuelo v,v2;
-
     private JDialog dialog ;
-    private Login login;
+    private Sesion sesion;
 
 
 
-    public ModuloVuelos(Login login){
-        this.login = login;
+    public ModuloVuelos(Sesion sesion){
+        this.sesion = sesion;
 
         selectorDeAsientos = new SelectorDeAsientos(this);
         pagoVuelos = new PagoVuelos(this);
@@ -58,15 +58,20 @@ public class ModuloVuelos extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 boolean bandera = true;
+                String fechaFormateada = "";
+
                 if(dateChooserInicio.getDate() == null){
                     bandera = false;
+                }else {
+                    SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+                    fechaFormateada = formato.format(dateChooserInicio.getDate());
                 }
                 if(!origen.getText().isEmpty() && !destino.getText().isEmpty() && bandera ){
-                    gestorVuelos.mostarVuelosFiltrados(table1, gestorVuelos.filtar(origen.getText().toString(),destino.getText().toString(), dateChooserInicio.getDate().toString()));
+                    gestorVuelos.mostarVuelosFiltrados(table1, gestorVuelos.filtar(origen.getText().toString(),destino.getText().toString(), fechaFormateada));
                 }else if(!origen.getText().isEmpty() && !destino.getText().isEmpty()) {
                     gestorVuelos.mostarVuelosFiltrados(table1, gestorVuelos.buscarVuelo(origen.getText(), destino.getText()));
                 } else if(bandera && origen.getText().isEmpty() &&  destino.getText().isEmpty()){
-                    gestorVuelos.mostarVuelosFiltrados(table1, gestorVuelos.buscarVueloFecha(dateChooserInicio.getDate().toString()));
+                    gestorVuelos.mostarVuelosFiltrados(table1, gestorVuelos.buscarVueloFecha(fechaFormateada));
                 } else {
                     JOptionPane.showMessageDialog(null, "Datos insuficientes para la busqueda", "Aviso", JOptionPane.ERROR_MESSAGE);
                 }
