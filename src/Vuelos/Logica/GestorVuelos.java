@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class GestorVuelos {
@@ -63,6 +64,16 @@ public class GestorVuelos {
         return vuelosEncontrados;
     }
 
+    public List<Vuelo> buscarVueloPorDestinoFecha(String destinoComun, String fechaComun) {
+        List<Vuelo> vuelosEncontrados = new ArrayList<>();
+        for (Vuelo vuelo : this.vuelos) {
+            if (fechaComun.equalsIgnoreCase(vuelo.getFecha()) && vuelo.getDestino().equalsIgnoreCase(destinoComun)) {
+                vuelosEncontrados.add(vuelo);
+            }
+        }
+        return vuelosEncontrados;
+    }
+
     public List<Vuelo> filtar(String origen, String destino, String fecha) {
         List<Vuelo> vuelosEncontrados = new ArrayList<>();
         for (Vuelo vuelo : this.vuelos) {
@@ -75,12 +86,15 @@ public class GestorVuelos {
 
     public void mostarVuelosFiltrados(JTable tabla, List<Vuelo> vuelos){
         TablaVuelos modelo = new TablaVuelos(vuelos);
+        System.out.println(vuelos.size());
         tabla.setModel(modelo);
 
     }
     public void agregarVuelo(Vuelo v) {
         this.vuelos.add(v);
     }
+
+
 
     private static class TablaVuelos extends AbstractTableModel {
     private final String[] COLUMNS = {"Origen","Destino", "Fecha", "Hora salida",
