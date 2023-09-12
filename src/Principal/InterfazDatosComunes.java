@@ -16,7 +16,7 @@ public class InterfazDatosComunes extends JFrame{
         pnlFechaComun.add(fechaComun);
 
         btnConfirmarDatos.addActionListener(e -> {
-            sesion.setFechaComun(fechaComun.getDate().toString());
+            sesion.setFechaComun(fechaComun.getDate());
             sesion.setDestinoComun(cmbDestinoComun.getSelectedItem().toString());
             JOptionPane.showMessageDialog(null, "Ahora, podrás hacer tu plan con estos datos.", "Muchas gracias", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
