@@ -1,150 +1,110 @@
 package Tours;
 
-import Reservas.ReservaTour;
-
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 
 public class Tour {
-
-    private String tourID;
     private String nombre;
     private double precio;
-    private ArrayList <Parada> paradasTuristicas;
-    private String info_guia;
+    private ArrayList <String> paradasTuristicas;
+    private ArrayList <String> actividadesTuristicas;
+    private String infoGuia;
     private String duracion;
-    private int limite_usuarios;
-    private Gestion_Reserva gestion_reserva;
+    private int limiteUsuarios;
+    private int disponibilidad;
+    private String fechaInicio;
+    private String fechaFin;
 
 
     //Constructor
 
-    public Tour(String tourID, String nombre, double precio, String info_guia, String duracion, int limite_usuarios, Gestion_Reserva gestion_reserva) {
-        this.tourID = tourID;
+    public Tour(String nombre, double precio, ArrayList<String> paradasTuristicas, ArrayList<String> actividadesTuristicas, String infoGuia, String duracion, int limiteUsuarios, String fechaInicio, String fechaFin) {
         this.nombre = nombre;
         this.precio = precio;
-        this.paradasTuristicas = null;
-        this.info_guia = info_guia;
+        this.paradasTuristicas = paradasTuristicas;
+        this.actividadesTuristicas = actividadesTuristicas;
+        this.infoGuia = infoGuia;
         this.duracion = duracion;
-        this.limite_usuarios = limite_usuarios;
-        this.gestion_reserva = gestion_reserva;
+        this.limiteUsuarios = limiteUsuarios;
+        this.disponibilidad = limiteUsuarios;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
     }
 
     //Getters y Setters
-
-    public String getTourID() {
-        return tourID;
-    }
-
-    public void setTourID(String tourID) {
-        this.tourID = tourID;
-    }
-
     public String getNombre() {
         return nombre;
     }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
+    
     public double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(double precio) {
-        this.precio = precio;
+    public void reservarTour(int numPersonas){
+        this.disponibilidad -= numPersonas;
     }
 
-    public ArrayList<Parada> getParadasTuristicas() {
-        return paradasTuristicas;
+    public void cancelarReservaTour(int numPersonas){
+        this.disponibilidad += numPersonas;
     }
 
-    public void setParadasTuristicas(ArrayList<Parada> paradasTuristicas) {
-        this.paradasTuristicas = paradasTuristicas;
+    public int getLimiteUsuarios() {
+        return limiteUsuarios;
     }
 
-    public String getInfo_guia() {
-        return info_guia;
+    public int getDisponibilidad(){
+        return this.disponibilidad;
+    }
+    public String getFechaInicio() {
+        return fechaInicio;
     }
 
-    public void setInfo_guia(String info_guia) {
-        this.info_guia = info_guia;
-    }
+    public String getFechaFin() { return fechaFin; }
 
-    public String getDuracion() {
-        return duracion;
-    }
+    //ToString para mostrar en la informacion
+    public String informacionRelevante(){
+        String info = "";
 
-    public void setDuracion(String duracion) {
-        this.duracion = duracion;
-    }
+        info += this.nombre + ", ";
+        info += "Paradas: \n";
 
-    public int getLimite_usuarios() {
-        return limite_usuarios;
-    }
-
-    public void setLimite_usuarios(int limite_usuarios) {
-        this.limite_usuarios = limite_usuarios;
-    }
-
-    public void agregarParada(Parada parada) {
-        this.paradasTuristicas.add(parada);
-    }
-
-    public void eliminarParada(int paradaId) {
-        Parada paradaAEliminar = null;
-        for (Parada parada : this.paradasTuristicas) {
-            if (parada.getParadaId().equals(paradaId)) {
-                paradaAEliminar = parada;
+        int contador = 0;
+        for (String parada : paradasTuristicas) {
+            info += parada + ",\n";
+            contador++;
+            if (contador >= 2) {
                 break;
             }
         }
-        if (paradaAEliminar != null) {
-            paradasTuristicas.remove(paradaAEliminar);
-            JOptionPane.showMessageDialog(null,
-                    "La parada se ha eliminado correctamente.",
-                    "Tour",
-                    JOptionPane.WARNING_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(null,
-                    "La parada no se ha eliminado porque no existe en la lista.",
-                    "Tour",
-                    JOptionPane.WARNING_MESSAGE);
-        }
-    }
 
-    public int getDisponibilidad (){
-        int result = 0;
-        int contReservas = 0;
-//<<<<<<< HEAD
-        for (ReservaTour reserva : this.gestion_reserva.getReservas()) {
-            contReservas += this.gestion_reserva.totalPersonasPorTour(this.tourID);
-        }
-//=======
-        /*for (ReservaTour reserva : this.gestion_reserva.reservaciones) {
-            contReservas += reserva.getNumeroPersonas();
-        }*/
-//>>>>>>> 2bfb696a5fa4c4b8f965b0620b53a7803c090156
-        return result = this.limite_usuarios - contReservas;
-    }
-
-    //ToString para mostrar en la informacion
-    public String toString(){
-        String info = "";
-
-        info += "Tour: " + this.nombre;
-        info +=  "\nParadas: \n";
-
-        for (Parada x: paradasTuristicas) {
-            info += x.getDestino() + ", \n ";
-        }
-
-        info += "Guia: $" + this.info_guia;
-        info += "Duracion: $" + this.duracion;
+        info += "Guia: " + this.infoGuia + "\n";
+        info += "Duracion: " + this.duracion + "\n";
         info += "Precio: $" + this.precio;
 
         return info;
+    }
+
+    //Método para agregar parada turistica
+
+    public void agregarParadaTuristica(String paradaTurisitica) {
+        this.paradasTuristicas.add(paradaTurisitica);
+    }
+
+    //Metodo para eliminar parada turistica
+
+    public void eliminarParadaTuristica(String paradaTuristica) {
+        this.paradasTuristicas.remove(paradaTuristica);
+    }
+
+    //Metodo para agregar actividad turistica
+
+    public void agregarActividadTuristica(String actividadTuristica){
+        this.actividadesTuristicas.add(actividadTuristica);
+    }
+
+    //Metodo para eliminar actividad turistica
+
+    public void eliminarActividadTuristica(String actividadTuristica){
+        this.actividadesTuristicas.remove(actividadTuristica);
     }
 
 }

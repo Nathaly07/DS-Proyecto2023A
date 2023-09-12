@@ -196,11 +196,24 @@ public class SelectorDeAsientos extends JFrame{
         confirmarSelecciónButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                moduloVuelos.crearReserva(carrito);
-                moduloVuelos.actualizar();
+                CarritoAsientos aux = carrito;
+                if(aux.getAsientos().size() > 0){
+                    moduloVuelos.crearReserva(aux);
+                    moduloVuelos.actualizar();
+                    habilitarBotones(false);
+                    carrito.mostarCarrito(table1);
+                }
                 moduloVuelos.cerrarDialog();
 
-
+            }
+        });
+        cancelarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carrito.Limpiar();
+                habilitarBotones(false);
+                carrito.mostarCarrito(table1);
+                moduloVuelos.cerrarDialog();
             }
         });
     }
@@ -208,11 +221,14 @@ public class SelectorDeAsientos extends JFrame{
     public void setVuelo(Vuelo v){
         this.v = v;
         carrito = new CarritoAsientos(v);
+        carrito.Limpiar();
+        carrito.mostarCarrito(table1);
+
     }
     public void crearframe() {
         setTitle("Selector de asientos");
         setSize(804, 604);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
@@ -255,7 +271,7 @@ public class SelectorDeAsientos extends JFrame{
         btnA6.setEnabled(bandera);
     }
     public void MostrarTabla(int numAsiento){
-        carrito.añadir(v.seleccionarAsiento(new Asiento(numAsiento,Integer.parseInt(fila.getText()))));
+        carrito.añadir(v.BuscarAsiento(new Asiento(numAsiento,Integer.parseInt(fila.getText()))));
         carrito.mostarCarrito(table1);
     }
     public List<Integer> asientosSeleccionables(int fila){
@@ -267,4 +283,5 @@ public class SelectorDeAsientos extends JFrame{
         }
         return asientosHabilitados;
     }
+
 }

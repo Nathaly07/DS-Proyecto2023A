@@ -7,7 +7,7 @@ import Hospedaje.Criteria.CriteriaCiudad;
 import Hospedaje.Habitaciones.Habitacion;
 import Hospedaje.Reservas.GestionReservas;
 import Hospedaje.Reservas.ReservaHospedaje;
-import Principal.Login;
+import Principal.Sesion;
 import com.toedter.calendar.JDateChooser;
 
 import java.awt.event.MouseAdapter;
@@ -17,7 +17,7 @@ import java.util.List;
 
 public class CrearReserva extends JFrame {
     private GestionReservas gestionReservas;
-    private Login login;
+    private Sesion sesion;
     private JPanel jpReservaInicio;
     private JPanel jPHospedajes;
     private JPanel jpReservaFinal;
@@ -33,9 +33,9 @@ public class CrearReserva extends JFrame {
 
     JDateChooser reservacionInicio  = new JDateChooser();
     JDateChooser reservacionFinal  = new JDateChooser();
-    public CrearReserva(Login login, GestionReservas gestionReservas) {
+    public CrearReserva(Sesion sesion, GestionReservas gestionReservas) {
         this.gestionReservas = gestionReservas;
-        this.login = login;
+        this.sesion = sesion;
 
         //Calendar
         jpReservaInicio.add(reservacionInicio);
@@ -49,7 +49,7 @@ public class CrearReserva extends JFrame {
             dispose();
         });
 
-        this.txtNombreCompleto.setText(login.getUsuarioVerificado().getNombre() + " " + login.getUsuarioVerificado().getApellido());
+        this.txtNombreCompleto.setText(sesion.getUsuarioVerificado().getNombre() + " " + sesion.getUsuarioVerificado().getApellido());
     }
 
     public void crearFrame() {
@@ -108,7 +108,7 @@ public class CrearReserva extends JFrame {
         Habitacion[] habitaciones = new Habitacion[1];
         habitaciones[0] = habitacionSeleccionada;
         ReservaHospedaje reserva = new ReservaHospedaje(
-                this.login.getUsuarioVerificado(),
+                this.sesion.getUsuarioVerificado(),
                 Integer.toString(habitacionSeleccionada.getHabitacionID()),
                 numeroPersonas,
                 habitaciones,

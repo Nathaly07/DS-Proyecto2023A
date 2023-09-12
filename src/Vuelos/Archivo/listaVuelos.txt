@@ -1,16 +1,19 @@
-New York,Los Angeles,08:00,10 sept 2023,150
-Miami,Chicago,08:00,1 oct 2023,170
-London,Paris,08:00,14 nov 2023,190
-Tokyo,Sydney,08:00,18 dic 2023,220
-San Francisco,Seattle,08:00,10 sept 2023,200
-New York,Los Angeles,08:00,14 oct 2023,180
-New York,London,12:00,19 sept 2023,300
-Tokyo,Sydney,15:30,25 sept 2023,270
-Paris,Rome,09:45,30 sept 2023,130
-Los Angeles,Miami,14:15,1 dic 2023,160
-Beijing,Moscow,10:30,11 nov 2023,330
-Cairo,CapeTown,11:30,10 nov 2023,250
-São Paulo,Buenos Aires,17:00,10 oct 2023,180
-Toronto,Vancouver,13:45,8 sept 2023,240
-Dubai,Mumbai,08:45,30 sept 2023,180
-Istanbul,Athens,16:15,19 sept 2023,120
+Quito,Manta,12:00,01/10/2023,30
+Guayaquil,Manta,08:00,15/10/2023,20
+Cuenca,Manta,09:00,29/10/2023,50
+Quito,Cuenca,12:00,01/10/2023,35
+Guayaquil,Cuenca,08:00,15/10/2023,20
+Quito,Los Angeles,12:00,01/10/2023,610
+Guayaquil,Los Angeles,08:00,15/10/2023,650
+Cuenca,Los Angeles,09:00,29/10/2023,660
+Quito,Las Vegas,12:00,01/10/2023,520
+Guayaquil,Las Vegas,08:00,15/10/2023,550
+Cuenca,Las Vegas,09:00,29/10/2023,530
+Quito,Roma,12:00,01/10/2023,835
+Guayaquil,Roma,08:00,15/10/2023,850
+Cuenca,Roma,09:00,29/10/2023,860
+New York,Ciudad De Panama,12:00,01/10/2023,315
+Japon,Medellin,08:00,15/10/2023,1000
+Marruecos,Barcelona,09:00,29/10/2023,500
+Santiago de Chile,Barcelona,12:00,01/10/2023,795
+Santiago de Chile,Barcelona,08:00,15/10/2023,795

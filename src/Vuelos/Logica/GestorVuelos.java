@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class GestorVuelos {
@@ -54,10 +55,19 @@ public class GestorVuelos {
 
     public List<Vuelo> buscarVueloFecha(String fecha) {
         List<Vuelo> vuelosEncontrados = new ArrayList<>();
-        String cadena = fecha(fecha);
-        System.out.println(cadena);
+
         for (Vuelo vuelo : this.vuelos) {
-            if (cadena.equalsIgnoreCase(vuelo.getFecha())) {
+            if (fecha.equalsIgnoreCase(vuelo.getFecha())) {
+                vuelosEncontrados.add(vuelo);
+            }
+        }
+        return vuelosEncontrados;
+    }
+
+    public List<Vuelo> buscarVueloPorDestinoFecha(String destinoComun, String fechaComun) {
+        List<Vuelo> vuelosEncontrados = new ArrayList<>();
+        for (Vuelo vuelo : this.vuelos) {
+            if (fechaComun.equalsIgnoreCase(vuelo.getFecha()) && vuelo.getDestino().equalsIgnoreCase(destinoComun)) {
                 vuelosEncontrados.add(vuelo);
             }
         }
@@ -66,9 +76,8 @@ public class GestorVuelos {
 
     public List<Vuelo> filtar(String origen, String destino, String fecha) {
         List<Vuelo> vuelosEncontrados = new ArrayList<>();
-        String cadena = fecha(fecha);
         for (Vuelo vuelo : this.vuelos) {
-            if (vuelo.getOrigen().equalsIgnoreCase(origen) && vuelo.getDestino().equalsIgnoreCase(destino) && vuelo.getFecha().equalsIgnoreCase(cadena)) {
+            if (vuelo.getOrigen().equalsIgnoreCase(origen) && vuelo.getDestino().equalsIgnoreCase(destino) && vuelo.getFecha().equalsIgnoreCase(fecha)) {
                 vuelosEncontrados.add(vuelo);
             }
         }
@@ -77,6 +86,7 @@ public class GestorVuelos {
 
     public void mostarVuelosFiltrados(JTable tabla, List<Vuelo> vuelos){
         TablaVuelos modelo = new TablaVuelos(vuelos);
+        System.out.println(vuelos.size());
         tabla.setModel(modelo);
 
     }
@@ -84,9 +94,11 @@ public class GestorVuelos {
         this.vuelos.add(v);
     }
 
+
+
     private static class TablaVuelos extends AbstractTableModel {
     private final String[] COLUMNS = {"Origen","Destino", "Fecha", "Hora salida",
-        "Duracion", "Num. Asientos"};
+        "Duracion", "Asientos Disponibles"};
     private List<Vuelo> vuelos;
 
     public TablaVuelos(List<Vuelo> vuelos){
@@ -110,7 +122,7 @@ public class GestorVuelos {
                 case 2 -> vuelos.get(rowIndex).getFecha();
                 case 3 -> vuelos.get(rowIndex).getHora_salida();
                 case 4 -> vuelos.get(rowIndex).getDuracion();
-                case 5 -> vuelos.get(rowIndex).getNumeroAsientos();
+                case 5 -> vuelos.get(rowIndex).asientosDisponibles();
                 default ->  "-";
 
             };
@@ -143,10 +155,6 @@ public class GestorVuelos {
         }
         return null;
     }
-    private String fecha(String cadena){
-        String[] partes = cadena.split(" ");
-        String fecha = partes[2] + " "+ partes[1] + " " + partes[5];
-        return fecha;
-    }
+
 
 }
