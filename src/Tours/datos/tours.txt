@@ -1,10 +1,12 @@
-Ruta Cascadas PRIVADO,55,[Agoyan;Manto de la Novia;Pailon del Diablo;Termas medicinales;Basilica],[Visitas a cascadas;Cruce en tarabita;Hora Relax;Visita Basílica],Ernesto Aguilar,1 día,20,10/11/2023
-Ruta Cascadas,20,[Agoyan;Culebrilla;Esperanza;Puertas del Cielo;Manto de la Novia;Pailon del Diablo;Termas medicinales;Basilica],[Visitas a cascadas;Cruce en tarabita;Uso de Chiva;Juegos Extremos],Mariela Guerrero,3 horas,25,09/11/2023
-Nocturno Sacha,15,[Puente de cristal;Sendero de los Duendes],[Visitas guiadas;Canelazo;Fogata],Ernesto Aguilar,2 horas,25,11/11/2023,11/11/2023
-Animal Park,10,[Resbaladera gigante;Animal Park],[Juegos con animales],Mariela Guerrero,3 horas,25,10/11/2023,10/11/2023
-City Tour Quito PRIVADO,70,[Basilica del Voto Nacional;Palacio Arzobispal;Plaza Grande;Centro Cultural Metropolitano;Iglesia del Sagrario;Iglesia Compañia de Jesus;Antiguo Banco Central;Iglesia San Francisco;Mirador Panecillo;Mitad Del Mundo],[Visita lugares emblemáticos;Hora de Almuerzo],Juan Erazo,1 dia,15,30/11/2023
-City Tour Quito,50,[Basilica del Voto Nacional;Palacio Arzobispal;Plaza Grande;Centro Cultural Metropolitano;Iglesia del Sagrario;Iglesia Compañia de Jesus;Antiguo Banco Central;Iglesia San Francisco;Mirador Panecillo;Mitad Del Mundo],[Visita lugares emblemáticos;Hora de Almuerzo],Juan Erazo,1 dia,20,01/12/2023,01/12/2023
-Termas Papallacta PRIVADO,70,[Volcán Antisana;Guango;Piscinas termales],[Caminata;Visita Paramos;Uso termas],Esteban Jimenez,3 horas,15,21/10/2023
-Termas Papallacta,50,[Volcán Antisana;Guango;Piscinas termales],[Caminata;Visita Paramos;Uso termas],Esteban Jimenez,3 horas,20,20/10/2023
-Fin de Año Salinas,200,[Bahía;Playa San Lorenzo;Chocolatera;Mar Bravo;Ballenita;Farallon Dillon;Ruta del Sol(6 playas);Montañita;Acuario de Valdivia;Discoteca],[Paseo playas;Alimentacion; Visita Miradores;Noche Discoteca],Francisco Meneses,2 dias 1 noche,30,29/12/2023,31/12/2023
 City Tour Cuenca,90,[Parque Nacional Cajas;Centro Historico;Mirador de Turi;Museo y Fabrica de sombreros de Paja Toquilla],[Caminata;Visitas Guiadas],Julia Cañizares,1 día,20,16/10/2023,16/10/2023
+Tour Histórico Cuenca,45,[Plaza de San Sebastián;Museo de Arte Moderno;Plaza de las Flores;Catedral;Puente Roto],[Caminata;Visitas Guiadas],Julia Cañizares,1 día,20,21/10/2023,21/10/2023
+Tour Histórico Cuenca,45,[Plaza de San Sebastián;Museo de Arte Moderno;Plaza de las Flores;Catedral;Puente Roto],[Caminata;Visitas Guiadas],Julia Cañizares,1 día,20,24/10/2023,24/10/2023
+Lo mejor de Manta,65,[Plage de Tarqui;Boatyard;Fábrica de Tagua;Montecristi;Museo Ciudad Alfaro],[Demostraciones;Visitas Guiadas],Ernesto Lema,1 día,18,14/10/2023,14/10/2023
+Lo mejor de Manta,65,[Plage de Tarqui;Boatyard;Fábrica de Tagua;Montecristi;Museo Ciudad Alfaro],[Demostraciones;Visitas Guiadas],Ernesto Lema,1 día,18,14/10/2023,14/10/2023
+Los Ángeles al Completo,100,[Plaza Olvera;Sala de conciertos Walt Disney;Staples Center;Casas Victorianas;Avenida de las Estrellas;Teatro Dolby;Teatro Chino;Sunset Boulevard;Beverly Hills;Rodeo Drive],[Guía en Español, Caminata],Melissa Puebla,1 día,15,17/10/2023,17/10/2023
+Los Ángeles PRIVADO,150,[Plaza Olvera;Sala de conciertos Walt Disney;Staples Center;Casas Victorianas;Avenida de las Estrellas;Teatro Dolby;Teatro Chino;Sunset Boulevard;Beverly Hills;Rodeo Drive],[Guía en Español, Caminata],Melissa Puebla,1 día,10,17/10/2023,17/10/2023
+Noche en las Vegas,75,[Las Vegas Boulevard;Hotel Luxor;Hotel Bellagio;Hotel Venetian;Centro neurálgico;Fremont Street Experience],[Guía en Español;Espectáculos],Pablo Arandi,1 día,10,18/10/2023,18/10/2023
+Roma Tour,75,[Coliseo;Monte Palatino;Circo Máximo;Foro Romano;Vía Sacra;Templos;Arco de Tito;Casa de las Vestales],[Guía en Español;Caminata],Daniel Cuadrado,1 día,10,12/10/2023,12/10/2023
+Roma Tour,75,[Coliseo;Monte Palatino;Circo Máximo;Foro Romano;Vía Sacra;Templos;Arco de Tito;Casa de las Vestales],[Guía en Español;Caminata],Daniel Cuadrado,1 día,10,19/10/2023,19/10/2023
+El Vaticano,75,[Museo Vaticano;Capilla Sixtina;Basilica de San Pedro],[Visitas Guiadas;Caminata;Entrada sin filas],Daniel Cuadrado,1 día,15,18/10/2023,18/10/2023
+El Vaticano,75,[Museo Vaticano;Capilla Sixtina;Basilica de San Pedro],[Visitas Guiadas;Caminata;Entrada sin filas],Daniel Cuadrado,1 día,15,25/10/2023,25/10/2023

@@ -1,5 +1,6 @@
 package Tours;
 
+import Principal.Sesion;
 import Principal.Usuario;
 
 import java.awt.event.ActionEvent;
@@ -74,6 +75,9 @@ public class ModuloTours extends JFrame{
     List<Tour> tours;
 
     HashSet<String> reservasUnicas = new HashSet<>();
+
+    //Instancia para acceder a la información de la sesión
+    Sesion sesion = Sesion.getInstance();
 
     public ModuloTours(String head, Usuario usuarioVerificado){
         super (head);
@@ -181,7 +185,7 @@ public class ModuloTours extends JFrame{
                 int numReserva = Integer.parseInt(opcion.split("-")[0]);
                 reservaTourModificar = gestionReserva.buscarReserva(numReserva);
                 DefaultListModel toursModel = new DefaultListModel<>();
-                ArrayList<Tour> toursList = (ArrayList<Tour>) gestionTour.getToursDisponibles();
+                ArrayList<Tour> toursList = (ArrayList<Tour>) gestionTour.getToursDisponibles(sesion.getDestinoComun(), sesion.getFechaComun());
 
                 for(Tour tour: toursList) {
                     toursModel.addElement(tour.informacionRelevante());
@@ -265,8 +269,9 @@ public class ModuloTours extends JFrame{
 
     //Metodo para mostrar tours disponibles
     private void mostrarToursDisponibles(JList list){
+
         DefaultListModel<String> model = new DefaultListModel<>();
-        List<Tour> toursDispo = this.gestionTour.getToursDisponibles();
+        List<Tour> toursDispo = this.gestionTour.getToursDisponibles(sesion.getDestinoComun(), sesion.getFechaComun());
 
         for (Tour i : toursDispo){
             model.addElement(i.informacionRelevante());
