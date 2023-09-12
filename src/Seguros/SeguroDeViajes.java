@@ -20,7 +20,7 @@ public class SeguroDeViajes extends Seguro {
 
 
     @Override
-    void indemnizar(float valorGastado, String motivo) {
+    public void indemnizar(float valorGastado, String motivo) {
         float cantidadAPagar = 0.0f;
         for (String[] cobertura : coberturas) {
             if (motivo.equalsIgnoreCase(cobertura[0])) {
@@ -38,7 +38,7 @@ public class SeguroDeViajes extends Seguro {
         }
     }
 
-    float calcularPrimaTotal() {
+    public float calcularPrimaTotal() {
         float total = 0.0F;
         if (this.destino == 1) {
             total = (float)((double)this.getPrimaSinRecargo() + (double)this.getPrimaSinRecargo() * 0.1) * (float)this.getBeneficiarios().length;

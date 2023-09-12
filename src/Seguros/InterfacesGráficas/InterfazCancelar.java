@@ -1,10 +1,9 @@
-package Seguros;
+package Seguros.InterfacesGráficas;
 
-import Principal.Usuario;
+import Seguros.Seguro;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
 import java.util.ArrayList;
 
 public class InterfazCancelar extends JFrame{
@@ -14,6 +13,8 @@ public class InterfazCancelar extends JFrame{
     private JPanel panelPrincipal;
 
     public InterfazCancelar(InterfazSeguro interfazSeguro){
+        interfazSeguro.colocarIconos("src/Seguros/InterfacesGráficas/Imagenes/IconoBorrar.png", this.btnEliminar);
+        interfazSeguro.colocarIconos("src/Seguros/InterfacesGráficas/Imagenes/IconoCancelarAccion.png", this.btnCancelar);
         this.mostrarSeguros(interfazSeguro);
 
         // En resumen, se llama al gestor transmitido por la interfaz principal, y ejecuta la acción.

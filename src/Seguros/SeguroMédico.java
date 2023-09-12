@@ -19,7 +19,7 @@ public class SeguroMédico extends Seguro {
     }
 
     @Override
-    void indemnizar(float valorGastado, String motivo) {
+    public void indemnizar(float valorGastado, String motivo) {
         float porcentajeCubierto = 0.0f;
         for (String cobertura : coberturas) {
             if (motivo.equalsIgnoreCase(cobertura)) {
@@ -39,7 +39,7 @@ public class SeguroMédico extends Seguro {
         }
     }
 
-    float calcularPrimaTotal() {
+    public float calcularPrimaTotal() {
         float total = 0.0F;
         if (this.nivelSeguro == 1) {
             total = (float)((double)this.getPrimaSinRecargo() + (double)this.getPrimaSinRecargo() * 0.15) * (float)this.getBeneficiarios().length;

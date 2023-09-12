@@ -1,13 +1,14 @@
-package Seguros;
+package Seguros.InterfacesGráficas;
 
 import Principal.Usuario;
+import Seguros.GestorSeguros;
+import Seguros.Seguro;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.*;
 import java.util.ArrayList;
-import java.util.Iterator;
+
 
 public class InterfazSeguro extends JFrame {
     private JTable tblSegurosCliente;
@@ -21,12 +22,17 @@ public class InterfazSeguro extends JFrame {
 
     //Se pasa el cliente para saber cuales son sus seguros.
     public InterfazSeguro(Usuario cliente){
+        /*------------------------------------------ICONOS DE LOS BOTONES-----------------------------*/
+        this.colocarIconos("src/Seguros/InterfacesGráficas/Imagenes/IconoNuevo.png", this.btnNuevoSeguro);
+        this.colocarIconos("src/Seguros/InterfacesGráficas/Imagenes/IconoRenovar.png", this.btnRenovar);
+        this.colocarIconos("src/Seguros/InterfacesGráficas/Imagenes/IconoIndemnizar.png", this.btnIndemnizar);
+        this.colocarIconos("src/Seguros/InterfacesGráficas/Imagenes/IconoCancelar.png", this.btnCancelar);
+
+
         this.gestorSeguros = new GestorSeguros();
         this.gestorSeguros.insertarSeguros(cliente);
         this.cliente = cliente;
         this.mostrarSeguros();
-
-
 
         this.btnNuevoSeguro.addActionListener((e) -> {
             //Array para mostrar las opciones al crear un nuevo seguro.
@@ -103,8 +109,17 @@ public class InterfazSeguro extends JFrame {
             }
 
             this.tblSegurosCliente.setModel(model);
+            this.tblSegurosCliente.setDefaultRenderer(Object.class, new RenderColores());
         }
 
+    }
+
+    public void colocarIconos(String direccion, JButton boton){
+        ImageIcon iconoNuevo = new ImageIcon(direccion);
+        Image scaledIcon = iconoNuevo.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+        boton.setIcon(new ImageIcon(scaledIcon));
+        boton.setPreferredSize(new Dimension(50, 50));
+        boton.setIconTextGap(10);
     }
 
     public void crearFrame() {

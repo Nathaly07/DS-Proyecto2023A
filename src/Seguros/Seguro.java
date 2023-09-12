@@ -7,7 +7,7 @@ package Seguros;
 
 import Pagos.Pago;
 import Principal.Usuario;
-import java.awt.Component;
+
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -35,7 +35,7 @@ public abstract class Seguro {
 
     //Es una nueva forma de renovar el seguro. SOLO lo renueva por un 1 mes.
     //Además coloca al seguro en estado activo.
-    public void newRenovar() {
+    public void Renovar() {
         Date fechaActual = new Date();
         Calendar calendario = Calendar.getInstance();
         calendario.setTime(fechaActual);
@@ -55,9 +55,9 @@ public abstract class Seguro {
     }
 
 
-    abstract void indemnizar(float var1, String var2);
+    public abstract void indemnizar(float var1, String var2);
 
-    abstract float calcularPrimaTotal();
+    public abstract float calcularPrimaTotal();
 
     public Usuario getPropietario() {
         return this.propietario;

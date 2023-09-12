@@ -1,7 +1,8 @@
-package Seguros;
+package Seguros.InterfacesGráficas;
 
 import javax.swing.*;
 import Principal.Sesion;
+import Seguros.SeguroDeViajes;
 
 import java.util.Calendar;
 import java.util.StringTokenizer;
@@ -21,6 +22,10 @@ public class InterfazSeguroViaje extends JFrame {
 
     //Los siguientes pasos se repiten en la mayoria de interfaces para crear seguros.
     public InterfazSeguroViaje(InterfazSeguro interfazSeguro){
+        interfazSeguro.colocarIconos("src/Seguros/InterfacesGráficas/Imagenes/IconoSeguroViaje.png", this.btnCrearSeguro);
+        interfazSeguro.colocarIconos("src/Seguros/InterfacesGráficas/Imagenes/IconoCancelarAccion.png", this.btnCancelar);
+
+
         this.btnCrearSeguro.addActionListener((e) -> {
             //Se extraen los beneficiarios-------------------------
             StringTokenizer tokens=new StringTokenizer(this.areaBeneficiarios.getText(), "\n");

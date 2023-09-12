@@ -1,7 +1,7 @@
-package Seguros;
+package Seguros.InterfacesGráficas;
 
 import Principal.Sesion;
-import Principal.Usuario;
+import Seguros.SeguroDeVida;
 
 import javax.swing.*;
 import java.util.Calendar;
@@ -17,6 +17,9 @@ public class InterfazSeguroVida extends JFrame {
     private JButton btnCancelar;
 
     public InterfazSeguroVida(InterfazSeguro interfazSeguro){
+        interfazSeguro.colocarIconos("src/Seguros/InterfacesGráficas/Imagenes/IconoSeguroVida.png", this.btnNuevoSeguro);
+        interfazSeguro.colocarIconos("src/Seguros/InterfacesGráficas/Imagenes/IconoCancelarAccion.png", this.btnCancelar);
+
         this.btnNuevoSeguro.addActionListener((e) -> {
             //Se extraen los beneficiarios-------------------------
             StringTokenizer tokens=new StringTokenizer(this.txtBeneficiario.getText(), "\n");

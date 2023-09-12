@@ -17,7 +17,7 @@ public class SeguroDeVida extends Seguro {
         this.nivelSeguro = nivelSeguro;
     }
 
-    void indemnizar(float valorPedido, String motivo) {
+    public void indemnizar(float valorPedido, String motivo) {
         float totalMonto = 0.0F;
         if (valorPedido <= 400000.0F && motivo.equalsIgnoreCase("muerte")) {
             if (this.nivelSeguro == 1) {
@@ -36,7 +36,7 @@ public class SeguroDeVida extends Seguro {
         }
     }
 
-    float calcularPrimaTotal() {
+    public float calcularPrimaTotal() {
         float total = 0.0F;
         if (this.nivelSeguro == 1) {
             total = (float)((double)this.getPrimaSinRecargo() + (double)this.getPrimaSinRecargo() * 0.4) * (float)this.getBeneficiarios().length;

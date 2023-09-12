@@ -3,7 +3,7 @@ package Principal;
 import Hospedaje.InterfacesDeUsuario.MenuHospedaje;
 import Vehiculo.UIVehiculos;
 
-import Seguros.InterfazSeguro;
+import Seguros.InterfacesGráficas.InterfazSeguro;
 import Tours.ModuloTours;
 import Vuelos.ModuloVuelos;
 

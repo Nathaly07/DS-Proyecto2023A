@@ -1,7 +1,7 @@
-package Seguros;
+package Seguros.InterfacesGráficas;
 
 import Principal.Sesion;
-import Principal.Usuario;
+import Seguros.SeguroMédico;
 
 import javax.swing.*;
 import java.util.Calendar;
@@ -20,6 +20,10 @@ public class InterfazSeguroMedico extends JFrame {
 
 
     public InterfazSeguroMedico(InterfazSeguro interfazSeguro){
+        interfazSeguro.colocarIconos("src/Seguros/InterfacesGráficas/Imagenes/IconoSeguroMedico.png", this.btnNuevoSeguro);
+        interfazSeguro.colocarIconos("src/Seguros/InterfacesGráficas/Imagenes/IconoCancelarAccion.png", this.btnCancelar);
+
+
         this.btnNuevoSeguro.addActionListener((e) -> {
             //Se extraen los beneficiarios-------------------------
             StringTokenizer tokens=new StringTokenizer(this.txtBeneficiarios.getText(), "\n");

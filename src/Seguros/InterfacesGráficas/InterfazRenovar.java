@@ -1,45 +1,54 @@
-package Seguros;
+package Seguros.InterfacesGráficas;
 
-import Principal.Usuario;
+import Seguros.Seguro;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.util.ArrayList;
 
-public class InterfazIndemnizar extends JFrame {
-    private JTable tblSeguros;
-    private JButton btnIndemnizar;
+public class InterfazRenovar extends JFrame {
+    private JTable tblSegurosRenovar;
+    private JButton btnRenovar;
     private JButton btnCancelar;
     private JPanel panelPrincipal;
+    private JScrollPane scrollPane;
 
-    public InterfazIndemnizar(InterfazSeguro interfazSeguro){
+
+    public InterfazRenovar(InterfazSeguro interfazSeguro){
+        interfazSeguro.colocarIconos("src/Seguros/InterfacesGráficas/Imagenes/IconoActualizar.png", this.btnRenovar);
+        interfazSeguro.colocarIconos("src/Seguros/InterfacesGráficas/Imagenes/IconoCancelarAccion.png", this.btnCancelar);
         this.mostrarSeguros(interfazSeguro);
 
-        //Se busca al seguro por medio de su ID de la tabla. Y despues ejecuta la acción.
-        this.btnIndemnizar.addActionListener((e) -> {
-            int fila = this.tblSeguros.getSelectedRow();
+        //Busca al seguro con el ID de la tabla y ejecuta la acción.
+        this.btnRenovar.addActionListener((e) -> {
+            int fila = this.tblSegurosRenovar.getSelectedRow();
             if(fila<0){
                 JOptionPane.showMessageDialog(null, "¡No has seleccionado ningún seguro!", "Error", JOptionPane.ERROR_MESSAGE);
             }else{
-                String motivo = JOptionPane.showInputDialog(null, "Por favor, ingresa tu motivo para solicitar la indemnización: ", "Motivo", JOptionPane.QUESTION_MESSAGE);
-                float valorGastado = Float.parseFloat(JOptionPane.showInputDialog(null, "¿Cuánto gastaste en el proceso?: ", "Valor gastado", JOptionPane.QUESTION_MESSAGE));
-
-                int numSeguro = (int) this.tblSeguros.getValueAt(fila,0)-1;
-                interfazSeguro.gestorSeguros.buscarSeguroEspecifico(numSeguro).indemnizar(valorGastado, motivo);
-                interfazSeguro.mostrarSeguros();
-
-                this.setVisible(false);
-
+                int numSeguro = (int) this.tblSegurosRenovar.getValueAt(fila,0)-1;
+                int eleccion = JOptionPane.showConfirmDialog(null, "Esta acción requiere de un pago.\n¿Desea continuar?", "Advertencia", JOptionPane.YES_NO_OPTION);
+                if(eleccion==-1||eleccion==1){
+                    JOptionPane.showMessageDialog(null, "Es una pena. \nVuelve si deseas renovar tu seguro.", "Cancelar renovación", JOptionPane.INFORMATION_MESSAGE);
+                }else{
+                    String[] opcionesPago = new String[]{"Paypal", "Transferencia", "Tarjeta de crédito"};
+                    int tipoPago = JOptionPane.showOptionDialog((Component)null, "Por favor, indica tu forma de pago: ", "Pagar", -1, 3, (Icon)null, opcionesPago, opcionesPago[0]);
+                    interfazSeguro.gestorSeguros.buscarSeguroEspecifico(numSeguro).pagar(opcionesPago[tipoPago]);
+                    interfazSeguro.gestorSeguros.buscarSeguroEspecifico(numSeguro).Renovar();
+                    interfazSeguro.mostrarSeguros();
+                    this.setVisible(false);
+                }
             }
         });
 
         this.btnCancelar.addActionListener((e) -> {
             this.setVisible(false);
         });
+
     }
 
-    //Imprime solo los seguros activos del cliente. De modo que, no puede gozar la indemnización
-    // de seguros inactivos o ya cobrados.
+    //Solo muestra los seguros inactivos del cliente. Es para que pueda pagar a aquellos que
+    // no han sido renovados.
     public void mostrarSeguros(InterfazSeguro interfazSeguro) {
         ArrayList<Seguro> seguros = interfazSeguro.gestorSeguros.buscarSegurosCliente(interfazSeguro.cliente);
         if(seguros!=null){
@@ -53,7 +62,7 @@ public class InterfazIndemnizar extends JFrame {
             model.addColumn("Prima total");
             model.addColumn("Estado");
             for (Seguro seguro : seguros) {
-                if(seguro.getEstado().equalsIgnoreCase("Activo")){
+                if(seguro.getEstado().equalsIgnoreCase("Inactivo")){
                     String tipoSeguro = "";
                     if(seguro.getClass().toString().equals("class Seguros.SeguroDeViajes")){
                         tipoSeguro = "Seguro de viaje";
@@ -73,13 +82,13 @@ public class InterfazIndemnizar extends JFrame {
 
             }
 
-            this.tblSeguros.setModel(model);
+            this.tblSegurosRenovar.setModel(model);
         }
 
     }
 
     public void crearFrame() {
-        setTitle("Proceso de indemnización");
+        setTitle("Renovar seguro");
         setSize(1000, 700);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -87,4 +96,5 @@ public class InterfazIndemnizar extends JFrame {
         add(panelPrincipal);
         setVisible(true);
     }
+
 }
