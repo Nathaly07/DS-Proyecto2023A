@@ -21,10 +21,11 @@ public class GestorTour {
     public List<Tour> getToursDisponibles(String destino, String fechaTentativa) {
         List<Tour> toursDisponibles = new ArrayList<>();
         List<Tour> toursDestino = getToursDestino(destino);
+        System.out.println(toursDestino.toString());
         List<Tour> toursFecha  = getToursFecha(fechaTentativa);
-
-        List<Tour> toursFinal = toursDestino.stream().filter(toursFecha::contains).toList();
-
+        System.out.println(toursFecha.toString());
+        List<Tour> toursFinal = toursDestino.stream().filter(f-> toursFecha.contains(f)).toList();
+        System.out.println(toursFinal.toString());
         if(toursFinal.isEmpty()){
             toursFinal = this.tours;
         }
@@ -49,7 +50,7 @@ public class GestorTour {
             try {
                 Date fechaTour = format.parse(tour.getFechaInicio());
                 Date fechaT = format.parse(fechaTentativa);
-                if(fechaTour.before(fechaT)){
+                if(fechaTour.after(fechaT)){
                     toursFinal.add(tour);
                 }
             } catch (ParseException e) {
