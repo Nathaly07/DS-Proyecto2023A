@@ -54,10 +54,9 @@ public class GestorVuelos {
 
     public List<Vuelo> buscarVueloFecha(String fecha) {
         List<Vuelo> vuelosEncontrados = new ArrayList<>();
-        String cadena = fecha(fecha);
-        System.out.println(cadena);
+
         for (Vuelo vuelo : this.vuelos) {
-            if (cadena.equalsIgnoreCase(vuelo.getFecha())) {
+            if (fecha.equalsIgnoreCase(vuelo.getFecha())) {
                 vuelosEncontrados.add(vuelo);
             }
         }
@@ -66,9 +65,8 @@ public class GestorVuelos {
 
     public List<Vuelo> filtar(String origen, String destino, String fecha) {
         List<Vuelo> vuelosEncontrados = new ArrayList<>();
-        String cadena = fecha(fecha);
         for (Vuelo vuelo : this.vuelos) {
-            if (vuelo.getOrigen().equalsIgnoreCase(origen) && vuelo.getDestino().equalsIgnoreCase(destino) && vuelo.getFecha().equalsIgnoreCase(cadena)) {
+            if (vuelo.getOrigen().equalsIgnoreCase(origen) && vuelo.getDestino().equalsIgnoreCase(destino) && vuelo.getFecha().equalsIgnoreCase(fecha)) {
                 vuelosEncontrados.add(vuelo);
             }
         }
@@ -143,10 +141,6 @@ public class GestorVuelos {
         }
         return null;
     }
-    private String fecha(String cadena){
-        String[] partes = cadena.split(" ");
-        String fecha = partes[2] + " "+ partes[1] + " " + partes[5];
-        return fecha;
-    }
+
 
 }

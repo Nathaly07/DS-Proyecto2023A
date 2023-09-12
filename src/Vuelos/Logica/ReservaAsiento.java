@@ -42,10 +42,6 @@ public class ReservaAsiento {
         this.fecha = fechaAutomatica();
     }
 
-    public void ModificarReserva() {
-
-    }
-
 
     public double generarCostoTotal() {
         return generarCostoTotalPremium()+ generarCostoTotalTurista();

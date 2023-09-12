@@ -21,23 +21,23 @@ public class Módulos extends JFrame {
     private JButton btnExit;
     private JPanel pnlContenido;
     private JButton btnActualizarDatos;
-    private Login login;
+    private Sesion sesion;
 
 
-    public Módulos(Login login) {
-        this.login = login;
+    public Módulos(Sesion sesion) {
+        this.sesion = sesion;
 
         btnVuelos.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ModuloVuelos moduloVuelos= new ModuloVuelos(login);
+                ModuloVuelos moduloVuelos= new ModuloVuelos(sesion);
                 setPanel(moduloVuelos.plnPrincipalVuelos);
                 crearFrame();
             }
         });
 
         btnExit.addActionListener(e -> {
-            LoginInterfaz loginInterfaz = new LoginInterfaz(login);
+            LoginInterfaz loginInterfaz = new LoginInterfaz(sesion);
             loginInterfaz.crearFrame();
             dispose();
         });
@@ -47,7 +47,7 @@ public class Módulos extends JFrame {
             crearFrame();
         });
         button3.addActionListener(e ->{
-            UIVehiculos rentaVehiculo = new UIVehiculos(login);
+            UIVehiculos rentaVehiculo = new UIVehiculos(sesion);
             setPanel(rentaVehiculo.pnlPrincipal);
             crearFrame();
         });
@@ -56,14 +56,14 @@ public class Módulos extends JFrame {
 
         btnHospedaje.addActionListener(e -> hospedaje());
         btnActualizarDatos.addActionListener(e -> {
-            ActualizarDatosInterfaz actualizarDatosInterfaz = new ActualizarDatosInterfaz(login);
+            ActualizarDatosInterfaz actualizarDatosInterfaz = new ActualizarDatosInterfaz(sesion);
             setPanel(actualizarDatosInterfaz.pnlActualizarDatos);
             crearFrame();
         });
         toursButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ModuloTours moduloTours = new ModuloTours("Reservas - Tour", login.getUsuarioVerificado());
+                ModuloTours moduloTours = new ModuloTours("Reservas - Tour", sesion.getUsuarioVerificado());
                 setPanel(moduloTours.pnlOpcionesTours);
                 crearFrame();
             }
@@ -87,12 +87,12 @@ public class Módulos extends JFrame {
     }
 
     public void rentarVehiculo() {
-        UIVehiculos rentaVehiculos = new UIVehiculos(this.login);
+        UIVehiculos rentaVehiculos = new UIVehiculos(this.sesion);
         rentaVehiculos.crearFrame();
         dispose();
     }
     public void hospedaje(){
-        MenuHospedaje menuHospedaje = new MenuHospedaje(this.login);
+        MenuHospedaje menuHospedaje = new MenuHospedaje(this.sesion);
         menuHospedaje.crearFrame();
         dispose();
     }

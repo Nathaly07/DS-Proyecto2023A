@@ -57,9 +57,9 @@ public class Vuelo {
         int min = 1;
         int max = 6;
         for (int numeroAsiento = 1; numeroAsiento <= numeroAsientoPorFila; numeroAsiento++) {
-            int numeroAsientoAleatorio2 = random.nextInt(max - min + 1) + min;
+//            int numeroAsientoAleatorio2 = random.nextInt(max - min + 1) + min;
             Asiento a;
-            if (numeroAsiento % numeroAsientoAleatorio2 == 0) {
+            if (numeroAsiento  == 0) {
                 a = new Asiento(numeroAsiento, true, ((duracion / 60) * precio), Clase, numeroFilaTurista);
 
             } else {
@@ -69,9 +69,6 @@ public class Vuelo {
         }
     }
 
-    public  int getEstaDisponible() {
-        return estaDisponible;
-    }
 
     public Asiento seleccionarAsiento(Asiento asiento) {
         for (Asiento a : this.asientos) {
@@ -87,13 +84,6 @@ public class Vuelo {
         return "Vuelo{ "+ " origen=" + origen + ", destino=" + destino + ", hora_salida=" + hora_salida +", fecha=" + fecha + ", duracion=" + duracion + ", estaDisponible=" + estaDisponible + '}';
     }
 
-    public void mostrarVuelo() {
-        String cadena = toString() + "\n";
-        for (Asiento a : asientos) {
-            cadena += a.toString() + "\n";
-        }
-        System.out.println(cadena);
-    }
 
     public String getOrigen() {
         return origen;
@@ -114,11 +104,6 @@ public class Vuelo {
     public int getDuracion() {
         return duracion;
     }
-
-    public List<Asiento> getAsientos() {
-        return asientos;
-    }
-
 
     public int asientosDisponibles(){
         int contador = 0;
