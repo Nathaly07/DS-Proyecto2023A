@@ -15,13 +15,9 @@ public class GestoReservaVehiculo {
     public static void agregarRenta(Vehiculo vehiculo) {
         if (rentas.isEmpty()) {
             rentas.add(renta);
-            if (renta.verificarEstado()) {
-                renta.agregarVehiculo(vehiculo);
-            }
-        } else {
-            if (renta.verificarEstado()) {
-                renta.agregarVehiculo(vehiculo);
-            }
+        }
+        if (renta.verificarEstado()) {
+            renta.agregarVehiculo(vehiculo);
         }
 
     }
