@@ -18,7 +18,6 @@ public class SeguroDeViajes extends Seguro {
         this.coberturas = coberturas;
     }
 
-
     @Override
     public void indemnizar(float valorGastado, String motivo) {
         float cantidadAPagar = 0.0f;
@@ -51,13 +50,5 @@ public class SeguroDeViajes extends Seguro {
         }
 
         return total;
-    }
-
-    public int getDestino() {
-        return this.destino;
-    }
-
-    public String[][] getCoberturas() {
-        return this.coberturas;
     }
 }

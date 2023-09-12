@@ -17,9 +17,9 @@ public class SeguroDeVida extends Seguro {
         this.nivelSeguro = nivelSeguro;
     }
 
-    public void indemnizar(float valorPedido, String motivo) {
+    public void indemnizar(float valorGastado, String motivo) {
         float totalMonto = 0.0F;
-        if (valorPedido <= 400000.0F && motivo.equalsIgnoreCase("muerte")) {
+        if (valorGastado <= 400000.0F && motivo.equalsIgnoreCase("muerte")) {
             if (this.nivelSeguro == 1) {
                 totalMonto = 100000.0F;
             } else if (this.nivelSeguro == 2) {

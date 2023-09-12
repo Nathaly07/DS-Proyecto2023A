@@ -9,9 +9,11 @@ import java.util.StringTokenizer;
 import java.util.Date;
 
 public class GestorSeguros {
-    private ArrayList<Seguro> Seguros = new ArrayList();
+    private ArrayList<Seguro> Seguros;
 
+    //Constructor del gestor
     public GestorSeguros() {
+        this.Seguros = new ArrayList();
     }
 
     //Elimina el seguro de la lista.
