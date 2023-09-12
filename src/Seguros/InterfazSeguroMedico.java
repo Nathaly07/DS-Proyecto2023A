@@ -1,5 +1,6 @@
 package Seguros;
 
+import Principal.Sesion;
 import Principal.Usuario;
 
 import javax.swing.*;
@@ -33,7 +34,12 @@ public class InterfazSeguroMedico extends JFrame {
             }
 
             //Se extrae la fecha actual y la de vencimiento-------------------------
-            Date fechaActual = new Date();
+            Date fechaActual;
+            if(Sesion.getInstance().getFechaComun()!=null){
+                fechaActual= Sesion.getInstance().getFechaComun();
+            }else{
+                fechaActual= new Date();
+            }
             Calendar calendario = Calendar.getInstance();
             calendario.setTime(fechaActual);
             calendario.add(Calendar.MONTH, 1);
@@ -58,6 +64,7 @@ public class InterfazSeguroMedico extends JFrame {
             SeguroMédico seguroMédico = new SeguroMédico(interfazSeguro.cliente, beneficiarios, fechaActual, fechaVencimiento, coberturas, nivelSeguro, "Activo");
             interfazSeguro.gestorSeguros.agregarSeguro(seguroMédico);
             JOptionPane.showMessageDialog(null, "Tu seguro MÉDICO se ha creado exitosamente.", "Éxito", JOptionPane.WARNING_MESSAGE);
+            interfazSeguro.mostrarSeguros();
             this.setVisible(false);
 
         });

@@ -26,6 +26,7 @@ public class InterfazIndemnizar extends JFrame {
 
                 int numSeguro = (int) this.tblSeguros.getValueAt(fila,0)-1;
                 interfazSeguro.gestorSeguros.buscarSeguroEspecifico(numSeguro).indemnizar(valorGastado, motivo);
+                interfazSeguro.mostrarSeguros();
 
                 this.setVisible(false);
 

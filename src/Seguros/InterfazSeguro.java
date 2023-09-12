@@ -16,7 +16,6 @@ public class InterfazSeguro extends JFrame {
     private JButton btnRenovar;
     private JButton btnIndemnizar;
     private JButton btnCancelar;
-    private JButton mostrarButton;
     public Usuario cliente;
     public GestorSeguros gestorSeguros;
 
@@ -49,12 +48,6 @@ public class InterfazSeguro extends JFrame {
                 interfazSeguroVida.crearFrame();
             }
         });
-
-        //Actualiza los datos de los seguros
-        this.mostrarButton.addActionListener((e) -> {
-            mostrarSeguros();
-        });
-
 
         //Los otros botones que abren las ventanas. Solo necesitan esta interfaz, porque, es
         // el que almacena al cliente y al gestor.

@@ -33,6 +33,7 @@ public class InterfazRenovar extends JFrame {
                     int tipoPago = JOptionPane.showOptionDialog((Component)null, "Por favor, indica tu forma de pago: ", "Pagar", -1, 3, (Icon)null, opcionesPago, opcionesPago[0]);
                     interfazSeguro.gestorSeguros.buscarSeguroEspecifico(numSeguro).pagar(opcionesPago[tipoPago]);
                     interfazSeguro.gestorSeguros.buscarSeguroEspecifico(numSeguro).newRenovar();
+                    interfazSeguro.mostrarSeguros();
                     this.setVisible(false);
                 }
             }

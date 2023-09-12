@@ -1,5 +1,6 @@
 package Seguros;
 
+import Principal.Sesion;
 import Principal.Usuario;
 
 import javax.swing.*;
@@ -30,7 +31,12 @@ public class InterfazSeguroVida extends JFrame {
             }
 
             //Se extrae la fecha actual y la de vencimiento-------------------------
-            Date fechaActual = new Date();
+            Date fechaActual;
+            if(Sesion.getInstance().getFechaComun()!=null){
+                fechaActual= Sesion.getInstance().getFechaComun();
+            }else{
+                fechaActual= new Date();
+            }
             Calendar calendario = Calendar.getInstance();
             calendario.setTime(fechaActual);
             calendario.add(Calendar.MONTH, 1);
@@ -43,6 +49,7 @@ public class InterfazSeguroVida extends JFrame {
             SeguroDeVida seguroDeVida = new SeguroDeVida(interfazSeguro.cliente, beneficiarios, fechaActual, fechaVencimiento, nivelSeguro, "Activo" );
             interfazSeguro.gestorSeguros.agregarSeguro(seguroDeVida);
             JOptionPane.showMessageDialog(null, "Tu seguro de VIDA se ha creado exitosamente.", "Éxito", JOptionPane.WARNING_MESSAGE);
+            interfazSeguro.mostrarSeguros();
             this.setVisible(false);
         });
 

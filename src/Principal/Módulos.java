@@ -1,7 +1,6 @@
 package Principal;
 
 import Hospedaje.InterfacesDeUsuario.MenuHospedaje;
-import Seguros.GestorSeguros;
 import Vehiculo.UIVehiculos;
 
 import Seguros.InterfazSeguro;
@@ -43,7 +42,7 @@ public class Módulos extends JFrame {
             dispose();
         });
         btnSeguros.addActionListener(e -> {
-            InterfazSeguro interfazSeguro = new InterfazSeguro(this.login.getUsuarioVerificado());
+            InterfazSeguro interfazSeguro = new InterfazSeguro(this.sesion.getUsuarioVerificado());
             setPanel(interfazSeguro.panelPrincipal);
             crearFrame();
         });

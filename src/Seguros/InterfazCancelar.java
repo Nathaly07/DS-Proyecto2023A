@@ -29,6 +29,7 @@ public class InterfazCancelar extends JFrame{
                     JOptionPane.showMessageDialog(null, "Gracias por no hacerlo. Lo valoramos mucho.", "Buena decisión", JOptionPane.INFORMATION_MESSAGE);
                 }else{
                     interfazSeguro.gestorSeguros.eliminarSeguro(seguroEliminar);
+                    interfazSeguro.mostrarSeguros();
                     this.setVisible(false);
                 }
             }

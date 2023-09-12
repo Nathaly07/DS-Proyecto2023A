@@ -1,7 +1,7 @@
 package Seguros;
 
 import javax.swing.*;
-import Principal.Usuario;
+import Principal.Sesion;
 
 import java.util.Calendar;
 import java.util.StringTokenizer;
@@ -16,6 +16,7 @@ public class InterfazSeguroViaje extends JFrame {
     private JTextArea areaCoberturasAgregadas;
     private JButton btnCrearSeguro;
     private JButton btnCancelar;
+    private JLabel lblTipoDeViajeComun;
 
 
     //Los siguientes pasos se repiten en la mayoria de interfaces para crear seguros.
@@ -34,15 +35,21 @@ public class InterfazSeguroViaje extends JFrame {
             }
 
             //Se extrae la fecha actual y la de vencimiento-------------------------
-            Date fechaActual = new Date();
+            Date fechaActual;
+            if(Sesion.getInstance().getFechaComun()!=null){
+                fechaActual= Sesion.getInstance().getFechaComun();
+            }else{
+                fechaActual= new Date();
+            }
             Calendar calendario = Calendar.getInstance();
             calendario.setTime(fechaActual);
             calendario.add(Calendar.MONTH, 1);
             Date fechaVencimiento = calendario.getTime();
 
             //Se extrae el tipo de destino
-            int tipoDestino = this.comboBoxTipoViaje.getSelectedIndex();
 
+
+            int tipoDestino = this.comboBoxTipoViaje.getSelectedIndex();
             //Se extrae las coberturas
             StringTokenizer tokensC=new StringTokenizer(this.areaCoberturasAgregadas.getText(), "\n");
             String[][]coberturas = new String[tokensC.countTokens()-1][2];
@@ -79,6 +86,7 @@ public class InterfazSeguroViaje extends JFrame {
             SeguroDeViajes seguroDeViajes = new SeguroDeViajes(interfazSeguro.cliente,beneficiarios,fechaActual, fechaVencimiento, tipoDestino, coberturas, "Activo");
             interfazSeguro.gestorSeguros.agregarSeguro(seguroDeViajes);
             JOptionPane.showMessageDialog(null, "Tu seguro de VIAJE se ha creado exitosamente.", "Éxito", JOptionPane.WARNING_MESSAGE);
+            interfazSeguro.mostrarSeguros();
             this.setVisible(false);
 
 
@@ -136,6 +144,24 @@ public class InterfazSeguroViaje extends JFrame {
     }
 
     public void crearFrame() {
+        if(Sesion.getInstance().getDestinoComun()!=null){
+            this.lblTipoDeViajeComun.setText("Tu plan se llevará a cabo en: " + Sesion.getInstance().getDestinoComun());
+            this.lblTipoDeViajeComun.setVisible(true);
+            String destino = Sesion.getInstance().getDestinoComun();
+            int numTipoSeguro = 0;
+            if((destino.equalsIgnoreCase("Manta"))||((destino.equalsIgnoreCase("Cuenca")))){
+                numTipoSeguro = 2;
+            }else if((destino.equalsIgnoreCase("Los ángeles"))||((destino.equalsIgnoreCase("Las vegas")))){
+                numTipoSeguro = 3;
+            }else if ((destino.equalsIgnoreCase("Roma"))||((destino.equalsIgnoreCase("Ciudad del Vaticano")))) {
+                numTipoSeguro = 4;
+            }
+            this.comboBoxTipoViaje.setSelectedIndex(numTipoSeguro);
+            this.comboBoxTipoViaje.setEnabled(false);
+        }
+
+
+
         setTitle("Nuevo seguro de viaje");
         setSize(1000, 700);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
