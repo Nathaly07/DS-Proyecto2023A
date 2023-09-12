@@ -1,6 +1,7 @@
 package Principal;
 
 import Hospedaje.InterfacesDeUsuario.MenuHospedaje;
+import Tours.GestorReserva;
 import Vehiculo.UIVehiculos;
 
 import Seguros.InterfacesGráficas.InterfazSeguro;
@@ -23,6 +24,7 @@ public class Módulos extends JFrame {
     private JButton btnActualizarDatos;
     private Sesion sesion;
 
+    private GestorReserva gestionReserva = new GestorReserva();
 
     public Módulos(Sesion sesion) {
         this.sesion = sesion;
@@ -63,7 +65,7 @@ public class Módulos extends JFrame {
         toursButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ModuloTours moduloTours = new ModuloTours("Reservas - Tour", sesion.getUsuarioVerificado());
+                ModuloTours moduloTours = new ModuloTours("Reservas - Tour", sesion.getUsuarioVerificado(), gestionReserva);
                 setPanel(moduloTours.pnlOpcionesTours);
                 crearFrame();
             }
