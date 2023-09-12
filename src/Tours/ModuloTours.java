@@ -3,15 +3,14 @@ package Tours;
 import Principal.Sesion;
 import Principal.Usuario;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
+import java.awt.event.*;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.util.HashSet;
 
 public class ModuloTours extends JFrame{
@@ -68,6 +67,7 @@ public class ModuloTours extends JFrame{
     private JPanel pnlEliminarReserva;
     private JTextArea txtAreaDescripcionTour;
     private JScrollPane pnlAreaDescripcionTour;
+    private JTextArea txtModificarDetallesTour;
     private Tour tour; //para prueba
     private ReservaTour reservaTour;
     private ReservaTour reservaTourConfirmar = null;
@@ -241,6 +241,21 @@ public class ModuloTours extends JFrame{
                 setReservasUsuario();
             }
         });
+
+        list1.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                String selected = list1.getSelectedValue().toString().split(" ")[0];
+                txtAreaDescripcionTour.setText(gestionTour.buscarTour(selected).informacionRelevante());
+            }
+        });
+        listToursModificar.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                String selected = listToursModificar.getSelectedValue().toString().split(" ")[0];
+                txtModificarDetallesTour.setText(gestionTour.buscarTour(selected).informacionRelevante());
+            }
+        });
     }
 
 
@@ -279,7 +294,7 @@ public class ModuloTours extends JFrame{
         List<Tour> toursDispo = this.gestionTour.getToursDisponibles(sesion.getDestinoComun(), sesion.getFechaComun());
 
         for (Tour i : toursDispo){
-            model.addElement(i.informacionRelevante());
+            model.addElement(i.getNombre() + "  Inicio: " + i.getFechaInicio());
         }
 
         list.setModel(model);

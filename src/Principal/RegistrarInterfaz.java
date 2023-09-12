@@ -8,7 +8,6 @@ public class RegistrarInterfaz extends JFrame {
     private JTextField txtApellido;
     private JTextField txtEmail;
     private JPasswordField txtContraseña;
-    private JTextField txtRol;
     private JLabel lblIDUsuario;
     private JButton btnRegistrarse;
     private JTextField txtUser;
