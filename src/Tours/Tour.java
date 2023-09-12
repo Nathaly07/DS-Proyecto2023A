@@ -69,15 +69,16 @@ public class Tour {
 
         int contador = 0;
         for (String parada : paradasTuristicas) {
-            info += parada + ",\n";
+            info += parada + ", ";
             contador++;
-            if (contador >= 2) {
+            if (contador >= 4) {
                 break;
             }
         }
 
-        info += "Guía: " + this.infoGuia + "\n";
-        info += "Duración: " + this.duracion + "\n";
+        info += "\nGuia: " + this.infoGuia + "\n";
+        info += "Duracion: " + this.duracion + "\n";
+
         info += "Precio: $" + this.precio;
 
         return info;

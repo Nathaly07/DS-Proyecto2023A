@@ -528,7 +528,7 @@
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <component id="309a1" class="javax.swing.JTextArea">
+                  <component id="309a1" class="javax.swing.JTextArea" binding="txtModificarDetallesTour">
                     <constraints/>
                     <properties>
                       <editable value="false"/>
