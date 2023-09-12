@@ -65,6 +65,9 @@ public class ModuloTours extends JFrame{
     private JList listToursReservaModificar;
     private JButton btnModificarReserva;
     private JSpinner jspNumPersonasModificar;
+    private JPanel pnlEliminarReserva;
+    private JTextArea txtAreaDescripcionTour;
+    private JScrollPane pnlAreaDescripcionTour;
     private Tour tour; //para prueba
     private ReservaTour reservaTour;
     private ReservaTour reservaTourConfirmar = null;
