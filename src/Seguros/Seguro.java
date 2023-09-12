@@ -1,74 +1,84 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by FernFlower decompiler)
+//
+
 package Seguros;
 
 import Pagos.Pago;
+import Principal.Usuario;
 
-import javax.swing.*;
+import java.util.Calendar;
 import java.util.Date;
+import javax.swing.JOptionPane;
 
 public abstract class Seguro {
-    private String propietario;
-    private String[] condiciones;
+    private Usuario propietario;
     private String[] beneficiarios;
     private Date fechaDeInicio;
     private Date fechaDeVencimiento;
     private float primaSinRecargo;
+    private String estado;
 
-    public Seguro(String propietario, String[] condiciones, String[] beneficiarios, Date fechaDeInicio, Date fechaDeVencimiento, float primaSinRecargo) {
+    //Constructor del seguro
+    public Seguro(Usuario propietario, String[] beneficiarios, Date fechaDeInicio, Date fechaDeVencimiento, String estado) {
         this.propietario = propietario;
-        this.condiciones = condiciones;
         this.beneficiarios = beneficiarios;
         this.fechaDeInicio = fechaDeInicio;
         this.fechaDeVencimiento = fechaDeVencimiento;
-        this.primaSinRecargo = primaSinRecargo;
+        this.estado = estado;
     }
 
-    public boolean renovar(Date fecha) {
-        if (fecha.after(fechaDeVencimiento)) {
-            this.fechaDeVencimiento = fecha;
-            return true;
-        } else {
-            return false;
-        }
+    //Método para renovar el seguro. Lo coloca como activo, y cambia su fecha de vencimiento. 
+    public void renovar() {
+        Date fechaActual = new Date();
+        Calendar calendario = Calendar.getInstance();
+        calendario.setTime(fechaActual);
+        calendario.add(Calendar.MONTH, 1);
+        Date fechaVencimiento = calendario.getTime();
+        this.fechaDeVencimiento = fechaVencimiento;
+        this.setEstado("Activo");
+        JOptionPane.showMessageDialog(null, "Tu seguro se ha renovado exitosamente un mes más.", "Éxito", JOptionPane.WARNING_MESSAGE);
     }
 
-    public void pagar(double montoAPagar, String modoPago, Date fechaPago ) {
-        if (montoAPagar == 0) {
-            JOptionPane.showMessageDialog(null, "Pago no realizado");
-        } else {
-            Pago pagoSeguros = new Pago(montoAPagar,modoPago,fechaPago);
-            pagoSeguros.pagar();
-        }
+
+    //Método para pagar el seguro.
+    public void pagar(String modoPago) {
+        Pago pagoSeguros = new Pago(this.calcularPrimaTotal(), modoPago, new Date());
+        pagoSeguros.pagar();
     }
 
-    abstract void indemnizar(float valorGastado, String motivo);
+    //Métodos abstractos. Varia dependiendo del tipo de seguro.
+    public abstract void indemnizar(float valorGastado, String motivo);
 
-    abstract float calcularPrimaTotal();
+    public abstract float calcularPrimaTotal();
 
-    public String getPropietario() {
-        return propietario;
-    }
-
-    public String[] getCondiciones() {
-        return condiciones;
+    public Usuario getPropietario() {
+        return this.propietario;
     }
 
     public String[] getBeneficiarios() {
-        return beneficiarios;
+        return this.beneficiarios;
     }
 
     public Date getFechaDeInicio() {
-        return fechaDeInicio;
+        return this.fechaDeInicio;
     }
 
     public Date getFechaDeVencimiento() {
-        return fechaDeVencimiento;
+        return this.fechaDeVencimiento;
     }
 
     public float getPrimaSinRecargo() {
-        return primaSinRecargo;
+        return this.primaSinRecargo;
+    }
+    public void setPrimaSinRecargo(float valor) {
+        this.primaSinRecargo = valor ;
     }
 
-    public void setFechaDeVencimiento(Date fechaDeVencimiento) {
-        this.fechaDeVencimiento = fechaDeVencimiento;
+    public String getEstado() {return estado;}
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 }

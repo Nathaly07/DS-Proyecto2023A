@@ -4,8 +4,10 @@ import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 
 public class GestorReserva {
 
@@ -132,6 +134,36 @@ public class GestorReserva {
                     JOptionPane.WARNING_MESSAGE);
         }
         return reservaResultado;
+    }
+
+    public ArrayList<String> getRangosFechas(String nombreUsuario, String apellidoUsuario) throws ParseException {
+        ArrayList<String> rangosFechas = new ArrayList<String>();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
+        ArrayList<Date> tempFechas = new ArrayList<Date>();
+        long minTime = Long.MAX_VALUE;
+        long maxTime = 0;
+        Date minFecha = new Date();
+        Date maxFecha = new Date();
+        String rango = "";
+
+        for(ReservaTour reserva: this.reservaciones) {
+            if(reserva.getNombreUsuario().equalsIgnoreCase(nombreUsuario) && reserva.getApellidoUsuario().equalsIgnoreCase(apellidoUsuario)){
+                for(Tour tour: reserva.getToursAgregados()) {
+                    tempFechas.add(dateFormat.parse(tour.getFechaInicio()));
+                    tempFechas.add(dateFormat.parse(tour.getFechaFin()));
+                }
+                for(Date fecha: tempFechas) {
+                    if(fecha.getTime() < minTime) { minTime = fecha.getTime(); minFecha = fecha; }
+                    if(fecha.getTime() > maxTime) { maxTime = fecha.getTime(); maxFecha = fecha; }
+                }
+                rango = dateFormat.format(minFecha) + "-" + dateFormat.format(maxFecha);
+                rangosFechas.add(rango);
+                minTime = Long.MAX_VALUE;
+                maxTime = 0;
+            }
+        }
+
+        return rangosFechas;
     }
 
 }
