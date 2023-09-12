@@ -271,7 +271,7 @@ public class SelectorDeAsientos extends JFrame{
         btnA6.setEnabled(bandera);
     }
     public void MostrarTabla(int numAsiento){
-        carrito.añadir(v.seleccionarAsiento(new Asiento(numAsiento,Integer.parseInt(fila.getText()))));
+        carrito.añadir(v.BuscarAsiento(new Asiento(numAsiento,Integer.parseInt(fila.getText()))));
         carrito.mostarCarrito(table1);
     }
     public List<Integer> asientosSeleccionables(int fila){

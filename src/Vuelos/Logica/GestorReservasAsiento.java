@@ -98,4 +98,8 @@ public class GestorReservasAsiento {
         }
     }
 
+    public boolean VerificarReservasAsientos(){
+        return reservas.size() > 0;
+    }
+
 }
