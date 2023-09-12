@@ -45,7 +45,16 @@ public class PagoVuelos extends JFrame {
                     JOptionPane.showMessageDialog(null, "Seleccione un método de pago", "Aviso", JOptionPane.INFORMATION_MESSAGE);
                 }
                 else {
-                    pago.Pagar();
+                    String metodo = "";
+                    if(jrbEfectivo.isSelected()){
+                       metodo = "Efectivo";
+                    } else if (jrbTransferencia.isSelected()) {
+                        metodo = "Transferencia";
+                    }else{
+                        metodo =  "Tarjeta";
+                    }
+                    MétodoDePago.clearSelection();
+                    pago.Pagar(metodo);
                     moduloVuelos.cerrarDialog();
                 }
 

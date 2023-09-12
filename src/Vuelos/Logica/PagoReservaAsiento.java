@@ -1,6 +1,8 @@
 package Vuelos.Logica;
 
 
+import Pagos.Pago;
+
 import javax.swing.*;
 
 
@@ -28,8 +30,10 @@ public class PagoReservaAsiento {
         return truncatedTotal;
     }
 
-    public void Pagar(){
+    public void Pagar(String metodoPago){
         this.reserva.CambiarEstado(EstadoReserva.Pagado);
-        JOptionPane.showMessageDialog(null, "Pago realizado con exito", "Aviso de pago", JOptionPane.INFORMATION_MESSAGE);
+        float precioFinal = Float.parseFloat(calcularCostoTotalReservados()+"");
+        Pago pago = new Pago(precioFinal, metodoPago);
+        pago.pagar();
     }
 }
