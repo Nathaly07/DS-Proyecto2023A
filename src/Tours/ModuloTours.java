@@ -3,15 +3,14 @@ package Tours;
 import Principal.Sesion;
 import Principal.Usuario;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
+import java.awt.event.*;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.util.HashSet;
 
 public class ModuloTours extends JFrame{
@@ -107,7 +106,7 @@ public class ModuloTours extends JFrame{
                 } catch (ParseException ex) {
                     throw new RuntimeException(ex);
                 }
-                mostrarReserva(list2);
+                mostrarToursEnReserva(list2);
             }
         });
 
@@ -115,7 +114,7 @@ public class ModuloTours extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 eliminarTour();
-                mostrarReserva(list2);
+                mostrarToursEnReserva(list2);
             }
         });
 
@@ -158,7 +157,7 @@ public class ModuloTours extends JFrame{
                 ArrayList<Tour> toursEnReservaList = reservaTourConfirmar.getToursAgregados();
 
                 for(Tour tour: toursEnReservaList) {
-                    toursEnReservaModel.addElement(tour.informacionRelevante());
+                    toursEnReservaModel.addElement(tour.getInformacionRelevante());
                 }
 
                 listTours.setModel(toursEnReservaModel);
@@ -193,7 +192,7 @@ public class ModuloTours extends JFrame{
                 ArrayList<Tour> toursList = (ArrayList<Tour>) gestionTour.getToursDisponibles(sesion.getDestinoComun(), sesion.getFechaComun());
 
                 for(Tour tour: toursList) {
-                    toursModel.addElement(tour.informacionRelevante());
+                    toursModel.addElement(tour.getNombre());
                 }
                 listToursModificar.setModel(toursModel);
 
@@ -201,7 +200,7 @@ public class ModuloTours extends JFrame{
                 toursList = reservaTourModificar.getToursAgregados();
 
                 for(Tour tour: toursList) {
-                    toursModel.addElement(tour.informacionRelevante());
+                    toursModel.addElement(tour.getNombre());
                     listatemp.add(tour);
                 }
                 listToursReservaModificar.setModel(toursModel);
@@ -215,7 +214,7 @@ public class ModuloTours extends JFrame{
                 String[] nombreTour = tours.split(",");
                 String Ntour = nombreTour[0];
                 listatemp.add(gestionTour.buscarTour(Ntour));
-                mostrarReserva(listToursReservaModificar);
+                mostrarToursEnReserva(listToursReservaModificar);
             }
         });
         btnEliminarTourModificar.addActionListener(new ActionListener() {
@@ -225,7 +224,7 @@ public class ModuloTours extends JFrame{
                 String[] nombreTour = tours.split(",");
                 String Ntour = nombreTour[0];
                 listatemp.remove(gestionTour.buscarTour(Ntour));
-                mostrarReserva(listToursReservaModificar);
+                mostrarToursEnReserva(listToursReservaModificar);
             }
         });
         btnModificarReserva.addActionListener(new ActionListener() {
@@ -241,8 +240,25 @@ public class ModuloTours extends JFrame{
                 setReservasUsuario();
             }
         });
+
+
+        list1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                super.mouseReleased(e);
+                escribirInfoTour(list1, txtAreaDescripcionTour);
+            }
+        });
     }
 
+    public void escribirInfoTour(JList lista, JTextArea areaTexto) {
+        areaTexto.setText("");
+        if(!lista.getSelectedValue().equals(null)){
+            String nombreTour = lista.getSelectedValue().toString();
+            Tour tour = this.gestionTour.buscarTour(nombreTour);
+            areaTexto.setText(tour.getInformacionRelevante());
+        }
+    }
 
     public void setReservasUsuario() {
         String nombreUsuario = this.usuarioVerificado.getNombre();
@@ -274,40 +290,34 @@ public class ModuloTours extends JFrame{
 
     //Metodo para mostrar tours disponibles
     private void mostrarToursDisponibles(JList list){
-
         DefaultListModel<String> model = new DefaultListModel<>();
         List<Tour> toursDispo = this.gestionTour.getToursDisponibles(sesion.getDestinoComun(), sesion.getFechaComun());
 
         for (Tour i : toursDispo){
-            model.addElement(i.informacionRelevante());
+            model.addElement(i.getNombre());
         }
 
         list.setModel(model);
     }
 
-    public void mostrarReserva(JList list){
+    public void mostrarToursEnReserva(JList list){
         DefaultListModel<String> model = new DefaultListModel<>();
         ArrayList<Tour> tours = this.listatemp;
 
         for(Tour i: tours){
-            model.addElement(i.informacionRelevante());
+            model.addElement(i.getNombre());
         }
         list.setModel(model);
     }
 
     public void agregarTour() throws ParseException {
-
-        String tours = list1.getSelectedValue().toString();
-        String[] nombreTour = tours.split(",");
-        String Ntour = nombreTour[0];
-        this.listatemp.add(this.gestionTour.buscarTour(Ntour));
+        String nombreTour = list1.getSelectedValue().toString();
+        this.listatemp.add(this.gestionTour.buscarTour(nombreTour));
     }
 
     public void eliminarTour(){
-        String tours = list2.getSelectedValue().toString();
-        String[] nombreTour = tours.split(",");
-        String Ntour = nombreTour[0];
-        this.listatemp.remove(this.gestionTour.buscarTour(Ntour));
+        String nombreTour = list2.getSelectedValue().toString();
+        this.listatemp.remove(this.gestionTour.buscarTour(nombreTour));
     }
 
     public void crearReserva(){
