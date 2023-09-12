@@ -6,7 +6,7 @@ import Vehiculo.UIVehiculos;
 
 import Seguros.InterfacesGráficas.InterfazSeguro;
 import Tours.ModuloTours;
-import Vuelos.ModuloVuelos;
+import Vuelos.GUI.ModuloVuelos;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

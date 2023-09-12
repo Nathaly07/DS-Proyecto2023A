@@ -1,4 +1,4 @@
-package Vuelos;
+package Vuelos.GUI;
 
 import Vuelos.Logica.Asiento;
 import Vuelos.Logica.CarritoAsientos;
@@ -30,8 +30,8 @@ public class SelectorDeAsientos extends JFrame{
     private JButton btnA4;
     private JButton btnA5;
     private JButton btnA6;
-    private JButton confirmarSelecciónButton;
-    private JButton cancelarButton;
+    private JButton btnConfirmarSeleccion;
+    private JButton btnCancelar;
     private JScrollPane scrAsientos;
     private JPanel pnlContenidoAsientos;
     private JPanel pnlImagenAsientos;
@@ -42,11 +42,11 @@ public class SelectorDeAsientos extends JFrame{
     private JPanel pnlVIPAsientos;
     private JPanel pnlTextoTurista;
     private JPanel pnlBotonesTurista;
-    private JLabel fila;
-    private JTable table1;
+    private JLabel lblFila;
+    private JTable tblCarritoAsiento;
     private JButton btnEliminarRegistro;
-    private Vuelo v;
-    private Asiento a;
+    private Vuelo vuelo;
+    private Asiento asiento;
     private ModuloVuelos moduloVuelos;
 
     private CarritoAsientos carrito ;
@@ -57,172 +57,172 @@ public class SelectorDeAsientos extends JFrame{
         btnF1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                fila.setText("1");
+                lblFila.setText("1");
                 botones(1);
             }
         });
         btnF2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                fila.setText("2");
+                lblFila.setText("2");
                 botones(2);
             }
         });
         btnF3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                fila.setText("3");
+                lblFila.setText("3");
                 botones(3);
             }
         });
         btnF4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                fila.setText("4");
+                lblFila.setText("4");
                 botones(4);
             }
         });
         btnF5.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                fila.setText("5");
+                lblFila.setText("5");
                 botones(5);
             }
         });
         btnF6.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                fila.setText("6");
+                lblFila.setText("6");
                 botones(6);
             }
         });
         btnF7.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                fila.setText("7");
+                lblFila.setText("7");
                 botones(7);
             }
         });
         btnF8.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                fila.setText("8");
+                lblFila.setText("8");
                 botones(8);
             }
         });
         btnF9.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                fila.setText("9");
+                lblFila.setText("9");
                 botones(9);
             }
         });
         btnF10.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                fila.setText("10");
+                lblFila.setText("10");
                 botones(10);
             }
         });
-        fila.setVisible(false);
+        lblFila.setVisible(false);
         habilitarBotones(false);
         btnA1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MostrarTabla(1);
-                botones(Integer.parseInt(fila.getText()));
+                mostrarTabla(1);
+                botones(Integer.parseInt(lblFila.getText()));
             }
         });
         btnA2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MostrarTabla(2);
-                botones(Integer.parseInt(fila.getText()));
+                mostrarTabla(2);
+                botones(Integer.parseInt(lblFila.getText()));
 
             }
         });
         btnA3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MostrarTabla(3);
-                botones(Integer.parseInt(fila.getText()));
+                mostrarTabla(3);
+                botones(Integer.parseInt(lblFila.getText()));
             }
         });
         btnA4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MostrarTabla(4);
-                botones(Integer.parseInt(fila.getText()));
+                mostrarTabla(4);
+                botones(Integer.parseInt(lblFila.getText()));
 
             }
         });
         btnA5.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MostrarTabla(5);
-                botones(Integer.parseInt(fila.getText()));
+                mostrarTabla(5);
+                botones(Integer.parseInt(lblFila.getText()));
             }
         });
         btnA6.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MostrarTabla(6);
-                botones(Integer.parseInt(fila.getText()));
+                mostrarTabla(6);
+                botones(Integer.parseInt(lblFila.getText()));
             }
         });
         btnEliminarRegistro.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(a != null) {
-                    carrito.eliminar(a);
-                    carrito.mostarCarrito(table1);
-                    botones(Integer.parseInt(fila.getText()));
+                if(asiento != null) {
+                    carrito.eliminarAsiento(asiento);
+                    carrito.mostrarCarrito(tblCarritoAsiento);
+                    botones(Integer.parseInt(lblFila.getText()));
                 } else{
                     JOptionPane.showMessageDialog(null, "Seleccione un asiento", "Aviso", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
-        table1.addMouseListener(new MouseAdapter() {
+        tblCarritoAsiento.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                int fila = table1.getSelectedRow();
+                int fila = tblCarritoAsiento.getSelectedRow();
                 if (fila != -1) {
-                    a = new Asiento(Integer.parseInt(table1.getValueAt(fila, 0).toString()),
-                            Integer.parseInt(table1.getValueAt(fila, 1).toString())
+                    asiento = new Asiento(Integer.parseInt(tblCarritoAsiento.getValueAt(fila, 0).toString()),
+                            Integer.parseInt(tblCarritoAsiento.getValueAt(fila, 1).toString())
                     );
                 }
             }
         });
-        confirmarSelecciónButton.addActionListener(new ActionListener() {
+        btnConfirmarSeleccion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CarritoAsientos aux = carrito;
-                if(aux.getAsientos().size() > 0){
-                    moduloVuelos.crearReserva(aux);
-                    moduloVuelos.actualizar();
+                CarritoAsientos carritoAsientos = carrito;
+                if(carritoAsientos.getAsientos().size() > 0){
+                    moduloVuelos.crearReserva(carritoAsientos);
+                    moduloVuelos.actualizarTablaCatalogo();
                     habilitarBotones(false);
-                    carrito.mostarCarrito(table1);
+                    carrito.mostrarCarrito(tblCarritoAsiento);
                 }
                 moduloVuelos.cerrarDialog();
 
             }
         });
-        cancelarButton.addActionListener(new ActionListener() {
+        btnCancelar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carrito.Limpiar();
+                carrito.limpiarCarrito();
                 habilitarBotones(false);
-                carrito.mostarCarrito(table1);
+                carrito.mostrarCarrito(tblCarritoAsiento);
                 moduloVuelos.cerrarDialog();
             }
         });
     }
 
-    public void setVuelo(Vuelo v){
-        this.v = v;
-        carrito = new CarritoAsientos(v);
-        carrito.Limpiar();
-        carrito.mostarCarrito(table1);
+    public void setVuelo(Vuelo vuelo){
+        this.vuelo = vuelo;
+        carrito = new CarritoAsientos(vuelo);
+        carrito.limpiarCarrito();
+        carrito.mostrarCarrito(tblCarritoAsiento);
 
     }
     public void crearframe() {
@@ -235,7 +235,7 @@ public class SelectorDeAsientos extends JFrame{
     }
     private void botones(int fila){
         habilitarBotones(true);
-        List<Integer> lista = v.getFila(fila);
+        List<Integer> lista = vuelo.getFila(fila);
         lista.addAll(asientosSeleccionables(fila));
         for (int i: lista) {
             switch (i) {
@@ -270,15 +270,15 @@ public class SelectorDeAsientos extends JFrame{
         btnA5.setEnabled(bandera);
         btnA6.setEnabled(bandera);
     }
-    public void MostrarTabla(int numAsiento){
-        carrito.añadir(v.BuscarAsiento(new Asiento(numAsiento,Integer.parseInt(fila.getText()))));
-        carrito.mostarCarrito(table1);
+    public void mostrarTabla(int numAsiento){
+        carrito.añadirAsiento(vuelo.buscarAsiento(new Asiento(numAsiento,Integer.parseInt(lblFila.getText()))));
+        carrito.mostrarCarrito(tblCarritoAsiento);
     }
     public List<Integer> asientosSeleccionables(int fila){
         List<Integer> asientosHabilitados = new ArrayList<>();
-        for (int i = 0; i < table1.getRowCount(); i++) {
-            if(Integer.parseInt(table1.getValueAt(i,1).toString()) == fila){
-                asientosHabilitados.add(Integer.parseInt(table1.getValueAt(i,0).toString()));
+        for (int i = 0; i < tblCarritoAsiento.getRowCount(); i++) {
+            if(Integer.parseInt(tblCarritoAsiento.getValueAt(i,1).toString()) == fila){
+                asientosHabilitados.add(Integer.parseInt(tblCarritoAsiento.getValueAt(i,0).toString()));
             }
         }
         return asientosHabilitados;
