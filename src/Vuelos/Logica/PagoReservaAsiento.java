@@ -23,9 +23,9 @@ public class PagoReservaAsiento {
 
     //IVA
     public double calcularIVA(){
-        double total = 0;
-        total = this.reserva.generarCostoTotal()* 0.12;
-        return total;
+        double total = this.reserva.generarCostoTotal() * 0.12;
+        double truncatedTotal = Math.floor(total * 100) / 100;
+        return truncatedTotal;
     }
 
     public void Pagar(){

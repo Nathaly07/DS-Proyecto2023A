@@ -1,30 +1,29 @@
 package Vuelos.Logica;
 
 
-import Vuelos.Logica.Asiento;
-import Vuelos.Logica.CarritoAsientos;
-import Vuelos.Logica.Vuelo;
+import Principal.Usuario;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 public class ReservaAsiento {
 
     private String fecha;
     private String fecha_vuelo;
     private double costo;
+    private Usuario usuario;
     private EstadoReserva estado;
 
     private CarritoAsientos reservas;
 
-    public ReservaAsiento(CarritoAsientos reservas) {
+    public ReservaAsiento(CarritoAsientos reservas, Usuario usuario) {
         this.reservas = reservas;
         this.fecha_vuelo = reservas.getVuelo().getFecha();
         this.estado = EstadoReserva.Pendiente;
+        this.usuario = usuario;
     }
 
-    public void reservar() {
+    private void reservarAsientos() {
         for(Asiento a: reservas.getAsientos()){
             a.reservar();
         }
@@ -39,11 +38,8 @@ public class ReservaAsiento {
     public void crearReserva(){
         this.costo = generarCostoTotal();
         this.fecha_vuelo = reservas.getVuelo().getFecha();
+        reservarAsientos();
         this.fecha = fechaAutomatica();
-    }
-
-    public void ModificarReserva() {
-
     }
 
 

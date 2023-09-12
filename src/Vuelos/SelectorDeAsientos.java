@@ -197,10 +197,12 @@ public class SelectorDeAsientos extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 CarritoAsientos aux = carrito;
-                moduloVuelos.crearReserva(aux);
-                moduloVuelos.actualizar();
-                habilitarBotones(false);
-                carrito.mostarCarrito(table1);
+                if(aux.getAsientos().size() > 0){
+                    moduloVuelos.crearReserva(aux);
+                    moduloVuelos.actualizar();
+                    habilitarBotones(false);
+                    carrito.mostarCarrito(table1);
+                }
                 moduloVuelos.cerrarDialog();
 
             }
@@ -269,7 +271,7 @@ public class SelectorDeAsientos extends JFrame{
         btnA6.setEnabled(bandera);
     }
     public void MostrarTabla(int numAsiento){
-        carrito.añadir(v.seleccionarAsiento(new Asiento(numAsiento,Integer.parseInt(fila.getText()))));
+        carrito.añadir(v.BuscarAsiento(new Asiento(numAsiento,Integer.parseInt(fila.getText()))));
         carrito.mostarCarrito(table1);
     }
     public List<Integer> asientosSeleccionables(int fila){
