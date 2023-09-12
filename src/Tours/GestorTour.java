@@ -21,11 +21,10 @@ public class GestorTour {
     public List<Tour> getToursDisponibles(String destino, Date fechaTentativa) {
         List<Tour> toursDisponibles = new ArrayList<>();
         List<Tour> toursDestino = getToursDestino(destino);
-        System.out.println(toursDestino.toString());
         List<Tour> toursFecha  = getToursFecha(fechaTentativa);
-        System.out.println(toursFecha.toString());
+
         List<Tour> toursFinal = toursDestino.stream().filter(f-> toursFecha.contains(f)).toList();
-        System.out.println(toursFinal.toString());
+
         if(toursFinal.isEmpty()){
             toursFinal = this.tours;
         }
