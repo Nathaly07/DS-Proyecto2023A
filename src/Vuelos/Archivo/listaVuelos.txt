@@ -1,9 +1,19 @@
-Quito,Atacames,12:00,01/10/2023,50
-Quito,Atacames,08:00,15/10/2023,50
-Quito,Atacames,09:00,29/10/2023,50
-Quito,Los Angeles,10:00,05/10/2023,350
-Quito,Los Angeles,08:00,19/10/2023,350
-Quito,Los Angeles,11:00,30/10/2023,350
-Quito,Roma,14:00,10/10/2023,800
-Quito,Roma,19:00,24/10/2023,800
-Quito,Roma,20:00,31/10/2023,800
+Quito,Manta,12:00,01/10/2023,30
+Guayaquil,Manta,08:00,15/10/2023,20
+Cuenca,Manta,09:00,29/10/2023,50
+Quito,Cuenca,12:00,01/10/2023,35
+Guayaquil,Cuenca,08:00,15/10/2023,20
+Quito,Los Angeles,12:00,01/10/2023,610
+Guayaquil,Los Angeles,08:00,15/10/2023,650
+Cuenca,Los Angeles,09:00,29/10/2023,660
+Quito,Las Vegas,12:00,01/10/2023,520
+Guayaquil,Las Vegas,08:00,15/10/2023,550
+Cuenca,Las Vegas,09:00,29/10/2023,530
+Quito,Roma,12:00,01/10/2023,835
+Guayaquil,Roma,08:00,15/10/2023,850
+Cuenca,Roma,09:00,29/10/2023,860
+New York,Ciudad De Panama,12:00,01/10/2023,315
+Japon,Medellin,08:00,15/10/2023,1000
+Marruecos,Barcelona,09:00,29/10/2023,500
+Santiago de Chile,Barcelona,12:00,01/10/2023,795
+Santiago de Chile,Barcelona,08:00,15/10/2023,795
