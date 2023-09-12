@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.*;
+import java.util.HashSet;
 
 public class ModuloTours extends JFrame{
 
@@ -71,6 +72,8 @@ public class ModuloTours extends JFrame{
     private ArrayList<Tour> listatemp = new ArrayList<>();
 
     List<Tour> tours;
+
+    HashSet<String> reservasUnicas = new HashSet<>();
 
     public ModuloTours(String head, Usuario usuarioVerificado){
         super (head);
@@ -236,10 +239,18 @@ public class ModuloTours extends JFrame{
         String nombreUsuario = this.usuarioVerificado.getNombre();
         String apellidoUsuario = this.usuarioVerificado.getApellido();
         ArrayList<ReservaTour> reservas = this.gestionReserva.getReservaciones();
+
         for (ReservaTour reserva: reservas) {
             if ((reserva.getNombreUsuario().equalsIgnoreCase(nombreUsuario)) && (reserva.getApellidoUsuario().equalsIgnoreCase(apellidoUsuario))) {
-                this.comboBox2.addItem(reserva.getNumReserva() + "-" + reserva.getNombreUsuario() + " " + reserva.getApellidoUsuario());
-                this.comboBox3.addItem(reserva.getNumReserva() + "-" + reserva.getNombreUsuario() + " " + reserva.getApellidoUsuario());
+
+
+                String reservaStr = reserva.getNumReserva() + "-" + reserva.getNombreUsuario() + " " + reserva.getApellidoUsuario();
+
+                // Agregamos la reserva al HashSet solo si no está duplicada
+                if (reservasUnicas.add(reservaStr)) {
+                    this.comboBox2.addItem(reservaStr);
+                    this.comboBox3.addItem(reservaStr);
+                }
             }
         }
 
