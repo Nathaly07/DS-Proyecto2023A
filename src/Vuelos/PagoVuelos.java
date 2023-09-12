@@ -20,6 +20,10 @@ public class PagoVuelos extends JFrame {
     private JTextField subtotal;
     private JTextField iva;
     private JTextField total;
+    private JRadioButton jrbTarjeta;
+    private JRadioButton jrbTransferencia;
+    private JRadioButton jrbEfectivo;
+    private ButtonGroup MétodoDePago;
     private PagoReservaAsiento pago;
     private ModuloVuelos moduloVuelos;
     public PagoVuelos(ModuloVuelos moduloVuelos) {
@@ -33,8 +37,17 @@ public class PagoVuelos extends JFrame {
         pagarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                pago.Pagar();
-                moduloVuelos.cerrarDialog();
+
+                MétodoDePago.add(jrbEfectivo);
+                MétodoDePago.add(jrbTransferencia);
+                MétodoDePago.add(jrbTarjeta);
+                if (MétodoDePago.getSelection() == null){
+                    JOptionPane.showMessageDialog(null, "Seleccione un método de pago", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                }
+                else {
+                    pago.Pagar();
+                    moduloVuelos.cerrarDialog();
+                }
 
             }
         });

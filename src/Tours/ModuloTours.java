@@ -17,7 +17,8 @@ import java.util.HashSet;
 public class ModuloTours extends JFrame{
 
     private GestorTour gestionTour = new GestorTour();
-    private GestorReserva gestionReserva = new GestorReserva();
+
+    private GestorReserva gestionReserva;
     private PagoReserva pagoReserva = new PagoReserva();
     private Usuario usuarioVerificado;
     public JPanel pnlOpcionesTours;
@@ -64,6 +65,9 @@ public class ModuloTours extends JFrame{
     private JList listToursReservaModificar;
     private JButton btnModificarReserva;
     private JSpinner jspNumPersonasModificar;
+    private JPanel pnlEliminarReserva;
+    private JTextArea txtAreaDescripcionTour;
+    private JScrollPane pnlAreaDescripcionTour;
     private Tour tour; //para prueba
     private ReservaTour reservaTour;
     private ReservaTour reservaTourConfirmar = null;
@@ -79,9 +83,10 @@ public class ModuloTours extends JFrame{
     //Instancia para acceder a la información de la sesión
     Sesion sesion = Sesion.getInstance();
 
-    public ModuloTours(String head, Usuario usuarioVerificado){
+    public ModuloTours(String head, Usuario usuarioVerificado, GestorReserva gestionReserva){
         super (head);
         this.usuarioVerificado = usuarioVerificado;
+        this.gestionReserva = gestionReserva;
 
         //Listener para mostrar los tours
         pnlCrearReserva.addComponentListener(new ComponentAdapter() {

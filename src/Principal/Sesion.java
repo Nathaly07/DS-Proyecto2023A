@@ -1,12 +1,13 @@
 package Principal;
 
 import javax.swing.*;
+import java.util.Date;
 
 public class Sesion {
     private static Sesion instance;
     private Usuario usuarioVerificado;
     private GestorUsuarios gestor;
-    private String fechaComun = null;
+    private Date fechaComun = null;
     private String destinoComun = null;
 
     private Sesion() {
@@ -49,7 +50,7 @@ public class Sesion {
         this.usuarioVerificado = usr;
     }
 
-    public String getFechaComun() {
+    public Date getFechaComun() {
         return fechaComun;
     }
 
@@ -57,7 +58,7 @@ public class Sesion {
         return destinoComun;
     }
 
-    public void setFechaComun(String fechaComun) {
+    public void setFechaComun(Date fechaComun) {
         this.fechaComun = fechaComun;
     }
 

@@ -14,6 +14,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class ModuloVuelos extends JFrame{
@@ -35,37 +37,48 @@ public class ModuloVuelos extends JFrame{
     private GestorVuelos gestorVuelos = new GestorVuelos();
     private GestorReservasAsiento gestorReservasAsiento = new GestorReservasAsiento();
     private SelectorDeAsientos selectorDeAsientos;
-    private JDateChooser dateChooserInicio = new JDateChooser();
+    private JDateChooser dateChooserFechaVuelos = new JDateChooser();
     private PagoVuelos pagoVuelos;
     private  Vuelo v,v2;
     private JDialog dialog ;
     private Sesion sesion;
+    private Date fechaComun;
+    private String destinoComun;
 
 
 
     public ModuloVuelos(Sesion sesion){
         this.sesion = sesion;
+        this.fechaComun = sesion.getFechaComun();
+        this.destinoComun = sesion.getDestinoComun();
 
         selectorDeAsientos = new SelectorDeAsientos(this);
         pagoVuelos = new PagoVuelos(this);
         pnlListaVuelos.setVisible(true);
+        mostrarVuelosConDatosIniciales();
         mostrarCatalogoButton.addActionListener(e -> pnlListaVuelos.setVisible(true));
 
+
         //calendario
-        pnlCalendario.add(dateChooserInicio);
+        pnlCalendario.add(dateChooserFechaVuelos);
         buscarVuelosButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 boolean bandera = true;
-                if(dateChooserInicio.getDate() == null){
+                String fechaFormateada = "";
+
+                if(dateChooserFechaVuelos.getDate() == null){
                     bandera = false;
+                }else {
+                    SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+                    fechaFormateada = formato.format(dateChooserFechaVuelos.getDate());
                 }
                 if(!origen.getText().isEmpty() && !destino.getText().isEmpty() && bandera ){
-                    gestorVuelos.mostarVuelosFiltrados(table1, gestorVuelos.filtar(origen.getText().toString(),destino.getText().toString(), dateChooserInicio.getDate().toString()));
+                    gestorVuelos.mostarVuelosFiltrados(table1, gestorVuelos.filtar(origen.getText().toString(),destino.getText().toString(), fechaFormateada));
                 }else if(!origen.getText().isEmpty() && !destino.getText().isEmpty()) {
                     gestorVuelos.mostarVuelosFiltrados(table1, gestorVuelos.buscarVuelo(origen.getText(), destino.getText()));
                 } else if(bandera && origen.getText().isEmpty() &&  destino.getText().isEmpty()){
-                    gestorVuelos.mostarVuelosFiltrados(table1, gestorVuelos.buscarVueloFecha(dateChooserInicio.getDate().toString()));
+                    gestorVuelos.mostarVuelosFiltrados(table1, gestorVuelos.buscarVueloFecha(fechaFormateada));
                 } else {
                     JOptionPane.showMessageDialog(null, "Datos insuficientes para la busqueda", "Aviso", JOptionPane.ERROR_MESSAGE);
                 }
@@ -114,7 +127,7 @@ public class ModuloVuelos extends JFrame{
                 if (gestorReservasAsiento.CantidadReservasPendientes() >0) {
                     if (v2 != null) {
                         CarritoAsientos carritoAsientos = new CarritoAsientos(v2);
-                        ReservaAsiento reserva = new ReservaAsiento(carritoAsientos);
+                        ReservaAsiento reserva = new ReservaAsiento(carritoAsientos, sesion.getUsuarioVerificado());
                         pagoVuelos.InicioDatos(gestorReservasAsiento.SeleccionarReserva(reserva));
                         mostrarPagoVuelos(ModuloVuelos.this);
                         v2 = null;
@@ -148,7 +161,7 @@ public class ModuloVuelos extends JFrame{
                 if (gestorReservasAsiento.CantidadReservasPendientes() >0) {
                     if (v2 != null) {
                         CarritoAsientos carritoAsientos = new CarritoAsientos(v2);
-                        ReservaAsiento reserva = new ReservaAsiento(carritoAsientos);
+                        ReservaAsiento reserva = new ReservaAsiento(carritoAsientos, sesion.getUsuarioVerificado());
                         gestorReservasAsiento.SeleccionarReserva(reserva).cancelarReserva();
                         actualizar();
                         JOptionPane.showMessageDialog(null, "Reserva cancelada con exito", "Cancelación", JOptionPane.INFORMATION_MESSAGE);
@@ -164,6 +177,16 @@ public class ModuloVuelos extends JFrame{
             }
 
         });
+    }
+
+    private void mostrarVuelosConDatosIniciales() {
+        String fechaFormateada = "";
+        if(destinoComun != null ){
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        fechaFormateada = formato.format(fechaComun);
+            gestorVuelos.mostarVuelosFiltrados(table1, gestorVuelos.buscarVueloPorDestinoFecha(destinoComun, fechaFormateada));
+        }
+        
     }
 
     public void crearframe() {
@@ -232,8 +255,7 @@ public class ModuloVuelos extends JFrame{
 
 
     public void crearReserva(CarritoAsientos lista) {
-        ReservaAsiento reservaAsiento = new ReservaAsiento(new CarritoAsientos(lista.getAsientos(),lista.getVuelo()));
-        reservaAsiento.reservar();
+        ReservaAsiento reservaAsiento = new ReservaAsiento(new CarritoAsientos(lista.getAsientos(),lista.getVuelo()), sesion.getUsuarioVerificado());
         reservaAsiento.crearReserva();
         gestorReservasAsiento.agregarResarva(reservaAsiento);
     }
