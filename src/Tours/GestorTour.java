@@ -23,10 +23,12 @@ public class GestorTour {
         List<Tour> toursDestino = getToursDestino(destino);
         List<Tour> toursFecha  = getToursFecha(fechaTentativa);
 
-        List<Tour> toursFinal = toursDestino.stream().filter(f-> toursFecha.contains(f)).toList();
+        List<Tour> toursFinal = new ArrayList<>();
 
-        if(toursFinal.isEmpty()){
+        if(toursDestino == null && toursFecha == null){
             toursFinal = this.tours;
+        }else{
+            toursFinal = toursDestino.stream().filter(f-> toursFecha.contains(f)).toList();
         }
 
         for (Tour tour : toursFinal) {
@@ -100,8 +102,7 @@ public class GestorTour {
     }
 
     private void leerDatos(){
-        ArrayList<String> paradasList = new ArrayList<>();
-        ArrayList<String> actividadesList = new ArrayList<>();
+
         Tour tour;
 
         try {
@@ -109,8 +110,11 @@ public class GestorTour {
 
             String linea = "";
             while ((linea = br.readLine()) != null) {
+                ArrayList<String> paradasList = new ArrayList<>();
+                ArrayList<String> actividadesList = new ArrayList<>();
+
                 String[] datos = linea.split(",");
-                
+
                 String[] paradas = datos[2].replace('[', ' ').replace(']', ' ').trim().split(";");
                 String[] actividades = datos[3].replace('[', ' ').replace(']', ' ').trim().split(";");
                 String fechaInicio = datos[7];

@@ -67,6 +67,7 @@ public class ModuloTours extends JFrame{
     private JPanel pnlEliminarReserva;
     private JTextArea txtAreaDescripcionTour;
     private JScrollPane pnlAreaDescripcionTour;
+    private JTextArea txtModificarDetallesTour;
     private Tour tour; //para prueba
     private ReservaTour reservaTour;
     private ReservaTour reservaTourConfirmar = null;
@@ -246,6 +247,13 @@ public class ModuloTours extends JFrame{
             public void valueChanged(ListSelectionEvent e) {
                 String selected = list1.getSelectedValue().toString().split(" ")[0];
                 txtAreaDescripcionTour.setText(gestionTour.buscarTour(selected).informacionRelevante());
+            }
+        });
+        listToursModificar.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                String selected = listToursModificar.getSelectedValue().toString().split(" ")[0];
+                txtModificarDetallesTour.setText(gestionTour.buscarTour(selected).informacionRelevante());
             }
         });
     }
