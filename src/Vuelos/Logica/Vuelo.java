@@ -31,6 +31,12 @@ public class Vuelo {
         GenerarAsientos(duracion);
     }
 
+    public Vuelo(String origen, String destino, String hora_salida, String fecha) {
+        this.origen = origen;
+        this.destino = destino;
+        this.hora_salida = hora_salida;
+        this.fecha = fecha;
+    }
 
     private void GenerarAsientos(int duracion){
         int numeroAsientoPorFila = 6;
@@ -38,11 +44,11 @@ public class Vuelo {
         int cantidadFilaTurista = 10;
 
         for(int numeroFilaPremium = 1; numeroFilaPremium <= cantidadFilaPremium; numeroFilaPremium++){
-            crearAsiento(numeroAsientoPorFila, (int) duracion, precioPremium, "Clase Premium", numeroFilaPremium);
+            crearAsiento(numeroAsientoPorFila, (int) duracion, precioPremium, "Premium", numeroFilaPremium);
         }
 
         for(int numeroFilaTurista = 5; numeroFilaTurista <= cantidadFilaTurista; numeroFilaTurista++){
-            crearAsiento(numeroAsientoPorFila, (int) duracion, precioTurista, "Clase Turista", numeroFilaTurista);
+            crearAsiento(numeroAsientoPorFila, (int) duracion, precioTurista, "Turista", numeroFilaTurista);
         }
     }
 
@@ -54,10 +60,10 @@ public class Vuelo {
             int numeroAsientoAleatorio2 = random.nextInt(max - min + 1) + min;
             Asiento a;
             if (numeroAsiento % numeroAsientoAleatorio2 == 0) {
-                a = new Asiento(numeroAsiento, true, ((duracion / 60) * precio), Clase, numeroFilaTurista, this);
+                a = new Asiento(numeroAsiento, true, ((duracion / 60) * precio), Clase, numeroFilaTurista);
 
             } else {
-                a = new Asiento(numeroAsiento, false, ((duracion / 60) * precio), Clase, numeroFilaTurista, this);
+                a = new Asiento(numeroAsiento, false, ((duracion / 60) * precio), Clase, numeroFilaTurista);
             }
             this.asientos.add(a);
         }
@@ -113,18 +119,35 @@ public class Vuelo {
         return asientos;
     }
 
-    public int getNumeroAsientos() {
-        return numeroAsientos;
+
+    public int asientosDisponibles(){
+        int contador = 0;
+        for(Asiento a: this.asientos){
+            if(a.isEstaReservado() == false){
+                contador++;
+            }
+        }
+        return contador;
     }
 
     public List<Integer> getFila(int fila){
         List<Integer> lista = new ArrayList<>();
         for(Asiento a: this.asientos){
-            if(a.isEstaReservado() == false && a.getNumFila() == fila){
+            if(a.isEstaReservado() == true && a.getNumFila() == fila){
                 lista.add(a.getNumero());
             }
         }
         return lista;
+    }
+    public void Actualizar(List<Asiento> seleccionados){
+        for(Asiento a : this.asientos){
+            for(Asiento aux : seleccionados){
+                if(a.getNumero() == aux.getNumero() && a.getNumFila() == aux.getNumFila()){
+                    a.reservar();
+                }
+            }
+        }
+
     }
 
     public int getPrecioPremium() {

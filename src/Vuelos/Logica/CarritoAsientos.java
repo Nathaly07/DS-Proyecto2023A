@@ -10,7 +10,7 @@ public class CarritoAsientos {
 
     private List<Asiento> asientos;
     private  Vuelo vuelo;
-public CarritoAsientos(){
+    public CarritoAsientos(){
     asientos = new ArrayList<>();
 }
     public CarritoAsientos(Vuelo vuelo) {
@@ -18,6 +18,10 @@ public CarritoAsientos(){
         asientos = new ArrayList<>();
     }
 
+    public CarritoAsientos(List<Asiento> asientos, Vuelo vuelo) {
+        this.asientos = asientos;
+        this.vuelo = vuelo;
+    }
 
     public void añadir(Asiento a) {
         this.asientos.add(a);
@@ -60,7 +64,10 @@ public CarritoAsientos(){
                 default ->  "-";
 
             };
+
         }
+
+
         @Override
         public boolean isCellEditable(int row,int column){
             return false;
@@ -84,7 +91,17 @@ public CarritoAsientos(){
         tabla.setModel(modelo);
     }
 
+    public void Limpiar(){
+        this.asientos = new ArrayList<>();
+    }
     public Vuelo getVuelo() {
         return vuelo;
     }
+
+    public void setAsientos(List<Asiento> asientos) {
+        this.asientos = asientos;
+    }
+
+
+
 }

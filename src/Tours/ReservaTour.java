@@ -26,7 +26,7 @@ public class ReservaTour {
 
     private GestorTour gestorTour;
     private PagoReserva pagoReserva;
-    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/M/yy");
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
 
     public ReservaTour(String nombreUsuario, String apellidoUsuario, int numeroPersonas, GestorTour gestorTour, PagoReserva pagoReserva) {
         this.numReserva = this.cantidadReservas;

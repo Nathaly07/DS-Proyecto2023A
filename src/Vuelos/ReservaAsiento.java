@@ -1,4 +1,4 @@
-package Reservas;
+package Vuelos;
 
 import Vuelos.Logica.Asiento;
 import Vuelos.Logica.CarritoAsientos;

@@ -12,52 +12,61 @@ public class LoginInterfaz extends JFrame {
     private JLabel lblContraseña;
     private JLabel lblUsuario;
     private JButton btnRegistrarse;
-    private Login login;
+    private Sesion sesion;
 
     public LoginInterfaz() {
-        login = new Login();
+        sesion = Sesion.getInstance();
+
         btnLogin.addActionListener(e -> {
             String passwordIngresada = new String(txtContraseña.getPassword());
-            if (login.validarUsuario(Integer.parseInt(txtUsuario.getText()), passwordIngresada)) {
-                Módulos módulos = new Módulos(login);
+            if (sesion.validarUsuario(txtUsuario.getText(), passwordIngresada)) {
+                Módulos módulos = new Módulos(sesion);
                 módulos.crearFrame();
+                int eleccion = JOptionPane.showConfirmDialog(null, "¿Deseas organizar un plan para una fecha y destino específico?", "Organización de un plan", JOptionPane.YES_NO_OPTION);
+                if (eleccion == -1 || eleccion == 1) {
+                    JOptionPane.showMessageDialog(null, "No hay problema.\nSigue gozando de nuestros demás servicios.", "Está bien", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    InterfazDatosComunes interfazDatosComunes = new InterfazDatosComunes(this.sesion);
+                    interfazDatosComunes.crearFrame();
+                }
                 this.dispose();
             }
         });
 
         btnRegistrarse.addActionListener(e -> {
-            RegistrarInterfaz registrarInterfaz = new RegistrarInterfaz(login);
+            RegistrarInterfaz registrarInterfaz = new RegistrarInterfaz(sesion);
             registrarInterfaz.crearFrame();
         });
         txtContraseña.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
                 super.keyPressed(e);
-                if (e.getKeyCode() == KeyEvent.VK_ENTER){
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     btnLogin.doClick();
                 }
             }
         });
     }
 
-    public LoginInterfaz(Login log) {
-        this.login = log;
+    public LoginInterfaz(Sesion log) {
+        this.sesion = log;
         btnLogin.addActionListener(e -> {
             String passwordIngresada = new String(txtContraseña.getPassword());
-            if (login.validarUsuario(Integer.parseInt(txtUsuario.getText()), passwordIngresada)) {
-                Módulos módulos = new Módulos(login);
+            if (sesion.validarUsuario(txtUsuario.getText(), passwordIngresada)) {
+                Módulos módulos = new Módulos(sesion);
                 módulos.crearFrame();
                 this.dispose();
             }
         });
 
         btnRegistrarse.addActionListener(e -> {
-            RegistrarInterfaz registrarInterfaz = new RegistrarInterfaz(login);
+            RegistrarInterfaz registrarInterfaz = new RegistrarInterfaz(sesion);
             registrarInterfaz.crearFrame();
         });
     }
 
     public void crearFrame() {
+        setTitle("Iniciar sesión");
         setSize(1000, 700);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
