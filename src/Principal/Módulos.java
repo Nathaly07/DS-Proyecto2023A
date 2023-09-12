@@ -4,7 +4,7 @@ import Hospedaje.InterfacesDeUsuario.MenuHospedaje;
 import Tours.GestorReserva;
 import Vehiculo.UIVehiculos;
 
-import Seguros.InterfazSeguros;
+import Seguros.InterfacesGráficas.InterfazSeguro;
 import Tours.ModuloTours;
 import Vuelos.ModuloVuelos;
 
@@ -44,8 +44,8 @@ public class Módulos extends JFrame {
             dispose();
         });
         btnSeguros.addActionListener(e -> {
-            InterfazSeguros interfazSeguros = new InterfazSeguros();
-            setPanel(interfazSeguros.pnlOpcionesSeguro);
+            InterfazSeguro interfazSeguro = new InterfazSeguro(this.sesion.getUsuarioVerificado());
+            setPanel(interfazSeguro.panelPrincipal);
             crearFrame();
         });
         button3.addActionListener(e ->{
