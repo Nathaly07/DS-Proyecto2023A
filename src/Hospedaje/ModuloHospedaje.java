@@ -1,39 +1,24 @@
 package Hospedaje;
 
-import Hospedaje.Habitaciones.Gestion_Habitaciones;
-import Hospedaje.Habitaciones.Habitacion;
-import Hospedaje.Reservas.Gestion_Reservas;
-import Hospedaje.Reservas.ReservaHospedaje;
-
-import java.util.Date;
-import java.util.List;
+import Hospedaje.Habitaciones.GestionHabitaciones;
+import Hospedaje.Reservas.GestionReservas;
 
 public class ModuloHospedaje {
-    private Gestion_Habitaciones gestion_habitaciones;
-    private Gestion_Reservas gestion_reservas;
+    private GestionHabitaciones gestionHabitaciones;
+    private GestionReservas gestionReservas;
 
     public ModuloHospedaje() {
-        this.gestion_habitaciones = new Gestion_Habitaciones();
-        this.gestion_reservas = new Gestion_Reservas(gestion_habitaciones);
+        this.gestionHabitaciones = new GestionHabitaciones();
+        this.gestionReservas = new GestionReservas(gestionHabitaciones);
     }
 
-    public boolean crearReserva(ReservaHospedaje reserva) {
-        return this.gestion_reservas.crearReserva(reserva);
+    public GestionReservas getGestionReservas() {
+        return gestionReservas;
     }
 
-    public boolean actualizarReserva(String reservaId, ReservaHospedaje nuevaReserva) {
-        return this.gestion_reservas.actualizarReserva(reservaId, nuevaReserva);
+    public GestionHabitaciones getGestionHabitaciones() {
+        return gestionHabitaciones;
     }
 
-    public boolean cancelarReserva(String reservaId) {
-        return this.gestion_reservas.cancelarReserva(reservaId);
-    }
-
-    public boolean confirmarReserva(String reservaID, String metodoPago) {
-        return this.gestion_reservas.confirmarReserva(reservaID, metodoPago);
-    }
-
-    public List<Habitacion> buscarHabitacionesDisponibles(Date reservarDesde, Date reservarHasta) {
-        return this.gestion_reservas.getHabitacionesDisponibles(reservarDesde, reservarHasta);
-    }
+    // En una proxima iteracion gestion hoteles
 }

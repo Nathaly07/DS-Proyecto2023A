@@ -8,54 +8,45 @@ public class ActualizarDatosInterfaz extends JFrame {
     private JTextField txtApellido;
     private JTextField txtEmail;
     private JTextField txtContraseña;
-    private JTextField txtRol;
     private JRadioButton rbtnNombre;
     private JRadioButton rbtnApellido;
     private JRadioButton rbtnEmail;
     private JRadioButton rbtnContraseña;
-    private JRadioButton rbtnRol;
     private JButton btnActualizar;
-    private Login login;
+    private Sesion sesion;
 
-    public ActualizarDatosInterfaz(Login login) {
-        this.login = login;
+    public ActualizarDatosInterfaz(Sesion sesion) {
+        this.sesion = sesion;
         btnActualizar.addActionListener(e -> {
             String nombre = "";
             String apellido = "";
             String email = "";
             String contraseña = "";
-            String rol = "";
             if (this.rbtnNombre.isSelected()) {
                 txtNombre.setVisible(true);
                 nombre = this.txtNombre.getText();
             } else {
-                nombre = login.getUsuarioVerificado().getNombre();
+                nombre = sesion.getUsuarioVerificado().getNombre();
             }
             if (this.rbtnApellido.isSelected()) {
                 txtApellido.setVisible(true);
                 apellido = this.txtApellido.getText();
             } else {
-                apellido = login.getUsuarioVerificado().getApellido();
+                apellido = sesion.getUsuarioVerificado().getApellido();
             }
             if (this.rbtnEmail.isSelected()) {
                 txtEmail.setVisible(true);
                 email = this.txtEmail.getText();
             } else {
-                email = login.getUsuarioVerificado().getEmail();
+                email = sesion.getUsuarioVerificado().getEmail();
             }
             if (this.rbtnContraseña.isSelected()) {
                 txtContraseña.setVisible(true);
                 contraseña = this.txtContraseña.getText();
             } else {
-                contraseña = login.getUsuarioVerificado().getPassword();
+                contraseña = sesion.getUsuarioVerificado().getPassword();
             }
-            if (this.rbtnRol.isSelected()) {
-                txtRol.setVisible(true);
-                rol = this.txtRol.getText();
-            } else {
-                rol = login.getUsuarioVerificado().getRol();
-            }
-            login.getUsuarioVerificado().actualizarDatos(nombre, apellido, email, contraseña, rol);
+            sesion.getUsuarioVerificado().actualizarDatos(nombre, apellido, email, contraseña);
             JOptionPane.showMessageDialog(null, "Datos actualizados con exito.");
         });
     }

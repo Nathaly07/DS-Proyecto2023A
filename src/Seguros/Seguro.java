@@ -1,9 +1,11 @@
 package Seguros;
 
+import Pagos.Pago;
+
+import javax.swing.*;
 import java.util.Date;
 
 public abstract class Seguro {
-    private int ID_Seguro;
     private String propietario;
     private String[] condiciones;
     private String[] beneficiarios;
@@ -11,8 +13,7 @@ public abstract class Seguro {
     private Date fechaDeVencimiento;
     private float primaSinRecargo;
 
-    public Seguro(int ID_Seguro, String propietario, String[] condiciones, String[] beneficiarios, Date fechaDeInicio, Date fechaDeVencimiento, float primaSinRecargo) {
-        this.ID_Seguro = ID_Seguro;
+    public Seguro(String propietario, String[] condiciones, String[] beneficiarios, Date fechaDeInicio, Date fechaDeVencimiento, float primaSinRecargo) {
         this.propietario = propietario;
         this.condiciones = condiciones;
         this.beneficiarios = beneficiarios;
@@ -30,17 +31,18 @@ public abstract class Seguro {
         }
     }
 
-    public void cancelar(int ID_Seguro) {
-        this.ID_Seguro = 0;
+    public void pagar(double montoAPagar, String modoPago, Date fechaPago ) {
+        if (montoAPagar == 0) {
+            JOptionPane.showMessageDialog(null, "Pago no realizado");
+        } else {
+            Pago pagoSeguros = new Pago(montoAPagar,modoPago,fechaPago);
+            pagoSeguros.pagar();
+        }
     }
 
-    abstract float indemnizar(float valorGastado, String motivo);
+    abstract void indemnizar(float valorGastado, String motivo);
 
     abstract float calcularPrimaTotal();
-
-    public int getID_Seguro() {
-        return ID_Seguro;
-    }
 
     public String getPropietario() {
         return propietario;

@@ -1,6 +1,7 @@
 package Hospedaje.InterfacesDeUsuario;
 
 import Hospedaje.ModuloHospedaje;
+import Hospedaje.Reservas.GestionReservas;
 import Hospedaje.Reservas.ReservaHospedaje;
 
 import javax.swing.*;
@@ -13,15 +14,16 @@ public class ConfirmarReserva extends JFrame{
     private JButton btnConfirmar;
     private JButton btnRegresar;
     private ReservaHospedaje reserva;
-    private ModuloHospedaje moduloHospedaje;
+    private GestionReservas gestionReservas;
 
-    public ConfirmarReserva(ModuloHospedaje moduloHospedaje, ReservaHospedaje reserva) {
-        this.moduloHospedaje = moduloHospedaje;
+    public ConfirmarReserva(GestionReservas gestionReservas, ReservaHospedaje reserva) {
+        this.gestionReservas = gestionReservas;
         this.reserva = reserva;
         actualizarTablaReserva();
 
         btnConfirmar.addActionListener(e -> {
-            this.moduloHospedaje.confirmarReserva(reserva.getReservaId(), "Efectivo");
+            this.gestionReservas.crearReserva(reserva);
+            this.gestionReservas.confirmarReserva(reserva, "Efectivo");
             JOptionPane.showMessageDialog(null, "RESERVA CONFIRMADA");
             dispose();
         });
@@ -34,9 +36,9 @@ public class ConfirmarReserva extends JFrame{
     public void crearFrame(){
         setContentPane(mainPanel);
         setVisible(true);
-        this.setLocationRelativeTo(null);
         setTitle("Ver Reserva");
         setSize(600,400);
+        setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
@@ -68,7 +70,7 @@ public class ConfirmarReserva extends JFrame{
     public void agregarReservaATabla(ReservaHospedaje reserva) {
         // Agregar una nueva fila al modelo de la tabla
         tbModeloReservas.addRow(new Object[]{
-                reserva.getReservaID(),
+                reserva.getReservaId(),
                 reserva.getHabitaciones()[0].getHotel().getNombre(),
                 reserva.getHabitaciones()[0].getHotel().getCiudad(),
                 reserva.getHabitaciones()[0].getPrecioPorNoche(),

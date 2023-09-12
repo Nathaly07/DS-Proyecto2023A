@@ -1,6 +1,9 @@
 package Hospedaje.Habitaciones;
 
-public class Hotel {
+import java.io.Serializable;
+
+public class Hotel implements Serializable {
+    private static final long serialVersionUID = 2L;
     private String nombre;
     private String direccion;
     private String ciudad;
