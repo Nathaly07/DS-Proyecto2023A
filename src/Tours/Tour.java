@@ -64,19 +64,19 @@ public class Tour {
     public String informacionRelevante(){
         String info = "";
 
-        info += this.nombre + ", ";
-        info += "Paradas: \n";
+        info += this.nombre;
+        info += "\nParadas: \n";
 
         int contador = 0;
         for (String parada : paradasTuristicas) {
-            info += parada + ",\n";
+            info += parada + ", ";
             contador++;
-            if (contador >= 2) {
+            if (contador >= 4) {
                 break;
             }
         }
 
-        info += "Guia: " + this.infoGuia + "\n";
+        info += "\nGuia: " + this.infoGuia + "\n";
         info += "Duracion: " + this.duracion + "\n";
         info += "Precio: $" + this.precio;
 
