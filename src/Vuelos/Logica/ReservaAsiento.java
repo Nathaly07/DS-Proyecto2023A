@@ -48,7 +48,7 @@ public class ReservaAsiento {
     }
     private String fechaAutomatica(){
         LocalDate fechaActual = LocalDate.now();
-        DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String fechaFormateada = fechaActual.format(formatoFecha);
         return fechaFormateada;
     }

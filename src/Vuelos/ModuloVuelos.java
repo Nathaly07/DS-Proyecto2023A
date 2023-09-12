@@ -88,6 +88,7 @@ public class ModuloVuelos extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 MostrarTabla();
+                bloquearCampos(true);
             }
         });
         btnSeleccionarVuelo.addActionListener(new ActionListener() {
@@ -181,12 +182,22 @@ public class ModuloVuelos extends JFrame{
 
     private void mostrarVuelosConDatosIniciales() {
         String fechaFormateada = "";
-        if(destinoComun != null ){
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-        fechaFormateada = formato.format(fechaComun);
+        if(destinoComun != null) {
+            fechaFormateada = formato.format(fechaComun);
             gestorVuelos.mostarVuelosFiltrados(table1, gestorVuelos.buscarVueloPorDestinoFecha(destinoComun, fechaFormateada));
+            bloquearCampos(false);
+        }else{
+            MostrarTabla();
         }
-        
+    }
+
+    private void bloquearCampos(boolean bandera) {
+        buscarVuelosButton.setEnabled(bandera);
+        pnlCalendario.setEnabled(bandera);
+        origen.setEnabled(bandera);
+        destino.setEnabled(bandera);
+        dateChooserFechaVuelos.setEnabled(bandera);
     }
 
     public void crearframe() {
@@ -222,7 +233,6 @@ public class ModuloVuelos extends JFrame{
 
     public void cerrarDialog(){
         dialog.dispose();
-        MostrarTabla();
         actualizar();
     }
 
@@ -250,7 +260,14 @@ public class ModuloVuelos extends JFrame{
     public void actualizar(){
         gestorReservasAsiento.reservasPendientes(table2);
         gestorReservasAsiento.mostrarReservas(table3);
-        gestorVuelos.mostrarVuelos(table1);
+        if(destinoComun != null && !origen.isEnabled()) {
+            String fechaFormateada = "";
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+            fechaFormateada = formato.format(fechaComun);
+            gestorVuelos.mostarVuelosFiltrados(table1, gestorVuelos.buscarVueloPorDestinoFecha(destinoComun, fechaFormateada));
+        }else {
+            gestorVuelos.mostrarVuelos(table1);
+        }
     }
 
 

@@ -85,9 +85,12 @@ public class GestorVuelos {
     }
 
     public void mostarVuelosFiltrados(JTable tabla, List<Vuelo> vuelos){
-        TablaVuelos modelo = new TablaVuelos(vuelos);
-        System.out.println(vuelos.size());
-        tabla.setModel(modelo);
+        if(vuelos.size() > 0) {
+            TablaVuelos modelo = new TablaVuelos(vuelos);
+            tabla.setModel(modelo);
+        } else {
+            JOptionPane.showMessageDialog(null, "No existen vuelos con esas caracteristicas", "Aviso", JOptionPane.ERROR_MESSAGE);
+        }
 
     }
     public void agregarVuelo(Vuelo v) {

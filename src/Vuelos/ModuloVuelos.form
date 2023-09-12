@@ -174,7 +174,9 @@
             <preferred-size width="90" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <enabled value="true"/>
+        </properties>
         <border type="none"/>
         <children/>
       </grid>
