@@ -3,6 +3,7 @@ package Principal;
 import com.toedter.calendar.JDateChooser;
 
 import javax.swing.*;
+import java.text.SimpleDateFormat;
 
 public class InterfazDatosComunes extends JFrame{
     private JPanel pnlDatosComunes;
@@ -10,7 +11,6 @@ public class InterfazDatosComunes extends JFrame{
     private JPanel pnlFechaComun;
     private JButton btnConfirmarDatos;
     private JDateChooser fechaComun = new JDateChooser();
-
 
     public InterfazDatosComunes(Sesion sesion) {
         pnlFechaComun.add(fechaComun);

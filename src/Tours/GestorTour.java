@@ -2,9 +2,13 @@ package Tours;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Date;
+
 public class GestorTour {
     private List<Tour> tours;
 
@@ -14,23 +18,80 @@ public class GestorTour {
     }
 
     // Obtener los tours disponibles
-    public List<Tour> getToursDisponibles() {
+    public List<Tour> getToursDisponibles(String destino, Date fechaTentativa) {
         List<Tour> toursDisponibles = new ArrayList<>();
-        for (Tour tour : this.tours) {
-            if (tour.getDisponibilidad() > 0) {
+        List<Tour> toursDestino = getToursDestino(destino);
+        System.out.println(toursDestino.toString());
+        List<Tour> toursFecha  = getToursFecha(fechaTentativa);
+        System.out.println(toursFecha.toString());
+        List<Tour> toursFinal = toursDestino.stream().filter(f-> toursFecha.contains(f)).toList();
+        System.out.println(toursFinal.toString());
+        if(toursFinal.isEmpty()){
+            toursFinal = this.tours;
+        }
+
+        for (Tour tour : toursFinal) {
+            if (tour.getDisponibilidad() > 0 ) {
                 toursDisponibles.add(tour);
             }
         }
         return toursDisponibles;
     }
 
+    //Filtrar tour por fechas
+    public List<Tour> getToursFecha(Date fechaTentativa){
+        if(fechaTentativa == null){
+            return null;
+        }
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        List<Tour> toursFinal = new ArrayList<>();
+
+        for(Tour tour: this.tours){
+            try {
+                Date fechaTour = format.parse(tour.getFechaInicio());
+                Date fechaT = format.parse(format.format(fechaTentativa));
+                if(fechaTour.after(fechaT)){
+                    toursFinal.add(tour);
+                }
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        if(toursFinal.isEmpty()){
+            return null;
+        }
+        return toursFinal;
+    }
+
     //Buscar Tour por nombre
-    public Tour buscarTour(String nombreTour) {
+    public List<Tour> getToursDestino(String destino) {
+
+        if(destino == null){
+            return null;
+        }
+
+        List<Tour> toursDestino = new ArrayList<>();
         for (Tour tour : this.tours) {
-            if (tour.getNombre().equals(nombreTour)) {
+            if (tour.getNombre().contains(destino)) {
+                toursDestino.add(tour);
+            }
+        }
+
+        if(toursDestino.isEmpty()){
+            return null;
+        }
+        return toursDestino;
+    }
+
+    public Tour buscarTour(String nombre) {
+
+        for (Tour tour : this.tours) {
+            if (tour.getNombre().contains(nombre)) {
                 return tour;
             }
         }
+
         return null;
     }
 

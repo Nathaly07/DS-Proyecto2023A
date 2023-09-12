@@ -58,6 +58,8 @@ public class Tour {
         return fechaInicio;
     }
 
+    public String getFechaFin() { return fechaFin; }
+
     //ToString para mostrar en la informacion
     public String informacionRelevante(){
         String info = "";
