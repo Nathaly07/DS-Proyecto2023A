@@ -1,5 +1,6 @@
 package Tours;
 
+import Principal.Sesion;
 import Principal.Usuario;
 
 import java.awt.event.ActionEvent;
@@ -11,11 +12,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.*;
+import java.util.HashSet;
 
 public class ModuloTours extends JFrame{
 
     private GestorTour gestionTour = new GestorTour();
-    private GestorReserva gestionReserva = new GestorReserva();
+
+    private GestorReserva gestionReserva;
     private PagoReserva pagoReserva = new PagoReserva();
     private Usuario usuarioVerificado;
     public JPanel pnlOpcionesTours;
@@ -62,6 +65,9 @@ public class ModuloTours extends JFrame{
     private JList listToursReservaModificar;
     private JButton btnModificarReserva;
     private JSpinner jspNumPersonasModificar;
+    private JPanel pnlEliminarReserva;
+    private JTextArea txtAreaDescripcionTour;
+    private JScrollPane pnlAreaDescripcionTour;
     private Tour tour; //para prueba
     private ReservaTour reservaTour;
     private ReservaTour reservaTourConfirmar = null;
@@ -72,9 +78,15 @@ public class ModuloTours extends JFrame{
 
     List<Tour> tours;
 
-    public ModuloTours(String head, Usuario usuarioVerificado){
+    HashSet<String> reservasUnicas = new HashSet<>();
+
+    //Instancia para acceder a la información de la sesión
+    Sesion sesion = Sesion.getInstance();
+
+    public ModuloTours(String head, Usuario usuarioVerificado, GestorReserva gestionReserva){
         super (head);
         this.usuarioVerificado = usuarioVerificado;
+        this.gestionReserva = gestionReserva;
 
         //Listener para mostrar los tours
         pnlCrearReserva.addComponentListener(new ComponentAdapter() {
@@ -178,7 +190,7 @@ public class ModuloTours extends JFrame{
                 int numReserva = Integer.parseInt(opcion.split("-")[0]);
                 reservaTourModificar = gestionReserva.buscarReserva(numReserva);
                 DefaultListModel toursModel = new DefaultListModel<>();
-                ArrayList<Tour> toursList = (ArrayList<Tour>) gestionTour.getToursDisponibles();
+                ArrayList<Tour> toursList = (ArrayList<Tour>) gestionTour.getToursDisponibles(sesion.getDestinoComun(), sesion.getFechaComun());
 
                 for(Tour tour: toursList) {
                     toursModel.addElement(tour.informacionRelevante());
@@ -236,10 +248,18 @@ public class ModuloTours extends JFrame{
         String nombreUsuario = this.usuarioVerificado.getNombre();
         String apellidoUsuario = this.usuarioVerificado.getApellido();
         ArrayList<ReservaTour> reservas = this.gestionReserva.getReservaciones();
+
         for (ReservaTour reserva: reservas) {
             if ((reserva.getNombreUsuario().equalsIgnoreCase(nombreUsuario)) && (reserva.getApellidoUsuario().equalsIgnoreCase(apellidoUsuario))) {
-                this.comboBox2.addItem(reserva.getNumReserva() + "-" + reserva.getNombreUsuario() + " " + reserva.getApellidoUsuario());
-                this.comboBox3.addItem(reserva.getNumReserva() + "-" + reserva.getNombreUsuario() + " " + reserva.getApellidoUsuario());
+
+
+                String reservaStr = reserva.getNumReserva() + "-" + reserva.getNombreUsuario() + " " + reserva.getApellidoUsuario();
+
+                // Agregamos la reserva al HashSet solo si no está duplicada
+                if (reservasUnicas.add(reservaStr)) {
+                    this.comboBox2.addItem(reservaStr);
+                    this.comboBox3.addItem(reservaStr);
+                }
             }
         }
 
@@ -254,8 +274,9 @@ public class ModuloTours extends JFrame{
 
     //Metodo para mostrar tours disponibles
     private void mostrarToursDisponibles(JList list){
+
         DefaultListModel<String> model = new DefaultListModel<>();
-        List<Tour> toursDispo = this.gestionTour.getToursDisponibles();
+        List<Tour> toursDispo = this.gestionTour.getToursDisponibles(sesion.getDestinoComun(), sesion.getFechaComun());
 
         for (Tour i : toursDispo){
             model.addElement(i.informacionRelevante());

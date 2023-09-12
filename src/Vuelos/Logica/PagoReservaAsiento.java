@@ -1,7 +1,7 @@
 package Vuelos.Logica;
 
 
-import javax.swing.*;
+import Pagos.Pago;
 
 
 public class PagoReservaAsiento {
@@ -23,13 +23,15 @@ public class PagoReservaAsiento {
 
     //IVA
     public double calcularIVA(){
-        double total = 0;
-        total = this.reserva.generarCostoTotal()* 0.12;
-        return total;
+        double total = this.reserva.generarCostoTotal() * 0.12;
+        double truncatedTotal = Math.floor(total * 100) / 100;
+        return truncatedTotal;
     }
 
-    public void Pagar(){
-        this.reserva.CambiarEstado(EstadoReserva.Pagado);
-        JOptionPane.showMessageDialog(null, "Pago realizado con exito", "Aviso de pago", JOptionPane.INFORMATION_MESSAGE);
+    public void pagar(String metodoPago){
+        this.reserva.cambiarEstado(EstadoReserva.Pagado);
+        float precioFinal = Float.parseFloat(calcularCostoTotalReservados()+"");
+        Pago pago = new Pago(precioFinal, metodoPago);
+        pago.pagar();
     }
 }

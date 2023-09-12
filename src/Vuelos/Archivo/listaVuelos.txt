@@ -1,9 +1,57 @@
-Quito,Atacames,12:00,01/10/2023,50
-Quito,Atacames,08:00,15/10/2023,50
-Quito,Atacames,09:00,29/10/2023,50
-Quito,Los Angeles,10:00,05/10/2023,350
-Quito,Los Angeles,08:00,19/10/2023,350
-Quito,Los Angeles,11:00,30/10/2023,350
-Quito,Roma,14:00,10/10/2023,800
-Quito,Roma,19:00,24/10/2023,800
-Quito,Roma,20:00,31/10/2023,800
+Quito,Manta,12:00,01/10/2023,30
+Guayaquil,Manta,08:00,15/10/2023,20
+Cuenca,Manta,09:00,29/10/2023,50
+Quito,Cuenca,12:00,01/10/2023,35
+Guayaquil,Cuenca,08:00,15/10/2023,20
+Quito,Los Angeles,12:00,01/10/2023,610
+Guayaquil,Los Angeles,08:00,15/10/2023,650
+Cuenca,Los Angeles,09:00,29/10/2023,660
+Quito,Las Vegas,12:00,01/10/2023,520
+Guayaquil,Las Vegas,08:00,15/10/2023,550
+Cuenca,Las Vegas,09:00,29/10/2023,530
+Quito,Roma,12:00,01/10/2023,835
+Guayaquil,Roma,08:00,15/10/2023,850
+Cuenca,Roma,09:00,29/10/2023,860
+New York,Ciudad De Panama,12:00,01/10/2023,315
+Japon,Medellin,08:00,15/10/2023,1000
+Marruecos,Barcelona,09:00,29/10/2023,500
+Santiago de Chile,Barcelona,12:00,01/10/2023,795
+Santiago de Chile,Barcelona,08:00,15/10/2023,795
+Japon,Las Vegas,12:00,01/10/2023,1050
+Marruecos,Las Vegas,08:00,15/10/2023,910
+Santiago de Chile,Las Vegas,09:00,29/10/2023,800
+Japon,Roma,12:00,01/10/2023,1130
+Marruecos,Roma,08:00,15/10/2023,970
+Santiago de Chile,Roma,09:00,29/10/2023,820
+Japon,Ciudad de Panama,12:00,01/10/2023,1020
+Marruecos,Ciudad de Panama,08:00,15/10/2023,880
+Santiago de Chile,Ciudad de Panama,09:00,29/10/2023,770
+Japon,Medellin,12:00,01/10/2023,1000
+Quito,Manta,11:00,01/10/2023,25
+Guayaquil,Manta,07:00,15/10/2023,15
+Cuenca,Manta,08:00,29/10/2023,45
+Quito,Cuenca,11:05,01/10/2023,30
+Guayaquil,Cuenca,07:05,15/10/2023,15
+Quito,Los Angeles,11:10,01/10/2023,600
+Guayaquil,Los Angeles,07:10,15/10/2023,640
+Cuenca,Los Angeles,08:10,29/10/2023,650
+Quito,Las Vegas,11:20,01/10/2023,510
+Guayaquil,Las Vegas,07:20,15/10/2023,540
+Cuenca,Las Vegas,08:20,29/10/2023,520
+Quito,Roma,11:30,01/10/2023,825
+Guayaquil,Roma,07:30,15/10/2023,840
+Cuenca,Roma,08:30,29/10/2023,850
+New York,Ciudad de Panama,11:40,01/10/2023,305
+Japon,Medellin,07:40,15/10/2023,990
+Marruecos,Barcelona,08:40,29/10/2023,490
+Santiago de Chile,Barcelona,11:50,01/10/2023,785
+Santiago de Chile,Barcelona,07:50,15/10/2023,785
+Japon,Manta,12:00,01/10/2023,1030
+Marruecos,Manta,08:00,15/10/2023,890
+Santiago de Chile,Manta,09:00,29/10/2023,780
+Japon,Cuenca,12:00,01/10/2023,1040
+Marruecos,Cuenca,08:00,15/10/2023,900
+Santiago de Chile,Cuenca,09:00,29/10/2023,790
+Japon,Los Angeles,12:00,01/10/2023,1080
+Marruecos,Los Angeles,08:00,15/10/2023,920
+Santiago de Chile,Los Angeles,09:00,29/10/2023,810

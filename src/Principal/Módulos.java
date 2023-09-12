@@ -1,11 +1,12 @@
 package Principal;
 
 import Hospedaje.InterfacesDeUsuario.MenuHospedaje;
+import Tours.GestorReserva;
 import Vehiculo.UIVehiculos;
 
-import Seguros.InterfazSeguros;
+import Seguros.InterfacesGráficas.InterfazSeguro;
 import Tours.ModuloTours;
-import Vuelos.ModuloVuelos;
+import Vuelos.GUI.ModuloVuelos;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -23,6 +24,7 @@ public class Módulos extends JFrame {
     private JButton btnActualizarDatos;
     private Sesion sesion;
 
+    private GestorReserva gestionReserva = new GestorReserva();
 
     public Módulos(Sesion sesion) {
         this.sesion = sesion;
@@ -42,8 +44,8 @@ public class Módulos extends JFrame {
             dispose();
         });
         btnSeguros.addActionListener(e -> {
-            InterfazSeguros interfazSeguros = new InterfazSeguros();
-            setPanel(interfazSeguros.pnlOpcionesSeguro);
+            InterfazSeguro interfazSeguro = new InterfazSeguro(this.sesion.getUsuarioVerificado());
+            setPanel(interfazSeguro.panelPrincipal);
             crearFrame();
         });
         button3.addActionListener(e ->{
@@ -63,7 +65,7 @@ public class Módulos extends JFrame {
         toursButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ModuloTours moduloTours = new ModuloTours("Reservas - Tour", sesion.getUsuarioVerificado());
+                ModuloTours moduloTours = new ModuloTours("Reservas - Tour", sesion.getUsuarioVerificado(), gestionReserva);
                 setPanel(moduloTours.pnlOpcionesTours);
                 crearFrame();
             }
