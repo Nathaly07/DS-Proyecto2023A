@@ -16,10 +16,14 @@ public class InterfazDatosComunes extends JFrame{
         pnlFechaComun.add(fechaComun);
 
         btnConfirmarDatos.addActionListener(e -> {
-            sesion.setFechaComun(fechaComun.getDate());
-            sesion.setDestinoComun(cmbDestinoComun.getSelectedItem().toString());
-            JOptionPane.showMessageDialog(null, "Ahora, podrás hacer tu plan con estos datos.", "Muchas gracias", JOptionPane.INFORMATION_MESSAGE);
-            this.dispose();
+            if(fechaComun.getDate() != null && cmbDestinoComun.getSelectedIndex() != 0) {
+                sesion.setFechaComun(fechaComun.getDate());
+                sesion.setDestinoComun(cmbDestinoComun.getSelectedItem().toString());
+                JOptionPane.showMessageDialog(null, "Ahora, podrás hacer tu plan con estos datos.", "Muchas gracias", JOptionPane.INFORMATION_MESSAGE);
+                this.dispose();
+            }else{
+                JOptionPane.showMessageDialog(null, "Por favor, ingrese todos los datos", "Advertencia", JOptionPane.ERROR_MESSAGE);
+            }
         });
     }
 
