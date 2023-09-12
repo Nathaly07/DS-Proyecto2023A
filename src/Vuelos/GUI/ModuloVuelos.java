@@ -139,7 +139,8 @@ public class ModuloVuelos extends JFrame{
         if (reservaVueloSeleccionado != null) {
             CarritoAsientos carritoAsientos = new CarritoAsientos(reservaVueloSeleccionado);
             ReservaAsiento reserva = new ReservaAsiento(carritoAsientos, sesion.getUsuarioVerificado());
-            gestorReservasAsiento.SeleccionarReserva(reserva).cancelarReserva();
+            gestorReservasAsiento.seleccionarReserva(reserva).cancelarReserva();
+            gestorReservasAsiento.eliminarReserva(reserva);
             actualizarTablaCatalogo();
             JOptionPane.showMessageDialog(null, "Reserva cancelada con exito", "Cancelación", JOptionPane.INFORMATION_MESSAGE);
             reservaVueloSeleccionado = null;
@@ -152,7 +153,7 @@ public class ModuloVuelos extends JFrame{
         if (reservaVueloSeleccionado != null) {
             CarritoAsientos carritoAsientos = new CarritoAsientos(reservaVueloSeleccionado);
             ReservaAsiento reserva = new ReservaAsiento(carritoAsientos, sesion.getUsuarioVerificado());
-            pagoVuelos.iniciarDatos(gestorReservasAsiento.SeleccionarReserva(reserva));
+            pagoVuelos.iniciarDatos(gestorReservasAsiento.seleccionarReserva(reserva));
             mostrarPagoVuelos(ModuloVuelos.this);
             reservaVueloSeleccionado = null;
         } else {
@@ -267,7 +268,7 @@ public class ModuloVuelos extends JFrame{
     public void crearReserva(CarritoAsientos lista) {
         ReservaAsiento reservaAsiento = new ReservaAsiento(new CarritoAsientos(lista.getAsientos(),lista.getVuelo()), sesion.getUsuarioVerificado());
         reservaAsiento.crearReserva();
-        gestorReservasAsiento.agregarResarva(reservaAsiento);
+        gestorReservasAsiento.añadirReserva(reservaAsiento);
     }
 
     public boolean VerificarReserva(){

@@ -25,15 +25,8 @@ public class ReservaAsiento {
 
     private void reservarAsientos() {
         for(Asiento asiento: reservas.getAsientos()){
-            asiento.reservar();
+            asiento.ocuparAsiento();
         }
-    }
-
-    public void cancelarReserva() {
-        for(Asiento asiento: reservas.getAsientos()){
-            asiento.CancelarReservaAsiento();
-        }
-        this.cambiarEstado(EstadoReserva.Cancelado);
     }
     public void crearReserva(){
         this.costo = generarCostoTotal();
@@ -41,6 +34,13 @@ public class ReservaAsiento {
         reservarAsientos();
         this.fecha = fechaAutomatica();
     }
+    public void cancelarReserva() {
+        for(Asiento asiento: reservas.getAsientos()){
+            asiento.desocuparAsiento();
+        }
+        this.cambiarEstado(EstadoReserva.Cancelado);
+    }
+
 
 
     public double generarCostoTotal() {
@@ -58,14 +58,14 @@ public class ReservaAsiento {
     }
 
     public int obtenerCantidadAsientosReservadosPremium() {
-        return cantidadReserva("Premium");
+        return obtenerCantidadAsientosPorTipo("Premium");
     }
 
     public int obtenerCantidadAsientosReservadosTurista() {
-        return cantidadReserva("Turista");
+        return obtenerCantidadAsientosPorTipo("Turista");
     }
 
-    private int cantidadReserva(String tipo) {
+    private int obtenerCantidadAsientosPorTipo(String tipo) {
         int cantidad= 0;
         for (Asiento asiento : reservas.getAsientos()) {
             if (asiento.getTipo().equalsIgnoreCase(tipo)) {

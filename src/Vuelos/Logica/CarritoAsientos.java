@@ -85,7 +85,7 @@ public class CarritoAsientos {
             }
         }
     }
-    public void mostarCarrito(JTable tabla){
+    public void mostrarCarrito(JTable tabla){
         TablaCarrito modelo = new TablaCarrito(this.asientos);
         tabla.setModel(modelo);
     }

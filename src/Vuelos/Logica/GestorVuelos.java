@@ -34,10 +34,7 @@ public class GestorVuelos {
     }
 
 
-    public void mostrarVuelos(JTable tabla){
-        TablaVuelos modelo = new TablaVuelos(this.vuelos);
-        tabla.setModel(modelo);
-    }
+
     public List<Vuelo> buscarVuelo(String origen, String destino) {
         List<Vuelo> vuelosEncontrados = new ArrayList<>();
 
@@ -79,7 +76,10 @@ public class GestorVuelos {
         }
         return vuelosEncontrados;
     }
-
+    public void mostrarVuelos(JTable tabla){
+        TablaVuelos modelo = new TablaVuelos(this.vuelos);
+        tabla.setModel(modelo);
+    }
     public void mostrarVuelosFiltrados(JTable tabla, List<Vuelo> vuelos){
         if(vuelos.size() > 0) {
             TablaVuelos modelo = new TablaVuelos(vuelos);
@@ -91,6 +91,16 @@ public class GestorVuelos {
     }
     public void agregarVuelo(Vuelo vuelo) {
         this.vuelos.add(vuelo);
+    }
+
+    public Vuelo seleccionarVuelo(Vuelo vuelo) {
+        ComparadorVuelo compararVuelo = new ComparadorVuelo();
+        for(Vuelo vueloSeleccionado : this.vuelos){
+            if(compararVuelo.compare(vuelo,vueloSeleccionado) == 1){
+                return vueloSeleccionado;
+            }
+        }
+        return null;
     }
 
 
@@ -121,7 +131,7 @@ public class GestorVuelos {
                 case 2 -> vuelos.get(rowIndex).getFecha();
                 case 3 -> vuelos.get(rowIndex).getHoraSalida();
                 case 4 -> vuelos.get(rowIndex).getDuracion();
-                case 5 -> vuelos.get(rowIndex).asientosDisponibles();
+                case 5 -> vuelos.get(rowIndex).consultarAsientosDisponibles();
                 default ->  "-";
 
             };
@@ -145,15 +155,7 @@ public class GestorVuelos {
         }
 
     }
-    public Vuelo seleccionarVuelo(Vuelo vuelo) {
-        ComparadorVuelo compararVuelo = new ComparadorVuelo();
-        for(Vuelo vueloSeleccionado : this.vuelos){
-            if(compararVuelo.compare(vuelo,vueloSeleccionado) == 1){
-                return vueloSeleccionado;
-            }
-        }
-        return null;
-    }
+
 
 
 }

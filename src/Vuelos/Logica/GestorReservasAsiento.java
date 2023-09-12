@@ -11,7 +11,7 @@ public class GestorReservasAsiento {
     public GestorReservasAsiento(){
         reservas = new ArrayList<>();
     }
-    public void agregarResarva(ReservaAsiento reservaAsiento){
+    public void añadirReserva(ReservaAsiento reservaAsiento){
         reservas.add(reservaAsiento);
     }
 
@@ -25,10 +25,6 @@ public class GestorReservasAsiento {
         return contador;
     }
 
-    public void mostrarReservas(JTable tabla) {
-        GestorReservasAsiento.TablaReservas modelo = new TablaReservas(this.reservas);
-        tabla.setModel(modelo);
-    }
 
     public void obtenerReservasPendientes(JTable tabla){
         List<ReservaAsiento> reservaAsientoSeleccionada  = new ArrayList<>();
@@ -41,7 +37,12 @@ public class GestorReservasAsiento {
         tabla.setModel(modelo);
     }
 
-    public ReservaAsiento SeleccionarReserva(ReservaAsiento reserva){
+    public void mostrarReservas(JTable tabla) {
+        GestorReservasAsiento.TablaReservas modelo = new TablaReservas(this.reservas);
+        tabla.setModel(modelo);
+    }
+
+    public ReservaAsiento seleccionarReserva(ReservaAsiento reserva){
         ComparadorVuelo comparadorVuelo = new ComparadorVuelo();
         for(ReservaAsiento reservaAsientoSeleccionado : this.reservas){
             if(comparadorVuelo.compare(reservaAsientoSeleccionado.getReservas().getVuelo(), reserva.getReservas().getVuelo()) == 1 &&
@@ -50,6 +51,11 @@ public class GestorReservasAsiento {
             }
         }
         return null;
+
+    }
+
+    public void eliminarReserva(ReservaAsiento reserva) {
+        this.reservas.remove(reserva);
 
     }
 

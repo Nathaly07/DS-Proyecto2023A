@@ -175,7 +175,7 @@ public class SelectorDeAsientos extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 if(asiento != null) {
                     carrito.eliminarAsiento(asiento);
-                    carrito.mostarCarrito(tblCarritoAsiento);
+                    carrito.mostrarCarrito(tblCarritoAsiento);
                     botones(Integer.parseInt(lblFila.getText()));
                 } else{
                     JOptionPane.showMessageDialog(null, "Seleccione un asiento", "Aviso", JOptionPane.ERROR_MESSAGE);
@@ -201,7 +201,7 @@ public class SelectorDeAsientos extends JFrame{
                     moduloVuelos.crearReserva(carritoAsientos);
                     moduloVuelos.actualizarTablaCatalogo();
                     habilitarBotones(false);
-                    carrito.mostarCarrito(tblCarritoAsiento);
+                    carrito.mostrarCarrito(tblCarritoAsiento);
                 }
                 moduloVuelos.cerrarDialog();
 
@@ -212,7 +212,7 @@ public class SelectorDeAsientos extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 carrito.limpiarCarrito();
                 habilitarBotones(false);
-                carrito.mostarCarrito(tblCarritoAsiento);
+                carrito.mostrarCarrito(tblCarritoAsiento);
                 moduloVuelos.cerrarDialog();
             }
         });
@@ -222,7 +222,7 @@ public class SelectorDeAsientos extends JFrame{
         this.vuelo = vuelo;
         carrito = new CarritoAsientos(vuelo);
         carrito.limpiarCarrito();
-        carrito.mostarCarrito(tblCarritoAsiento);
+        carrito.mostrarCarrito(tblCarritoAsiento);
 
     }
     public void crearframe() {
@@ -271,8 +271,8 @@ public class SelectorDeAsientos extends JFrame{
         btnA6.setEnabled(bandera);
     }
     public void mostrarTabla(int numAsiento){
-        carrito.añadirAsiento(vuelo.BuscarAsiento(new Asiento(numAsiento,Integer.parseInt(lblFila.getText()))));
-        carrito.mostarCarrito(tblCarritoAsiento);
+        carrito.añadirAsiento(vuelo.buscarAsiento(new Asiento(numAsiento,Integer.parseInt(lblFila.getText()))));
+        carrito.mostrarCarrito(tblCarritoAsiento);
     }
     public List<Integer> asientosSeleccionables(int fila){
         List<Integer> asientosHabilitados = new ArrayList<>();

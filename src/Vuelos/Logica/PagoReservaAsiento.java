@@ -28,7 +28,7 @@ public class PagoReservaAsiento {
         return truncatedTotal;
     }
 
-    public void Pagar(String metodoPago){
+    public void pagar(String metodoPago){
         this.reserva.cambiarEstado(EstadoReserva.Pagado);
         float precioFinal = Float.parseFloat(calcularCostoTotalReservados()+"");
         Pago pago = new Pago(precioFinal, metodoPago);

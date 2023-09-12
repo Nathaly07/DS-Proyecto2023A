@@ -10,7 +10,6 @@ public class Vuelo {
     private  int duracion;
     private  int estaDisponible;
     private  List<Asiento> asientos;
-    private  int numeroAsientos = 60;
 
     private int precioPremium = 150;
     private int precioTurista = 100;
@@ -24,7 +23,7 @@ public class Vuelo {
         this.duracion = duracion;
         this.estaDisponible = 1;
         this.asientos = new ArrayList<>();
-        GenerarAsientos(duracion);
+        clasificarAsientos(duracion);
     }
 
     public Vuelo(String origen, String destino, String horaSalida, String fecha) {
@@ -33,22 +32,7 @@ public class Vuelo {
         this.horaSalida = horaSalida;
         this.fecha = fecha;
     }
-
-    private void GenerarAsientos(int duracion){
-        int numeroAsientoPorFila = 6;
-        int cantidadFilaPremium = 4;
-        int cantidadFilaTurista = 10;
-
-        for(int numeroFilaPremium = 1; numeroFilaPremium <= cantidadFilaPremium; numeroFilaPremium++){
-            crearAsiento(numeroAsientoPorFila, (int) duracion, precioPremium, "Premium", numeroFilaPremium);
-        }
-
-        for(int numeroFilaTurista = 5; numeroFilaTurista <= cantidadFilaTurista; numeroFilaTurista++){
-            crearAsiento(numeroAsientoPorFila, (int) duracion, precioTurista, "Turista", numeroFilaTurista);
-        }
-    }
-
-    private void crearAsiento(int numeroAsientoPorFila, int duracion, int precio, String Clase, int numeroFilaTurista) {
+    private void inicializarAsiento(int numeroAsientoPorFila, int duracion, int precio, String Clase, int numeroFilaTurista) {
         for (int numeroAsiento = 1; numeroAsiento <= numeroAsientoPorFila; numeroAsiento++) {
             Asiento asiento;
             if (numeroAsiento  == 0) {
@@ -59,9 +43,22 @@ public class Vuelo {
             this.asientos.add(asiento);
         }
     }
+    private void clasificarAsientos(int duracion){
+        int numeroAsientoPorFila = 6;
+        int cantidadFilaPremium = 4;
+        int cantidadFilaTurista = 10;
+
+        for(int numeroFilaPremium = 1; numeroFilaPremium <= cantidadFilaPremium; numeroFilaPremium++){
+            inicializarAsiento(numeroAsientoPorFila, (int) duracion, precioPremium, "Premium", numeroFilaPremium);
+        }
+
+        for(int numeroFilaTurista = 5; numeroFilaTurista <= cantidadFilaTurista; numeroFilaTurista++){
+            inicializarAsiento(numeroAsientoPorFila, (int) duracion, precioTurista, "Turista", numeroFilaTurista);
+        }
+    }
 
 
-    public Asiento BuscarAsiento(Asiento asiento) {
+    public Asiento buscarAsiento(Asiento asiento) {
         for (Asiento asientoSeleccionado : this.asientos) {
             if (asientoSeleccionado.getNumero() == asiento.getNumero() && asientoSeleccionado.getNumFila() == asiento.getNumFila()) {
                 return asientoSeleccionado;
@@ -70,10 +67,6 @@ public class Vuelo {
         return null;
     }
 
-    @Override
-    public String toString() {
-        return "Vuelo{ "+ " origen=" + origen + ", destino=" + destino + ", hora_salida=" + horaSalida +", fecha=" + fecha + ", duracion=" + duracion + ", estaDisponible=" + estaDisponible + '}';
-    }
 
 
     public String getOrigen() {
@@ -96,7 +89,7 @@ public class Vuelo {
         return duracion;
     }
 
-    public int asientosDisponibles(){
+    public int consultarAsientosDisponibles(){
         int contador = 0;
         for(Asiento asiento: this.asientos){
             if(asiento.isEstaReservado() == false){
@@ -115,15 +108,10 @@ public class Vuelo {
         }
         return lista;
     }
-    public void actualizarListaAsiento(List<Asiento> seleccionados){
-        for(Asiento asiento : this.asientos){
-            for(Asiento asientoSeleccionado : seleccionados){
-                if(asiento.getNumero() == asientoSeleccionado.getNumero() && asiento.getNumFila() == asientoSeleccionado.getNumFila()){
-                    asiento.reservar();
-                }
-            }
-        }
 
+    @Override
+    public String toString() {
+        return "Vuelo{ "+ " origen=" + origen + ", destino=" + destino + ", hora_salida=" + horaSalida +", fecha=" + fecha + ", duracion=" + duracion + ", estaDisponible=" + estaDisponible + '}';
     }
 
 }

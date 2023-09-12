@@ -45,7 +45,7 @@ public class PagoVuelos extends JFrame {
                 else {
                     String metodo = obtenerStringMetodoPago();
                     btgMetodoDePago.clearSelection();
-                    pago.Pagar(metodo);
+                    pago.pagar(metodo);
                     moduloVuelos.cerrarDialog();
                 }
 
