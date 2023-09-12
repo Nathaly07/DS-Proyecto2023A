@@ -156,7 +156,7 @@ public class InterfazSeguroViaje extends JFrame {
             int numTipoSeguro = 0;
             if((destino.equalsIgnoreCase("Manta"))||((destino.equalsIgnoreCase("Cuenca")))){
                 numTipoSeguro = 2;
-            }else if((destino.equalsIgnoreCase("Los ángeles"))||((destino.equalsIgnoreCase("Las vegas")))){
+            }else if((destino.equalsIgnoreCase("Los Angeles"))||((destino.equalsIgnoreCase("Las vegas")))){
                 numTipoSeguro = 3;
             }else if ((destino.equalsIgnoreCase("Roma"))||((destino.equalsIgnoreCase("Ciudad del Vaticano")))) {
                 numTipoSeguro = 4;
@@ -164,8 +164,6 @@ public class InterfazSeguroViaje extends JFrame {
             this.comboBoxTipoViaje.setSelectedIndex(numTipoSeguro);
             this.comboBoxTipoViaje.setEnabled(false);
         }
-
-
 
         setTitle("Nuevo seguro de viaje");
         setSize(1000, 700);
