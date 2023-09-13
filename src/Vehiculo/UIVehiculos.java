@@ -42,6 +42,12 @@ public class UIVehiculos extends JPanel {
 
         gestorRentas = new GestorReservaVehiculo(gra);
 
+        if (sesion.getDestinoComun() != null) {
+            dateChooserInicio.setDate(sesion.getFechaComun());
+            txtOrigen.setText(sesion.getDestinoComun());
+            txtRetorno.setText(sesion.getDestinoComun());
+        }
+
         btnCatalogo.addActionListener(e -> { // METODO DESPLEGAR CATALOGO
             int fechaValida = dateChooserFinal.getDate().compareTo(dateChooserInicio.getDate());
             if (txtOrigen.getText().isEmpty() || txtRetorno.getText().isEmpty() || fechaValida<0) {
