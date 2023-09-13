@@ -108,11 +108,12 @@ public class GestorReserva {
             datosReserva += reserva.getNumeroPersonas() + "_";
             for (Tour tour : reserva.getToursAgregados()) {
                 contTours++;
+                contParadas = 0;
+                contActividades = 0;
                 datosReserva += "[" + tour.getNombre() + ",";
                 datosReserva += tour.getPrecio() + ",[";
 
                 for (String parada : tour.getParadasTuristicas()) {
-                    contParadas = 0;
                     contParadas++;
                     datosReserva += parada;
                     if (contParadas != tour.getParadasTuristicas().size()) {
@@ -123,7 +124,6 @@ public class GestorReserva {
                 datosReserva += "],[";
 
                 for (String actividad : tour.getActividadesTuristicas()) {
-                    contActividades = 0;
                     contActividades++;
                     datosReserva += actividad;
                     if (contActividades != tour.getActividadesTuristicas().size()) {
