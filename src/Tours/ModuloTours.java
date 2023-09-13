@@ -284,7 +284,7 @@ public class ModuloTours extends JFrame{
                 ArrayList<Tour> toursEnReservaList = reservaTourConfirmar.getToursAgregados();
 
                 for(Tour tour: toursEnReservaList) {
-                    toursEnReservaModel.addElement(tour.informacionRelevante());
+                    toursEnReservaModel.addElement(tour.getInformacionRelevante());
                 }
 
                 listTours.setModel(toursEnReservaModel);
