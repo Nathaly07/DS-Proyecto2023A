@@ -21,6 +21,7 @@ public class SeguroMédico extends Seguro {
     @Override
     public void indemnizar(float valorGastado, String motivo) {
         float porcentajeCubierto = 0.0f;
+        boolean estado = false;
         for (String cobertura : coberturas) {
             if (motivo.equalsIgnoreCase(cobertura)) {
                 if (nivelSeguro == 1) {
@@ -30,12 +31,15 @@ public class SeguroMédico extends Seguro {
                 } else if (nivelSeguro == 3) {
                     porcentajeCubierto = valorGastado;
                 }
-                JOptionPane.showMessageDialog(null, "Tu seguro si cubre tu situación.\nTe daremos: "+porcentajeCubierto+" $. ", "Solicitud aceptada", JOptionPane.INFORMATION_MESSAGE);
-                this.setEstado("Cobrado");
-                break;
-            }else{
-                JOptionPane.showMessageDialog(null, "Lo sentimos mucho.\nTu seguro médico no cubre ese problema.", "Una disculpa", JOptionPane.INFORMATION_MESSAGE);
+                estado = true;
             }
+        }
+
+        if (estado) {
+            JOptionPane.showMessageDialog(null, "Tu seguro si cubre tu situación.\nTe daremos: "+porcentajeCubierto+" $. ", "Solicitud aceptada", JOptionPane.INFORMATION_MESSAGE);
+            this.setEstado("Cobrado");
+        } else {
+            JOptionPane.showMessageDialog(null, "Lo sentimos mucho.\nTu seguro médico no cubre ese problema.", "Una disculpa", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 

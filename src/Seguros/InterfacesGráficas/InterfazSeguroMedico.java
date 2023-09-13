@@ -88,29 +88,32 @@ public class InterfazSeguroMedico extends JFrame {
                             +"3.- Enfermedad de bajo nivel\n"
                             +"4.- Enfermedad de alto nivel\n","Agregar cobertura", JOptionPane.QUESTION_MESSAGE);
             if(cobertura != null){
-                int numCobertura = Integer.parseInt(cobertura);
-                if(numCobertura<0||numCobertura>4){
-                    JOptionPane.showMessageDialog(null, "Esa no es una opción válida.", "ERROR 401",JOptionPane.ERROR_MESSAGE);
-                }else{
-                    switch (numCobertura){
-                        case 1:{
-                            this.txtCoberturas.setText(this.txtCoberturas.getText()+"\nAccidente menor");
-                            break;
-                        }
-                        case 2:{
-                            this.txtCoberturas.setText(this.txtCoberturas.getText()+"\nAccidente mayor");
-                            break;
-                        }
-                        case 3:{
-                            this.txtCoberturas.setText(this.txtCoberturas.getText()+"\nEnfermedad de bajo nivel");
-                            break;
-                        }
-                        case 4:{
-                            this.txtCoberturas.setText(this.txtCoberturas.getText()+"\nEnfermedad de alto nivel");
-                            break;
+                try{
+                    int numCobertura = Integer.parseInt(cobertura);
+                    if(numCobertura<0||numCobertura>4){
+                        JOptionPane.showMessageDialog(null, "Esa no es una opción válida.", "ERROR 401",JOptionPane.ERROR_MESSAGE);
+                    }else{
+                        switch (numCobertura){
+                            case 1:{
+                                this.txtCoberturas.setText(this.txtCoberturas.getText()+"\nAccidente menor");
+                                break;
+                            }
+                            case 2:{
+                                this.txtCoberturas.setText(this.txtCoberturas.getText()+"\nAccidente mayor");
+                                break;
+                            }
+                            case 3:{
+                                this.txtCoberturas.setText(this.txtCoberturas.getText()+"\nEnfermedad de bajo nivel");
+                                break;
+                            }
+                            case 4:{
+                                this.txtCoberturas.setText(this.txtCoberturas.getText()+"\nEnfermedad de alto nivel");
+                                break;
+                            }
                         }
                     }
-
+                }catch (NumberFormatException ex){
+                    JOptionPane.showMessageDialog(null, "Ingrese un número de las opciones dadas.", "ERROR",JOptionPane.ERROR_MESSAGE);
                 }
 
             }

@@ -75,7 +75,7 @@ public class Vehiculo {
 
 
     private void cambiarEstadoVehiculo() {
-        //GestoReservaVehiculo.agregarRenta(this);
+        GestorReservaVehiculo.agregarRenta(this);
        // renta.agregarVehiculo(this);
         if (estadoReservaVehiculo.equals("RENTADO")) {
             estadoReservaVehiculo = "NO RENTADO";

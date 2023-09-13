@@ -1,14 +1,18 @@
 package Vehiculo;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
 
-public class GestoReservaVehiculo {
+public class GestorReservaVehiculo {
     private static ArrayList<ReservaVehiculo> rentas;
     private static ReservaVehiculo renta = new ReservaVehiculo();
+    private  CatalogoVehiculos catalogo = new CatalogoVehiculos();
 
-    public GestoReservaVehiculo() {
+    public CatalogoVehiculos getCatalogo() {
+        return catalogo;
+    }
+
+    public GestorReservaVehiculo() {
         this.rentas = new ArrayList<ReservaVehiculo>();
     }
 
