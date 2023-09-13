@@ -107,15 +107,15 @@ public class ReservaTour {
                     "Reserva Tour",
                     JOptionPane.WARNING_MESSAGE);
             this.pagoReserva.calcularDevolucion((int)difEnDias, this.toursAgregados);
-            for (Tour tour: this.toursAgregados) {
-
-            }
-
         } else {
             JOptionPane.showMessageDialog(null,
                     "Ha cancelado su reserva",
                     "Reserva Tour",
                     JOptionPane.WARNING_MESSAGE);
+        }
+
+        for (Tour tour: this.toursAgregados) {
+            tour.cancelarReservaTour(this.numeroPersonas);
         }
 
     }
