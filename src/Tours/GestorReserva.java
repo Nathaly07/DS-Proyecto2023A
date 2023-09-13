@@ -80,9 +80,9 @@ public class GestorReserva {
         return tourResultado;
     }
 
-    public void removerReserva(ReservaTour reservaARemover){
+    public void removerReserva(int numReservaARemover){
         for (ReservaTour reserva : this.reservaciones) {
-            if (reserva.equals(reservaARemover)) {
+            if (reserva.getNumReserva() == numReservaARemover) {
                 this.reservaciones.remove(reserva);
                 break;
             }
@@ -112,6 +112,7 @@ public class GestorReserva {
                 datosReserva += tour.getPrecio() + ",[";
 
                 for (String parada : tour.getParadasTuristicas()) {
+                    contParadas = 0;
                     contParadas++;
                     datosReserva += parada;
                     if (contParadas != tour.getParadasTuristicas().size()) {
@@ -122,6 +123,7 @@ public class GestorReserva {
                 datosReserva += "],[";
 
                 for (String actividad : tour.getActividadesTuristicas()) {
+                    contActividades = 0;
                     contActividades++;
                     datosReserva += actividad;
                     if (contActividades != tour.getActividadesTuristicas().size()) {
@@ -166,7 +168,7 @@ public class GestorReserva {
                         "Gestor Reserva",
                         JOptionPane.WARNING_MESSAGE);
                 reservaAPagar.cancelarReserva();
-                this.removerReserva(reservaAPagar);
+                this.removerReserva(reservaAPagar.getNumReserva());
             } else {
                 reservaAPagar.confirmarReserva(metodoPago);
             }
