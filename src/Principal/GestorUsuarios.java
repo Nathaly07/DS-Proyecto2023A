@@ -12,7 +12,10 @@ public class GestorUsuarios {
     private ArrayList<Usuario> usuarios;
 
     public GestorUsuarios() {
-        this.usuarios = this.leer();
+        this.usuarios = new ArrayList<Usuario>();
+        if(this.leer() != null) {
+            this.usuarios.addAll(this.leer());
+        }
     }
 
     public void agregarUsuario(Usuario usr) {
