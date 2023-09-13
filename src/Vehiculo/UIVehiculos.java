@@ -74,7 +74,7 @@ public class UIVehiculos extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    ArrayList<String> fechasReservas = gestionReserva.getRangosFechas(sesion.getUsuarioVerificado().getNombreUsuario(),
+                    ArrayList<String> fechasReservas = gestionReserva.getRangosFechas(sesion.getUsuarioVerificado().getNombre(),
                             sesion.getUsuarioVerificado().getApellido());
                     asignarFechasEnUI(fechasReservas);
 
@@ -84,6 +84,7 @@ public class UIVehiculos extends JPanel {
             }
 
             private void asignarFechasEnUI(ArrayList<String> fechasReservas) throws ParseException {
+                System.out.println(fechasReservas);
                 if (fechasReservas.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "No existe un tours reservados");
                 } else {
