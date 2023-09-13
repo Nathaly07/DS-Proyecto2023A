@@ -17,9 +17,13 @@ public class ReservaVehiculo {
     private Usuario usuario; //TODO: Log in pilas
     private Date fechaInicio, fechaRetorno;
 
+    private boolean b;
+
     public ReservaVehiculo(boolean b) {
         this.estadoReserva = "NO PAGADO";
         this.vehiculos = new ArrayList<>();
+        this.b = b;
+
     }
 
     public void reservar() {
@@ -46,11 +50,17 @@ public class ReservaVehiculo {
         long daysBetween = TimeUnit.DAYS.convert(diferenciaDias, TimeUnit.MILLISECONDS);
         double precioFinal = 0;
 
+
         for (Vehiculo vehiculo : vehiculos) {
             precioFinal += vehiculo.getPrecioDeRenta() * daysBetween;
         }
-        return precioFinal;
 
+        //Descuento si reservo vuelo
+        if (b) {
+            precioFinal = precioFinal * 0.9;
+        }
+
+        return precioFinal;
 
     }
 
@@ -61,6 +71,11 @@ public class ReservaVehiculo {
 
     public void verInfoReserva(JTable table, JPanel panel) {
 
+        JLabel subtotal = null;
+        //Mostrar precio final antes de descuento
+        if (b){
+            subtotal = new JLabel("Precio antes del descuento: " + calcularReserva() * 1.1);
+        }
         JLabel precioFinal = new JLabel("Precio Final Renta: " + calcularReserva());
         JLabel estadoDeRenta = new JLabel("Estado de Renta: " + estadoReserva);
         DefaultTableModel model = new DefaultTableModel();
@@ -95,6 +110,7 @@ public class ReservaVehiculo {
 
         panel.add(estadoDeRenta);//
         panel.add(new JScrollPane(table));
+        panel.add(subtotal);
         panel.add(precioFinal);
         panel.add(btnPagar);
         panel.add(btnModificar);
