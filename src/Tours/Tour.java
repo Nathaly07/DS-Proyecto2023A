@@ -39,7 +39,7 @@ public class Tour {
         return precio;
     }
 
-    public void reservarTour(int numPersonas){
+    public void disminuirDisponibilidad(int numPersonas){
         this.disponibilidad -= numPersonas;
     }
 
