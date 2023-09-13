@@ -6,7 +6,10 @@ import Vuelos.Logica.GestorReservasAsiento;
 import com.toedter.calendar.JDateChooser;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -24,6 +27,7 @@ public class UIVehiculos extends JPanel {
     private JLabel lblOrigen;
     private JLabel lblRetorno;
     private JScrollPane scroll;
+    private JButton btnUsaFechaModificación;
     private JButton actualizarCatalogoButton;
     private JTable table1;
     private JDateChooser dateChooserInicio = new JDateChooser();
@@ -60,6 +64,33 @@ public class UIVehiculos extends JPanel {
         pnlCalendario1.add(dateChooserInicio);
         pnlCalendario2.add(dateChooserFinal);
 
+        btnUsaFechaModificación.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    ArrayList<String> fechasReservas = gestionReserva.getRangosFechas(sesion.getUsuarioVerificado().getNombreUsuario(),
+                            sesion.getUsuarioVerificado().getApellido());
+                    asignarFechasEnUI(fechasReservas);
+
+                } catch (ParseException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+
+            private void asignarFechasEnUI(ArrayList<String> fechasReservas) throws ParseException {
+                if (fechasReservas.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "No existe un tours reservados");
+                } else {
+                    System.out.println(fechasReservas);
+                    String[] fechas = fechasReservas.get(0).split("-"); //TODO: maybe toca cambiar el número
+                    SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+                    dateChooserInicio.setDate(format.parse(fechas[0]));
+                    dateChooserFinal.setDate(format.parse(fechas[1]));
+                    dateChooserInicio.updateUI();
+                    dateChooserFinal.updateUI();
+                }
+            }
+        });
     }
 
     public void crearFrame() {

@@ -19,13 +19,8 @@ public class GestorReservaVehiculo {
         renta = new ReservaVehiculo(gra.verificarReservasAsientos());
     }
 
-    public static void agregarRenta(Vehiculo vehiculo) {
-        if (rentas.isEmpty()) {
-            rentas.add(renta);
-        }
-        if (renta.verificarEstado()) {
-            renta.agregarVehiculo(vehiculo);
-        }
+    public static void agregarRenta(ReservaVehiculo renta) {
+        rentas.add(renta);
 
     }
 
