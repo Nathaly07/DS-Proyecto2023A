@@ -9,8 +9,9 @@ public class Habitacion implements Serializable {
     private double precioPorNoche;
     private int limiteUsuarios;
     private Hotel hotel;
+    private String tipoHabitacion;
 
-    public Habitacion(int habitacionID, double precioPorNoche, int limiteUsuarios, Hotel hotel) {
+    public Habitacion(int habitacionID, double precioPorNoche, int limiteUsuarios, Hotel hotel, String tipoHabitacion){
         this.habitacionID = habitacionID;
         this.precioPorNoche = precioPorNoche;
         this.limiteUsuarios = limiteUsuarios;
@@ -46,6 +47,10 @@ public class Habitacion implements Serializable {
 
     public int getHabitacionId() {
         return this.habitacionID;
+    }
+
+    public String getTipoHabitacion() {
+        return this.tipoHabitacion;
     }
 
 }

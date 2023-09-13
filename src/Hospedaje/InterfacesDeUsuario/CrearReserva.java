@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import Hospedaje.Criteria.CriteriaCiudad;
+import Hospedaje.Criteria.CriteriaTipoHabitacion;
 import Hospedaje.Habitaciones.Habitacion;
 import Hospedaje.Reservas.GestionReservas;
 import Hospedaje.Reservas.ReservaHospedaje;
@@ -29,6 +30,8 @@ public class CrearReserva extends JFrame {
     private JButton cancelarButton;
     private List<Habitacion> habitacionesDisponibles;
     private JTable tbHabitacionesDisponibles;
+    private JCheckBox checkboxMascotas;
+    private JRadioButton checkboxFumadores;
     private DefaultTableModel tbModeloHabitacionesDisponibles;
 
     JDateChooser reservacionInicio  = new JDateChooser();
@@ -87,6 +90,17 @@ public class CrearReserva extends JFrame {
         this.habitacionesDisponibles = this.gestionReservas.getHabitacionesDisponibles(reservacionInicio.getDate(), reservacionFinal.getDate());
         CriteriaCiudad criteriaCiudad = new CriteriaCiudad(comboBox1.getSelectedItem().toString());
         this.habitacionesDisponibles = criteriaCiudad.meetCriteria(this.habitacionesDisponibles);
+
+        if(checkboxFumadores.isSelected()){
+            CriteriaTipoHabitacion criteriaTipoHabitacion = new CriteriaTipoHabitacion("fumadores");
+            this.habitacionesDisponibles = criteriaTipoHabitacion.meetCriteria(this.habitacionesDisponibles);
+        }
+
+        if(checkboxMascotas.isSelected()){
+            CriteriaTipoHabitacion criteriaTipoHabitacion = new CriteriaTipoHabitacion("mascotas");
+            this.habitacionesDisponibles = criteriaTipoHabitacion.meetCriteria(this.habitacionesDisponibles);
+        }
+
         this.habitacionesDisponibles.forEach(this::agregarHabitacionATabla);
 
         tbHabitacionesDisponibles.addMouseListener(new MouseAdapter() {
@@ -128,7 +142,7 @@ public class CrearReserva extends JFrame {
                 habitacion.getHotel().getNombre(),
                 habitacion.getHotel().getCiudad(),
                 habitacion.getPrecioPorNoche(),
-                habitacion.getLimiteUsuarios()
+                habitacion.getLimiteUsuarios(),
         });
     }
 }
