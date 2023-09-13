@@ -139,7 +139,7 @@ public class GestorReserva {
 
     public ArrayList<String> getRangosFechas(String nombreUsuario, String apellidoUsuario) throws ParseException {
         ArrayList<String> rangosFechas = new ArrayList<String>();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         ArrayList<Date> tempFechas = new ArrayList<Date>();
         long minTime = Long.MAX_VALUE;
         long maxTime = 0;
