@@ -12,13 +12,22 @@ public class ConfirmarReserva extends JFrame{
     private DefaultTableModel tbModeloReservas;
     private JButton btnConfirmar;
     private JButton btnRegresar;
+    private int personas;
+    private JLabel txtSubtotal;
+    private JLabel txtHabitacion;
+    private JLabel txtPrecioPorNoche;
+    private JLabel txtCantidad;
+    private JLabel txtValorTotal;
+    private JLabel txtIVA;
+    private JLabel txtTotal;
+    private JLabel txtDias;
     private ReservaHospedaje reserva;
     private GestionReservas gestionReservas;
 
-    public ConfirmarReserva(GestionReservas gestionReservas, ReservaHospedaje reserva) {
+    public ConfirmarReserva(GestionReservas gestionReservas, ReservaHospedaje reserva, int personas) {
         this.gestionReservas = gestionReservas;
         this.reserva = reserva;
-        actualizarTablaReserva();
+        this.personas = personas;
 
         btnConfirmar.addActionListener(e -> {
             this.gestionReservas.crearReserva(reserva);
@@ -30,6 +39,8 @@ public class ConfirmarReserva extends JFrame{
         btnRegresar.addActionListener(e -> {
             dispose();
         });
+
+        this.actualizarTablaReserva();
     }
 
     public void crearFrame(){
@@ -64,6 +75,23 @@ public class ConfirmarReserva extends JFrame{
         this.tbReservas.setModel(tbModeloReservas);
 
         this.agregarReservaATabla(reserva);
+
+        this.txtHabitacion.setText(reserva.getHabitaciones()[0].getHotel().getNombre() + " - " + reserva.getHabitaciones()[0].getHotel().getCiudad() + " - " + reserva.getHabitaciones()[0].getHabitacionID());
+        this.txtPrecioPorNoche.setText(String.valueOf(reserva.getHabitaciones()[0].getPrecioPorNoche()));
+        this.txtCantidad.setText(String.valueOf(this.personas));
+        this.reserva.generarPrecio();
+        // Dias
+        this.txtDias.setText(String.valueOf(this.reserva.getDias()));
+
+        // Subtotal
+        this.txtValorTotal.setText(this.reserva.getSubtotal() + "");
+        this.txtSubtotal.setText(this.reserva.getSubtotal() + "");
+
+        // IVA
+        this.txtIVA.setText(this.reserva.getIVA() + "");
+
+        // Total
+        this.txtTotal.setText(this.reserva.getTotal() + "");
     }
 
     public void agregarReservaATabla(ReservaHospedaje reserva) {

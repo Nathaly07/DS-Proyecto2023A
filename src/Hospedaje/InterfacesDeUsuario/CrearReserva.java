@@ -142,7 +142,7 @@ public class CrearReserva extends JFrame {
         tbHabitacionesDisponibles.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() == 2) { // Verificar si es un doble clic
+                if (e.getClickCount() == 2) { // Verificar si es un doble click
                     int filaSeleccionada = tbHabitacionesDisponibles.getSelectedRow();
                     if (filaSeleccionada != -1) {
                         Habitacion habitacionSeleccionada = habitacionesDisponibles.get(filaSeleccionada - 1);
@@ -166,7 +166,7 @@ public class CrearReserva extends JFrame {
                 reservacionInicio.getDate(),
                 reservacionFinal.getDate()
         );
-        ConfirmarReserva confirmarReserva = new ConfirmarReserva(this.gestionReservas, reserva);
+        ConfirmarReserva confirmarReserva = new ConfirmarReserva(this.gestionReservas, reserva, numeroPersonas);
         confirmarReserva.crearFrame();
         dispose();
     }

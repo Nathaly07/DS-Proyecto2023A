@@ -49,16 +49,20 @@
             </constraints>
             <properties>
               <model>
-                <item value="Quito"/>
-                <item value="Guayaquil"/>
-                <item value="Loja"/>
-                <item value="Cuenca"/>
-                <item value="Esmeraldas"/>
-                <item value="Baños"/>
-                <item value="Ibarra"/>
-                <item value="Riobamba"/>
-                <item value="Ambato"/>
                 <item value="Manta"/>
+                <item value="Cuenca"/>
+                <item value="Los Angeles"/>
+                <item value="Las Vegas"/>
+                <item value="Roma"/>
+                <item value="Ciudad del Vaticano"/>
+                <item value="Barcelona"/>
+                <item value="Madrid"/>
+                <item value="Paris"/>
+                <item value="Berlin"/>
+                <item value="Amsterdam"/>
+                <item value="Venecia"/>
+                <item value="Praga"/>
+                <item value="Budapest"/>
               </model>
             </properties>
           </component>
