@@ -14,7 +14,6 @@ import java.util.Date;
 public class GestorReserva {
 
     private ArrayList<ReservaTour> reservaciones;
-    private GestorTour gestorTour;
     private PagoReserva pagoReserva;
 
     public GestorReserva() {
@@ -48,7 +47,7 @@ public class GestorReserva {
 
                 String fechaCreacion = datos[2];
 
-                reservaTour = new ReservaTour(datos[0], datos[1], Integer.parseInt(datos[3]),gestorTour, pagoReserva);
+                reservaTour = new ReservaTour(datos[0], datos[1], Integer.parseInt(datos[3]), pagoReserva);
                 reservaTour.setFechaCreacion(fechaCreacion);
                 reservaTour.setToursAgregados(toursAgregados);
 

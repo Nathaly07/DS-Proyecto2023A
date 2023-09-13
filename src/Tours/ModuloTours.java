@@ -129,7 +129,7 @@ public class ModuloTours extends JFrame{
         btnCrearReserva.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                reservaTour = new ReservaTour(usuarioVerificado.getNombre(), usuarioVerificado.getApellido(), (Integer) spinner1.getValue() ,gestionTour, pagoReserva);
+                reservaTour = new ReservaTour(usuarioVerificado.getNombre(), usuarioVerificado.getApellido(), (Integer) spinner1.getValue(), pagoReserva);
                 try {
                     reservaTour.reservarMultiplesTours(listaToursAgregadosReserva, (Integer) spinner1.getValue());
                 } catch (ParseException ex) {
