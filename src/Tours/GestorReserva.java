@@ -3,6 +3,8 @@ package Tours;
 import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -90,7 +92,58 @@ public class GestorReserva {
     public void agregarReserva(ReservaTour reservaAAgregar) {
         this.reservaciones.add(reservaAAgregar);
         JOptionPane.showMessageDialog(null, "Reserva Agregada");
-        //escribir reserva
+        guardarReserva(reservaAAgregar);
+    }
+
+    public void guardarReserva(ReservaTour reserva) {
+        String datosReserva = "";
+        try (FileWriter escritor = new FileWriter("src/Tours/datos/reservas.txt", true)) {
+            int contTours = 0;
+            int contParadas = 0;
+            int contActividades = 0;
+            escritor.write(System.lineSeparator()); // Añade un salto de línea al final del archivo
+            datosReserva += reserva.getNombreUsuario() + "_";
+            datosReserva += reserva.getApellidoUsuario() + "_";
+            datosReserva += reserva.getFechaCreacion() + "_";
+            datosReserva += reserva.getNumeroPersonas() + "_";
+            for (Tour tour : reserva.getToursAgregados()) {
+                contTours++;
+                datosReserva += "[" + tour.getNombre() + ",";
+                datosReserva += tour.getPrecio() + ",[";
+
+                for (String parada : tour.getParadasTuristicas()) {
+                    contParadas++;
+                    datosReserva += parada;
+                    if (contParadas != tour.getParadasTuristicas().size()) {
+                        datosReserva += ";";
+                    }
+                }
+
+                datosReserva += "],[";
+
+                for (String actividad : tour.getActividadesTuristicas()) {
+                    contActividades++;
+                    datosReserva += actividad;
+                    if (contActividades != tour.getActividadesTuristicas().size()) {
+                        datosReserva += ";";
+                    }
+                }
+
+                datosReserva += "],";
+                datosReserva += tour.getInfoGuia() + ",";
+                datosReserva += tour.getDuracion() + ",";
+                datosReserva += tour.getLimiteUsuarios() + ",";
+                datosReserva += tour.getFechaInicio()+ ",";
+                datosReserva += tour.getFechaFin();
+
+                if (contTours != reserva.getToursAgregados().size()) {
+                    datosReserva += "_";
+                }
+            }
+            escritor.write(datosReserva);
+        } catch (IOException e) {
+            System.err.println("Error al escribir en el archivo: " + e.getMessage());
+        }
     }
 
     public void confirmarReserva(ReservaTour reservaAPagar, String metodoPago) throws ParseException {

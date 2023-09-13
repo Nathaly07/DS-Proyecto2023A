@@ -39,6 +39,22 @@ public class Tour {
         return precio;
     }
 
+    public ArrayList<String> getParadasTuristicas() {
+        return paradasTuristicas;
+    }
+
+    public ArrayList<String> getActividadesTuristicas() {
+        return actividadesTuristicas;
+    }
+
+    public String getInfoGuia() {
+        return infoGuia;
+    }
+
+    public String getDuracion() {
+        return duracion;
+    }
+
     public void disminuirDisponibilidad(int numPersonas){
         this.disponibilidad -= numPersonas;
     }
@@ -47,6 +63,9 @@ public class Tour {
         this.disponibilidad += numPersonas;
     }
 
+    public int getLimiteUsuarios() {
+        return limiteUsuarios;
+    }
 
     public int getDisponibilidad(){
         return this.disponibilidad;
