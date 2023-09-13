@@ -24,11 +24,10 @@ public class ReservaTour {
     private ArrayList<Tour> toursAgregados;
     private String fechaConfirmacionPago = "-";
 
-    private GestorTour gestorTour;
     private PagoReserva pagoReserva;
-    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
-    public ReservaTour(String nombreUsuario, String apellidoUsuario, int numeroPersonas, GestorTour gestorTour, PagoReserva pagoReserva) {
+    public ReservaTour(String nombreUsuario, String apellidoUsuario, int numeroPersonas) {
         this.numReserva = this.cantidadReservas;
         this.nombreUsuario = nombreUsuario;
         this.apellidoUsuario = apellidoUsuario;
@@ -37,11 +36,13 @@ public class ReservaTour {
         this.numeroPersonas = numeroPersonas;
         this.toursAgregados = new ArrayList<Tour>();
         this.fechaConfirmacionPago = "Sin confirmar";
-        this.gestorTour = gestorTour;
-        this.pagoReserva = pagoReserva;
+        this.pagoReserva = new PagoReserva();
         this.cantidadReservas += 1;
     }
 
+    public boolean getEstadoReserva() {
+        return this.estadoReserva;
+    }
     public void setNumeroPersonas(int numeroPersonas) {
         this.numeroPersonas = numeroPersonas;
     }
@@ -71,13 +72,15 @@ public class ReservaTour {
     public void setFechaCreacion(String fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
     }
-
-    public void setToursAgregados(ArrayList<Tour> toursAgregados) {
-        this.toursAgregados = toursAgregados;
-    }
-
+    public void setToursAgregados(ArrayList<Tour> toursAgregados) { this.toursAgregados = toursAgregados; }
     public ArrayList<Tour> getToursAgregados() {
         return this.toursAgregados;
+    }
+
+    public void reservarMultiplesTours(ArrayList<Tour> toursAgregados, int personasReserva) throws ParseException {
+        for (Tour tour: toursAgregados) {
+            this.reservarTour(tour, personasReserva);
+        }
     }
 
     public void cancelarReserva() {
@@ -114,9 +117,13 @@ public class ReservaTour {
                     JOptionPane.WARNING_MESSAGE);
         }
 
+        for (Tour tour: this.toursAgregados) {
+            tour.cancelarReservaTour(this.numeroPersonas);
+        }
+
     }
 
-    public void agregarTour(Tour tour) throws ParseException {
+    public void reservarTour(Tour tour, int personasReserva) throws ParseException {
         boolean isAvailable = true;
         Date fechaCreacionReserva = dateFormat.parse(this.fechaCreacion);
         Date fechaInicioTour = dateFormat.parse(tour.getFechaInicio());
@@ -124,7 +131,8 @@ public class ReservaTour {
 
         if (difEnMilis <= 0) {
             JOptionPane.showMessageDialog(null,
-                    "No existen mínimo 30 días de diferencia respecto al inicio del tour\n" +
+                            tour.getNombre() + "\n" +
+                            "No existen mínimo 30 días de diferencia respecto al inicio del tour\n" +
                             "No es posible agregar el Tour",
                     "Reserva Tour",
                     JOptionPane.WARNING_MESSAGE);
@@ -133,20 +141,19 @@ public class ReservaTour {
 
             if (difEnDias < 30) {
                 JOptionPane.showMessageDialog(null,
-                        "No existen mínimo 30 días de diferencia respecto al inicio del tour\n" +
+                        tour.getNombre() + "\n" +
+                                "No existen mínimo 30 días de diferencia respecto al inicio del tour\n" +
                                 "No es posible agregar el Tour",
                         "Reserva Tour",
                         JOptionPane.WARNING_MESSAGE);
             } else {
                 if (tour.getDisponibilidad() >= this.numeroPersonas) {
                     this.toursAgregados.add(tour);
-                    JOptionPane.showMessageDialog(null,
-                            "El tour se ha agregado correctamente.",
-                            "Reserva Tour",
-                            JOptionPane.WARNING_MESSAGE);
+                    tour.disminuirDisponibilidad(numeroPersonas);
                 } else {
                     JOptionPane.showMessageDialog(null,
-                            "El número de personas en la reserva excede la disponibilidad del tour\n" +
+                            tour.getNombre() + "\n" +
+                                    "El número de personas en la reserva excede la disponibilidad del tour\n" +
                                     "No es posible agregar el Tour",
                             "Reserva Tour",
                             JOptionPane.WARNING_MESSAGE);
@@ -154,6 +161,7 @@ public class ReservaTour {
             }
         }
     }
+
 
     // -1 -> Reserva ya fue confirmada
     public int tiempoSinConfirmar() throws ParseException {
@@ -165,10 +173,6 @@ public class ReservaTour {
         } else {
             return -1;
         }
-    }
-
-    public void removerTourAgregado(Tour tour){
-        this.toursAgregados.remove(tour);
     }
 
     public void confirmarReserva(String metodoPago) {

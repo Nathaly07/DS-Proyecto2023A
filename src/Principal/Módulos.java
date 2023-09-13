@@ -6,7 +6,8 @@ import Vehiculo.UIVehiculos;
 
 import Seguros.InterfacesGráficas.InterfazSeguro;
 import Tours.ModuloTours;
-import Vuelos.ModuloVuelos;
+import Vuelos.GUI.ModuloVuelos;
+import Vuelos.Logica.GestorReservasAsiento;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -25,6 +26,7 @@ public class Módulos extends JFrame {
     private Sesion sesion;
 
     private GestorReserva gestionReserva = new GestorReserva();
+    private GestorReservasAsiento gra = new GestorReservasAsiento();
 
     public Módulos(Sesion sesion) {
         this.sesion = sesion;
@@ -32,7 +34,7 @@ public class Módulos extends JFrame {
         btnVuelos.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ModuloVuelos moduloVuelos= new ModuloVuelos(sesion);
+                ModuloVuelos moduloVuelos= new ModuloVuelos(sesion,gra);
                 setPanel(moduloVuelos.plnPrincipalVuelos);
                 crearFrame();
             }
@@ -49,7 +51,7 @@ public class Módulos extends JFrame {
             crearFrame();
         });
         button3.addActionListener(e ->{
-            UIVehiculos rentaVehiculo = new UIVehiculos(sesion);
+            UIVehiculos rentaVehiculo = new UIVehiculos(sesion,gra,gestionReserva);
             setPanel(rentaVehiculo.pnlPrincipal);
             crearFrame();
         });
@@ -89,7 +91,7 @@ public class Módulos extends JFrame {
     }
 
     public void rentarVehiculo() {
-        UIVehiculos rentaVehiculos = new UIVehiculos(this.sesion);
+        UIVehiculos rentaVehiculos = new UIVehiculos(this.sesion, gra, gestionReserva);
         rentaVehiculos.crearFrame();
         dispose();
     }

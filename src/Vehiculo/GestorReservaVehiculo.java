@@ -1,34 +1,33 @@
 package Vehiculo;
 
+import Vuelos.Logica.GestorReservasAsiento;
+
 import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
 
-public class GestoReservaVehiculo {
+public class GestorReservaVehiculo {
     private static ArrayList<ReservaVehiculo> rentas;
-    private static ReservaVehiculo renta = new ReservaVehiculo();
-
-    public GestoReservaVehiculo() {
-        this.rentas = new ArrayList<ReservaVehiculo>();
+    private static ReservaVehiculo renta;
+    private  CatalogoVehiculos catalogo = new CatalogoVehiculos();
+    private static boolean tieneVuelo;
+    public CatalogoVehiculos getCatalogo() {
+        return catalogo;
     }
 
-    public static void agregarRenta(Vehiculo vehiculo) {
-        if (rentas.isEmpty()) {
-            rentas.add(renta);
-            if (renta.verificarEstado()) {
-                renta.agregarVehiculo(vehiculo);
-            }
-        } else {
-            if (renta.verificarEstado()) {
-                renta.agregarVehiculo(vehiculo);
-            }
-        }
+    public GestorReservaVehiculo(GestorReservasAsiento gra) {
+        this.rentas = new ArrayList<ReservaVehiculo>();
+        this.tieneVuelo = gra.verificarReservasAsientos();
+        renta = new ReservaVehiculo(tieneVuelo);
+    }
 
+    public static void agregarRenta(ReservaVehiculo renta) {
+        rentas.add(renta);
+        GestorReservaVehiculo.renta = new ReservaVehiculo(tieneVuelo);
     }
 
     public static void eliminarRenta() {
         rentas.remove(renta);
-        renta = new ReservaVehiculo();
+        //renta = new ReservaVehiculo(gra.verificarReservasAsientos());
     }
 
 

@@ -52,7 +52,7 @@ public class Vehiculo {
         btnRentar.setPreferredSize(new Dimension(100, 20));
 
         btnRentar.addActionListener(e -> {
-            rentar();
+            cambiarEstadoVehiculo();
             estadoRentalabel.setText(estadoReservaVehiculo);
             panel.revalidate();
             panel.repaint();
@@ -74,10 +74,16 @@ public class Vehiculo {
     }
 
 
-    private void rentar() {
-        GestoReservaVehiculo.agregarRenta(this);
-        estadoReservaVehiculo = "RENTADO";
+    private void cambiarEstadoVehiculo() {
+        ReservaVehiculo reservaActual = GestorReservaVehiculo.getRenta();
+        reservaActual.agregarVehiculo(this);
+       // GestorReservaVehiculo.agregarRenta(reservaActual);
+        if (estadoReservaVehiculo.equals("RENTADO")) {
+            estadoReservaVehiculo = "NO RENTADO";
 
+        } else {
+            estadoReservaVehiculo = "RENTADO";
+        }
     }
 
     public double getPrecioDeRenta() {

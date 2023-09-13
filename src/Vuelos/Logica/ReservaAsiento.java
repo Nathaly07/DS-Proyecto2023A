@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 public class ReservaAsiento {
 
     private String fecha;
-    private String fecha_vuelo;
+    private String fechaVuelo;
     private double costo;
     private Usuario usuario;
     private EstadoReserva estado;
@@ -18,29 +18,29 @@ public class ReservaAsiento {
 
     public ReservaAsiento(CarritoAsientos reservas, Usuario usuario) {
         this.reservas = reservas;
-        this.fecha_vuelo = reservas.getVuelo().getFecha();
+        this.fechaVuelo = reservas.getVuelo().getFecha();
         this.estado = EstadoReserva.Pendiente;
         this.usuario = usuario;
     }
 
     private void reservarAsientos() {
-        for(Asiento a: reservas.getAsientos()){
-            a.reservar();
+        for(Asiento asiento: reservas.getAsientos()){
+            asiento.ocuparAsiento();
         }
-    }
-
-    public void cancelarReserva() {
-        for(Asiento a: reservas.getAsientos()){
-            a.CancelarReservaAsiento();
-        }
-        this.CambiarEstado(EstadoReserva.cancelado);
     }
     public void crearReserva(){
         this.costo = generarCostoTotal();
-        this.fecha_vuelo = reservas.getVuelo().getFecha();
+        this.fechaVuelo = reservas.getVuelo().getFecha();
         reservarAsientos();
         this.fecha = fechaAutomatica();
     }
+    public void cancelarReserva() {
+        for(Asiento asiento: reservas.getAsientos()){
+            asiento.desocuparAsiento();
+        }
+        this.cambiarEstado(EstadoReserva.Cancelado);
+    }
+
 
 
     public double generarCostoTotal() {
@@ -48,7 +48,7 @@ public class ReservaAsiento {
     }
     private String fechaAutomatica(){
         LocalDate fechaActual = LocalDate.now();
-        DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String fechaFormateada = fechaActual.format(formatoFecha);
         return fechaFormateada;
     }
@@ -57,18 +57,18 @@ public class ReservaAsiento {
         return reservas.getAsientos().size();
     }
 
-    public int cantidadAsientosReservadosPremium() {
-        return cantidadReserva("Premium");
+    public int obtenerCantidadAsientosReservadosPremium() {
+        return obtenerCantidadAsientosPorTipo("Premium");
     }
 
-    public int cantidadAsientosReservadosTurista() {
-        return cantidadReserva("Turista");
+    public int obtenerCantidadAsientosReservadosTurista() {
+        return obtenerCantidadAsientosPorTipo("Turista");
     }
 
-    private int cantidadReserva(String tipo) {
+    private int obtenerCantidadAsientosPorTipo(String tipo) {
         int cantidad= 0;
-        for (Asiento a : reservas.getAsientos()) {
-            if (a.getTipo().equalsIgnoreCase(tipo)) {
+        for (Asiento asiento : reservas.getAsientos()) {
+            if (asiento.getTipo().equalsIgnoreCase(tipo)) {
                 cantidad++;
             }
         }
@@ -78,9 +78,9 @@ public class ReservaAsiento {
 
     public double generarCostoTotalPremium() {
         double total  = 0.0;
-        for (Asiento a : reservas.getAsientos()){
-            if (a.getTipo().equalsIgnoreCase("Premium")){
-                total += a.getPrecio();
+        for (Asiento asiento : reservas.getAsientos()){
+            if (asiento.getTipo().equalsIgnoreCase("Premium")){
+                total += asiento.getPrecio();
             }
         }
         return total;
@@ -88,9 +88,9 @@ public class ReservaAsiento {
 
     public double generarCostoTotalTurista() {
         double total  = 0.0;
-        for (Asiento a : reservas.getAsientos()){
-            if (a.getTipo().equalsIgnoreCase("Turista")){
-                total += a.getPrecio();
+        for (Asiento asiento : reservas.getAsientos()){
+            if (asiento.getTipo().equalsIgnoreCase("Turista")){
+                total += asiento.getPrecio();
             }
         }
         return total;
@@ -104,7 +104,7 @@ public class ReservaAsiento {
         return  this.reservas;
     }
 
-    public void CambiarEstado(EstadoReserva estado){
+    public void cambiarEstado(EstadoReserva estado){
         this.estado = estado;
     }
 

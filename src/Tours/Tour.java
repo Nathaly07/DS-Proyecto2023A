@@ -39,7 +39,23 @@ public class Tour {
         return precio;
     }
 
-    public void reservarTour(int numPersonas){
+    public ArrayList<String> getParadasTuristicas() {
+        return paradasTuristicas;
+    }
+
+    public ArrayList<String> getActividadesTuristicas() {
+        return actividadesTuristicas;
+    }
+
+    public String getInfoGuia() {
+        return infoGuia;
+    }
+
+    public String getDuracion() {
+        return duracion;
+    }
+
+    public void disminuirDisponibilidad(int numPersonas){
         this.disponibilidad -= numPersonas;
     }
 
@@ -61,50 +77,27 @@ public class Tour {
     public String getFechaFin() { return fechaFin; }
 
     //ToString para mostrar en la informacion
-    public String informacionRelevante(){
+    public String getInformacionRelevante(){
         String info = "";
 
-        info += this.nombre + ", ";
+        info += this.nombre + "\n";
         info += "Paradas: \n";
 
         int contador = 0;
         for (String parada : paradasTuristicas) {
-            info += parada + ",\n";
+            info += parada + ", ";
             contador++;
-            if (contador >= 2) {
+            if (contador >= 4) {
                 break;
             }
         }
 
-        info += "Guia: " + this.infoGuia + "\n";
+        info += "\nGuia: " + this.infoGuia + "\n";
         info += "Duracion: " + this.duracion + "\n";
+
         info += "Precio: $" + this.precio;
 
         return info;
-    }
-
-    //Método para agregar parada turistica
-
-    public void agregarParadaTuristica(String paradaTurisitica) {
-        this.paradasTuristicas.add(paradaTurisitica);
-    }
-
-    //Metodo para eliminar parada turistica
-
-    public void eliminarParadaTuristica(String paradaTuristica) {
-        this.paradasTuristicas.remove(paradaTuristica);
-    }
-
-    //Metodo para agregar actividad turistica
-
-    public void agregarActividadTuristica(String actividadTuristica){
-        this.actividadesTuristicas.add(actividadTuristica);
-    }
-
-    //Metodo para eliminar actividad turistica
-
-    public void eliminarActividadTuristica(String actividadTuristica){
-        this.actividadesTuristicas.remove(actividadTuristica);
     }
 
 }

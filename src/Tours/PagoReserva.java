@@ -35,13 +35,13 @@ public class PagoReserva {
         float devolucion;
         if(diasAntesInicioTour >= 20){
             devolucion = precioFinal * 0.8f;
-            JOptionPane.showMessageDialog(null, "Se le ha devuelto: " + devolucion, "Devolución", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Se le ha devuelto: $" + devolucion, "Devolución", JOptionPane.INFORMATION_MESSAGE);
         } else if(diasAntesInicioTour >= 10){
             devolucion = precioFinal * 0.5f;
-            JOptionPane.showMessageDialog(null, "Se le ha devuelto: " + devolucion, "Devolución", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Se le ha devuelto: $" + devolucion, "Devolución", JOptionPane.INFORMATION_MESSAGE);
         }else if(diasAntesInicioTour >= 5){
             devolucion = precioFinal * 0.2f;
-            JOptionPane.showMessageDialog(null, "Se le ha devuelto: " + devolucion, "Devolución", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Se le ha devuelto: $" + devolucion, "Devolución", JOptionPane.INFORMATION_MESSAGE);
         }else{
             JOptionPane.showMessageDialog(null, "No hay devolucion", "Devolución", JOptionPane.INFORMATION_MESSAGE);
         }

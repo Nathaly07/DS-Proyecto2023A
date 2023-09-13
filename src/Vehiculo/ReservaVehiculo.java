@@ -16,21 +16,26 @@ public class ReservaVehiculo {
     private String ciudadRetorno, ciudadDeEntrega, estadoReserva;
     private Usuario usuario; //TODO: Log in pilas
     private Date fechaInicio, fechaRetorno;
+    private double totalAPagar;
 
-    public ReservaVehiculo() {
+    private boolean tieneVuelo;
+
+    public ReservaVehiculo(boolean tieneVuelo) {
         this.estadoReserva = "NO PAGADO";
         this.vehiculos = new ArrayList<>();
+        this.tieneVuelo = tieneVuelo;
+
     }
 
     public void reservar() {
-        PagoReservaVehiculos pagoRentaVehiculos = new PagoReservaVehiculos(calcularReserva(), "transferencia");
-        pagoRentaVehiculos.pagar();
-        estadoReserva = "PAGADO";
+        GestorReservaVehiculo.agregarRenta(this);
+        totalAPagar = calcularReserva();
     }
 
     public void agregarVehiculo(Vehiculo vehiculo) {
         vehiculos.add(vehiculo);
         JOptionPane.showMessageDialog(null, "SE HA AGREGADO EL CARRO DE PLACAS: " + vehiculo.getNumPlaca());
+        reservar();
     }
 
     public void eliminarVehiculo(Vehiculo vehiculo) {
@@ -39,17 +44,21 @@ public class ReservaVehiculo {
     }
 
     public double calcularReserva() {
-        //Calcular dias
-        //recores los vechiculos
         long diferenciaDias = fechaRetorno.getTime() - fechaInicio.getTime();
         long daysBetween = TimeUnit.DAYS.convert(diferenciaDias, TimeUnit.MILLISECONDS);
         double precioFinal = 0;
 
+
         for (Vehiculo vehiculo : vehiculos) {
             precioFinal += vehiculo.getPrecioDeRenta() * daysBetween;
         }
-        return precioFinal;
 
+        //Descuento si reservo vuelo
+        if (tieneVuelo) {
+            precioFinal = precioFinal * 0.9;
+        }
+
+        return precioFinal;
 
     }
 
@@ -60,7 +69,14 @@ public class ReservaVehiculo {
 
     public void verInfoReserva(JTable table, JPanel panel) {
 
-        JLabel precioFinal = new JLabel("Precio Final Renta: " + calcularReserva());
+        JLabel subtotal = new JLabel("");
+        //Mostrar precio final antes de descuento
+        if (tieneVuelo) {
+            subtotal = new JLabel("Precio antes del descuento: " + calcularReserva() / 0.9);
+        }
+        JLabel impuesto = new JLabel("Impuesto: "+calcularReserva()*.12);
+        JLabel precioFinal = new JLabel("Precio Final Renta: " + String.format("%,.2f", calcularReserva()*1.12));
+
         JLabel estadoDeRenta = new JLabel("Estado de Renta: " + estadoReserva);
         DefaultTableModel model = new DefaultTableModel();
 
@@ -68,13 +84,11 @@ public class ReservaVehiculo {
         JButton btnModificar = new JButton("Modificar");
         JButton btnEliminarReserva = new JButton("Eliminar");
 
-        btnModificar.addActionListener(e -> {
-            panel.add(new PanelModificacion(this).panelModificarReserva);
-        });
+        btnModificar.addActionListener(e -> panel.add(new PanelModificacion(this).panelModificarReserva));
 
 
         btnPagar.addActionListener(e -> {
-            reservar();
+            pagar();
         });
 
         btnEliminarReserva.addActionListener(e -> {
@@ -96,6 +110,8 @@ public class ReservaVehiculo {
 
         panel.add(estadoDeRenta);//
         panel.add(new JScrollPane(table));
+        panel.add(subtotal);
+        panel.add(impuesto);
         panel.add(precioFinal);
         panel.add(btnPagar);
         panel.add(btnModificar);
@@ -104,14 +120,18 @@ public class ReservaVehiculo {
         panel.repaint();
     }
 
+    private void pagar() {
+        PagoReservaVehiculos pagoRentaVehiculos = new PagoReservaVehiculos(totalAPagar, "transferencia");
+        pagoRentaVehiculos.pagar();
+        estadoReserva = "PAGADO";
+    }
+
     private void liberarAutos() {
         for (int i = vehiculos.size() - 1; i >= 0; i--) {
             vehiculos.get(i).cambiarEstado();
             vehiculos.remove(i);
         }
-
-
-        GestoReservaVehiculo.eliminarRenta();
+        GestorReservaVehiculo.eliminarRenta();
         JOptionPane.showMessageDialog(null, "Se elimino la reserva");
     }
 
@@ -135,7 +155,7 @@ public class ReservaVehiculo {
             Date fechaFinDate = dateFormat.parse(fechaFin);
 
 
-            recolectarDatosReserva(ciudadEntrega, ciudadRetorno, fechaFinDate,fechaInicioDate);
+            recolectarDatosReserva(ciudadEntrega, ciudadRetorno, fechaFinDate, fechaInicioDate);
         } catch (ParseException e) {
             System.out.println("El formato de la fecha es incorrecto (dd-mm-aaaa): " + e.getMessage());
         }

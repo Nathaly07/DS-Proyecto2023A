@@ -14,7 +14,9 @@ public class PagoReservaVehiculos {
     }
 
     private double calcularValorTotal() {
-        return montoAPagar * 1.12;
+        double valorTotal = montoAPagar;
+        valorTotal = valorTotal*(1+impuesto/100);
+        return valorTotal;
     }
 
     public void pagar() {
