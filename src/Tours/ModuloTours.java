@@ -73,6 +73,7 @@ public class ModuloTours extends JFrame{
     private JLabel lblFechaCreacionCancelar;
     private JLabel lblFechaConfirmacionCancelar;
     private JButton btnEliminarReserva;
+    private JList listaEliminar;
     private Tour tour; //para prueba
     private ReservaTour reservaTour;
     private ReservaTour reservaTourConfirmar = null;
@@ -281,34 +282,40 @@ public class ModuloTours extends JFrame{
 
             }
         });
+
+        btnEliminarReserva.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                    reservaTourCancelar.cancelarReserva();
+                    gestionReserva.removerReserva(reservaTourCancelar);
+                    setReservasUsuario();
+            }
+        });
         boxCancelar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String opcion = (String)comboBox3.getSelectedItem();
+                String opcion = (String)boxCancelar.getSelectedItem();
                 int numReserva = Integer.parseInt(opcion.split("-")[0]);
+
+
 
                 reservaTourCancelar = gestionReserva.buscarReserva(numReserva);
                 lblNumCancelar.setText("# de personas:");
                 lblFechaCreacionCancelar.setText("Fecha de Creacion de Reserva:");
                 lblFechaConfirmacionCancelar.setText("Fecha de Confirmacion de Reserva:");
                 lblNumCancelar.setText(lblNumCancelar.getText() + " " + reservaTourCancelar.getNumeroPersonas());
-                lblFechaCreacionCancelar.setText(lblFechaCreacionCancelar.getText() + " " + reservaTourCancelar.getFechaCreacion());
-                lblFechaConfirmacionCancelar.setText(lblFechaConfirmacionCancelar.getText() + " " + reservaTourCancelar.getFechaConfirmacionPago());
+                lblFechaCreacion.setText(lblFechaCreacionCancelar.getText() + " " + reservaTourCancelar.getFechaCreacion());
+                lblFechaConfirmacion.setText(lblFechaConfirmacionCancelar.getText() + " " + reservaTourCancelar.getFechaConfirmacionPago());
 
                 DefaultListModel toursEnReservaModel = new DefaultListModel<>();
-                ArrayList<Tour> toursEnReservaList = reservaTourConfirmar.getToursAgregados();
+                ArrayList<Tour> toursEnReservaList = reservaTourCancelar.getToursAgregados();
 
                 for(Tour tour: toursEnReservaList) {
                     toursEnReservaModel.addElement(tour.getInformacionRelevante());
                 }
 
-                listTours.setModel(toursEnReservaModel);
-            }
-        });
-        btnEliminarReserva.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                reservaTourCancelar.cancelarReserva();
+                listaEliminar.setModel(toursEnReservaModel);
             }
         });
     }
@@ -345,6 +352,7 @@ public class ModuloTours extends JFrame{
                 if (reservasUnicas.add(reservaStr)) {
                     this.comboBox2.addItem(reservaStr);
                     this.comboBox3.addItem(reservaStr);
+                    this.boxCancelar.addItem(reservaStr);
                 }
             }
         }

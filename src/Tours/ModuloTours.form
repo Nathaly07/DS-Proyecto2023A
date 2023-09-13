@@ -622,7 +622,7 @@
                     <properties/>
                     <border type="none"/>
                     <children>
-                      <component id="531f1" class="javax.swing.JList">
+                      <component id="531f1" class="javax.swing.JList" binding="listaEliminar">
                         <constraints/>
                         <properties>
                           <model/>
