@@ -9,19 +9,20 @@ public class GestorReservaVehiculo {
     private static ArrayList<ReservaVehiculo> rentas;
     private static ReservaVehiculo renta;
     private  CatalogoVehiculos catalogo = new CatalogoVehiculos();
-
+    private static boolean tieneVuelo;
     public CatalogoVehiculos getCatalogo() {
         return catalogo;
     }
 
     public GestorReservaVehiculo(GestorReservasAsiento gra) {
         this.rentas = new ArrayList<ReservaVehiculo>();
-        renta = new ReservaVehiculo(gra.verificarReservasAsientos());
+        this.tieneVuelo = gra.verificarReservasAsientos();
+        renta = new ReservaVehiculo(tieneVuelo);
     }
 
     public static void agregarRenta(ReservaVehiculo renta) {
         rentas.add(renta);
-
+        GestorReservaVehiculo.renta = new ReservaVehiculo(tieneVuelo);
     }
 
     public static void eliminarRenta() {
