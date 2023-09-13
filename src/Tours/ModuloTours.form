@@ -111,7 +111,7 @@
                 </constraints>
                 <properties>
                   <model>
-                    <item value="niguna reserva encontrada"/>
+                    <item value="ninguna reserva encontrada"/>
                   </model>
                 </properties>
               </component>
@@ -561,7 +561,7 @@
                 </constraints>
                 <properties>
                   <model>
-                    <item value="niguna reserva encontrada"/>
+                    <item value="ninguna reserva encontrada"/>
                   </model>
                 </properties>
               </component>

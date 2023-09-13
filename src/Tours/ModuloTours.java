@@ -129,7 +129,7 @@ public class ModuloTours extends JFrame{
         btnCrearReserva.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                reservaTour = new ReservaTour(usuarioVerificado.getNombre(), usuarioVerificado.getApellido(), (Integer) spinner1.getValue(), pagoReserva);
+                reservaTour = new ReservaTour(usuarioVerificado.getNombre(), usuarioVerificado.getApellido(), (Integer) spinner1.getValue());
                 try {
                     reservaTour.reservarMultiplesTours(listaToursAgregadosReserva, (Integer) spinner1.getValue());
                 } catch (ParseException ex) {
@@ -151,37 +151,43 @@ public class ModuloTours extends JFrame{
                 } catch (ParseException ex) {
                     throw new RuntimeException(ex);
                 }
+                lblNPersonas.setText("# de personas:");
+                lblFechaCreacion.setText("Fecha de Creacion de Reserva:");
+                lblFechaConfirmacion.setText("Fecha de Confirmacion de Reserva:");
+                listTours.setModel(new DefaultListModel<>());
             }
         });
         comboBox2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String opcion = (String)comboBox2.getSelectedItem();
-                int numReserva = Integer.parseInt(opcion.split("-")[0]);
+                if (!opcion.contains("ningun")) {
+                    int numReserva = Integer.parseInt(opcion.split("-")[0]);
 
-                reservaTourConfirmar = gestionReserva.buscarReserva(numReserva);
+                    reservaTourConfirmar = gestionReserva.buscarReserva(numReserva);
 
-                if (reservaTourConfirmar.getEstadoReserva()) {
-                    btnConfirmar.setEnabled(false);
-                } else {
-                    btnConfirmar.setEnabled(true);
+                    if (reservaTourConfirmar.getEstadoReserva()) {
+                        btnConfirmar.setEnabled(false);
+                    } else {
+                        btnConfirmar.setEnabled(true);
+                    }
+
+                    lblNPersonas.setText("# de personas:");
+                    lblFechaCreacion.setText("Fecha de Creacion de Reserva:");
+                    lblFechaConfirmacion.setText("Fecha de Confirmacion de Reserva:");
+                    lblNPersonas.setText(lblNPersonas.getText() + " " + reservaTourConfirmar.getNumeroPersonas());
+                    lblFechaCreacion.setText(lblFechaCreacion.getText() + " " + reservaTourConfirmar.getFechaCreacion());
+                    lblFechaConfirmacion.setText(lblFechaConfirmacion.getText() + " " + reservaTourConfirmar.getFechaConfirmacionPago());
+
+                    DefaultListModel toursEnReservaModel = new DefaultListModel<>();
+                    ArrayList<Tour> toursEnReservaList = reservaTourConfirmar.getToursAgregados();
+
+                    for(Tour tour: toursEnReservaList) {
+                        toursEnReservaModel.addElement(tour.getInformacionRelevante());
+                    }
+
+                    listTours.setModel(toursEnReservaModel);
                 }
-
-                lblNPersonas.setText("# de personas:");
-                lblFechaCreacion.setText("Fecha de Creacion de Reserva:");
-                lblFechaConfirmacion.setText("Fecha de Confirmacion de Reserva:");
-                lblNPersonas.setText(lblNPersonas.getText() + " " + reservaTourConfirmar.getNumeroPersonas());
-                lblFechaCreacion.setText(lblFechaCreacion.getText() + " " + reservaTourConfirmar.getFechaCreacion());
-                lblFechaConfirmacion.setText(lblFechaConfirmacion.getText() + " " + reservaTourConfirmar.getFechaConfirmacionPago());
-
-                DefaultListModel toursEnReservaModel = new DefaultListModel<>();
-                ArrayList<Tour> toursEnReservaList = reservaTourConfirmar.getToursAgregados();
-
-                for(Tour tour: toursEnReservaList) {
-                    toursEnReservaModel.addElement(tour.getInformacionRelevante());
-                }
-
-                listTours.setModel(toursEnReservaModel);
             }
         });
         tarjetaRadioButton.addActionListener(new ActionListener() {
@@ -207,24 +213,26 @@ public class ModuloTours extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 listaToursAgregadosReserva = new ArrayList<Tour>();
                 String opcion = (String)comboBox3.getSelectedItem();
-                int numReserva = Integer.parseInt(opcion.split("-")[0]);
-                reservaTourModificar = gestionReserva.buscarReserva(numReserva);
-                DefaultListModel toursModel = new DefaultListModel<>();
-                ArrayList<Tour> toursList = (ArrayList<Tour>) gestionTour.getToursDisponibles(sesion.getDestinoComun(), sesion.getFechaComun());
+                if (!opcion.contains("ningun")) {
+                    int numReserva = Integer.parseInt(opcion.split("-")[0]);
+                    reservaTourModificar = gestionReserva.buscarReserva(numReserva);
+                    DefaultListModel toursModel = new DefaultListModel<>();
+                    ArrayList<Tour> toursList = (ArrayList<Tour>) gestionTour.getToursDisponibles(sesion.getDestinoComun(), sesion.getFechaComun());
 
-                for(Tour tour: toursList) {
-                    toursModel.addElement(tour.getNombre() + "-> Inicia: " + tour.getFechaInicio());
+                    for(Tour tour: toursList) {
+                        toursModel.addElement(tour.getNombre() + "-> Inicia: " + tour.getFechaInicio());
+                    }
+                    listToursModificar.setModel(toursModel);
+
+                    toursModel = new DefaultListModel<>();
+                    toursList = reservaTourModificar.getToursAgregados();
+
+                    for(Tour tour: toursList) {
+                        toursModel.addElement(tour.getNombre() + "-> Inicia: " + tour.getFechaInicio());
+                        listaToursAgregadosReserva.add(tour);
+                    }
+                    listToursReservaModificar.setModel(toursModel);
                 }
-                listToursModificar.setModel(toursModel);
-
-                toursModel = new DefaultListModel<>();
-                toursList = reservaTourModificar.getToursAgregados();
-
-                for(Tour tour: toursList) {
-                    toursModel.addElement(tour.getNombre() + "-> Inicia: " + tour.getFechaInicio());
-                    listaToursAgregadosReserva.add(tour);
-                }
-                listToursReservaModificar.setModel(toursModel);
 
             }
         });
@@ -289,10 +297,9 @@ public class ModuloTours extends JFrame{
 
                     reservaTourCancelar.cancelarReserva();
                     gestionReserva.removerReserva(reservaTourCancelar.getNumReserva());
-                    for(int i = boxCancelar.getItemCount() - 1; i > 0; i--) {
-                        boxCancelar.removeItemAt(i);
-                    }
-                    reservasUnicas = new HashSet<>();
+                    comboBox2.removeItemAt(boxCancelar.getSelectedIndex());
+                    comboBox3.removeItemAt(boxCancelar.getSelectedIndex());
+                    boxCancelar.removeItem(boxCancelar.getSelectedItem());
                     setReservasUsuario();
                     lblNumCancelar.setText("# de personas:");
                     lblFechaCreacionCancelar.setText("Fecha de Creacion de Reserva:");
@@ -304,26 +311,27 @@ public class ModuloTours extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 String opcion = (String)boxCancelar.getSelectedItem();
-                int numReserva = Integer.parseInt(opcion.split("-")[0]);
+                if (!opcion.contains("ningun")) {
+                    int numReserva = Integer.parseInt(opcion.split("-")[0]);
 
 
+                    reservaTourCancelar = gestionReserva.buscarReserva(numReserva);
+                    lblNumCancelar.setText("# de personas:");
+                    lblFechaCreacionCancelar.setText("Fecha de Creacion de Reserva:");
+                    lblFechaConfirmacionCancelar.setText("Fecha de Confirmacion de Reserva:");
+                    lblNumCancelar.setText(lblNumCancelar.getText() + " " + reservaTourCancelar.getNumeroPersonas());
+                    lblFechaCreacion.setText(lblFechaCreacionCancelar.getText() + " " + reservaTourCancelar.getFechaCreacion());
+                    lblFechaConfirmacion.setText(lblFechaConfirmacionCancelar.getText() + " " + reservaTourCancelar.getFechaConfirmacionPago());
 
-                reservaTourCancelar = gestionReserva.buscarReserva(numReserva);
-                lblNumCancelar.setText("# de personas:");
-                lblFechaCreacionCancelar.setText("Fecha de Creacion de Reserva:");
-                lblFechaConfirmacionCancelar.setText("Fecha de Confirmacion de Reserva:");
-                lblNumCancelar.setText(lblNumCancelar.getText() + " " + reservaTourCancelar.getNumeroPersonas());
-                lblFechaCreacion.setText(lblFechaCreacionCancelar.getText() + " " + reservaTourCancelar.getFechaCreacion());
-                lblFechaConfirmacion.setText(lblFechaConfirmacionCancelar.getText() + " " + reservaTourCancelar.getFechaConfirmacionPago());
+                    DefaultListModel toursEnReservaModel = new DefaultListModel<>();
+                    ArrayList<Tour> toursEnReservaList = reservaTourCancelar.getToursAgregados();
 
-                DefaultListModel toursEnReservaModel = new DefaultListModel<>();
-                ArrayList<Tour> toursEnReservaList = reservaTourCancelar.getToursAgregados();
+                    for(Tour tour: toursEnReservaList) {
+                        toursEnReservaModel.addElement(tour.getInformacionRelevante());
+                    }
 
-                for(Tour tour: toursEnReservaList) {
-                    toursEnReservaModel.addElement(tour.getInformacionRelevante());
+                    listaEliminar.setModel(toursEnReservaModel);
                 }
-
-                listaEliminar.setModel(toursEnReservaModel);
             }
         });
     }

@@ -26,12 +26,12 @@ public class UIVehiculos extends JPanel {
 
     //Clases diagrama
    // private  CatalogoVehiculos catalogoVehiculos;
-    private static GestoReservaVehiculo gestorRentas;
+    private static GestorReservaVehiculo gestorRentas;
 
 
     public UIVehiculos(Sesion sesion) {
 
-        gestorRentas = new GestoReservaVehiculo();
+        gestorRentas = new GestorReservaVehiculo();
 
 
         btnCatalogo.addActionListener(e -> { // METODO DESPLEGAR CATALOGO
@@ -41,7 +41,7 @@ public class UIVehiculos extends JPanel {
 
             }else{
                 gestorRentas.getCatalogo().mostrarVehiculos(pnlCatalogo1);
-                GestoReservaVehiculo.getRenta().recolectarDatosReserva(txtOrigen.getText(),txtRetorno.getText(),dateChooserFinal.getDate(),dateChooserInicio.getDate());
+                GestorReservaVehiculo.getRenta().recolectarDatosReserva(txtOrigen.getText(),txtRetorno.getText(),dateChooserFinal.getDate(),dateChooserInicio.getDate());
             }
 
 

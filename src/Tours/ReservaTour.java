@@ -27,7 +27,7 @@ public class ReservaTour {
     private PagoReserva pagoReserva;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
-    public ReservaTour(String nombreUsuario, String apellidoUsuario, int numeroPersonas, PagoReserva pagoReserva) {
+    public ReservaTour(String nombreUsuario, String apellidoUsuario, int numeroPersonas) {
         this.numReserva = this.cantidadReservas;
         this.nombreUsuario = nombreUsuario;
         this.apellidoUsuario = apellidoUsuario;
@@ -36,7 +36,7 @@ public class ReservaTour {
         this.numeroPersonas = numeroPersonas;
         this.toursAgregados = new ArrayList<Tour>();
         this.fechaConfirmacionPago = "Sin confirmar";
-        this.pagoReserva = pagoReserva;
+        this.pagoReserva = new PagoReserva();
         this.cantidadReservas += 1;
     }
 
