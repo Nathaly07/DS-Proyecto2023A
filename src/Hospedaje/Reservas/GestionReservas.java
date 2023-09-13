@@ -4,7 +4,6 @@ import Hospedaje.Criteria.CriteriaDisponibilidadHabitaciones;
 import Hospedaje.Criteria.CriteriaDoble;
 import Hospedaje.Habitaciones.GestionHabitaciones;
 import Hospedaje.Habitaciones.Habitacion;
-import Hospedaje.Pagos.PagoHospedaje;
 import Principal.Usuario;
 
 import java.io.*;
@@ -19,8 +18,9 @@ public class GestionReservas {
 
     public GestionReservas(GestionHabitaciones gestionHabitaciones) {
         this.gestionHabitaciones = gestionHabitaciones;
-        this.reservas = new ArrayList<ReservaHospedaje>();
-        this.guardar();
+        this.reservas = this.leer();
+        /*this.reservas = new ArrayList<ReservaHospedaje>();
+        this.guardar();*/
     }
     public List<Habitacion> getHabitacionesDisponibles(Date reservarDesde, Date reservarHasta) {
         List<Habitacion> habitaciones = this.gestionHabitaciones.getHabitaciones();
@@ -59,8 +59,6 @@ public class GestionReservas {
     public boolean confirmarReserva(ReservaHospedaje reservaAConfirmar, String metodoPago) {
         for (ReservaHospedaje reserva : reservas) {
             if (reserva == reservaAConfirmar) {
-                PagoHospedaje pago = new PagoHospedaje(reserva, metodoPago);
-                pago.pagar();
                 reserva.confirmarReserva();
                 this.guardar();
                 return true; // Reserva confirmada exitosamente

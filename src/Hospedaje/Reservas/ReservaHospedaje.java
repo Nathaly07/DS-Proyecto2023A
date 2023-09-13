@@ -1,6 +1,7 @@
 package Hospedaje.Reservas;
 
 import Hospedaje.Habitaciones.Habitacion;
+import Pagos.Pago;
 import Principal.Usuario;
 
 
@@ -19,6 +20,10 @@ public class ReservaHospedaje implements Serializable {
     //TODO CAMBIAR Id's por login
     private Usuario user;
     private String reservaId;
+    private int dias;
+    private double subtotal;
+    private double iva;
+    private double total;
 
     public Usuario getUser() {
         return user;
@@ -42,6 +47,7 @@ public class ReservaHospedaje implements Serializable {
     //TODO IMPLEMENTAR SUS PROPIOS METODOS
     public void cancelarReserva() {
         this.estadoReserva = EstadoReserva.CANCELADA;
+        this.generarPrecio();
     }
 
 
@@ -82,6 +88,8 @@ public class ReservaHospedaje implements Serializable {
 
     public void confirmarReserva() {
         this.estadoReserva = EstadoReserva.CONFIRMADA;
+        Pago pago = new Pago(this.total, "Efectivo");
+        pago.pagar();
     }
 
     public Usuario getUsuario() {
@@ -90,5 +98,31 @@ public class ReservaHospedaje implements Serializable {
 
     public int getNumeroPersonas() {
         return numeroPersonas;
+    }
+
+    public void generarPrecio(){
+        dias = (int) ((fechaFin.getTime() - fechaInicio.getTime()) / 86400000);
+        subtotal = 0;
+        for (Habitacion habitacion : habitaciones) {
+            subtotal += habitacion.getPrecioPorNoche() * dias;
+        }
+        iva = subtotal * 0.12;
+        total = subtotal + iva;
+    }
+
+    public double getSubtotal(){
+        return subtotal;
+    }
+
+    public double getIVA(){
+        return iva;
+    }
+
+    public double getTotal(){
+        return total;
+    }
+
+    public int getDias(){
+        return dias;
     }
 }

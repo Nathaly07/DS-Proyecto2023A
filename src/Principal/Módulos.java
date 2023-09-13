@@ -97,8 +97,8 @@ public class Módulos extends JFrame {
     }
     public void hospedaje(){
         MenuHospedaje menuHospedaje = new MenuHospedaje(this.sesion);
-        menuHospedaje.crearFrame();
-        dispose();
+        setPanel(menuHospedaje.mainPanel);
+        crearFrame();
     }
 
 }
