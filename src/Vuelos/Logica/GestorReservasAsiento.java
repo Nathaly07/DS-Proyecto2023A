@@ -11,18 +11,30 @@ public class GestorReservasAsiento {
     public GestorReservasAsiento(){
         reservas = new ArrayList<>();
     }
-    public void agregarResarva(ReservaAsiento r){
-        reservas.add(r);
+    public void añadirReserva(ReservaAsiento reservaAsiento){
+        reservas.add(reservaAsiento);
     }
 
-    public int CantidadReservasPendientes(){
+    public int contarReservasPendientes(){
         int contador=0;
-        for(ReservaAsiento r : this.reservas) {
-           if(r.getEstado().equals(EstadoReserva.Pendiente)){
+        for(ReservaAsiento reservaAsiento : this.reservas) {
+           if(reservaAsiento.getEstado().equals(EstadoReserva.Pendiente)){
                contador++;
            }
         }
         return contador;
+    }
+
+
+    public void obtenerReservasPendientes(JTable tabla){
+        List<ReservaAsiento> reservaAsientoSeleccionada  = new ArrayList<>();
+        for(ReservaAsiento reservaAsiento : this.reservas){
+            if(reservaAsiento.getEstado().equals(EstadoReserva.Pendiente)){
+                reservaAsientoSeleccionada.add(reservaAsiento);
+            }
+        }
+        GestorReservasAsiento.TablaReservas modelo = new TablaReservas(reservaAsientoSeleccionada);
+        tabla.setModel(modelo);
     }
 
     public void mostrarReservas(JTable tabla) {
@@ -30,27 +42,20 @@ public class GestorReservasAsiento {
         tabla.setModel(modelo);
     }
 
-    public void reservasPendientes(JTable tabla){
-        List<ReservaAsiento> aux  = new ArrayList<>();
-        for(ReservaAsiento r : this.reservas){
-            if(r.getEstado().equals(EstadoReserva.Pendiente)){
-                aux.add(r);
+    public ReservaAsiento seleccionarReserva(ReservaAsiento reserva){
+        ComparadorVuelo comparadorVuelo = new ComparadorVuelo();
+        for(ReservaAsiento reservaAsientoSeleccionado : this.reservas){
+            if(comparadorVuelo.compare(reservaAsientoSeleccionado.getReservas().getVuelo(), reserva.getReservas().getVuelo()) == 1 &&
+            reserva.getEstado().equals(reservaAsientoSeleccionado.getEstado())){
+                return reservaAsientoSeleccionado;
             }
-        }
-        GestorReservasAsiento.TablaReservas modelo = new TablaReservas(aux);
-        tabla.setModel(modelo);
-    }
-
-    public ReservaAsiento SeleccionarReserva(ReservaAsiento reserva){
-        ComparadorVuelo com = new ComparadorVuelo();
-        for(ReservaAsiento aux : this.reservas){
-            if(com.compare(aux.getReservas().getVuelo(), reserva.getReservas().getVuelo()) == 1 &&
-            reserva.getEstado().equals(aux.getEstado())){
-                return aux;
-            }
-
         }
         return null;
+
+    }
+
+    public void eliminarReserva(ReservaAsiento reserva) {
+        this.reservas.remove(reserva);
 
     }
 
@@ -77,7 +82,7 @@ public class GestorReservasAsiento {
                 case 0 -> reservas.get(rowIndex).getFecha();
                 case 1 -> reservas.get(rowIndex).getReservas().getVuelo().getOrigen();
                 case 2 -> reservas.get(rowIndex).getReservas().getVuelo().getDestino();
-                case 3 -> reservas.get(rowIndex).getReservas().getVuelo().getHora_salida();
+                case 3 -> reservas.get(rowIndex).getReservas().getVuelo().getHoraSalida();
                 case 4 -> reservas.get(rowIndex).getReservas().getVuelo().getFecha();
                 case 5 -> reservas.get(rowIndex).getReservas().getAsientos().size();
                 case 6 -> reservas.get(rowIndex).getEstado();
@@ -98,7 +103,7 @@ public class GestorReservasAsiento {
         }
     }
 
-    public boolean VerificarReservasAsientos(){
+    public boolean verificarReservasAsientos(){
         return reservas.size() > 0;
     }
 

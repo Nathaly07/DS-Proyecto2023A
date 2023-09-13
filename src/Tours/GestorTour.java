@@ -86,7 +86,6 @@ public class GestorTour {
     }
 
     public Tour buscarTour(String nombre) {
-
         for (Tour tour : this.tours) {
             if (tour.getNombre().contains(nombre)) {
                 return tour;

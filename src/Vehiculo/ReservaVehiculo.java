@@ -23,6 +23,7 @@ public class ReservaVehiculo {
     }
 
     public void reservar() {
+        //GestoReservaVehiculo.agregarRenta
         PagoReservaVehiculos pagoRentaVehiculos = new PagoReservaVehiculos(calcularReserva(), "transferencia");
         pagoRentaVehiculos.pagar();
         estadoReserva = "PAGADO";

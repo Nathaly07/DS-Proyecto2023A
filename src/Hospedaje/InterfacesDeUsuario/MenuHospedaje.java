@@ -1,14 +1,15 @@
 package Hospedaje.InterfacesDeUsuario;
 
-import Hospedaje.ModuloHospedaje;
+import Hospedaje.Habitaciones.GestionHabitaciones;
+import Hospedaje.Reservas.GestionReservas;
 import Principal.Sesion;
 import Principal.Módulos;
 
 import javax.swing.*;
 
 public class MenuHospedaje extends JFrame {
-
-    private ModuloHospedaje moduloHospedaje;
+    private GestionHabitaciones gestionHabitaciones;
+    private GestionReservas gestionReservas;
     private Sesion sesion;
     public JPanel mainPanel;
     private JButton btnReservarHabitaciones;
@@ -16,7 +17,8 @@ public class MenuHospedaje extends JFrame {
     private JButton btnSalir;
 
     public MenuHospedaje(Sesion sesion){
-        this.moduloHospedaje = new ModuloHospedaje();
+        this.gestionHabitaciones = new GestionHabitaciones();
+        this.gestionReservas = new GestionReservas(this.gestionHabitaciones);
         this.sesion = sesion;
         btnReservarHabitaciones.addActionListener(e -> reservar());
 
@@ -38,12 +40,12 @@ public class MenuHospedaje extends JFrame {
     }
 
     public void reservar(){
-        CrearReserva crearReserva = new CrearReserva(this.sesion, this.moduloHospedaje.getGestionReservas());
+        CrearReserva crearReserva = new CrearReserva(this.sesion, this.gestionReservas);
         crearReserva.crearFrame();
     }
 
     public void modificarReservas(){
-        VerReservas verReservas = new VerReservas(this.sesion, this.moduloHospedaje.getGestionReservas());
+        VerReservas verReservas = new VerReservas(this.sesion, this.gestionReservas);
         verReservas.crearFrame();
     }
 

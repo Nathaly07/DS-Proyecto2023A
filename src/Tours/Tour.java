@@ -58,11 +58,11 @@ public class Tour {
     public String getFechaFin() { return fechaFin; }
 
     //ToString para mostrar en la informacion
-    public String informacionRelevante(){
+    public String getInformacionRelevante(){
         String info = "";
 
-        info += this.nombre;
-        info += "\nParadas: \n";
+        info += this.nombre + "\n";
+        info += "Paradas: \n";
 
         int contador = 0;
         for (String parada : paradasTuristicas) {
@@ -75,6 +75,7 @@ public class Tour {
 
         info += "\nGuia: " + this.infoGuia + "\n";
         info += "Duracion: " + this.duracion + "\n";
+
         info += "Precio: $" + this.precio;
 
         return info;

@@ -1,17 +1,13 @@
 package Vuelos.Logica;
 
 
-import java.util.Scanner;
-
 public class Asiento {
 
     private int numero;
     private boolean estaReservado;
     private double precio;
     private String tipo;
-
     private int numFila;
-
 
 
     public Asiento(int numero,boolean estadoReservado, double precio, String tipo, int numFila) {
@@ -25,7 +21,17 @@ public class Asiento {
         this.numero = numero;
         this.numFila = numFila;
     }
+    public boolean isEstaReservado() {
+        return estaReservado;
+    }
 
+    public void desocuparAsiento(){
+        this.estaReservado = false;
+    }
+
+    public void ocuparAsiento() {
+        this.estaReservado = true;
+    }
 
     public int getNumero() {
         return numero;
@@ -35,17 +41,6 @@ public class Asiento {
         return precio;
     }
 
-    public boolean isEstaReservado() {
-        return estaReservado;
-    }
-
-    public void CancelarReservaAsiento(){
-        this.estaReservado = false;
-    }
-
-    public void reservar() {
-        this.estaReservado = true;
-    }
 
     public int getNumFila() {
         return numFila;

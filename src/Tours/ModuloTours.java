@@ -79,8 +79,7 @@ public class ModuloTours extends JFrame{
     private ReservaTour reservaTourModificar = null;
     private ReservaTour reservaTourCancelar= null;
     private String metodoPagoConfirmar = "";
-
-    private ArrayList<Tour> listatemp = new ArrayList<>();
+    private ArrayList<Tour> listaToursAgregadosReserva = new ArrayList<>();
 
     List<Tour> tours;
 
@@ -108,31 +107,34 @@ public class ModuloTours extends JFrame{
         btnAgregarTour.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    agregarTour();
-                } catch (ParseException ex) {
-                    throw new RuntimeException(ex);
+                String tour = list1.getSelectedValue().toString();
+                if(verificarTourYaAgregado(tour, list2)) {
+                    String nombreTour = tour.split("->")[0];
+                    listaToursAgregadosReserva.add(gestionTour.buscarTour(nombreTour));
+                    mostrarToursEnReserva(list2);
                 }
-                mostrarReserva(list2);
             }
         });
 
         btnEliminarTour.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                eliminarTour();
-                mostrarReserva(list2);
+                String nombreTour = list2.getSelectedValue().toString().split("->")[0];
+                listaToursAgregadosReserva.remove(gestionTour.buscarTour(nombreTour));
+                mostrarToursEnReserva(list2);
             }
         });
 
         btnCrearReserva.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                crearReserva();
+                reservaTour = new ReservaTour(usuarioVerificado.getNombre(), usuarioVerificado.getApellido(), (Integer) spinner1.getValue() ,gestionTour, pagoReserva);
                 gestionReserva.agregarReserva(reservaTour);
-                reservaTour.setToursAgregados(listatemp);
-                listatemp = new ArrayList<Tour>();
+                reservaTour.setToursAgregados(listaToursAgregadosReserva);
+                listaToursAgregadosReserva = new ArrayList<Tour>();
                 setReservasUsuario();
+                list2.setModel(new DefaultListModel<>());
+                spinner1.setValue(0);
             }
         });
 
@@ -164,7 +166,7 @@ public class ModuloTours extends JFrame{
                 ArrayList<Tour> toursEnReservaList = reservaTourConfirmar.getToursAgregados();
 
                 for(Tour tour: toursEnReservaList) {
-                    toursEnReservaModel.addElement(tour.informacionRelevante());
+                    toursEnReservaModel.addElement(tour.getInformacionRelevante());
                 }
 
                 listTours.setModel(toursEnReservaModel);
@@ -191,7 +193,7 @@ public class ModuloTours extends JFrame{
         comboBox3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                listatemp = new ArrayList<Tour>();
+                listaToursAgregadosReserva = new ArrayList<Tour>();
                 String opcion = (String)comboBox3.getSelectedItem();
                 int numReserva = Integer.parseInt(opcion.split("-")[0]);
                 reservaTourModificar = gestionReserva.buscarReserva(numReserva);
@@ -199,7 +201,7 @@ public class ModuloTours extends JFrame{
                 ArrayList<Tour> toursList = (ArrayList<Tour>) gestionTour.getToursDisponibles(sesion.getDestinoComun(), sesion.getFechaComun());
 
                 for(Tour tour: toursList) {
-                    toursModel.addElement(tour.informacionRelevante());
+                    toursModel.addElement(tour.getNombre() + "-> Inicia: " + tour.getFechaInicio());
                 }
                 listToursModificar.setModel(toursModel);
 
@@ -207,8 +209,8 @@ public class ModuloTours extends JFrame{
                 toursList = reservaTourModificar.getToursAgregados();
 
                 for(Tour tour: toursList) {
-                    toursModel.addElement(tour.informacionRelevante());
-                    listatemp.add(tour);
+                    toursModel.addElement(tour.getNombre() + "-> Inicia: " + tour.getFechaInicio());
+                    listaToursAgregadosReserva.add(tour);
                 }
                 listToursReservaModificar.setModel(toursModel);
 
@@ -217,49 +219,51 @@ public class ModuloTours extends JFrame{
         btnAgregarTourModificar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String tours = listToursModificar.getSelectedValue().toString();
-                String[] nombreTour = tours.split(",");
-                String Ntour = nombreTour[0];
-                listatemp.add(gestionTour.buscarTour(Ntour));
-                mostrarReserva(listToursReservaModificar);
+                String tour = listToursModificar.getSelectedValue().toString();
+                if(verificarTourYaAgregado(tour, listToursReservaModificar)){
+                    String nombreTour = tour.split("->")[0];
+                    listaToursAgregadosReserva.add(gestionTour.buscarTour(nombreTour));
+                    mostrarToursEnReserva(listToursReservaModificar);
+                }
             }
         });
         btnEliminarTourModificar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String tours = listToursReservaModificar.getSelectedValue().toString();
-                String[] nombreTour = tours.split(",");
-                String Ntour = nombreTour[0];
-                listatemp.remove(gestionTour.buscarTour(Ntour));
-                mostrarReserva(listToursReservaModificar);
+                String nombreTour = listToursReservaModificar.getSelectedValue().toString().split("->")[0];;
+                listaToursAgregadosReserva.remove(gestionTour.buscarTour(nombreTour));
+                mostrarToursEnReserva(listToursReservaModificar);
             }
         });
         btnModificarReserva.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                reservaTourModificar.setToursAgregados(listatemp);
+                reservaTourModificar.setToursAgregados(listaToursAgregadosReserva);
                 reservaTourModificar.setNumeroPersonas((Integer)jspNumPersonasModificar.getValue());
                 JOptionPane.showMessageDialog(null,
                         "Se ha modificado su reserva exitosamente",
                         "Gestor Reserva",
-                        JOptionPane.WARNING_MESSAGE);
-                listatemp = new ArrayList<Tour>();
+                        JOptionPane.INFORMATION_MESSAGE);
+                listaToursAgregadosReserva = new ArrayList<Tour>();
                 setReservasUsuario();
+                listToursReservaModificar.setModel(new DefaultListModel());
+                jspNumPersonasModificar.setValue(0);
             }
         });
 
         list1.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                String selected = list1.getSelectedValue().toString().split(" ")[0];
-                txtAreaDescripcionTour.setText(gestionTour.buscarTour(selected).informacionRelevante());
+                String selected = list1.getSelectedValue().toString().split("->")[0];
+                txtAreaDescripcionTour.setText(gestionTour.buscarTour(selected).getInformacionRelevante());
             }
         });
         listToursModificar.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                String selected = listToursModificar.getSelectedValue().toString().split(" ")[0];
-                txtModificarDetallesTour.setText(gestionTour.buscarTour(selected).informacionRelevante());
+                String selected = listToursModificar.getSelectedValue().toString().split("->")[0];
+                txtModificarDetallesTour.setText(gestionTour.buscarTour(selected).getInformacionRelevante());
+
             }
         });
         boxCancelar.addActionListener(new ActionListener() {
@@ -294,6 +298,22 @@ public class ModuloTours extends JFrame{
         });
     }
 
+    public boolean verificarTourYaAgregado(String opcionSelecionada, JList listaSeleccionados) {
+        ListModel modeloLista = listaSeleccionados.getModel();
+
+        for (int i = 0; i < modeloLista.getSize(); i++) {
+            Object tour =  modeloLista.getElementAt(i);
+            if(tour.toString().compareTo(opcionSelecionada) == 41 || tour.toString().compareTo(opcionSelecionada) == 0){
+                JOptionPane.showMessageDialog(null,
+                        "Este tour ya fue agregado",
+                        "Gestor Reserva",
+                        JOptionPane.WARNING_MESSAGE);
+                return false;
+            }
+        }
+
+        return true;
+    }
 
     public void setReservasUsuario() {
         String nombreUsuario = this.usuarioVerificado.getNombre();
@@ -325,44 +345,24 @@ public class ModuloTours extends JFrame{
 
     //Metodo para mostrar tours disponibles
     private void mostrarToursDisponibles(JList list){
-
         DefaultListModel<String> model = new DefaultListModel<>();
         List<Tour> toursDispo = this.gestionTour.getToursDisponibles(sesion.getDestinoComun(), sesion.getFechaComun());
 
         for (Tour i : toursDispo){
-            model.addElement(i.getNombre() + "  Inicio: " + i.getFechaInicio());
+            model.addElement(i.getNombre() + "->  Inicio: " + i.getFechaInicio());
         }
 
         list.setModel(model);
     }
 
-    public void mostrarReserva(JList list){
+    public void mostrarToursEnReserva(JList list){
         DefaultListModel<String> model = new DefaultListModel<>();
-        ArrayList<Tour> tours = this.listatemp;
+        ArrayList<Tour> tours = this.listaToursAgregadosReserva;
 
         for(Tour i: tours){
-            model.addElement(i.informacionRelevante());
+            model.addElement(i.getNombre() + "-> Inicia: " + i.getFechaInicio());
         }
         list.setModel(model);
-    }
-
-    public void agregarTour() throws ParseException {
-
-        String tours = list1.getSelectedValue().toString();
-        String[] nombreTour = tours.split(",");
-        String Ntour = nombreTour[0];
-        this.listatemp.add(this.gestionTour.buscarTour(Ntour));
-    }
-
-    public void eliminarTour(){
-        String tours = list2.getSelectedValue().toString();
-        String[] nombreTour = tours.split(",");
-        String Ntour = nombreTour[0];
-        this.listatemp.remove(this.gestionTour.buscarTour(Ntour));
-    }
-
-    public void crearReserva(){
-        reservaTour = new ReservaTour(this.usuarioVerificado.getNombre(), this.usuarioVerificado.getApellido(), (Integer) this.spinner1.getValue() ,this.gestionTour, this.pagoReserva);
     }
 
 }
