@@ -1,30 +1,32 @@
 package Principal;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import Hospedaje.Reservas.ReservaHospedaje;
+
+import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.StringTokenizer;
 
 public class GestorUsuarios {
 
-    private ArrayList<Usuario> usuario;
+    private ArrayList<Usuario> usuarios;
 
     public GestorUsuarios() {
-        usuario = new ArrayList<Usuario>();
+        this.usuarios = this.leer();
     }
 
     public void agregarUsuario(Usuario usr) {
-        usuario.add(usr);
+        usuarios.add(usr);
+        this.guardar();
     }
 
     public void eliminarUsuario(Usuario usr) {
-        usuario.remove(usr);
+        usuarios.remove(usr);
     }
 
     public Usuario buscarUsuario(String nombreUsuario) {
         Usuario usuarioBuscado = null;
-        for (Usuario usuario1 : usuario) {
+        for (Usuario usuario1 : usuarios) {
             if (usuario1.getNombreUsuario().equalsIgnoreCase(nombreUsuario)) {
                 usuarioBuscado = usuario1;
                 break;
@@ -33,33 +35,35 @@ public class GestorUsuarios {
         return usuarioBuscado;
     }
 
-    public void insertarUsuarios() {
-        File archivo = null;
-        FileReader fr = null;
-        BufferedReader br = null;
+    private void guardar() {
+        String basePath = new File("").getAbsolutePath();
+        String filePath = basePath.concat("/src/Principal/usuarios.txt");
         try {
-            archivo = new File("src/Principal/Usuarios.txt");
-            fr = new FileReader(archivo);
-            br = new BufferedReader(fr);
-            String linea;
-            while ((linea = br.readLine()) != null) {
-                StringTokenizer registro = new StringTokenizer(linea, "\n");
-                while (registro.hasMoreTokens()) {
-                    StringTokenizer subCadena = new StringTokenizer(registro.nextToken(), ",");
-                    this.agregarUsuario(new Usuario(subCadena.nextToken(), subCadena.nextToken(), subCadena.nextToken(), subCadena.nextToken(), subCadena.nextToken()));
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (null != fr) {
-                    fr.close();
-                }
-            } catch (Exception e2) {
-                e2.printStackTrace();
-            }
+            FileOutputStream fos = new FileOutputStream(filePath);
+            ObjectOutputStream outputStream = new ObjectOutputStream(fos);
+            outputStream.writeObject(this.usuarios);
+            outputStream.close();
+            fos.close();
+        } catch (IOException ex) {
+            System.err.println(ex);
         }
+    }
+
+    private ArrayList<Usuario> leer() {
+        ArrayList<Usuario> reservasGuardadas = null;
+        String basePath = new File("").getAbsolutePath();
+        String filePath = basePath.concat("/src/Principal/usuarios.txt");
+        try {
+            FileInputStream fis = new FileInputStream(filePath);
+            ObjectInputStream inputStream = new ObjectInputStream(fis);
+            reservasGuardadas = (ArrayList<Usuario>) inputStream.readObject();
+            inputStream.close();
+            fis.close();
+        } catch (IOException | ClassNotFoundException ex) {
+            System.err.println(ex);
+        }
+
+        return reservasGuardadas;
     }
 
 }

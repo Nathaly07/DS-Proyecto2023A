@@ -3,7 +3,6 @@ package Vuelos.Logica;
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class CarritoAsientos {
@@ -23,15 +22,15 @@ public class CarritoAsientos {
         this.vuelo = vuelo;
     }
 
-    public void añadir(Asiento a) {
-        this.asientos.add(a);
+    public void añadirAsiento(Asiento asiento) {
+        this.asientos.add(asiento);
     }
 
-    public void eliminar(Asiento a) {
+    public void eliminarAsiento(Asiento asiento) {
         for(int i = 0; i < this.asientos.size(); i++){
-            Asiento aux = this.asientos.get(i);
-            if (aux.getNumero() == a.getNumero() && aux.getNumFila() == a.getNumFila()) {
-                this.asientos.remove(aux);
+            Asiento asientoSeleccionado = this.asientos.get(i);
+            if (asientoSeleccionado.getNumero() == asiento.getNumero() && asientoSeleccionado.getNumFila() == asiento.getNumFila()) {
+                this.asientos.remove(asientoSeleccionado);
             }
         }
     }
@@ -86,22 +85,16 @@ public class CarritoAsientos {
             }
         }
     }
-    public void mostarCarrito(JTable tabla){
+    public void mostrarCarrito(JTable tabla){
         TablaCarrito modelo = new TablaCarrito(this.asientos);
         tabla.setModel(modelo);
     }
 
-    public void Limpiar(){
+    public void limpiarCarrito(){
         this.asientos = new ArrayList<>();
     }
     public Vuelo getVuelo() {
         return vuelo;
     }
-
-    public void setAsientos(List<Asiento> asientos) {
-        this.asientos = asientos;
-    }
-
-
-
+    
 }
