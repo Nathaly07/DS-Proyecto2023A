@@ -129,12 +129,12 @@ public class ModuloTours extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 reservaTour = new ReservaTour(usuarioVerificado.getNombre(), usuarioVerificado.getApellido(), (Integer) spinner1.getValue() ,gestionTour, pagoReserva);
-                gestionReserva.agregarReserva(reservaTour);
                 try {
                     reservaTour.reservarMultiplesTours(listaToursAgregadosReserva, (Integer) spinner1.getValue());
                 } catch (ParseException ex) {
                     throw new RuntimeException(ex);
                 }
+                gestionReserva.agregarReserva(reservaTour);
                 listaToursAgregadosReserva = new ArrayList<Tour>();
                 setReservasUsuario();
                 list2.setModel(new DefaultListModel<>());
