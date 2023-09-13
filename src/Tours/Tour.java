@@ -39,6 +39,22 @@ public class Tour {
         return precio;
     }
 
+    public ArrayList<String> getParadasTuristicas() {
+        return paradasTuristicas;
+    }
+
+    public ArrayList<String> getActividadesTuristicas() {
+        return actividadesTuristicas;
+    }
+
+    public String getInfoGuia() {
+        return infoGuia;
+    }
+
+    public String getDuracion() {
+        return duracion;
+    }
+
     public void disminuirDisponibilidad(int numPersonas){
         this.disponibilidad -= numPersonas;
     }
@@ -47,6 +63,9 @@ public class Tour {
         this.disponibilidad += numPersonas;
     }
 
+    public int getLimiteUsuarios() {
+        return limiteUsuarios;
+    }
 
     public int getDisponibilidad(){
         return this.disponibilidad;
@@ -79,30 +98,6 @@ public class Tour {
         info += "Precio: $" + this.precio;
 
         return info;
-    }
-
-    //Método para agregar parada turistica
-
-    public void agregarParadaTuristica(String paradaTurisitica) {
-        this.paradasTuristicas.add(paradaTurisitica);
-    }
-
-    //Metodo para eliminar parada turistica
-
-    public void eliminarParadaTuristica(String paradaTuristica) {
-        this.paradasTuristicas.remove(paradaTuristica);
-    }
-
-    //Metodo para agregar actividad turistica
-
-    public void agregarActividadTuristica(String actividadTuristica){
-        this.actividadesTuristicas.add(actividadTuristica);
-    }
-
-    //Metodo para eliminar actividad turistica
-
-    public void eliminarActividadTuristica(String actividadTuristica){
-        this.actividadesTuristicas.remove(actividadTuristica);
     }
 
 }

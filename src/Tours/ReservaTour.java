@@ -24,11 +24,10 @@ public class ReservaTour {
     private ArrayList<Tour> toursAgregados;
     private String fechaConfirmacionPago = "-";
 
-    private GestorTour gestorTour;
     private PagoReserva pagoReserva;
-    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
-    public ReservaTour(String nombreUsuario, String apellidoUsuario, int numeroPersonas, GestorTour gestorTour, PagoReserva pagoReserva) {
+    public ReservaTour(String nombreUsuario, String apellidoUsuario, int numeroPersonas) {
         this.numReserva = this.cantidadReservas;
         this.nombreUsuario = nombreUsuario;
         this.apellidoUsuario = apellidoUsuario;
@@ -37,11 +36,13 @@ public class ReservaTour {
         this.numeroPersonas = numeroPersonas;
         this.toursAgregados = new ArrayList<Tour>();
         this.fechaConfirmacionPago = "Sin confirmar";
-        this.gestorTour = gestorTour;
-        this.pagoReserva = pagoReserva;
+        this.pagoReserva = new PagoReserva();
         this.cantidadReservas += 1;
     }
 
+    public boolean getEstadoReserva() {
+        return this.estadoReserva;
+    }
     public void setNumeroPersonas(int numeroPersonas) {
         this.numeroPersonas = numeroPersonas;
     }
@@ -72,14 +73,14 @@ public class ReservaTour {
         this.fechaCreacion = fechaCreacion;
     }
     public void setToursAgregados(ArrayList<Tour> toursAgregados) { this.toursAgregados = toursAgregados; }
+    public ArrayList<Tour> getToursAgregados() {
+        return this.toursAgregados;
+    }
+
     public void reservarMultiplesTours(ArrayList<Tour> toursAgregados, int personasReserva) throws ParseException {
         for (Tour tour: toursAgregados) {
             this.reservarTour(tour, personasReserva);
         }
-    }
-
-    public ArrayList<Tour> getToursAgregados() {
-        return this.toursAgregados;
     }
 
     public void cancelarReserva() {
@@ -172,10 +173,6 @@ public class ReservaTour {
         } else {
             return -1;
         }
-    }
-
-    public void removerTourAgregado(Tour tour){
-        this.toursAgregados.remove(tour);
     }
 
     public void confirmarReserva(String metodoPago) {
