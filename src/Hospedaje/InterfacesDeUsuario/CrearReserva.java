@@ -6,6 +6,7 @@ import javax.swing.table.DefaultTableModel;
 import Hospedaje.Criteria.CriteriaCiudad;
 import Hospedaje.Criteria.CriteriaTipoHabitacion;
 import Hospedaje.Habitaciones.Habitacion;
+import Hospedaje.Habitaciones.TipoHabitacion;
 import Hospedaje.Reservas.GestionReservas;
 import Hospedaje.Reservas.ReservaHospedaje;
 import Principal.Sesion;
@@ -92,12 +93,12 @@ public class CrearReserva extends JFrame {
         this.habitacionesDisponibles = criteriaCiudad.meetCriteria(this.habitacionesDisponibles);
 
         if(checkboxFumadores.isSelected()){
-            CriteriaTipoHabitacion criteriaTipoHabitacion = new CriteriaTipoHabitacion("fumadores");
+            CriteriaTipoHabitacion criteriaTipoHabitacion = new CriteriaTipoHabitacion(TipoHabitacion.FUMADOR);
             this.habitacionesDisponibles = criteriaTipoHabitacion.meetCriteria(this.habitacionesDisponibles);
         }
 
         if(checkboxMascotas.isSelected()){
-            CriteriaTipoHabitacion criteriaTipoHabitacion = new CriteriaTipoHabitacion("mascotas");
+            CriteriaTipoHabitacion criteriaTipoHabitacion = new CriteriaTipoHabitacion(TipoHabitacion.MASCOTAS);
             this.habitacionesDisponibles = criteriaTipoHabitacion.meetCriteria(this.habitacionesDisponibles);
         }
 

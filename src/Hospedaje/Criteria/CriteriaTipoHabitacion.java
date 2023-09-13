@@ -1,14 +1,15 @@
 package Hospedaje.Criteria;
 
 import Hospedaje.Habitaciones.Habitacion;
+import Hospedaje.Habitaciones.TipoHabitacion;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CriteriaTipoHabitacion implements CriteriaSimple<Habitacion>{
-    private String tipoHabitacion;
+    private TipoHabitacion tipoHabitacion;
 
-    public CriteriaTipoHabitacion(String tipoHabitacion) {
+    public CriteriaTipoHabitacion(TipoHabitacion tipoHabitacion) {
         this.tipoHabitacion = tipoHabitacion;
     }
     @Override

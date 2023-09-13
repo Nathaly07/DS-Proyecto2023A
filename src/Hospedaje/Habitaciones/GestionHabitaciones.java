@@ -10,7 +10,8 @@ public class GestionHabitaciones {
 
     public GestionHabitaciones() {
         this.habitaciones = new ArrayList<>();
-        this.guardar();
+        habitaciones.add(new Habitacion(204, 220.00, 2, new Hotel("Hotel Quito", "Calle Principal 123", "Quito", 5), TipoHabitacion.MASCOTAS));
+        //this.guardar();
     }
 
     public List<Habitacion> getHabitaciones() {
