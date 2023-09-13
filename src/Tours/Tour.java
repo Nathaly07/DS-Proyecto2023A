@@ -39,7 +39,7 @@ public class Tour {
         return precio;
     }
 
-    public void reservarTour(int numPersonas){
+    public void disminuirDisponibilidad(int numPersonas){
         this.disponibilidad -= numPersonas;
     }
 
@@ -47,9 +47,6 @@ public class Tour {
         this.disponibilidad += numPersonas;
     }
 
-    public int getLimiteUsuarios() {
-        return limiteUsuarios;
-    }
 
     public int getDisponibilidad(){
         return this.disponibilidad;
@@ -61,23 +58,24 @@ public class Tour {
     public String getFechaFin() { return fechaFin; }
 
     //ToString para mostrar en la informacion
-    public String informacionRelevante(){
+    public String getInformacionRelevante(){
         String info = "";
 
-        info += this.nombre + ", ";
+        info += this.nombre + "\n";
         info += "Paradas: \n";
 
         int contador = 0;
         for (String parada : paradasTuristicas) {
-            info += parada + ",\n";
+            info += parada + ", ";
             contador++;
-            if (contador >= 2) {
+            if (contador >= 4) {
                 break;
             }
         }
 
-        info += "Guia: " + this.infoGuia + "\n";
+        info += "\nGuia: " + this.infoGuia + "\n";
         info += "Duracion: " + this.duracion + "\n";
+
         info += "Precio: $" + this.precio;
 
         return info;
