@@ -8,7 +8,6 @@ import Principal.Módulos;
 import javax.swing.*;
 
 public class MenuHospedaje extends JFrame {
-
     private GestionHabitaciones gestionHabitaciones;
     private GestionReservas gestionReservas;
     private Sesion sesion;

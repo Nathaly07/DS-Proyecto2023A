@@ -3,14 +3,14 @@ package Hospedaje.Habitaciones;
 import Hospedaje.Reservas.ReservaHospedaje;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class GestionHabitaciones {
     private List<Habitacion> habitaciones;
 
     public GestionHabitaciones() {
-        this.habitaciones = leer();
+        this.habitaciones = new ArrayList<>();
+        this.guardar();
     }
 
     public List<Habitacion> getHabitaciones() {
