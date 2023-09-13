@@ -290,6 +290,10 @@ public class ModuloTours extends JFrame{
                     reservaTourCancelar.cancelarReserva();
                     gestionReserva.removerReserva(reservaTourCancelar);
                     setReservasUsuario();
+                    lblNumCancelar.setText("# de personas:");
+                    lblFechaCreacionCancelar.setText("Fecha de Creacion de Reserva:");
+                    lblFechaConfirmacionCancelar.setText("Fecha de Confirmacion de Reserva:");
+                    listaEliminar.setModel(new DefaultListModel<>());
             }
         });
         boxCancelar.addActionListener(new ActionListener() {

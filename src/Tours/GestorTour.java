@@ -95,11 +95,6 @@ public class GestorTour {
         return null;
     }
 
-    //Obtener lista de Tours
-    public List<Tour> getTours() {
-        return this.tours;
-    }
-
     private void leerDatos(){
 
         Tour tour;
