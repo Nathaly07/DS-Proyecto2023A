@@ -107,6 +107,10 @@ public class ReservaTour {
                     "Reserva Tour",
                     JOptionPane.WARNING_MESSAGE);
             this.pagoReserva.calcularDevolucion((int)difEnDias, this.toursAgregados);
+            for (Tour tour: this.toursAgregados) {
+
+            }
+
         } else {
             JOptionPane.showMessageDialog(null,
                     "Ha cancelado su reserva",
@@ -154,6 +158,7 @@ public class ReservaTour {
             }
         }
     }
+
 
     // -1 -> Reserva ya fue confirmada
     public int tiempoSinConfirmar() throws ParseException {

@@ -47,9 +47,6 @@ public class Tour {
         this.disponibilidad += numPersonas;
     }
 
-    public int getLimiteUsuarios() {
-        return limiteUsuarios;
-    }
 
     public int getDisponibilidad(){
         return this.disponibilidad;
