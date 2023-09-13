@@ -17,7 +17,7 @@ public class ReservaVehiculo {
     private Usuario usuario; //TODO: Log in pilas
     private Date fechaInicio, fechaRetorno;
 
-    public ReservaVehiculo() {
+    public ReservaVehiculo(boolean b) {
         this.estadoReserva = "NO PAGADO";
         this.vehiculos = new ArrayList<>();
     }

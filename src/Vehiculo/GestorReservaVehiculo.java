@@ -1,19 +1,22 @@
 package Vehiculo;
 
+import Vuelos.Logica.GestorReservasAsiento;
+
 import javax.swing.*;
 import java.util.ArrayList;
 
 public class GestorReservaVehiculo {
     private static ArrayList<ReservaVehiculo> rentas;
-    private static ReservaVehiculo renta = new ReservaVehiculo();
+    private static ReservaVehiculo renta;
     private  CatalogoVehiculos catalogo = new CatalogoVehiculos();
 
     public CatalogoVehiculos getCatalogo() {
         return catalogo;
     }
 
-    public GestorReservaVehiculo() {
+    public GestorReservaVehiculo(GestorReservasAsiento gra) {
         this.rentas = new ArrayList<ReservaVehiculo>();
+        renta = new ReservaVehiculo(gra.verificarReservasAsientos());
     }
 
     public static void agregarRenta(Vehiculo vehiculo) {
@@ -28,7 +31,7 @@ public class GestorReservaVehiculo {
 
     public static void eliminarRenta() {
         rentas.remove(renta);
-        renta = new ReservaVehiculo();
+        //renta = new ReservaVehiculo(gra.verificarReservasAsientos());
     }
 
 

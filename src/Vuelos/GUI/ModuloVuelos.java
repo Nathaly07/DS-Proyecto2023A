@@ -35,7 +35,7 @@ public class ModuloVuelos extends JFrame{
     private JTable tblReservasPendientes;
     private JTable tblHistorialReservas;
     private GestorVuelos gestorVuelos = new GestorVuelos();
-    private GestorReservasAsiento gestorReservasAsiento = new GestorReservasAsiento();
+    private GestorReservasAsiento gestorReservasAsiento;
     private SelectorDeAsientos selectorDeAsientos;
     private JDateChooser dateChooserFechaVuelos = new JDateChooser();
     private PagoVuelos pagoVuelos;
@@ -45,10 +45,11 @@ public class ModuloVuelos extends JFrame{
     private Date fechaComun;
     private String destinoComun;
 
-    public ModuloVuelos(Sesion sesion){
+    public ModuloVuelos(Sesion sesion, GestorReservasAsiento gra){
         this.sesion = sesion;
         this.fechaComun = sesion.getFechaComun();
         this.destinoComun = sesion.getDestinoComun();
+        this.gestorReservasAsiento = gra;
 
         selectorDeAsientos = new SelectorDeAsientos(this);
         pagoVuelos = new PagoVuelos(this);

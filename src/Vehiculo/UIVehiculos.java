@@ -1,9 +1,14 @@
 package Vehiculo;
 
 import Principal.Sesion;
+import Tours.GestorReserva;
+import Vuelos.Logica.GestorReservasAsiento;
 import com.toedter.calendar.JDateChooser;
 
 import javax.swing.*;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class UIVehiculos extends JPanel {
     public JPanel pnlPrincipal;
@@ -29,7 +34,7 @@ public class UIVehiculos extends JPanel {
     private static GestoReservaVehiculo gestorRentas;
 
 
-    public UIVehiculos(Sesion sesion) {
+    public UIVehiculos(Sesion sesion, GestorReservasAsiento gra, GestorReserva gestionReserva) {
 
         gestorRentas = new GestoReservaVehiculo();
 
