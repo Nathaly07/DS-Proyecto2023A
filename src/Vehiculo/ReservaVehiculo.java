@@ -112,7 +112,7 @@ public class ReservaVehiculo {
         }
 
 
-        GestoReservaVehiculo.eliminarRenta();
+        GestorReservaVehiculo.eliminarRenta();
         JOptionPane.showMessageDialog(null, "Se elimino la reserva");
     }
 
