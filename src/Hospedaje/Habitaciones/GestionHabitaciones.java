@@ -10,7 +10,13 @@ public class GestionHabitaciones {
 
     public GestionHabitaciones() {
         this.habitaciones = new ArrayList<>();
-        habitaciones.add(new Habitacion(204, 220.00, 2, new Hotel("Hotel Quito", "Calle Principal 123", "Quito", 5), TipoHabitacion.MASCOTAS));
+        habitaciones.add(new Habitacion(110, 220.00, 2, new Hotel("Hotel Quito", "Calle Principal 123", "Quito", 5), new CaracteristicasHabitacion[]{CaracteristicasHabitacion.MASCOTAS}));
+        habitaciones.add(new Habitacion(110, 220.00, 2, new Hotel("Hotel Quito", "Calle Principal 123", "Quito", 5), new CaracteristicasHabitacion[]{CaracteristicasHabitacion.FUMADORES}));
+        habitaciones.add(new Habitacion(110, 220.00, 2, new Hotel("Hotel Quito", "Calle Principal 123", "Quito", 5), new CaracteristicasHabitacion[]{CaracteristicasHabitacion.MASCOTAS}));
+        habitaciones.add(new Habitacion(110, 220.00, 2, new Hotel("Hotel Quito", "Calle Principal 123", "Quito", 5), new CaracteristicasHabitacion[]{CaracteristicasHabitacion.MASCOTAS}));
+        habitaciones.add(new Habitacion(110, 220.00, 2, new Hotel("Hotel Quito", "Calle Principal 123", "Quito", 5), new CaracteristicasHabitacion[]{ CaracteristicasHabitacion.FUMADORES}));
+        habitaciones.add(new Habitacion(110, 220.00, 2, new Hotel("Hotel Quito", "Calle Principal 123", "Quito", 5), new CaracteristicasHabitacion[]{CaracteristicasHabitacion.MASCOTAS, CaracteristicasHabitacion.FUMADORES}));
+        habitaciones.add(new Habitacion(110, 220.00, 2, new Hotel("Hotel Quito", "Calle Principal 123", "Quito", 5), new CaracteristicasHabitacion[]{CaracteristicasHabitacion.MASCOTAS, CaracteristicasHabitacion.FUMADORES}));
         this.guardar();
 
         //this.habitaciones = this.leer();

@@ -4,9 +4,10 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import Hospedaje.Criteria.CriteriaCiudad;
+import Hospedaje.Criteria.CriteriaPorPersonas;
 import Hospedaje.Criteria.CriteriaTipoHabitacion;
+import Hospedaje.Habitaciones.CaracteristicasHabitacion;
 import Hospedaje.Habitaciones.Habitacion;
-import Hospedaje.Habitaciones.TipoHabitacion;
 import Hospedaje.Reservas.GestionReservas;
 import Hospedaje.Reservas.ReservaHospedaje;
 import Principal.Sesion;
@@ -24,7 +25,7 @@ public class CrearReserva extends JFrame {
     private JPanel jPHospedajes;
     private JPanel jpReservaFinal;
     private JLabel txtNombreCompleto;
-    private JComboBox comboBox1;
+    private JComboBox comboBoxCiudad;
     private JTextField txtNinos;
     private JTextField txtAdultos;
     private JButton btnVerificarDisponibilidad;
@@ -54,6 +55,16 @@ public class CrearReserva extends JFrame {
         });
 
         this.txtNombreCompleto.setText(sesion.getUsuarioVerificado().getNombre() + " " + sesion.getUsuarioVerificado().getApellido());
+
+        if(this.sesion.getDestinoComun() != null){
+            this.comboBoxCiudad.setSelectedItem(this.sesion.getDestinoComun());
+        }
+
+        if(this.sesion.getFechaComun() != null){
+            this.reservacionInicio.setDate(this.sesion.getFechaComun());
+        }
+
+        this.actualizarHabitacionesDisponibles();
     }
 
     public void crearFrame() {
@@ -77,31 +88,55 @@ public class CrearReserva extends JFrame {
         tbModeloHabitacionesDisponibles.addColumn("Ciudad");
         tbModeloHabitacionesDisponibles.addColumn("Precio");
         tbModeloHabitacionesDisponibles.addColumn("Maximo de Personas");
+        tbModeloHabitacionesDisponibles.addColumn("Fumadores");
+        tbModeloHabitacionesDisponibles.addColumn("Mascotas");
 
         tbModeloHabitacionesDisponibles.addRow(new Object[]{
                 "ID",
                 "Hotel",
                 "Ciudad",
                 "Precio",
-                "Maximo de Personas"
+                "Máximo de Personas",
+                "Fumadores",
+                "Mascotas"
         });
 
         this.tbHabitacionesDisponibles.setModel(tbModeloHabitacionesDisponibles);
 
+        // Se obtienen todas las habitaciones
         this.habitacionesDisponibles = this.gestionReservas.getHabitacionesDisponibles(reservacionInicio.getDate(), reservacionFinal.getDate());
-        CriteriaCiudad criteriaCiudad = new CriteriaCiudad(comboBox1.getSelectedItem().toString());
+
+        // Filtro por ciudad
+        CriteriaCiudad criteriaCiudad = new CriteriaCiudad(comboBoxCiudad.getSelectedItem().toString());
         this.habitacionesDisponibles = criteriaCiudad.meetCriteria(this.habitacionesDisponibles);
 
+        // Filtro por fumadores
         if(checkboxFumadores.isSelected()){
-            CriteriaTipoHabitacion criteriaTipoHabitacion = new CriteriaTipoHabitacion(TipoHabitacion.FUMADOR);
+            CriteriaTipoHabitacion criteriaTipoHabitacion = new CriteriaTipoHabitacion(CaracteristicasHabitacion.FUMADORES);
             this.habitacionesDisponibles = criteriaTipoHabitacion.meetCriteria(this.habitacionesDisponibles);
         }
 
+        // Filtro por Mascotas
         if(checkboxMascotas.isSelected()){
-            CriteriaTipoHabitacion criteriaTipoHabitacion = new CriteriaTipoHabitacion(TipoHabitacion.MASCOTAS);
+            CriteriaTipoHabitacion criteriaTipoHabitacion = new CriteriaTipoHabitacion(CaracteristicasHabitacion.MASCOTAS);
             this.habitacionesDisponibles = criteriaTipoHabitacion.meetCriteria(this.habitacionesDisponibles);
         }
 
+        // Filtro por numero de personas
+        int numeroPersonas = 0;
+
+        try {
+            numeroPersonas = Integer.parseInt(txtAdultos.getText()) + Integer.parseInt(txtNinos.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Ingrese un número válido de personas");
+            return;
+        }
+
+        CriteriaPorPersonas criteriaPorPersonas = new CriteriaPorPersonas(numeroPersonas);
+        this.habitacionesDisponibles = criteriaPorPersonas.meetCriteria(this.habitacionesDisponibles);
+
+
+        // Se agregan las habitaciones a la tabla en la UI
         this.habitacionesDisponibles.forEach(this::agregarHabitacionATabla);
 
         tbHabitacionesDisponibles.addMouseListener(new MouseAdapter() {
@@ -137,13 +172,27 @@ public class CrearReserva extends JFrame {
     }
 
     public void agregarHabitacionATabla(Habitacion habitacion) {
-        // Agregar una nueva fila al modelo de la tabla
+        String fumadores = "No";
+        String mascotas = "No";
+
+        for (CaracteristicasHabitacion caracteristica : habitacion.getCaracteristicas()) {
+            if (caracteristica.equals(CaracteristicasHabitacion.FUMADORES)) {
+                fumadores = "Si";
+            }
+
+            if (caracteristica.equals(CaracteristicasHabitacion.MASCOTAS)) {
+                mascotas = "Si";
+            }
+        }
+
         tbModeloHabitacionesDisponibles.addRow(new Object[]{
                 habitacion.getHabitacionID(),
                 habitacion.getHotel().getNombre(),
                 habitacion.getHotel().getCiudad(),
                 habitacion.getPrecioPorNoche(),
                 habitacion.getLimiteUsuarios(),
+                fumadores,
+                mascotas
         });
     }
 }

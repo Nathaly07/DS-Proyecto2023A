@@ -8,14 +8,20 @@ public class Habitacion implements Serializable {
     private int habitacionID;
     private double precioPorNoche;
     private int limiteUsuarios;
+    private CaracteristicasHabitacion[] caracteristicas;
     private Hotel hotel;
-    private TipoHabitacion tipoHabitacion;
-
-    public Habitacion(int habitacionID, double precioPorNoche, int limiteUsuarios, Hotel hotel, TipoHabitacion tipoHabitacion){
+    public Habitacion(
+            int habitacionID,
+            double precioPorNoche,
+            int limiteUsuarios,
+            Hotel hotel,
+            CaracteristicasHabitacion[] caracteristicas
+    ) {
         this.habitacionID = habitacionID;
         this.precioPorNoche = precioPorNoche;
         this.limiteUsuarios = limiteUsuarios;
         this.hotel = hotel;
+        this.caracteristicas = caracteristicas;
     }
 
     public Hotel getHotel() {
@@ -49,8 +55,9 @@ public class Habitacion implements Serializable {
         return this.habitacionID;
     }
 
-    public TipoHabitacion getTipoHabitacion() {
-        return this.tipoHabitacion;
+    public CaracteristicasHabitacion[] getCaracteristicas() {
+        return this.caracteristicas;
     }
+
 
 }

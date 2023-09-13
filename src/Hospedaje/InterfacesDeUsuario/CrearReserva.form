@@ -21,6 +21,7 @@
               <grid row="2" column="0" row-span="1" col-span="5" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font size="18" style="1"/>
               <text value="Datos Usuario"/>
             </properties>
           </component>
@@ -29,6 +30,7 @@
               <grid row="6" column="0" row-span="1" col-span="5" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font size="18" style="1"/>
               <text value="Datos de Reservacion"/>
             </properties>
           </component>
@@ -37,10 +39,11 @@
               <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font style="1"/>
               <text value="Nombre"/>
             </properties>
           </component>
-          <component id="62bbd" class="javax.swing.JComboBox" binding="comboBox1" default-binding="true">
+          <component id="62bbd" class="javax.swing.JComboBox" binding="comboBoxCiudad">
             <constraints>
               <grid row="9" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -64,6 +67,7 @@
               <grid row="10" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font style="1"/>
               <text value="Fecha de entrada"/>
             </properties>
           </component>
@@ -72,6 +76,7 @@
               <grid row="9" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font style="1"/>
               <text value="Cuidad"/>
             </properties>
           </component>
@@ -90,7 +95,7 @@
               </grid>
             </constraints>
             <properties>
-              <text value=""/>
+              <text value="0"/>
             </properties>
           </component>
           <component id="ea17c" class="javax.swing.JLabel">
@@ -98,6 +103,7 @@
               <grid row="11" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font style="1"/>
               <text value="Adultos "/>
             </properties>
           </component>
@@ -134,6 +140,7 @@
               <grid row="10" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font style="1"/>
               <text value="Fecha de salida"/>
             </properties>
           </component>
@@ -152,6 +159,7 @@
               <grid row="11" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font style="1"/>
               <text value="Niños"/>
             </properties>
           </component>
@@ -161,7 +169,9 @@
                 <preferred-size width="150" height="-1"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <text value="0"/>
+            </properties>
           </component>
           <component id="5fd81" class="javax.swing.JToolBar$Separator">
             <constraints>
@@ -182,6 +192,7 @@
               <grid row="8" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font style="1"/>
               <text value="Fumadores"/>
             </properties>
           </component>
@@ -198,6 +209,7 @@
               <grid row="8" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font style="1"/>
               <text value="Mascotas"/>
             </properties>
           </component>

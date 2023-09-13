@@ -1,24 +1,29 @@
 package Hospedaje.Criteria;
 
+import Hospedaje.Habitaciones.CaracteristicasHabitacion;
 import Hospedaje.Habitaciones.Habitacion;
-import Hospedaje.Habitaciones.TipoHabitacion;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CriteriaTipoHabitacion implements CriteriaSimple<Habitacion>{
-    private TipoHabitacion tipoHabitacion;
+public class CriteriaTipoHabitacion implements CriteriaSimple<Habitacion> {
+    private CaracteristicasHabitacion caracteristica;
 
-    public CriteriaTipoHabitacion(TipoHabitacion tipoHabitacion) {
-        this.tipoHabitacion = tipoHabitacion;
+    public CriteriaTipoHabitacion(CaracteristicasHabitacion caracteristica) {
+        this.caracteristica = caracteristica;
     }
+
     @Override
     public List<Habitacion> meetCriteria(List<Habitacion> habitaciones) {
         ArrayList<Habitacion> habitacionesFiltradas = new ArrayList<>();
 
         for (Habitacion habitacion : habitaciones) {
-            if (habitacion.getTipoHabitacion().equals(tipoHabitacion)) {
-                habitacionesFiltradas.add(habitacion);
+            CaracteristicasHabitacion[] caracteristicas = habitacion.getCaracteristicas();
+
+            for (CaracteristicasHabitacion caracteristicaActual : caracteristicas) {
+                if (caracteristicaActual.equals(this.caracteristica)) {
+                    habitacionesFiltradas.add(habitacion);
+                }
             }
         }
 
