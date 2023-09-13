@@ -69,9 +69,7 @@ public class ReservaVehiculo {
         JButton btnModificar = new JButton("Modificar");
         JButton btnEliminarReserva = new JButton("Eliminar");
 
-        btnModificar.addActionListener(e -> {
-            panel.add(new PanelModificacion(this).panelModificarReserva);
-        });
+        btnModificar.addActionListener(e -> panel.add(new PanelModificacion(this).panelModificarReserva));
 
 
         btnPagar.addActionListener(e -> {
@@ -112,7 +110,7 @@ public class ReservaVehiculo {
         }
 
 
-        GestoReservaVehiculo.eliminarRenta();
+        GestorReservaVehiculo.eliminarRenta();
         JOptionPane.showMessageDialog(null, "Se elimino la reserva");
     }
 

@@ -114,29 +114,33 @@ public class InterfazSeguroViaje extends JFrame {
                             +"3.- Cancelación del viaje\n"
                             +"4.- Reembolso de hospedaje\n","Agregar cobertura", JOptionPane.QUESTION_MESSAGE);
             if(cobertura != null){
-                int numCobertura = Integer.parseInt(cobertura);
-                if(numCobertura<0||numCobertura>4){
-                    JOptionPane.showMessageDialog(null, "Esa no es una opción válida.", "ERROR 401",JOptionPane.ERROR_MESSAGE);
-                }else{
-                    switch (numCobertura){
-                        case 1:{
-                            this.areaCoberturasAgregadas.setText(this.areaCoberturasAgregadas.getText()+"\nRobo de pertenencias");
-                            break;
+                try{
+                    int numCobertura = Integer.parseInt(cobertura);
+                    if(numCobertura<0||numCobertura>4){
+                        JOptionPane.showMessageDialog(null, "Esa no es una opción válida.", "ERROR 401",JOptionPane.ERROR_MESSAGE);
+                    }else{
+                        switch (numCobertura){
+                            case 1:{
+                                this.areaCoberturasAgregadas.setText(this.areaCoberturasAgregadas.getText()+"\nRobo de pertenencias");
+                                break;
+                            }
+                            case 2:{
+                                this.areaCoberturasAgregadas.setText(this.areaCoberturasAgregadas.getText()+"\nAccidente en el viaje");
+                                break;
+                            }
+                            case 3:{
+                                this.areaCoberturasAgregadas.setText(this.areaCoberturasAgregadas.getText()+"\nCancelación del viaje");
+                                break;
+                            }
+                            case 4:{
+                                this.areaCoberturasAgregadas.setText(this.areaCoberturasAgregadas.getText()+"\nReembolso de hospedaje");
+                                break;
+                            }
                         }
-                        case 2:{
-                            this.areaCoberturasAgregadas.setText(this.areaCoberturasAgregadas.getText()+"\nAccidente en el viaje");
-                            break;
-                        }
-                        case 3:{
-                            this.areaCoberturasAgregadas.setText(this.areaCoberturasAgregadas.getText()+"\nCancelación del viaje");
-                            break;
-                        }
-                        case 4:{
-                            this.areaCoberturasAgregadas.setText(this.areaCoberturasAgregadas.getText()+"\nReembolso de hospedaje");
-                            break;
-                        }
-                    }
 
+                    }
+                }catch (NumberFormatException ex){
+                    JOptionPane.showMessageDialog(null, "Ingrese un número de las opciones dadas.", "ERROR",JOptionPane.ERROR_MESSAGE);
                 }
 
             }

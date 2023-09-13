@@ -25,12 +25,12 @@ public class UIVehiculos extends JPanel {
     private JDateChooser dateChooserFinal = new JDateChooser();
 
     //Clases diagrama
-    private  CatalogoVehiculos catalogoVehiculos;
+   // private  CatalogoVehiculos catalogoVehiculos;
     private static GestoReservaVehiculo gestorRentas;
 
 
     public UIVehiculos(Sesion sesion) {
-        catalogoVehiculos = new CatalogoVehiculos();
+
         gestorRentas = new GestoReservaVehiculo();
 
 
@@ -40,7 +40,7 @@ public class UIVehiculos extends JPanel {
                 JOptionPane.showMessageDialog(null,"Datos no validos");
 
             }else{
-                catalogoVehiculos.mostrarVehiculos(pnlCatalogo1);
+                gestorRentas.getCatalogo().mostrarVehiculos(pnlCatalogo1);
                 GestoReservaVehiculo.getRenta().recolectarDatosReserva(txtOrigen.getText(),txtRetorno.getText(),dateChooserFinal.getDate(),dateChooserInicio.getDate());
             }
 

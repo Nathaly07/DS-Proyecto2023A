@@ -131,7 +131,11 @@ public class ModuloTours extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 reservaTour = new ReservaTour(usuarioVerificado.getNombre(), usuarioVerificado.getApellido(), (Integer) spinner1.getValue() ,gestionTour, pagoReserva);
                 gestionReserva.agregarReserva(reservaTour);
-                reservaTour.setToursAgregados(listaToursAgregadosReserva);
+                try {
+                    reservaTour.reservarMultiplesTours(listaToursAgregadosReserva, (Integer) spinner1.getValue());
+                } catch (ParseException ex) {
+                    throw new RuntimeException(ex);
+                }
                 listaToursAgregadosReserva = new ArrayList<Tour>();
                 setReservasUsuario();
                 list2.setModel(new DefaultListModel<>());
@@ -156,6 +160,13 @@ public class ModuloTours extends JFrame{
                 int numReserva = Integer.parseInt(opcion.split("-")[0]);
 
                 reservaTourConfirmar = gestionReserva.buscarReserva(numReserva);
+
+                if (reservaTourConfirmar.getEstadoReserva()) {
+                    btnConfirmar.setEnabled(false);
+                } else {
+                    btnConfirmar.setEnabled(true);
+                }
+
                 lblNPersonas.setText("# de personas:");
                 lblFechaCreacion.setText("Fecha de Creacion de Reserva:");
                 lblFechaConfirmacion.setText("Fecha de Confirmacion de Reserva:");
@@ -239,7 +250,11 @@ public class ModuloTours extends JFrame{
         btnModificarReserva.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                reservaTourModificar.setToursAgregados(listaToursAgregadosReserva);
+                try {
+                    reservaTourModificar.reservarMultiplesTours(listaToursAgregadosReserva, (Integer)jspNumPersonasModificar.getValue());
+                } catch (ParseException ex) {
+                    throw new RuntimeException(ex);
+                }
                 reservaTourModificar.setNumeroPersonas((Integer)jspNumPersonasModificar.getValue());
                 JOptionPane.showMessageDialog(null,
                         "Se ha modificado su reserva exitosamente",

@@ -42,6 +42,9 @@ public class ReservaTour {
         this.cantidadReservas += 1;
     }
 
+    public boolean getEstadoReserva() {
+        return this.estadoReserva;
+    }
     public void setNumeroPersonas(int numeroPersonas) {
         this.numeroPersonas = numeroPersonas;
     }
@@ -71,9 +74,11 @@ public class ReservaTour {
     public void setFechaCreacion(String fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
     }
-
-    public void setToursAgregados(ArrayList<Tour> toursAgregados) {
-        this.toursAgregados = toursAgregados;
+    public void setToursAgregados(ArrayList<Tour> toursAgregados) { this.toursAgregados = toursAgregados; }
+    public void reservarMultiplesTours(ArrayList<Tour> toursAgregados, int personasReserva) throws ParseException {
+        for (Tour tour: toursAgregados) {
+            this.reservarTour(tour, personasReserva);
+        }
     }
 
     public ArrayList<Tour> getToursAgregados() {
@@ -120,7 +125,7 @@ public class ReservaTour {
 
     }
 
-    public void agregarTour(Tour tour) throws ParseException {
+    public void reservarTour(Tour tour, int personasReserva) throws ParseException {
         boolean isAvailable = true;
         Date fechaCreacionReserva = dateFormat.parse(this.fechaCreacion);
         Date fechaInicioTour = dateFormat.parse(tour.getFechaInicio());
@@ -128,7 +133,8 @@ public class ReservaTour {
 
         if (difEnMilis <= 0) {
             JOptionPane.showMessageDialog(null,
-                    "No existen mínimo 30 días de diferencia respecto al inicio del tour\n" +
+                            tour.getNombre() + "\n" +
+                            "No existen mínimo 30 días de diferencia respecto al inicio del tour\n" +
                             "No es posible agregar el Tour",
                     "Reserva Tour",
                     JOptionPane.WARNING_MESSAGE);
@@ -137,20 +143,19 @@ public class ReservaTour {
 
             if (difEnDias < 30) {
                 JOptionPane.showMessageDialog(null,
-                        "No existen mínimo 30 días de diferencia respecto al inicio del tour\n" +
+                        tour.getNombre() + "\n" +
+                                "No existen mínimo 30 días de diferencia respecto al inicio del tour\n" +
                                 "No es posible agregar el Tour",
                         "Reserva Tour",
                         JOptionPane.WARNING_MESSAGE);
             } else {
                 if (tour.getDisponibilidad() >= this.numeroPersonas) {
                     this.toursAgregados.add(tour);
-                    JOptionPane.showMessageDialog(null,
-                            "El tour se ha agregado correctamente.",
-                            "Reserva Tour",
-                            JOptionPane.WARNING_MESSAGE);
+                    tour.disminuirDisponibilidad(numeroPersonas);
                 } else {
                     JOptionPane.showMessageDialog(null,
-                            "El número de personas en la reserva excede la disponibilidad del tour\n" +
+                            tour.getNombre() + "\n" +
+                                    "El número de personas en la reserva excede la disponibilidad del tour\n" +
                                     "No es posible agregar el Tour",
                             "Reserva Tour",
                             JOptionPane.WARNING_MESSAGE);
