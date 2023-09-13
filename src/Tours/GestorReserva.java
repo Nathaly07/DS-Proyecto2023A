@@ -90,6 +90,7 @@ public class GestorReserva {
     public void agregarReserva(ReservaTour reservaAAgregar) {
         this.reservaciones.add(reservaAAgregar);
         JOptionPane.showMessageDialog(null, "Reserva Agregada");
+        //escribir reserva
     }
 
     public void confirmarReserva(ReservaTour reservaAPagar, String metodoPago) throws ParseException {
