@@ -159,6 +159,13 @@ public class ModuloTours extends JFrame{
                 int numReserva = Integer.parseInt(opcion.split("-")[0]);
 
                 reservaTourConfirmar = gestionReserva.buscarReserva(numReserva);
+
+                if (reservaTourConfirmar.getEstadoReserva()) {
+                    btnConfirmar.setEnabled(false);
+                } else {
+                    btnConfirmar.setEnabled(true);
+                }
+
                 lblNPersonas.setText("# de personas:");
                 lblFechaCreacion.setText("Fecha de Creacion de Reserva:");
                 lblFechaConfirmacion.setText("Fecha de Confirmacion de Reserva:");

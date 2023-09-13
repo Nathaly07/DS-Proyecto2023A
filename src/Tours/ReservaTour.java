@@ -42,6 +42,9 @@ public class ReservaTour {
         this.cantidadReservas += 1;
     }
 
+    public boolean getEstadoReserva() {
+        return this.estadoReserva;
+    }
     public void setNumeroPersonas(int numeroPersonas) {
         this.numeroPersonas = numeroPersonas;
     }
