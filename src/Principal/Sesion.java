@@ -12,7 +12,6 @@ public class Sesion {
 
     private Sesion() {
         this.gestor = new GestorUsuarios();
-        this.gestor.insertarUsuarios();
     }
 
     public static Sesion getInstance() {

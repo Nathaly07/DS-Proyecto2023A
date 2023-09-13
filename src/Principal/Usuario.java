@@ -3,6 +3,7 @@ package Principal;
 import java.io.Serializable;
 
 public class Usuario implements Serializable {
+    private static final long serialVersionUID = 36L;
     private String nombreUsuario;
     private String nombre;
     private String apellido;
