@@ -84,11 +84,11 @@ public class UIVehiculos extends JPanel {
             }
 
             private void asignarFechasEnUI(ArrayList<String> fechasReservas) throws ParseException {
-                System.out.println(fechasReservas);
+
                 if (fechasReservas.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "No existe un tours reservados");
                 } else {
-                    System.out.println(fechasReservas);
+
                     String[] fechas = fechasReservas.get(0).split("-"); //TODO: maybe toca cambiar el número
                     SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
                     dateChooserInicio.setDate(format.parse(fechas[0]));
