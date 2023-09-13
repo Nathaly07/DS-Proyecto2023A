@@ -21,6 +21,7 @@ public class SeguroDeViajes extends Seguro {
     @Override
     public void indemnizar(float valorGastado, String motivo) {
         float cantidadAPagar = 0.0f;
+        boolean estado = false;
         for (String[] cobertura : coberturas) {
             if (motivo.equalsIgnoreCase(cobertura[0])) {
                 if ((valorGastado <= Float.parseFloat(cobertura[1])) && (valorGastado > 0)) {
@@ -28,12 +29,15 @@ public class SeguroDeViajes extends Seguro {
                 } else {
                     cantidadAPagar = Float.parseFloat(cobertura[1]);
                 }
-                JOptionPane.showMessageDialog(null, "Tu seguro si cubre tu situación.\nTe daremos: "+cantidadAPagar+" $. ", "Solicitud aceptada", JOptionPane.INFORMATION_MESSAGE);
-                this.setEstado("Cobrado");
-                break;
-            }else{
-                JOptionPane.showMessageDialog(null, "Lo sentimos mucho.\nTu seguro de viaje no cubre esa situación.", "Una disculpa", JOptionPane.INFORMATION_MESSAGE);
+                estado = true;
             }
+        }
+
+        if (estado) {
+            JOptionPane.showMessageDialog(null, "Tu seguro si cubre tu situación.\nTe daremos: "+cantidadAPagar+" $. ", "Solicitud aceptada", JOptionPane.INFORMATION_MESSAGE);
+            this.setEstado("Cobrado");
+        } else {
+            JOptionPane.showMessageDialog(null, "Lo sentimos mucho.\nTu seguro de viaje no cubre esa situación.", "Una disculpa", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
