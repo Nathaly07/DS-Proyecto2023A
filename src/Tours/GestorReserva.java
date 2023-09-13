@@ -25,21 +25,21 @@ public class GestorReserva {
     }
 
     private void leerDatos(){
-        ArrayList<Tour> toursAgregados = new ArrayList<>();
+        ArrayList<Tour> toursAgregados;
         ReservaTour reservaTour;
         Tour tour;
-        int i;
 
         try {
             BufferedReader br = new BufferedReader(new FileReader("src/Tours/datos/reservas.txt"));
 
             String linea = "";
             while ((linea = br.readLine()) != null) {
+                toursAgregados = new ArrayList<>();
                 String[] datos = linea.split("_");
                 int tamanio = datos.length;
 
                 //Para leer en caso de que haya más de 1 tour
-                for (i = 4; i < tamanio; i++) {
+                for (int i = 4; i < tamanio; i++) {
                     tour = leerTours(datos[i]);
                     toursAgregados.add(tour);
                 }
