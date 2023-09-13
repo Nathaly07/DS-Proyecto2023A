@@ -103,29 +103,38 @@ public class CrearReserva extends JFrame {
 
         this.tbHabitacionesDisponibles.setModel(tbModeloHabitacionesDisponibles);
 
-        // Se obtienen todas las habitaciones
-        if(reservacionInicio.getDate() == null || reservacionFinal.getDate() == null){
-            JOptionPane.showMessageDialog(null, "Ingrese la fecha de entrada o salida");
+        // Validacion de fecha de entrada
+        if(reservacionInicio.getDate() == null){
+            JOptionPane.showMessageDialog(null, "Ingrese la fecha de entrada");
             return;
         }
 
+        // Validacion de fecha de salida
+        if(reservacionFinal.getDate() == null){
+            JOptionPane.showMessageDialog(null, "Ingrese la fecha de salida");
+            return;
+        }
+
+        // Se obtienen todas las habitaciones
         this.habitacionesDisponibles = this.gestionReservas.getHabitacionesDisponibles(reservacionInicio.getDate(), reservacionFinal.getDate());
 
-        // Filtro por ciudad
+        // Validacion de ciudad
         if(comboBoxCiudad.getSelectedItem() == null){
             JOptionPane.showMessageDialog(null, "Ingrese una ciudad");
             return;
         }
+
+        // Filtro por ciudad
         CriteriaCiudad criteriaCiudad = new CriteriaCiudad(comboBoxCiudad.getSelectedItem().toString());
         this.habitacionesDisponibles = criteriaCiudad.meetCriteria(this.habitacionesDisponibles);
 
-        // Filtro por fumadores
+        // Filtro por Habitacion Fumadores
         if(checkboxFumadores.isSelected()){
             CriteriaTipoHabitacion criteriaTipoHabitacion = new CriteriaTipoHabitacion(CaracteristicasHabitacion.FUMADORES);
             this.habitacionesDisponibles = criteriaTipoHabitacion.meetCriteria(this.habitacionesDisponibles);
         }
 
-        // Filtro por Mascotas
+        // Filtro por Habitacion Mascotas
         if(checkboxMascotas.isSelected()){
             CriteriaTipoHabitacion criteriaTipoHabitacion = new CriteriaTipoHabitacion(CaracteristicasHabitacion.MASCOTAS);
             this.habitacionesDisponibles = criteriaTipoHabitacion.meetCriteria(this.habitacionesDisponibles);
@@ -141,8 +150,8 @@ public class CrearReserva extends JFrame {
             return;
         }
 
-        if(numeroPersonas == 0){
-            JOptionPane.showMessageDialog(null, "Ingrese un número válido de personas");
+        if(numeroPersonas == 0 || numeroPersonas < 0){
+            JOptionPane.showMessageDialog(null, "Ingrese un número de personas mayor a 0");
             return;
         }
 

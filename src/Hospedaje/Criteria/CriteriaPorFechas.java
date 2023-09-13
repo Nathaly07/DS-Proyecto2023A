@@ -24,7 +24,11 @@ public class CriteriaPorFechas implements CriteriaSimple<ReservaHospedaje>{
             Date fechaInicioReserva = reserva.getFechaInicio();
             Date fechaFinReserva = reserva.getFechaFin();
 
-            // Si la reserva coincide con el rango de fechas solicitado, eliminamos todas las habitaciones de esa reserva de la lista de disponibles
+            // Si la fecha de inicio de la reserva es posterior a la fecha de fin de la reserva que se quiere hacer
+            // o si la fecha de fin de la reserva es anterior a la fecha de inicio de la reserva que se quiere hacer
+            // entonces la reserva no se puede hacer
+
+            // El siguiente rango de fechas verifica que se devuelvan las reservas que no se pueden hacer
             if (!(fechaInicioReserva.after(reservarHasta) || fechaFinReserva.before(reservarDesde))) {
                 reservasFiltradas.add(reserva);
             }

@@ -15,7 +15,9 @@ public class CriteriaCiudad implements CriteriaSimple<Habitacion> {
     public List<Habitacion> meetCriteria(List<Habitacion> habitaciones) {
         List<Habitacion> habitacionesPorCiudad = new ArrayList<>();
 
+        // Se filtran las habitaciones por ciudad
         for (Habitacion habitacion : habitaciones) {
+            // Si la habitacion tiene la ciudad que se busca, se agrega a la lista de habitaciones filtradas
             if (habitacion.getCiudad().equals(ciudad)) {
                 habitacionesPorCiudad.add(habitacion);
             }
