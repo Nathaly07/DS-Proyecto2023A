@@ -288,7 +288,11 @@ public class ModuloTours extends JFrame{
             public void actionPerformed(ActionEvent e) {
 
                     reservaTourCancelar.cancelarReserva();
-                    gestionReserva.removerReserva(reservaTourCancelar);
+                    gestionReserva.removerReserva(reservaTourCancelar.getNumReserva());
+                    for(int i = boxCancelar.getItemCount() - 1; i > 0; i--) {
+                        boxCancelar.removeItemAt(i);
+                    }
+                    reservasUnicas = new HashSet<>();
                     setReservasUsuario();
             }
         });
@@ -338,13 +342,13 @@ public class ModuloTours extends JFrame{
     }
 
     public void setReservasUsuario() {
+
         String nombreUsuario = this.usuarioVerificado.getNombre();
         String apellidoUsuario = this.usuarioVerificado.getApellido();
         ArrayList<ReservaTour> reservas = this.gestionReserva.getReservaciones();
 
         for (ReservaTour reserva: reservas) {
             if ((reserva.getNombreUsuario().equalsIgnoreCase(nombreUsuario)) && (reserva.getApellidoUsuario().equalsIgnoreCase(apellidoUsuario))) {
-
 
                 String reservaStr = reserva.getNumReserva() + "-" + reserva.getNombreUsuario() + " " + reserva.getApellidoUsuario();
 
