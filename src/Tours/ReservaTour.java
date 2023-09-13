@@ -73,14 +73,14 @@ public class ReservaTour {
         this.fechaCreacion = fechaCreacion;
     }
     public void setToursAgregados(ArrayList<Tour> toursAgregados) { this.toursAgregados = toursAgregados; }
+    public ArrayList<Tour> getToursAgregados() {
+        return this.toursAgregados;
+    }
+
     public void reservarMultiplesTours(ArrayList<Tour> toursAgregados, int personasReserva) throws ParseException {
         for (Tour tour: toursAgregados) {
             this.reservarTour(tour, personasReserva);
         }
-    }
-
-    public ArrayList<Tour> getToursAgregados() {
-        return this.toursAgregados;
     }
 
     public void cancelarReserva() {
@@ -173,10 +173,6 @@ public class ReservaTour {
         } else {
             return -1;
         }
-    }
-
-    public void removerTourAgregado(Tour tour){
-        this.toursAgregados.remove(tour);
     }
 
     public void confirmarReserva(String metodoPago) {

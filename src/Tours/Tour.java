@@ -100,28 +100,4 @@ public class Tour {
         return info;
     }
 
-    //Método para agregar parada turistica
-
-    public void agregarParadaTuristica(String paradaTurisitica) {
-        this.paradasTuristicas.add(paradaTurisitica);
-    }
-
-    //Metodo para eliminar parada turistica
-
-    public void eliminarParadaTuristica(String paradaTuristica) {
-        this.paradasTuristicas.remove(paradaTuristica);
-    }
-
-    //Metodo para agregar actividad turistica
-
-    public void agregarActividadTuristica(String actividadTuristica){
-        this.actividadesTuristicas.add(actividadTuristica);
-    }
-
-    //Metodo para eliminar actividad turistica
-
-    public void eliminarActividadTuristica(String actividadTuristica){
-        this.actividadesTuristicas.remove(actividadTuristica);
-    }
-
 }
