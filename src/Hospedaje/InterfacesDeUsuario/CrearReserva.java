@@ -104,9 +104,18 @@ public class CrearReserva extends JFrame {
         this.tbHabitacionesDisponibles.setModel(tbModeloHabitacionesDisponibles);
 
         // Se obtienen todas las habitaciones
+        if(reservacionInicio.getDate() == null || reservacionFinal.getDate() == null){
+            JOptionPane.showMessageDialog(null, "Ingrese la fecha de entrada o salida");
+            return;
+        }
+
         this.habitacionesDisponibles = this.gestionReservas.getHabitacionesDisponibles(reservacionInicio.getDate(), reservacionFinal.getDate());
 
         // Filtro por ciudad
+        if(comboBoxCiudad.getSelectedItem() == null){
+            JOptionPane.showMessageDialog(null, "Ingrese una ciudad");
+            return;
+        }
         CriteriaCiudad criteriaCiudad = new CriteriaCiudad(comboBoxCiudad.getSelectedItem().toString());
         this.habitacionesDisponibles = criteriaCiudad.meetCriteria(this.habitacionesDisponibles);
 
@@ -128,6 +137,11 @@ public class CrearReserva extends JFrame {
         try {
             numeroPersonas = Integer.parseInt(txtAdultos.getText()) + Integer.parseInt(txtNinos.getText());
         } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Ingrese un número válido de personas");
+            return;
+        }
+
+        if(numeroPersonas == 0){
             JOptionPane.showMessageDialog(null, "Ingrese un número válido de personas");
             return;
         }
